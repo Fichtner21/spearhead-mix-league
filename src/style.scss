@@ -1,0 +1,826 @@
+$darkenRed: #400000;
+$middleRed: #603030;
+$lightRed: #604040;
+
+$darkenBlue: #010141;
+$middleBlue: #2f3060;
+$lightBlue: #40415f;
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: Poppins, sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol,
+{
+  list-style: none;
+}
+
+body{
+  background-color: $darkenRed;
+
+  .contrast-mode & {
+    background-color: $darkenBlue;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.hidden {
+  display: none;
+}
+
+.currentClick {
+  text-decoration: underline;
+  background-color: $darkenRed;
+
+  .contrast-mode & {
+    background-color: $darkenBlue;
+  }
+}
+
+.title {
+  padding: 20px 0;
+}
+
+nav {
+  padding: 20px;  
+  font-weight: 700;  
+  color: #ffffc0;
+  background-image: linear-gradient(0deg, $lightRed 25%, $middleRed 25%, $middleRed 50%, $lightRed 50%, $lightRed 75%, $middleRed 75%, $middleRed 100%);
+  background-size: 12.00px 12.00px;
+
+  .contrast-mode & {
+    background-image: linear-gradient(0deg, $lightBlue 25%, $middleBlue 25%, $middleBlue 50%, $lightBlue 50%, $lightBlue 75%, $middleBlue 75%, $middleBlue 100%);
+    background-size: 12.00px 12.00px;
+  }
+
+  a {    
+    text-decoration: none;
+    color: #ffffc0;
+    margin: 10px 20px 10px 0;
+    line-height: 30px;
+    padding: 5px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  } 
+}
+
+.wrapper {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: #ffffc0;
+
+  h2 {
+    padding: 20px 0;
+  }
+
+  .mainSh {
+    padding: 30px 0;
+    font-size: 48px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .intro {
+    padding: 30px 0;
+    background-color: $lightRed;
+    margin: 15px 0;
+
+    .contrast-mode & {
+      background-color: $lightBlue;
+    }
+
+    p {
+      border-left: 5px solid #640000;
+      padding: 20px 10px;
+      margin: 15px 30px;
+      font-style: italic;
+    }
+  }
+
+  .mainTitle {  
+    padding: 30px 0;  
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    color: #fff;   
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #ffffc0, 0 0 30px #ffffc0, 0 0 40px #ffffc0, 0 0 55px #ffffc0, 0 0 75px #ffffc0;
+  }
+
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 15px 15px;
+
+    @media screen and (max-width: 800px){
+      grid-template-columns: 1fr;
+    }
+
+    &__left {
+      height: 225px;       
+      overflow: hidden; 
+      
+      @media screen and (max-width: 599px){
+        height: auto;
+      }
+      
+      &:hover {
+        img {
+          transform: scale(1.1);
+          filter: grayscale(1);
+        }
+      }
+
+      img {
+        width: 100%;  
+        height: 100%;          
+        transition: all .4s;      
+      }
+    }
+
+    &__right {
+      height: 225px;      
+      background-color: $lightRed;
+
+      @media screen and (max-width: 599px){
+        height: auto;
+      }
+
+      .contrast-mode & {
+        background-color: $lightBlue;
+      }
+
+      a {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        color: #ffffc0;
+        text-decoration: none;
+        font-size: 30px;
+        transition: all .4s;
+
+        @media screen and (max-width: 599px){
+          display: block;
+          text-align: center;
+        }
+
+        &:hover {
+          background-color: lighten($middleRed, 15%);
+
+          .contrast-mode & {
+            background-color: lighten($middleBlue, 15%);
+          }
+
+          img {
+            transform: rotate3d(1, 1, 1, 45deg);
+          }
+        }
+        img {
+          transition: all .4s;
+          max-height: 218px;
+        }
+      }
+    }
+  }
+
+  .files {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 15px 15px;
+
+    @media screen and (max-width:992px){
+      grid-template-columns: 1fr 1fr;
+    } 
+
+    .file {
+      height: 278px;
+      background-color: $lightRed;
+      color: #ffffc0;
+      display: flex;
+      justify-content: center;
+      align-items: center;      
+      transition: all .4s;
+
+      .contrast-mode & {
+        background-color: $lightBlue;
+      }
+
+      div {
+        background-color: rgba(0,0,0,0.9);
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      &:hover {
+        background-color: lighten($lightRed, 15%);
+        filter: sepia(50%);
+      }
+    }
+
+    .sh {
+      background-image: url('/src/assets/cropped-Medal-of-Honor-Allied-Assault-Spearhead-Cover.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .mumble {
+      background-image: url('/src/assets/1200px-Icons_mumble.svg.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .mappack {
+      background-image: url('/src/assets/ranked-custom-maps-for-medal-of-honor-allied-assault-1024x613.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .tase {
+      background-image: url('/src/assets/all-seeing-eye-3167-0.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
+
+  #siteurl {
+    font-weight: 400;
+  } 
+
+  .server__head {
+    display: flex;
+    justify-content: center;    
+    padding: 30px 0;
+
+    h2 {
+      font-size: 40px;
+      font-weight: 700;
+    }
+
+    h3 {
+      font-size: 30px;
+    }
+  }
+  
+  .server {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.row span {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.row {
+  :nth-child(2){
+    font-weight: 400;
+  }
+}
+
+#pml {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;  
+
+  @media screen and (max-width: 800px){
+    grid-template-columns: 0.5fr 2fr 1fr 0.5fr 1fr;
+  }
+
+  .column {
+    border-right: 1px solid $darkenRed;
+    position: relative;
+    .contrast-mode & {
+      border-right-color: $darkenBlue;
+    }
+    &:last-of-type {
+      border-right: none;
+    }
+
+    h2 {
+      text-align: center;
+      border-bottom: 3px solid $darkenRed;
+      color: #ffffc0; 
+      background-color: #333;
+      
+      .contrast-mode & {
+        background-color: $lightBlue;
+        border-bottom-color: $darkenBlue;
+      }
+
+      @media screen and (max-width: 800px){
+        width: 100%;
+        display: flex;
+        align-items: center;
+        writing-mode: tb-rl;
+        font-size: 18px;
+        font-weight: 700;
+        height: 125px;        
+      }
+    }    
+
+    .subcolumn {
+      text-align: center;
+      color: #ffffc0;
+
+      .item {
+        @media screen and (max-width: 800px){
+          height: 50px;
+          font-size: 14px;
+          padding-top: 10px;
+        }
+      }
+
+      :nth-child(2n-1){
+       background-color: lighten($lightRed,10%);
+
+       .contrast-mode & {
+         background-color: lighten($lightBlue, 10%);
+       }
+      }
+
+      :nth-child(2n){
+        background-color: $lightRed;
+        .contrast-mode & {
+          background-color: $lightBlue;
+        }
+      }
+
+      :nth-child(n){
+        border-bottom: 1px solid $darkenRed;
+        .contrast-mode & {
+          border-bottom-color: $darkenBlue;
+        }
+      }     
+
+      .item0 {
+        position: relative;
+        font-weight: 700;
+        &:after {
+          position: absolute;
+          top: 5px;          
+          margin-left: 5px;
+          content: "";
+          height: 13px;
+          width: 10px;
+          background-image: url("/assets/ladder1.gif");
+
+          @media screen and (max-width: 800px) {
+            top: 15px;
+          }
+        }
+      }
+
+      .item1 {
+        position: relative;
+        &:after {
+          position: absolute;
+          top: 5px;         
+          margin-left: 5px;
+          content: "";
+          height: 13px;
+          width: 10px;
+          background-image: url("/assets/ladder2.gif");
+
+          @media screen and (max-width: 800px) {
+            top: 15px;
+          }
+        }
+      }
+
+      .item2 {
+        position: relative;
+        &:after {
+          position: absolute;
+          top: 5px;          
+          margin-left: 5px;
+          content: "";
+          height: 13px;
+          width: 10px;
+          background-image: url("/assets/ladder3.gif");
+
+          @media screen and (max-width: 800px) {
+            top: 15px;
+          }
+        }
+      }
+    }
+  }
+}
+
+#history {
+  .match {
+    display: grid;
+    grid-template-columns: 1fr 4.5fr 4.5fr;
+    grid-template-rows: auto;    
+    border: 1px solid $darkenRed;   
+    padding-bottom: 15px; 
+    background-color: $darkenRed;
+
+    .contrast-mode & {
+      border-color: $darkenBlue;
+      background-color: $darkenBlue;
+    }
+
+    @media screen and (max-width: 800px){
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      gap: 15px 15px;
+    }
+
+    .date {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;      
+      padding: 10px;
+      background-color: #ffffc0;
+      color: $middleRed;
+
+      .contrast-mode & {
+        background-color: lighten($lightBlue, 15%);
+        color: $darkenBlue;
+      }
+
+      .matchId {
+        font-size: 22px;
+        font-weight: 700;
+      }
+    }
+
+    .bg__green {
+      background-color: $lightRed;
+
+      .contrast-mode & {
+        background-color: $lightBlue;
+      }
+    }
+
+    .bg__red {
+      background-color: $middleRed;
+
+      .contrast-mode & {
+        background-color: $middleBlue;
+      }
+    }
+
+    .bg__gray {
+      background-color: gray;
+    }
+
+    .team {
+      .roudswon1, .roudswon2 {
+        padding: 10px;
+        display: flex;
+        justify-content:center;
+        font-size: 28px;
+        font-weight: 700; 
+        border-bottom: 2px solid #ffffc0; 
+        color: #ffffc0;      
+      }      
+
+      .players {
+        padding: 10px;
+        color: darken(#ffffc0,10%);
+        .player {
+          display: flex;
+          align-items: flex-end;
+          
+          .preelo {
+            font-size: 12px;
+          }
+
+          .name {
+            font-size: 18px;
+            margin: 0 10px;
+          }
+
+          .score {
+            font-size: 18px;
+            margin-right: 10px;
+          }
+
+          .postelo {
+            font-size: 12px;
+          }
+
+          .difference {
+            font-size: 12px;
+            margin-left: 10px;
+          }
+        }
+
+        .won {
+          position: relative;
+
+          &:after {
+            position: absolute;
+            top: 5px;
+            margin-left: 5px;
+            content: " ";
+            background-image: url("/assets/uprate.gif");
+            width: 10px;
+            height: 5px;
+          }
+        }
+
+        .lost {
+          position: relative;
+
+          &:after {
+            position: absolute;
+            top: 5px;
+            margin-left: 5px;
+            content: "";
+            background-image: url("/assets/downrate.gif");
+            width: 10px;
+            height: 5px;
+          }
+        }
+      }
+    }
+  }  
+}
+
+#pagin {
+  background-color: $middleRed;
+  margin: 0;
+  padding: 15px 40px;
+  display: flex;
+  justify-content: flex-end;
+
+  .contrast-mode & {
+    background-color: $middleBlue;
+  }
+
+  li {
+    display: inline-block;
+    margin: 0 5px;
+  
+    .current {
+      color: #ffffc0;
+    }
+    
+  
+    a {
+      font-weight: 700;
+      color: #000;
+    }
+  }
+
+  .prev {
+    cursor: pointer;
+  }
+  
+  .next {
+    cursor: pointer;
+  }
+  
+  .last{
+    cursor:pointer;
+    margin-left:5px;
+  }
+  
+  .first{
+    cursor:pointer;
+    margin-right:5px;
+  }
+}
+
+.contrast__button {
+  outline: none;
+  appearance: none;
+  border: 0;
+  background-color: transparent;
+
+  i {
+    font-size: 16px;
+    color: #ffffc0;
+    cursor: pointer;
+  }
+}
+
+#selectionTeams {
+  .matchSelection {
+    display: grid;
+    grid-template-columns: 1fr 4.5fr 4.5fr;
+    grid-template-rows: auto;    
+    border: 1px solid $darkenRed;   
+    padding-bottom: 15px; 
+    background-color: $darkenRed;
+    gap: 15px 15px;
+
+    .contrast-mode & {
+      border-color: $darkenBlue;
+      background-color: $darkenBlue;
+    }
+
+    @media screen and (max-width: 800px){
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      gap: 15px 15px;
+    }
+
+    .date {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;      
+      padding: 10px;
+      background-color: #ffffc0;
+      color: $middleRed;
+
+      .contrast-mode & {
+        background-color: lighten($lightBlue, 15%);
+        color: $darkenBlue;
+      }
+
+      .matchId {
+        font-size: 22px;
+        font-weight: 700;
+      }
+    }
+
+    .bg__green {
+      background-color: $lightRed;
+
+      .contrast-mode & {
+        background-color: $lightBlue;
+      }
+    }
+
+    .bg__red {
+      background-color: $middleRed;
+
+      .contrast-mode & {
+        background-color: $middleBlue;
+      }
+    }
+
+    .bg__gray {
+      background-color: gray;
+    }
+
+    .team {
+      background-color: $lightRed;
+
+      .contrast-mode & {
+        background-color: $lightBlue;
+      }
+      .roudswon1, .roudswon2 {
+        padding: 10px;
+        display: flex;
+        justify-content:center;
+        font-size: 28px;
+        font-weight: 700; 
+        border-bottom: 2px solid #ffffc0; 
+        color: #ffffc0;      
+      }      
+
+      .players {
+        padding: 10px;
+        color: darken(#ffffc0,10%);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        gap: 15px 15px;
+        .player {
+          display: flex;
+          align-items: flex-end;
+          
+          .preelo {
+            font-size: 12px;
+          }
+
+          .name {
+            font-size: 18px;
+            margin: 0 10px;
+          }
+
+          .score {
+            font-size: 18px;
+            margin-right: 10px;
+          }
+
+          .postelo {
+            font-size: 12px;
+          }
+
+          .difference {
+            font-size: 12px;
+            margin-left: 10px;
+          }
+        }
+
+        .chance-desc {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 15px;
+        }
+
+        .chance {
+          display: flex;
+          justify-content: center;
+          align-items: center; 
+          border: 10px solid $darkenRed; 
+          font-size: 30px;  
+          font-weight: 700; 
+          
+          .contrast-mode & {
+            border-color: $darkenBlue;
+          }
+        }
+
+        @keyframes pulse-win {
+          0% {border-color: green;}
+          50% {border-color: rgba(0, 255, 255, 0);}
+          100% {border-color: green}
+        }
+
+        @keyframes pulse-lose {
+          0% {border-color: red;}
+          50% {border-color: rgba(0, 255, 255, 0);}
+          100% {border-color: red}
+        }
+
+        .chance-win {
+          animation: pulse-win 5s infinite;
+        }
+
+        .chance-lose {
+          animation: pulse-lose 5s infinite;
+          animation-delay: 2.5s;
+        }
+
+        .won {
+          position: relative;
+
+          &:after {
+            position: absolute;
+            top: 5px;
+            margin-left: 5px;
+            content: " ";
+            background-image: url("/assets/uprate.gif");
+            width: 10px;
+            height: 5px;
+          }
+        }
+
+        .lost {
+          position: relative;
+
+          &:after {
+            position: absolute;
+            top: 5px;
+            margin-left: 5px;
+            content: "";
+            background-image: url("/assets/downrate.gif");
+            width: 10px;
+            height: 5px;
+          }
+        }
+      }
+
+      .cumulative {
+        padding: 10px;
+        color: darken(#ffffc0,10%);
+      }
+    }
+  }
+}

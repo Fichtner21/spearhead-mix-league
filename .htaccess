@@ -1,0 +1,11 @@
+# AuthType Basic  
+# AuthName "restricted area"  
+# AuthUserFile /home/platne/wptest/public_html/src/.htpasswd  
+# require valid-user
+
+RewriteEngine On
+RewriteBase /src
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . src/index.html [L]
