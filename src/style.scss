@@ -280,12 +280,13 @@ nav {
 
   #siteurl {
     font-weight: 400;
-  } 
+  }   
+}
 
+#server {
   .server__head {
     display: flex;
     justify-content: center;    
-    padding: 30px 0;
 
     h2 {
       font-size: 40px;
@@ -294,6 +295,26 @@ nav {
 
     h3 {
       font-size: 30px;
+      padding-bottom: 20px;
+    }
+  }
+
+  .mumble-desc {
+    background-color: $lightRed;
+    padding: 20px;
+    margin: 20px 0;   
+    text-align: center;
+    
+    p:first-of-type {
+      text-align: left;
+    }
+
+    .contrast-mode & {
+      background-color: $lightBlue;
+    }
+
+    img {      
+      padding: 15px;
     }
   }
   
