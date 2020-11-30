@@ -474,6 +474,11 @@ nav {
     padding-bottom: 15px; 
     background-color: $darkenRed;
 
+    .vComments {
+      grid-column-start: 1;
+      grid-column-end: 4;
+    }
+
     .contrast-mode & {
       border-color: $darkenBlue;
       background-color: $darkenBlue;

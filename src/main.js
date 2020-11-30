@@ -10,7 +10,6 @@ function enableRouting() {
   function setRoute() {
     $('.view').hide();
     const { hash } = window.location;
-    // console.log(hash);
     if (hash === '') {
       $('#home').show();
     }

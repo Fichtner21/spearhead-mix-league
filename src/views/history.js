@@ -1,5 +1,6 @@
 import drive from 'drive-db';
 import $ from 'jquery';
+import Valine from 'valine';
 
 export function history() {
   (async () => {
@@ -660,7 +661,7 @@ export function history() {
       }
       // }
 
-      value += `<div class="match">          
+      value += `<div class="match" id="match${newObj.length - i}">          
           <div class="date">
             <div class="matchId" id="matchId-${newObj.length - i}">#${newObj.length - i}</div>
             <div class="dateDetail">${match.timestamp}</div>            
@@ -796,9 +797,11 @@ export function history() {
                 </div>
               </div>  
             </div>           
-          </div>            
-        </div>`;
+          </div>
+        </div>
+       `;
     });
+
     document.getElementById('matches').innerHTML = value;
     // console.log(newObj);
 
@@ -1010,6 +1013,21 @@ export function history() {
       }
     });
 
+    // const valineComments = () => {
+    //   for (let i = newObj.length; i > 0; i--) {
+    //     const elem = `#match${i}`;
+    //     new Valine({
+    //       el: `#vcomments${i}`,
+    //       appId: 'GbCaRUpGLOl1IN6vCnIwMcle-MdYXbMMI',
+    //       appKey: '3YW20TtAKRS89UlzqcMUPQcO',
+    //       lang: 'en',
+    //       path: elem.hash,
+    //     });
+    //   }
+    // };
+
+    // valineComments();
+
     const pageSize = 10;
     let incremSlide = 11;
     let startPage = 0;
@@ -1017,8 +1035,6 @@ export function history() {
 
     const pageCount = $('.match').length / pageSize;
     const totalSlidepPage = Math.floor(pageCount / incremSlide);
-    // console.log(pageCount);
-    // console.log(totalSlidepPage);
 
     for (let i = 0; i < pageCount; i++) {
       $('#pagin').append('<li><a href="#history">' + (i + 1) + '</a></li>');

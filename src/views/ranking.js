@@ -1,4 +1,5 @@
 import drive from 'drive-db';
+import _ from 'lodash';
 
 export function rankingInfo() {
   (async () => {
@@ -10,20 +11,160 @@ export function rankingInfo() {
       tab: '4',
     });
 
-    const myArrOfObjcts = [
-      { time: 4444, a: 'Tom', b: 'Ann', c: 'John' },
-      { time: 1111, a: 'Josh', b: 'Ann', c: 'Tom' },
-      { time: 1000, a: 'Ann', b: 'Luc', c: 'Tom' },
-      { time: 8888, a: 'Brain', b: 'Tom', c: 'Ann' },
-    ];
+    const historyRanking2 = await drive({
+      sheet: '1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo',
+      tab: '1',
+    });
 
-    const findTom2 = myArrOfObjcts.filter((item) => JSON.stringify(item).includes('Tom')).pop();
+    console.log(historyRanking2);
+
+    const myArrOfObjects = [
+      {
+        time: 1111,
+        t1p1name: 'Tom',
+        t1p1pre: '1000',
+        t1p1score: '10',
+        t1p1post: '990',
+        t1p2name: 'Luis',
+        t1p2pre: '1000',
+        t1p2score: '12',
+        t1p2post: '992',
+        t2p1name: 'John',
+        t2p1pre: '1000',
+        t2p1score: '10',
+        t2p1post: '1010',
+        t2p2name: 'David',
+        t2p2pre: '1000',
+        t2p2score: '15',
+        t2p2post: '1012',
+        t1roundswon: '9',
+        t2roundswon: '10',
+      },
+      {
+        time: 2222,
+        t1p1name: 'Tom',
+        t1p1pre: '990',
+        t1p1score: '1',
+        t1p1post: '974',
+        t1p2name: 'Alan',
+        t1p2pre: '1052',
+        t1p2score: '12',
+        t1p2post: '1069',
+        t2p1name: 'Ann',
+        t2p1pre: '1000',
+        t2p1score: '42',
+        t2p1post: '1045',
+        t2p2name: 'John',
+        t2p2pre: '1010',
+        t2p2score: '15',
+        t2p2post: '1029',
+        t1roundswon: '9',
+        t2roundswon: '25',
+      },
+      {
+        time: 3333,
+        t1p1name: 'John',
+        t1p1pre: '1029',
+        t1p1score: '34',
+        t1p1post: '1054',
+        t1p2name: 'Ann',
+        t1p2pre: '1045',
+        t1p2score: '23',
+        t1p2post: '1059',
+        t2p1name: 'David',
+        t2p1pre: '1012',
+        t2p1score: '10',
+        t2p1post: '1001',
+        t2p2name: 'Tom',
+        t2p2pre: '974',
+        t2p2score: '5',
+        t2p2post: '960',
+        t1roundswon: '19',
+        t2roundswon: '10',
+      },
+    ];
+    const arrTomPos = [];
+    // console.log(myArrOfObjects);
+
+    for (const key in myArrOfObjects) {
+      if (myArrOfObjects.hasOwnProperty(key)) {
+        // console.log(key + ' -> ' + JSON.stringify(myArrOfObjects[key]));
+        const objInArr = myArrOfObjects[key];
+        for (const key2 in objInArr) {
+          if (objInArr.hasOwnProperty(key2)) {
+            //  console.log(key2 + ' -> ' + JSON.stringify(objInArr[key2]));
+            const elemOfObj = objInArr[key2];
+            // console.log(elemOfObj);
+            arrTomPos.push(elemOfObj);
+          }
+        }
+      }
+    }
+    // console.log(arrTomPos);
+    // console.log('INCLUDES', arrTomPos.includes('Tom'));
+
+    function getAllIndexes(arr, val) {
+      const indexes = [];
+      let i = -1;
+      while ((i = arr.indexOf(val, i + 1)) !== -1) {
+        indexes.push(i + 4); // postELO
+      }
+      return indexes;
+    }
+
+    const indexes = getAllIndexes(arrTomPos, 'Tom');
+    console.log('INDEXES', indexes);
+    const tomStreakArr = [];
+    if (arrTomPos.includes('Tom')) {
+      // const newArry = arrTomPos.slice(arrTomPos.indexOf('Tom'), 5);
+      // console.log('newArry', newArry);
+      // console.log('newArryPop', newArry.pop());
+      arrTomPos.forEach(function (el, index) {
+        index += 1;
+        console.log('INDEX: ' + index + ' EL: ' + el);
+        console.log('INDEXES FROM FOREACH ');
+        indexes.forEach(function (founded, i) {
+          console.log('FOUNDED: ' + founded + ' INDEX -> ' + i);
+          if (Number(index) === Number(founded)) {
+            console.log('EL!!! -> ' + el);
+            const tomStreak = Number(el);
+            tomStreakArr.push(tomStreak);
+          }
+        });
+      });
+    }
+
+    console.log('STREAK ARR', tomStreakArr);
+
+    console.log('================');
+    for (let i = 1; i <= 2; i++) {
+      for (let j = 1; j <= 2; j++) {
+        console.log(`t${j}p${i}name`);
+        const tomPos = _.filter(myArrOfObjects, [`t${j}p${i}name`, 'Tom']);
+        // console.log(tomPos);
+        // console.log(_.find(myArrOfObjects, [`t${j}p${i}name`, 'Tom']));
+        // arrTomPos.push(tomPos);
+        // if (tomPos === true) {
+        //   console.log(_.filter(myArrOfObjects, [`t${j}p${i}post`]));
+        // }
+      }
+    }
+    console.log('================');
+    // console.log('arrTomPos ', arrTomPos);
+    console.log('================');
+
+    const findTom2 = myArrOfObjects.filter((item) => JSON.stringify(item).includes('Tom')).pop(); // ostatnie wystąpienie Toma
     // console.log(findTom2);
 
     const players = db.slice(0, 23); // pobranie pierwszych 23 graczy, do poprawy
-    // console.log(db);
-    // console.log(players);
+
     const lastWar = document.getElementById('lastWar');
+
+    // console.log(historyRanking.filter((item) => JSON.stringify(item).includes('josh')).pop());
+    const aaa = historyRanking.filter((item) => item);
+    aaa.forEach(function (el) {
+      // console.log(el);
+    });
 
     const findBaton = historyRanking.filter((item) => JSON.stringify(item).includes('baton')).pop();
     const findZielony = historyRanking.filter((item) => JSON.stringify(item).includes('zielony')).pop();

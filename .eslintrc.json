@@ -36,6 +36,10 @@
     "camelcase": 0,
     "no-use-before-define": 0,
     "operator-assignment": 0,
-    "no-restricted-properties": 0
+    "no-restricted-properties": 0,
+    "no-new": 0,
+    "no-restricted-syntax": 0,
+    "no-prototype-builtins": 0,
+    "no-cond-assign": 0
   }
 }
