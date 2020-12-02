@@ -5,6 +5,7 @@ import { rankingInfo } from './views/ranking';
 import { history } from './views/history';
 import { filesSite } from './views/files';
 import { serverSite } from './views/server';
+import { chartsSite } from './views/charts';
 
 function enableRouting() {
   function setRoute() {
@@ -24,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   history();
   filesSite();
   serverSite();
+  chartsSite();
 
   enableRouting();
 

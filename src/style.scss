@@ -337,7 +337,7 @@ nav {
 
 #pml {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;  
 
   @media screen and (max-width: 800px){
@@ -386,9 +386,14 @@ nav {
           font-size: 14px;
           padding-top: 10px;
         }
+
+        a {
+          color: #ffffc0;
+          text-decoration: none;
+        }
       }
 
-      :nth-child(2n-1){
+      > :nth-child(2n-1){
        background-color: lighten($lightRed,10%);
 
        .contrast-mode & {
@@ -396,14 +401,14 @@ nav {
        }
       }
 
-      :nth-child(2n){
+      > :nth-child(2n){
         background-color: $lightRed;
         .contrast-mode & {
           background-color: $lightBlue;
         }
       }
 
-      :nth-child(n){
+      > :nth-child(n){
         border-bottom: 1px solid $darkenRed;
         .contrast-mode & {
           border-bottom-color: $darkenBlue;
@@ -849,4 +854,37 @@ nav {
       }
     }
   }
+}
+
+.card {
+  color: #ffffc0;
+}
+
+.increaseDecrease {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 15px;
+  //margin: 30px 0;
+
+  .streak {
+    background-color: $lightRed;
+    padding: 15px;
+
+    .contrast-mode & {
+      background-color: $lightBlue;
+    }
+  }
+
+  .increaseStreak {
+
+  }
+
+  .decreaseStreak {
+
+  }
+}
+
+canvas {
+  margin-top: 30px;
 }

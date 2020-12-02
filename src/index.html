@@ -16,7 +16,8 @@
         <a href="#ranking" class="rank">Ranking</a>
         <a href="#history">Match History</a>
         <a href="#files">Files</a>
-        <a href="#server">Server</a>        
+        <a href="#server">Server</a>  
+        <a href="#charts">Charts</a>      
         <button data-action="contrast-mode" class="contrast__button" title="Wersja kontrastowa">
           <i class="fas fa-adjust"></i>         
         </button>
@@ -113,7 +114,11 @@
             <div class="column">
               <h2>Ranking</h2>
               <div class="subcolumn" id="overall"></div>
-            </div>                   
+            </div>      
+            <div class="column">
+              <h2>Frags</h2>
+              <div class="subcolumn" id="frags"></div>
+            </div>              
             <div class="column">
               <h2>War Count</h2>
               <div class="subcolumn" id="warCount"></div>
@@ -129,7 +134,7 @@
       <div class="container view hidden" id="history">
         <div class="wrapper">
           <div id="matches"></div>          
-         
+
           <ul id="pagin">
           
           </ul>
@@ -146,8 +151,7 @@
           </div>
         </div>  
       </div>             
-      <div class="container view hidden" id="server">
-        
+      <div class="container view hidden" id="server">        
         <div class="wrapper">
           <div class="server__head">
             <h2>173.199.83.169:12203</h2>            
@@ -169,6 +173,27 @@
           </div>
         </div>
       </div>
+      <div class="container view hidden" id="charts">
+        <div class="wrapper">
+          <nav class="navbar navbar-light bg-light">                
+            <a href="#charts-zielony" class="rank">Zielony</a>
+            <a href="#charts-baton" class="rank">bAtOn</a>
+            <a href="#charts-illusion" class="rank">-Illu$ioN-</a>
+            <a href="#charts-belus" class="rank">Belu$</a>
+            <a href="#charts-cwieku" class="rank">cwq</a>
+
+            <a href="#charts-jim">Jim</a> 
+                     
+          </nav>
+        </div>
+        
+          
+        <!-- </div> -->
+      </div>
+      <!-- <div class="container view hidden card" id="charts-jim" style="color:#fff">jim</div>
+      <div class="container view hidden card" id="charts-zielony" style="color:#fff">zielony
+          <canvas id="myChart" width="600" height="400"></canvas>
+      </div> -->
     </div>
   </body>
 </html>

@@ -64,6 +64,8 @@ export function history() {
     let value = '';
     newObj.forEach((match, i) => {
       // for (let j = 0; j < 5; j++) {
+      const yp = 'YOUR_PROBLEM';
+      const zielony = 'Zielony';
 
       // TEAM 1
       switch (match.t1p1name) {
@@ -84,7 +86,7 @@ export function history() {
           break;
         }
         case 'your problem': {
-          match.t1p1name = 'Your Problem';
+          match.t1p1name = yp;
           break;
         }
         case 'illusion': {
@@ -118,7 +120,7 @@ export function history() {
           break;
         }
         case 'your problem': {
-          match.t1p2name = 'Your Problem';
+          match.t1p2name = yp;
           break;
         }
         case 'illusion': {
@@ -151,6 +153,10 @@ export function history() {
         }
         case 'belus': {
           match.t1p2name = 'Belu$';
+          break;
+        }
+        case 'zielony': {
+          match.t1p2name = zielony;
           break;
         }
         case '': {
@@ -188,7 +194,7 @@ export function history() {
           break;
         }
         case 'your problem': {
-          match.t1p3name = 'Your Problem';
+          match.t1p3name = yp;
           break;
         }
         case 'illusion': {
@@ -216,7 +222,7 @@ export function history() {
           break;
         }
         case 'zielony': {
-          match.t1p3name = 'Zielony';
+          match.t1p3name = zielony;
           break;
         }
         case '': {
@@ -246,7 +252,7 @@ export function history() {
           break;
         }
         case 'your problem': {
-          match.t1p4name = 'Your Problem';
+          match.t1p4name = yp;
           break;
         }
         case 'illusion': {
@@ -262,7 +268,7 @@ export function history() {
           break;
         }
         case 'zielony': {
-          match.t1p4name = 'Zielony';
+          match.t1p4name = zielony;
           break;
         }
         case 'zielak': {
@@ -316,7 +322,7 @@ export function history() {
           break;
         }
         case 'your problem': {
-          match.t1p5name = 'Your Problem';
+          match.t1p5name = yp;
           break;
         }
         case 'illusion': {
@@ -332,7 +338,7 @@ export function history() {
           break;
         }
         case 'zielony': {
-          match.t1p5name = 'Zielony';
+          match.t1p5name = zielony;
           break;
         }
         case 'zielak': {
@@ -383,7 +389,7 @@ export function history() {
           break;
         }
         case 'your problem': {
-          match.t2p1name = 'Your Problem';
+          match.t2p1name = yp;
           break;
         }
         case 'illusion': {
@@ -420,12 +426,16 @@ export function history() {
           match.t2p2name = 'rybA';
           break;
         }
+        case 'wiggles': {
+          match.t2p2name = 'Mr.Wiggles';
+          break;
+        }
         case 'jim': {
           match.t2p2name = 'Jim';
           break;
         }
         case 'zielony': {
-          match.t2p2name = 'Zielony';
+          match.t2p2name = zielony;
           break;
         }
         case 'aker': {
@@ -449,7 +459,7 @@ export function history() {
           break;
         }
         case 'your problem': {
-          match.t2p2name = 'Your Problem';
+          match.t2p2name = yp;
           break;
         }
         case 'illusion': {
@@ -515,7 +525,7 @@ export function history() {
           break;
         }
         case 'your problem': {
-          match.t2p3name = 'Your Problem';
+          match.t2p3name = yp;
           break;
         }
         case 'illusion': {
@@ -535,7 +545,7 @@ export function history() {
           break;
         }
         case 'zielony': {
-          match.t2p3name = 'Zielony';
+          match.t2p3name = zielony;
           break;
         }
         case 'moses': {
@@ -573,7 +583,7 @@ export function history() {
           break;
         }
         case 'your problem': {
-          match.t2p4name = 'Your Problem';
+          match.t2p4name = yp;
           break;
         }
         case 'illusion': {
@@ -589,7 +599,7 @@ export function history() {
           break;
         }
         case 'zielony': {
-          match.t2p4name = 'Zielony';
+          match.t2p4name = zielony;
           break;
         }
         case 'moses': {
@@ -631,7 +641,7 @@ export function history() {
           break;
         }
         case 'your problem': {
-          match.t2p5name = 'Your Problem';
+          match.t2p5name = yp;
           break;
         }
         case 'illusion': {
@@ -647,7 +657,7 @@ export function history() {
           break;
         }
         case 'zielony': {
-          match.t2p5name = 'Zielony';
+          match.t2p5name = zielony;
           break;
         }
         case '': {

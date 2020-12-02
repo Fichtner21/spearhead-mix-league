@@ -42,6 +42,8 @@
     "webpackbar": "^4.0.0"
   },
   "dependencies": {
+    "chart.js": "^2.9.4",
+    "chartjs-plugin-annotation": "^0.5.7",
     "drive-db": "^6.0.1",
     "jquery": "^3.5.1",
     "js-cookie": "^2.2.1",

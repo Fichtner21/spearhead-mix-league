@@ -40,6 +40,7 @@
     "no-new": 0,
     "no-restricted-syntax": 0,
     "no-prototype-builtins": 0,
-    "no-cond-assign": 0
+    "no-cond-assign": 0,
+    "no-lonely-if": 0
   }
 }

@@ -1,5 +1,7 @@
 import drive from 'drive-db';
 import _ from 'lodash';
+import { Chart } from 'chart.js';
+import { annotations } from 'chartjs-plugin-annotation';
 
 export function rankingInfo() {
   (async () => {
@@ -45,7 +47,7 @@ export function rankingInfo() {
         t1p1name: 'Tom',
         t1p1pre: '990',
         t1p1score: '1',
-        t1p1post: '974',
+        t1p1post: '994',
         t1p2name: 'Alan',
         t1p2pre: '1052',
         t1p2score: '12',
@@ -78,30 +80,114 @@ export function rankingInfo() {
         t2p2name: 'Tom',
         t2p2pre: '974',
         t2p2score: '5',
+        t2p2post: '945',
+        t1roundswon: '19',
+        t2roundswon: '10',
+      },
+      {
+        time: 4444,
+        t1p1name: 'John',
+        t1p1pre: '1029',
+        t1p1score: '34',
+        t1p1post: '1054',
+        t1p2name: 'Ann',
+        t1p2pre: '1045',
+        t1p2score: '23',
+        t1p2post: '1059',
+        t2p1name: 'Tom',
+        t2p1pre: '980',
+        t2p1score: '10',
+        t2p1post: '940',
+        t2p2name: 'David',
+        t2p2pre: '974',
+        t2p2score: '5',
         t2p2post: '960',
         t1roundswon: '19',
         t2roundswon: '10',
       },
     ];
     const arrTomPos = [];
-    // console.log(myArrOfObjects);
+    const arrBelusPos = [];
+    const arrZielonyPos = [];
+    const arrZielonyFrags = [];
+    const arrBatonFrags = [];
+    const arrJimFrags = [];
 
-    for (const key in myArrOfObjects) {
-      if (myArrOfObjects.hasOwnProperty(key)) {
-        // console.log(key + ' -> ' + JSON.stringify(myArrOfObjects[key]));
-        const objInArr = myArrOfObjects[key];
-        for (const key2 in objInArr) {
-          if (objInArr.hasOwnProperty(key2)) {
-            //  console.log(key2 + ' -> ' + JSON.stringify(objInArr[key2]));
-            const elemOfObj = objInArr[key2];
-            // console.log(elemOfObj);
-            arrTomPos.push(elemOfObj);
+    function sumOfFrags(name) {
+      const arrNameFrags = [];
+
+      function destructObjFrags(obj, arr) {
+        for (const key in obj) {
+          if (obj.hasOwnProperty(key)) {
+            const objInArr = obj[key];
+            for (const key2 in objInArr) {
+              if (objInArr.hasOwnProperty(key2)) {
+                const elemOfObj = objInArr[key2];
+                arr.push(elemOfObj);
+              }
+            }
+          }
+        }
+      }
+
+      destructObjFrags(historyRanking, arrNameFrags);
+
+      function getIndexesFrags(arr, val) {
+        const indexes = [];
+        let i = -1;
+        while ((i = arr.indexOf(val, i + 1)) !== -1) {
+          indexes.push(i + 3); // frags
+        }
+        return indexes;
+      }
+
+      const indexesFragsName = getIndexesFrags(arrNameFrags, name);
+      const nameFragsOut = [];
+
+      function foundAllStrikes(username, ind, arrIn, arrOut) {
+        if (arrIn.includes(username)) {
+          arrIn.forEach(function (el, index) {
+            index += 1;
+            ind.forEach(function (founded, i) {
+              if (Number(index) === Number(founded)) {
+                const foundedStreak = Number(el);
+                arrOut.push(foundedStreak);
+              }
+            });
+          });
+        }
+      }
+
+      foundAllStrikes(name, indexesFragsName, arrNameFrags, nameFragsOut);
+
+      return nameFragsOut.reduce((a, b) => a + b);
+    }
+
+    console.log('============>', sumOfFrags('illusion'));
+
+    function destructObj(obj, arr) {
+      for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          // console.log(key + ' -> ' + JSON.stringify(myArrOfObjects[key]));
+          const objInArr = obj[key];
+          for (const key2 in objInArr) {
+            if (objInArr.hasOwnProperty(key2)) {
+              //  console.log(key2 + ' -> ' + JSON.stringify(objInArr[key2]));
+              const elemOfObj = objInArr[key2];
+              // console.log(elemOfObj);
+              arr.push(elemOfObj);
+            }
           }
         }
       }
     }
-    // console.log(arrTomPos);
-    // console.log('INCLUDES', arrTomPos.includes('Tom'));
+
+    destructObj(historyRanking, arrBelusPos);
+    destructObj(historyRanking, arrZielonyPos);
+    // liczba fragów
+    destructObj(historyRanking, arrZielonyFrags);
+    destructObj(historyRanking, arrBatonFrags);
+    destructObj(historyRanking, arrJimFrags);
 
     function getAllIndexes(arr, val) {
       const indexes = [];
@@ -112,21 +198,40 @@ export function rankingInfo() {
       return indexes;
     }
 
+    function getAllIndexesFrags(arr, val) {
+      const indexes = [];
+      let i = -1;
+      while ((i = arr.indexOf(val, i + 1)) !== -1) {
+        indexes.push(i + 3); // frags
+      }
+      return indexes;
+    }
+
     const indexes = getAllIndexes(arrTomPos, 'Tom');
-    console.log('INDEXES', indexes);
+
+    const indexesBelus = getAllIndexes(arrBelusPos, 'jim');
+    const belusStreakArr = [];
+
+    const indexesZielony = getAllIndexes(arrZielonyPos, 'zielony');
+    const zielonyStreakArr = [];
+
+    const indexesFragsZielony = getAllIndexesFrags(arrZielonyFrags, 'zielony');
+    const indexesFragsBaton = getAllIndexesFrags(arrBatonFrags, 'baton');
+    const indexesFragsJim = getAllIndexesFrags(arrJimFrags, 'jim');
+    const zielonyFragsOut = [];
+    const batonFragsOut = [];
+    const jimFragsOut = [];
+
     const tomStreakArr = [];
     if (arrTomPos.includes('Tom')) {
-      // const newArry = arrTomPos.slice(arrTomPos.indexOf('Tom'), 5);
-      // console.log('newArry', newArry);
-      // console.log('newArryPop', newArry.pop());
       arrTomPos.forEach(function (el, index) {
         index += 1;
-        console.log('INDEX: ' + index + ' EL: ' + el);
-        console.log('INDEXES FROM FOREACH ');
+        // console.log('INDEX: ' + index + ' EL: ' + el);
+        // console.log('INDEXES FROM FOREACH ');
         indexes.forEach(function (founded, i) {
-          console.log('FOUNDED: ' + founded + ' INDEX -> ' + i);
+          // console.log('FOUNDED: ' + founded + ' INDEX -> ' + i);
           if (Number(index) === Number(founded)) {
-            console.log('EL!!! -> ' + el);
+            // console.log('EL!!! -> ' + el);
             const tomStreak = Number(el);
             tomStreakArr.push(tomStreak);
           }
@@ -134,12 +239,123 @@ export function rankingInfo() {
       });
     }
 
-    console.log('STREAK ARR', tomStreakArr);
+    function findAllStrikes(playerName, ind, arrIn, arrOut) {
+      if (arrIn.includes(playerName)) {
+        arrIn.forEach(function (el, index) {
+          index += 1;
+          // console.log('INDEX: ' + index + ' EL: ' + el);
+          // console.log('INDEXES FROM FOREACH ');
+          ind.forEach(function (founded, i) {
+            // console.log('FOUNDED: ' + founded + ' INDEX -> ' + i);
+            if (Number(index) === Number(founded)) {
+              // console.log('EL!!! -> ' + el);
+              const foundedStreak = Number(el);
+              arrOut.push(foundedStreak);
+            }
+          });
+        });
+      }
+    }
+
+    const mainArrFrags = [];
+
+    findAllStrikes('jim', indexesBelus, arrBelusPos, belusStreakArr);
+    findAllStrikes('zielony', indexesZielony, arrZielonyPos, zielonyStreakArr);
+
+    findAllStrikes('zielony', indexesFragsZielony, arrZielonyFrags, zielonyFragsOut);
+    findAllStrikes('baton', indexesFragsBaton, arrBatonFrags, batonFragsOut);
+    findAllStrikes('jim', indexesFragsJim, arrJimFrags, jimFragsOut);
+
+    console.log(
+      'ZIELONY FRAGS',
+      zielonyFragsOut.reduce((a, b) => a + b),
+    );
+    console.log(
+      'BATON FRAGS: ',
+      batonFragsOut.reduce((a, b) => a + b),
+    );
+
+    const reduceZielony = zielonyFragsOut.reduce((a, b) => a + b);
+    const reduceBaton = batonFragsOut.reduce((a, b) => a + b);
+    const reduceJim = jimFragsOut.reduce((a, b) => a + b);
+
+    tomStreakArr.unshift(1000);
+    belusStreakArr.unshift(1000);
+    zielonyStreakArr.unshift(1000);
+
+    console.log('++++++++++++');
+    const ar = [1000, 1002, 1004, 600, 400, 200, 500, 600, 700].reverse();
+
+    console.log('******', ar);
+
+    console.log('================');
+    // tomStreakArr.reverse();
+    // console.log('toms STREAK: ', tomStreakArr);
+    // const subarrUp = [];
+    // for (let i = 0; i < tomStreakArr.length && tomStreakArr[i + 1] > tomStreakArr[i]; i++) {
+    //   subarrUp.push(tomStreakArr[i]);
+    // }
+    // console.log('subarrUp: ', subarrUp);
+
+    // const subarrDown = [];
+    // for (let i = 0; i < tomStreakArr.length && tomStreakArr[i + 1] < tomStreakArr[i]; i++) {
+    //   subarrDown.push(tomStreakArr[i]);
+    // }
+
+    // console.log('subarrDown: ', subarrDown);
+
+    function lenOfLongIncSubArr(arr, n) {
+      let max = 1;
+      let len = 1;
+
+      for (let i = 1; i < n; i++) {
+        if (arr[i] >= arr[i - 1]) {
+          len++;
+        } else {
+          if (max < len) {
+            max = len;
+            break;
+          }
+        }
+      }
+
+      if (max < len) {
+        max = len;
+      }
+
+      return max;
+    }
+
+    function lenOfLongDecSubArr(arr, n) {
+      let max = 1;
+      let len = 1;
+      for (let i = 1; i < n; i++) {
+        if (arr[i] <= arr[i + 1]) {
+          len++;
+        } else {
+          if (max < len) {
+            max = len;
+          }
+        }
+      }
+      if (max < len) {
+        max = len;
+      }
+      return max;
+    }
+
+    const reverseTomsArr = tomStreakArr.reverse();
+    const reverseBelusArr = belusStreakArr;
+    const exJim = reverseBelusArr;
+
+    console.log('******** Jim arr', reverseBelusArr);
+    console.log('Jim streak increase: ', lenOfLongIncSubArr(reverseBelusArr, reverseBelusArr.length), 'ar: ', reverseBelusArr);
+    console.log('Jim streak decrease: ', lenOfLongDecSubArr(reverseBelusArr, reverseBelusArr.length), 'ar: ', reverseBelusArr);
 
     console.log('================');
     for (let i = 1; i <= 2; i++) {
       for (let j = 1; j <= 2; j++) {
-        console.log(`t${j}p${i}name`);
+        // console.log(`t${j}p${i}name`);
         const tomPos = _.filter(myArrOfObjects, [`t${j}p${i}name`, 'Tom']);
         // console.log(tomPos);
         // console.log(_.find(myArrOfObjects, [`t${j}p${i}name`, 'Tom']));
@@ -149,22 +365,10 @@ export function rankingInfo() {
         // }
       }
     }
-    console.log('================');
-    // console.log('arrTomPos ', arrTomPos);
-    console.log('================');
-
-    const findTom2 = myArrOfObjects.filter((item) => JSON.stringify(item).includes('Tom')).pop(); // ostatnie wystąpienie Toma
-    // console.log(findTom2);
 
     const players = db.slice(0, 23); // pobranie pierwszych 23 graczy, do poprawy
 
     const lastWar = document.getElementById('lastWar');
-
-    // console.log(historyRanking.filter((item) => JSON.stringify(item).includes('josh')).pop());
-    const aaa = historyRanking.filter((item) => item);
-    aaa.forEach(function (el) {
-      // console.log(el);
-    });
 
     const findBaton = historyRanking.filter((item) => JSON.stringify(item).includes('baton')).pop();
     const findZielony = historyRanking.filter((item) => JSON.stringify(item).includes('zielony')).pop();
@@ -250,14 +454,78 @@ export function rankingInfo() {
     const playerName = document.getElementById('playerName');
     const place = document.getElementById('place');
     const ranking = document.getElementById('overall');
+    const frags = document.getElementById('frags');
     const warCount = document.getElementById('warCount');
+    const mainApp = document.getElementById('app');
 
-    const player = players.map((entry) => entry.playername);
+    const zielonyFrags = ['zielony', reduceZielony];
+    const batonFrags = ['baton', reduceBaton];
+    const jimFrags = ['jim', reduceJim];
+
+    console.log('ZZZZZ', zielonyFrags[1]);
+    console.log('BBBBB', batonFrags);
+
+    // const batonFragsArr = batonFrags.map((entry) => entry);
+    // batonFragsArr.forEach(function (el) {
+    //   console.log(el);
+    // });
+
+    // username.forEach(function (user) {
+    //   console.log('USER -> ', user);
+    //   const userName = user;
+    //   const item = document.createElement('div');
+    //   item.classList.add('item');
+    //   if (userName === zielonyFrags[0]) {
+    //     console.log('TRAFIONY', zielonyFrags[1]);
+    //     item.innerHTML += zielonyFrags[1];
+    //     frags.appendChild(item);
+    //   } else if (userName === batonFrags[0]) {
+    //     item.innerHTML += batonFrags[1];
+    //     frags.appendChild(item);
+    //   } else if (userName === jimFrags[0]) {
+    //     item.innerHTML += jimFrags[1];
+    //     frags.appendChild(item);
+    //   }
+    // });
+
+    const player = players.map((entry) => entry);
     player.forEach(function (name, index) {
       const playerItem = document.createElement('div');
       playerItem.classList.add('item' + index, 'item');
-      playerItem.innerHTML += name;
+      const playerItemLink = document.createElement('a');
+      playerItemLink.setAttribute('href', `#charts-${name.username}`);
+      playerItemLink.setAttribute('title', `Watch ${name.playername} profile.`);
+      playerItemLink.innerHTML += name.playername;
+      playerItem.appendChild(playerItemLink);
       playerName.appendChild(playerItem);
+    });
+
+    // let valueCard = '';
+    const playerCard = players.map((entry) => entry);
+    playerCard.forEach(function (name, index) {
+      const playerCardDiv = document.createElement('div');
+      playerCardDiv.classList.add('container', 'view', 'hidden', 'card');
+      playerCardDiv.setAttribute('id', `charts-${name.username}`);
+      const playerCardWrapper = document.createElement('div');
+      playerCardWrapper.classList.add('wrapper');
+      playerCardDiv.appendChild(playerCardWrapper);
+      playerCardWrapper.innerHTML += name.playername + ' war count: ' + name.warcount;
+      const inDeCont = document.createElement('div');
+      inDeCont.classList.add('increaseDecrease');
+      playerCardWrapper.appendChild(inDeCont);
+      const inCont = document.createElement('div');
+      inCont.classList.add('streak', 'increaseStreak');
+      inDeCont.appendChild(inCont);
+      const deCont = document.createElement('div');
+      deCont.classList.add('streak', 'decreaseStreak');
+      inDeCont.appendChild(deCont);
+      const playerCardDivChart = document.createElement('canvas');
+      playerCardDivChart.setAttribute('id', `chart-${name.username}`);
+      playerCardWrapper.appendChild(playerCardDivChart);
+      mainApp.appendChild(playerCardDiv);
+      // valueCard += `<div class="container view hidden card" id="charts-${name.username}">
+
+      // </div>`;
     });
 
     const places = players.map((entry) => entry.place);
@@ -270,19 +538,20 @@ export function rankingInfo() {
       place.appendChild(item);
     });
 
-    // places.forEach(function (placeNumber) {
-    //   const item = document.createElement('div');
-    //   item.classList.add('item');
-    //   item.innerHTML += placeNumber;
-    //   place.appendChild(item);
-    // });
-
-    const rankings = players.map((entry) => entry.ranking);
+    const rankings = players.map((entry) => entry);
     rankings.forEach(function (elorank) {
       const eloItem = document.createElement('div');
       eloItem.classList.add('item');
-      eloItem.innerHTML += elorank;
+      eloItem.innerHTML += elorank.ranking;
       ranking.appendChild(eloItem);
+    });
+
+    const showFrags = players.map((entry) => entry);
+    showFrags.forEach(function (frag) {
+      const fragItem = document.createElement('div');
+      fragItem.classList.add('item');
+      fragItem.innerHTML += sumOfFrags(frag.username);
+      frags.appendChild(fragItem);
     });
 
     const wars = players.map((entry) => entry.warcount);
@@ -293,15 +562,140 @@ export function rankingInfo() {
       warCount.appendChild(warItem);
     });
 
-    // console.log(findBaton.timestamp);
-    // console.log(findBaton);
-    function findBatonPlace(object, value) {
-      return Object.keys(object).find((key) => object[key] === value);
+    // function findBatonPlace(object, value) {
+    //   return Object.keys(object).find((key) => object[key] === value);
+    // }
+
+    const increase = document.querySelector('.increaseStreak');
+    const decrease = document.querySelector('.decreaseStreak');
+    console.log('****ZIELONY STREAK ARR*****', zielonyStreakArr);
+    const zielonyInStreak = lenOfLongIncSubArr(zielonyStreakArr, zielonyStreakArr.length);
+    const zielonyDeStreak = lenOfLongDecSubArr(zielonyStreakArr, zielonyStreakArr.length);
+    setTimeout(function () {
+      increase.innerHTML = 'Longest Increase Streak: ' + zielonyInStreak;
+      decrease.innerHTML = 'Longest Decrease Streak: ' + zielonyDeStreak;
+    }, 3000);
+
+    const countZielonyWars = [];
+    for (let i = 0; i < zielonyStreakArr.length; i++) {
+      countZielonyWars.push(i);
     }
-    // console.log(findBatonPlace(findBaton, 'baton'));
-    // const placeBaton = findBatonPlace(findBaton, 'baton');
-    // console.log(placeBaton);
-    // const batonLastWarDate = 'baton.' + placeBaton;
-    // console.log(batonLastWarDate);
+
+    const ctx = document.getElementById(`chart-zielony`).getContext('2d');
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: countZielonyWars,
+        datasets: [
+          {
+            label: 'Zielony',
+            borderColor: '#ffffc0',
+            data: zielonyStreakArr,
+            lineTension: 0,
+          },
+        ],
+      },
+      options: {
+        elements: {
+          line: {
+            tension: 0,
+          },
+        },
+        scales: {
+          xAxes: [
+            {
+              scaleLabel: {
+                display: true,
+                labelString: 'LICZBA WOJEN',
+              },
+            },
+          ],
+          yAxes: [
+            {
+              scaleLabel: {
+                display: true,
+                labelString: 'RANKING',
+              },
+            },
+          ],
+        },
+        annotation: {
+          drawTime: 'afterDatasetsDraw',
+          annotations: [
+            {
+              id: 'hline1',
+              type: 'line',
+              mode: 'horizontal',
+              scaleID: 'y-axis-0',
+              value: 950,
+              borderColor: 'red',
+              borderDash: [10, 5],
+              label: {
+                backgroundColor: 'red',
+                content: '950',
+                enabled: true,
+              },
+            },
+            {
+              id: 'hline3',
+              type: 'line',
+              mode: 'horizontal',
+              scaleID: 'y-axis-0',
+              value: 1000,
+              borderColor: 'red',
+              borderWidth: 3,
+              // borderDash: [10, 5],
+              label: {
+                backgroundColor: 'red',
+                content: '1000',
+                enabled: true,
+              },
+            },
+            {
+              id: 'hline2',
+              type: 'line',
+              mode: 'horizontal',
+              scaleID: 'y-axis-0',
+              value: 1050,
+              borderColor: 'red',
+              borderDash: [10, 5],
+              label: {
+                backgroundColor: 'red',
+                content: '1050',
+                enabled: true,
+              },
+            },
+            {
+              id: 'hline4',
+              type: 'line',
+              mode: 'horizontal',
+              scaleID: 'y-axis-0',
+              value: 1100,
+              borderColor: 'orange',
+              borderDash: [10, 5],
+              label: {
+                backgroundColor: 'orange',
+                content: '1100',
+                enabled: true,
+              },
+            },
+            {
+              id: 'hline5',
+              type: 'line',
+              mode: 'horizontal',
+              scaleID: 'y-axis-0',
+              value: 1150,
+              borderColor: 'lightgreen',
+              borderDash: [10, 5],
+              label: {
+                backgroundColor: 'green',
+                content: '1150',
+                enabled: true,
+              },
+            },
+          ],
+        },
+      },
+    });
   })();
 }
