@@ -341,7 +341,7 @@ nav {
   grid-template-rows: auto;  
 
   @media screen and (max-width: 800px){
-    grid-template-columns: 0.5fr 2fr 1fr 0.5fr 1fr;
+    grid-template-columns: 0.5fr 2fr 1fr 0.5fr 0.5fr 1fr;
   }
 
   .column {
@@ -372,7 +372,8 @@ nav {
         writing-mode: tb-rl;
         font-size: 18px;
         font-weight: 700;
-        height: 125px;        
+        height: 125px;  
+        padding: 5px 0;      
       }
     }    
 
@@ -887,4 +888,65 @@ nav {
 
 canvas {
   margin-top: 30px;
+}
+
+.frag-item {
+  padding: 10px; 
+  position: relative; 
+  display: flex;
+  align-items: center; 
+
+  .frag-value {
+    font-size: 20px;
+    padding: 5px;
+    background-color: $middleRed;
+    font-weight: 700;
+    margin-left: 5px;
+    display: inline-block; 
+    position: relative;   
+
+    .contrast-mode & {
+      background-color: $middleBlue;
+    }
+  }
+
+  img {
+    margin-left: 5px;
+  }
+
+  // .frag-avarage::after {
+  //   position: absolute;
+  //   content: '';
+  //   top: 0;
+  //   right: 0;
+  //   background-image: url('./assets/avarage.png');
+  // }
+
+  // .frag-low::after {
+  //   position: absolute;
+  //   content: '';
+  //   top: 0;
+  //   right: 0;
+  //   background-image: url('./assets/low.png');
+  // }
+}
+
+.frag-title {
+  margin: 10px 0;
+  font-size: 20px; 
+  display: inline-block; 
+  
+  
+  .frag-name {
+    font-weight: 700;
+    text-decoration: underline;
+    letter-spacing: 2px;
+    padding: 10px;
+    background-color: $middleRed;
+    display: inline-block;
+
+    .contrast-mode & {
+      background-color: $middleBlue;
+    }
+  }
 }

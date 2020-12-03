@@ -13,7 +13,7 @@ export function history() {
     historyMatches.reverse();
 
     const teams = historyMatches.map((entry) => entry);
-    console.log(teams);
+    // console.log(teams);
 
     const newObj = teams.map((obj) => {
       return {
@@ -85,7 +85,7 @@ export function history() {
           match.t1p1name = 'KaPsEL';
           break;
         }
-        case 'your problem': {
+        case 'your-problem': {
           match.t1p1name = yp;
           break;
         }
@@ -119,7 +119,7 @@ export function history() {
           match.t1p2name = 'KaPsEL';
           break;
         }
-        case 'your problem': {
+        case 'your-problem': {
           match.t1p2name = yp;
           break;
         }
@@ -193,7 +193,7 @@ export function history() {
           match.t1p3name = 'josh';
           break;
         }
-        case 'your problem': {
+        case 'your-problem': {
           match.t1p3name = yp;
           break;
         }
@@ -251,7 +251,7 @@ export function history() {
           match.t1p4name = 'KaPsEL';
           break;
         }
-        case 'your problem': {
+        case 'your-problem': {
           match.t1p4name = yp;
           break;
         }
@@ -321,7 +321,7 @@ export function history() {
           match.t1p5name = 'KaPsEL';
           break;
         }
-        case 'your problem': {
+        case 'your-problem': {
           match.t1p5name = yp;
           break;
         }
@@ -388,7 +388,7 @@ export function history() {
           match.t2p1name = 'KaPsEL';
           break;
         }
-        case 'your problem': {
+        case 'your-problem': {
           match.t2p1name = yp;
           break;
         }
@@ -458,7 +458,7 @@ export function history() {
           match.t2p2name = 'KaPsEL';
           break;
         }
-        case 'your problem': {
+        case 'your-problem': {
           match.t2p2name = yp;
           break;
         }
@@ -524,7 +524,7 @@ export function history() {
           match.t2p3name = 'KaPsEL';
           break;
         }
-        case 'your problem': {
+        case 'your-problem': {
           match.t2p3name = yp;
           break;
         }
@@ -582,7 +582,7 @@ export function history() {
           match.t2p4name = 'KaPsEL';
           break;
         }
-        case 'your problem': {
+        case 'your-problem': {
           match.t2p4name = yp;
           break;
         }
@@ -640,7 +640,7 @@ export function history() {
           match.t2p5name = 'KaPsEL';
           break;
         }
-        case 'your problem': {
+        case 'your-problem': {
           match.t2p5name = yp;
           break;
         }

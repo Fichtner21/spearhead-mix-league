@@ -1,7 +1,7 @@
 import drive from 'drive-db';
 import _ from 'lodash';
 import { Chart } from 'chart.js';
-import { annotations } from 'chartjs-plugin-annotation';
+import $ from 'jquery';
 
 export function rankingInfo() {
   (async () => {
@@ -18,7 +18,7 @@ export function rankingInfo() {
       tab: '1',
     });
 
-    console.log(historyRanking2);
+    // console.log(historyRanking2);
 
     const myArrOfObjects = [
       {
@@ -163,7 +163,59 @@ export function rankingInfo() {
       return nameFragsOut.reduce((a, b) => a + b);
     }
 
-    console.log('============>', sumOfFrags('illusion'));
+    function minMaxFrags(name) {
+      const arrNameFrags = [];
+
+      function destructObjFrags(obj, arr) {
+        for (const key in obj) {
+          if (obj.hasOwnProperty(key)) {
+            const objInArr = obj[key];
+            for (const key2 in objInArr) {
+              if (objInArr.hasOwnProperty(key2)) {
+                const elemOfObj = objInArr[key2];
+                arr.push(elemOfObj);
+              }
+            }
+          }
+        }
+      }
+
+      destructObjFrags(historyRanking, arrNameFrags);
+
+      function getIndexesFrags(arr, val) {
+        const indexes = [];
+        let i = -1;
+        while ((i = arr.indexOf(val, i + 1)) !== -1) {
+          indexes.push(i + 3); // frags
+        }
+        return indexes;
+      }
+
+      const indexesFragsName = getIndexesFrags(arrNameFrags, name);
+      const nameFragsOut = [];
+
+      function foundAllStrikes(username, ind, arrIn, arrOut) {
+        if (arrIn.includes(username)) {
+          arrIn.forEach(function (el, index) {
+            index += 1;
+            ind.forEach(function (founded, i) {
+              if (Number(index) === Number(founded)) {
+                const foundedStreak = Number(el);
+                arrOut.push(foundedStreak);
+              }
+            });
+          });
+        }
+      }
+
+      foundAllStrikes(name, indexesFragsName, arrNameFrags, nameFragsOut);
+
+      return nameFragsOut;
+    }
+
+    // console.log('============>', sumOfFrags('illusion'));
+    // console.log('============>', Math.min(...minMaxFrags('illusion')));
+    // console.log('============>', Math.max(...minMaxFrags('illusion')));
 
     function destructObj(obj, arr) {
       for (const key in obj) {
@@ -184,10 +236,6 @@ export function rankingInfo() {
 
     destructObj(historyRanking, arrBelusPos);
     destructObj(historyRanking, arrZielonyPos);
-    // liczba fragów
-    destructObj(historyRanking, arrZielonyFrags);
-    destructObj(historyRanking, arrBatonFrags);
-    destructObj(historyRanking, arrJimFrags);
 
     function getAllIndexes(arr, val) {
       const indexes = [];
@@ -207,37 +255,11 @@ export function rankingInfo() {
       return indexes;
     }
 
-    const indexes = getAllIndexes(arrTomPos, 'Tom');
-
     const indexesBelus = getAllIndexes(arrBelusPos, 'jim');
     const belusStreakArr = [];
 
     const indexesZielony = getAllIndexes(arrZielonyPos, 'zielony');
     const zielonyStreakArr = [];
-
-    const indexesFragsZielony = getAllIndexesFrags(arrZielonyFrags, 'zielony');
-    const indexesFragsBaton = getAllIndexesFrags(arrBatonFrags, 'baton');
-    const indexesFragsJim = getAllIndexesFrags(arrJimFrags, 'jim');
-    const zielonyFragsOut = [];
-    const batonFragsOut = [];
-    const jimFragsOut = [];
-
-    const tomStreakArr = [];
-    if (arrTomPos.includes('Tom')) {
-      arrTomPos.forEach(function (el, index) {
-        index += 1;
-        // console.log('INDEX: ' + index + ' EL: ' + el);
-        // console.log('INDEXES FROM FOREACH ');
-        indexes.forEach(function (founded, i) {
-          // console.log('FOUNDED: ' + founded + ' INDEX -> ' + i);
-          if (Number(index) === Number(founded)) {
-            // console.log('EL!!! -> ' + el);
-            const tomStreak = Number(el);
-            tomStreakArr.push(tomStreak);
-          }
-        });
-      });
-    }
 
     function findAllStrikes(playerName, ind, arrIn, arrOut) {
       if (arrIn.includes(playerName)) {
@@ -257,38 +279,12 @@ export function rankingInfo() {
       }
     }
 
-    const mainArrFrags = [];
-
     findAllStrikes('jim', indexesBelus, arrBelusPos, belusStreakArr);
     findAllStrikes('zielony', indexesZielony, arrZielonyPos, zielonyStreakArr);
 
-    findAllStrikes('zielony', indexesFragsZielony, arrZielonyFrags, zielonyFragsOut);
-    findAllStrikes('baton', indexesFragsBaton, arrBatonFrags, batonFragsOut);
-    findAllStrikes('jim', indexesFragsJim, arrJimFrags, jimFragsOut);
-
-    console.log(
-      'ZIELONY FRAGS',
-      zielonyFragsOut.reduce((a, b) => a + b),
-    );
-    console.log(
-      'BATON FRAGS: ',
-      batonFragsOut.reduce((a, b) => a + b),
-    );
-
-    const reduceZielony = zielonyFragsOut.reduce((a, b) => a + b);
-    const reduceBaton = batonFragsOut.reduce((a, b) => a + b);
-    const reduceJim = jimFragsOut.reduce((a, b) => a + b);
-
-    tomStreakArr.unshift(1000);
     belusStreakArr.unshift(1000);
     zielonyStreakArr.unshift(1000);
 
-    console.log('++++++++++++');
-    const ar = [1000, 1002, 1004, 600, 400, 200, 500, 600, 700].reverse();
-
-    console.log('******', ar);
-
-    console.log('================');
     // tomStreakArr.reverse();
     // console.log('toms STREAK: ', tomStreakArr);
     // const subarrUp = [];
@@ -344,15 +340,6 @@ export function rankingInfo() {
       return max;
     }
 
-    const reverseTomsArr = tomStreakArr.reverse();
-    const reverseBelusArr = belusStreakArr;
-    const exJim = reverseBelusArr;
-
-    console.log('******** Jim arr', reverseBelusArr);
-    console.log('Jim streak increase: ', lenOfLongIncSubArr(reverseBelusArr, reverseBelusArr.length), 'ar: ', reverseBelusArr);
-    console.log('Jim streak decrease: ', lenOfLongDecSubArr(reverseBelusArr, reverseBelusArr.length), 'ar: ', reverseBelusArr);
-
-    console.log('================');
     for (let i = 1; i <= 2; i++) {
       for (let j = 1; j <= 2; j++) {
         // console.log(`t${j}p${i}name`);
@@ -366,7 +353,8 @@ export function rankingInfo() {
       }
     }
 
-    const players = db.slice(0, 23); // pobranie pierwszych 23 graczy, do poprawy
+    // const players = db.slice(0, 23); // pobranie pierwszych 23 graczy, do poprawy
+    const players = db;
 
     const lastWar = document.getElementById('lastWar');
 
@@ -389,7 +377,7 @@ export function rankingInfo() {
     const findHwk = historyRanking.filter((item) => JSON.stringify(item).includes('hwk')).pop();
     const findGrabarz = historyRanking.filter((item) => JSON.stringify(item).includes('grabarz')).pop();
     const findTomas = historyRanking.filter((item) => JSON.stringify(item).includes('tomas')).pop();
-    const findYourProblem = historyRanking.filter((item) => JSON.stringify(item).includes('your problem')).pop();
+    const findYourProblem = historyRanking.filter((item) => JSON.stringify(item).includes('your-problem')).pop();
     const findRyba = historyRanking.filter((item) => JSON.stringify(item).includes('ryba')).pop();
     const findKaps = historyRanking.filter((item) => JSON.stringify(item).includes('k4ps')).pop();
     const findCwieku = historyRanking.filter((item) => JSON.stringify(item).includes('cwieku')).pop();
@@ -436,7 +424,7 @@ export function rankingInfo() {
         userItem.innerHTML += findGrabarz.timestamp;
       } else if (user === 'tomas') {
         userItem.innerHTML += findTomas.timestamp;
-      } else if (user === 'your problem') {
+      } else if (user === 'your-problem') {
         userItem.innerHTML += findYourProblem.timestamp;
       } else if (user === 'ryba') {
         userItem.innerHTML += findRyba.timestamp;
@@ -457,36 +445,6 @@ export function rankingInfo() {
     const frags = document.getElementById('frags');
     const warCount = document.getElementById('warCount');
     const mainApp = document.getElementById('app');
-
-    const zielonyFrags = ['zielony', reduceZielony];
-    const batonFrags = ['baton', reduceBaton];
-    const jimFrags = ['jim', reduceJim];
-
-    console.log('ZZZZZ', zielonyFrags[1]);
-    console.log('BBBBB', batonFrags);
-
-    // const batonFragsArr = batonFrags.map((entry) => entry);
-    // batonFragsArr.forEach(function (el) {
-    //   console.log(el);
-    // });
-
-    // username.forEach(function (user) {
-    //   console.log('USER -> ', user);
-    //   const userName = user;
-    //   const item = document.createElement('div');
-    //   item.classList.add('item');
-    //   if (userName === zielonyFrags[0]) {
-    //     console.log('TRAFIONY', zielonyFrags[1]);
-    //     item.innerHTML += zielonyFrags[1];
-    //     frags.appendChild(item);
-    //   } else if (userName === batonFrags[0]) {
-    //     item.innerHTML += batonFrags[1];
-    //     frags.appendChild(item);
-    //   } else if (userName === jimFrags[0]) {
-    //     item.innerHTML += jimFrags[1];
-    //     frags.appendChild(item);
-    //   }
-    // });
 
     const player = players.map((entry) => entry);
     player.forEach(function (name, index) {
@@ -509,7 +467,7 @@ export function rankingInfo() {
       const playerCardWrapper = document.createElement('div');
       playerCardWrapper.classList.add('wrapper');
       playerCardDiv.appendChild(playerCardWrapper);
-      playerCardWrapper.innerHTML += name.playername + ' war count: ' + name.warcount;
+      playerCardWrapper.innerHTML += `<div class="frag-title"><span class="frag-name">${name.playername}</span> has played <span class="frag-name">${name.warcount}</span> wars.</div>`;
       const inDeCont = document.createElement('div');
       inDeCont.classList.add('increaseDecrease');
       playerCardWrapper.appendChild(inDeCont);
@@ -519,13 +477,50 @@ export function rankingInfo() {
       const deCont = document.createElement('div');
       deCont.classList.add('streak', 'decreaseStreak');
       inDeCont.appendChild(deCont);
+
+      const fragCont = document.createElement('div');
+      fragCont.classList.add('streak', 'frag-cont');
+      inDeCont.appendChild(fragCont);
+
+      const fragContDiv = document.createElement('div');
+      fragContDiv.classList.add('frag-sum');
+      fragContDiv.innerHTML += `<div class="frag-item">Sum of Frags: <span class="frag-value">${sumOfFrags(name.username)}</span></div>`;
+      fragCont.appendChild(fragContDiv);
+
+      const fragAvarage = document.createElement('div');
+      fragAvarage.classList.add('streak', 'frag-avarage');
+      inDeCont.appendChild(fragAvarage);
+
+      const fragAvarageDiv = document.createElement('div');
+      fragAvarageDiv.classList.add('frag-avarage');
+      fragAvarageDiv.innerHTML += `<div class="frag-item">Highest frags per war: <span class="frag-value frag-high">${Math.max(
+        ...minMaxFrags(name.username),
+      )}</span><img src="./assets/high.png"></div><div class="frag-item">Avarage frags per war: <span class="frag-value frag-avarage">${(
+        sumOfFrags(name.username) / name.warcount
+      ).toFixed(
+        2,
+      )}</span><img src="./assets/avarage.png"></div><div class="frag-item">Lowest frags per war: <span class="frag-value frag-low">${Math.min(
+        ...minMaxFrags(name.username),
+      )}</span><img src="./assets/low.png"></div>`;
+      fragAvarage.appendChild(fragAvarageDiv);
+
       const playerCardDivChart = document.createElement('canvas');
       playerCardDivChart.setAttribute('id', `chart-${name.username}`);
       playerCardWrapper.appendChild(playerCardDivChart);
       mainApp.appendChild(playerCardDiv);
-      // valueCard += `<div class="container view hidden card" id="charts-${name.username}">
-
-      // </div>`;
+      function enableRoute() {
+        function setRoute() {
+          $('.view').hide();
+          const { hash } = window.location;
+          if (hash === '') {
+            $('#home').show();
+          }
+          $(hash).show();
+        }
+        setRoute();
+        window.addEventListener('hashchange', setRoute);
+      }
+      enableRoute();
     });
 
     const places = players.map((entry) => entry.place);
@@ -568,7 +563,7 @@ export function rankingInfo() {
 
     const increase = document.querySelector('.increaseStreak');
     const decrease = document.querySelector('.decreaseStreak');
-    console.log('****ZIELONY STREAK ARR*****', zielonyStreakArr);
+    // console.log('****ZIELONY STREAK ARR*****', zielonyStreakArr);
     const zielonyInStreak = lenOfLongIncSubArr(zielonyStreakArr, zielonyStreakArr.length);
     const zielonyDeStreak = lenOfLongDecSubArr(zielonyStreakArr, zielonyStreakArr.length);
     setTimeout(function () {

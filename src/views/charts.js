@@ -20,7 +20,7 @@ export function chartsSite() {
       tab: '1',
     });
 
-    console.log(listPlayers);
+    // console.log(listPlayers);
 
     const myArrOfObjects = [
       {
@@ -110,7 +110,7 @@ export function chartsSite() {
     ];
     const arrTomPos = [];
     const arrJimPos = [];
-    const arrZielonyPos = [];
+    // const arrZielonyPos = [];
 
     // for (const key in myArrOfObjects) {
     //   if (myArrOfObjects.hasOwnProperty(key)) {
@@ -145,7 +145,7 @@ export function chartsSite() {
     }
 
     destructObj(historyRanking, arrJimPos);
-    destructObj(historyRanking, arrZielonyPos);
+    // destructObj(historyRanking, arrZielonyPos);
     // console.log('BELUŚ', arrBelusPos);
 
     function getAllIndexes(arr, val) {
@@ -162,10 +162,10 @@ export function chartsSite() {
 
     const indexesJim = getAllIndexes(arrJimPos, 'jim');
     const jimStreakArr = [];
-    console.log('INDEXES Jim', indexesJim);
+    // console.log('INDEXES Jim', indexesJim);
 
-    const indexesZielony = getAllIndexes(arrZielonyPos, 'zielony');
-    const zielonyStreakArr = [];
+    // const indexesZielony = getAllIndexes(arrZielonyPos, 'zielony');
+    // const zielonyStreakArr = [];
 
     // const tomStreakArr = [];
     // if (arrTomPos.includes('Tom')) {
@@ -203,18 +203,12 @@ export function chartsSite() {
     }
 
     findAllStrikes('jim', indexesJim, arrJimPos, jimStreakArr);
-    findAllStrikes('zielony', indexesZielony, arrZielonyPos, zielonyStreakArr);
+    // findAllStrikes('zielony', indexesZielony, arrZielonyPos, zielonyStreakArr);
 
     // tomStreakArr.unshift(1000);
     jimStreakArr.push(1000);
-    zielonyStreakArr.push(1000);
+    // zielonyStreakArr.push(1000);
 
-    console.log('++++++++++++');
-    const ar = [1000, 1002, 1004, 600, 400, 200, 500, 600, 700].reverse();
-
-    console.log('******', ar);
-
-    console.log('================');
     // tomStreakArr.reverse();
     // console.log('toms STREAK: ', tomStreakArr);
     // const subarrUp = [];
@@ -279,141 +273,16 @@ export function chartsSite() {
       countJimWars.push(i);
     }
 
-    for (let i = 0; i < zielonyStreakArr.length; i++) {
-      countZielonyWars.push(i);
-    }
+    // for (let i = 0; i < zielonyStreakArr.length; i++) {
+    //   countZielonyWars.push(i);
+    // }
 
-    console.log('COUNT JIM WARS: ', countJimWars);
-
-    const increase = document.querySelector('.increaseStreak');
-    const decrease = document.querySelector('.decreaseStreak');
-    console.log('****ZIELONY STREAK ARR*****', zielonyStreakArr);
-    const zielonyInStreak = lenOfLongIncSubArr(zielonyStreakArr, zielonyStreakArr.length);
-    const zielonyDeStreak = lenOfLongDecSubArr(zielonyStreakArr, zielonyStreakArr.length);
-    setTimeout(function () {
-      increase.innerHTML = 'Longest Increase Streak: ' + zielonyInStreak;
-      decrease.innerHTML = 'Longest Decrease Streak: ' + zielonyDeStreak;
-    }, 3000);
+    // console.log('COUNT JIM WARS: ', countJimWars);
 
     // function drawCtx(countUserWars, userStreakArr) {
     // const playerCtx = listPlayers.map((entry) => entry);
     // playerCtx.forEach(function (name, index) {
-    const ctx = document.getElementById(`chart-zielony`).getContext('2d');
-    const chart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: countZielonyWars,
-        datasets: [
-          {
-            label: 'Zielony',
-            borderColor: '#ffffc0',
-            data: zielonyStreakArr,
-            lineTension: 0,
-          },
-        ],
-      },
-      options: {
-        elements: {
-          line: {
-            tension: 0,
-          },
-        },
-        scales: {
-          xAxes: [
-            {
-              scaleLabel: {
-                display: true,
-                labelString: 'LICZBA WOJEN',
-              },
-            },
-          ],
-          yAxes: [
-            {
-              scaleLabel: {
-                display: true,
-                labelString: 'RANKING',
-              },
-            },
-          ],
-        },
-        annotation: {
-          drawTime: 'afterDatasetsDraw',
-          annotations: [
-            {
-              id: 'hline1',
-              type: 'line',
-              mode: 'horizontal',
-              scaleID: 'y-axis-0',
-              value: 950,
-              borderColor: 'red',
-              borderDash: [10, 5],
-              label: {
-                backgroundColor: 'red',
-                content: '950',
-                enabled: true,
-              },
-            },
-            {
-              id: 'hline3',
-              type: 'line',
-              mode: 'horizontal',
-              scaleID: 'y-axis-0',
-              value: 1000,
-              borderColor: 'red',
-              borderWidth: 3,
-              // borderDash: [10, 5],
-              label: {
-                backgroundColor: 'red',
-                content: '1000',
-                enabled: true,
-              },
-            },
-            {
-              id: 'hline2',
-              type: 'line',
-              mode: 'horizontal',
-              scaleID: 'y-axis-0',
-              value: 1050,
-              borderColor: 'red',
-              borderDash: [10, 5],
-              label: {
-                backgroundColor: 'red',
-                content: '1050',
-                enabled: true,
-              },
-            },
-            {
-              id: 'hline4',
-              type: 'line',
-              mode: 'horizontal',
-              scaleID: 'y-axis-0',
-              value: 1100,
-              borderColor: 'orange',
-              borderDash: [10, 5],
-              label: {
-                backgroundColor: 'orange',
-                content: '1100',
-                enabled: true,
-              },
-            },
-            {
-              id: 'hline5',
-              type: 'line',
-              mode: 'horizontal',
-              scaleID: 'y-axis-0',
-              value: 1150,
-              borderColor: 'lightgreen',
-              borderDash: [10, 5],
-              label: {
-                backgroundColor: 'green',
-                content: '1150',
-                enabled: true,
-              },
-            },
-          ],
-        },
-      },
-    });
+
     // });
     // }
     // zielonyStreakArr.reverse();
