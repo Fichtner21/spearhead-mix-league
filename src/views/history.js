@@ -839,7 +839,7 @@ export function history() {
       <div class="">Match #${newObj.length - i}</div>
       <div class="video-responsive">
       <iframe id="ytplayer" type="text/html" width="640" height="360"
-      src="http://www.youtube.com/embed/${war.video}"
+      src="https://www.youtube.com/embed/${war.video}"
       frameborder="0"/>
       </div>
       </div>`;
