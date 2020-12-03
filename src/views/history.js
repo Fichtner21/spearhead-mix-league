@@ -13,7 +13,7 @@ export function history() {
     historyMatches.reverse();
 
     const teams = historyMatches.map((entry) => entry);
-    // console.log(teams);
+    console.log(teams);
 
     const newObj = teams.map((obj) => {
       return {
@@ -62,6 +62,7 @@ export function history() {
     });
 
     let value = '';
+
     newObj.forEach((match, i) => {
       // for (let j = 0; j < 5; j++) {
       const yp = 'YOUR_PROBLEM';
@@ -673,8 +674,16 @@ export function history() {
 
       value += `<div class="match" id="match${newObj.length - i}">          
           <div class="date">
-            <div class="matchId" id="matchId-${newObj.length - i}">#${newObj.length - i}</div>
+            <div class="matchId" id="matchId-${newObj.length - i}">
+              <a href="#match-${newObj.length - i}">#${newObj.length - i}</a></div>
             <div class="dateDetail">${match.timestamp}</div>            
+              ${
+                match.video
+                  ? `<a href="#match-${
+                      newObj.length - i
+                    }" title="Watch movie from match."><div class="matchVideo"><i class="fas fa-film"></i></div></a>`
+                  : ''
+              }                     
           </div>
           <div class="team">
             <div class="roudswon1">${match.t1roundswon}</div>
@@ -813,7 +822,44 @@ export function history() {
     });
 
     document.getElementById('matches').innerHTML = value;
-    // console.log(newObj);
+
+    // const matchesList = document.getElementById('matches');
+    // console.log('MATCHES', matchesList);
+    const mainApp2 = document.getElementById('app');
+    newObj.forEach((war, i) => {
+      const warCard = document.createElement('div');
+      warCard.classList.add('container', 'view', 'hidden', 'warcard');
+      warCard.setAttribute('id', `match-${newObj.length - i}`);
+      const warCardWrapper = document.createElement('div');
+      warCardWrapper.classList.add('wrapper');
+      warCard.appendChild(warCardWrapper);
+      const warCardDetail = document.createElement('div');
+      warCardDetail.classList.add('match-detail');
+      warCardDetail.innerHTML += `<div class="match-details">
+      <div class="">Match #${newObj.length - i}</div>
+      <div class="video-responsive">
+      <iframe id="ytplayer" type="text/html" width="640" height="360"
+      src="http://www.youtube.com/embed/${war.video}"
+      frameborder="0"/>
+      </div>
+      </div>`;
+      warCardWrapper.appendChild(warCardDetail);
+
+      mainApp2.appendChild(warCard);
+      function enableRouteWar() {
+        function setRoute() {
+          $('.view').hide();
+          const { hash } = window.location;
+          if (hash === '') {
+            $('#home').show();
+          }
+          $(hash).show();
+        }
+        setRoute();
+        window.addEventListener('hashchange', setRoute);
+      }
+      enableRouteWar();
+    });
 
     // <form onsubmit="event.preventDefault();">
     //     <textarea name="joinDiscussion" id="joinDiscussion" cols=50 placeholder="Join the discussion"></textarea>

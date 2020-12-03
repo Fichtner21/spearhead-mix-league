@@ -6,6 +6,7 @@ import { history } from './views/history';
 import { filesSite } from './views/files';
 import { serverSite } from './views/server';
 import { chartsSite } from './views/charts';
+// import Translator from './translator.js';
 
 function enableRouting() {
   function setRoute() {
@@ -26,6 +27,19 @@ document.addEventListener('DOMContentLoaded', () => {
   filesSite();
   serverSite();
   chartsSite();
+  // const translator = new Translator({
+  //   persist: false,
+  //   languages: ['de', 'en', 'es'],
+  //   defaultLanguage: 'en',
+  //   detectLanguage: true,
+  //   filesLocation: '/i18n',
+  // });
+  // translator.load();
+  // document.querySelector('form').addEventListener('click', function (evt) {
+  //   if (evt.target.tagName === 'INPUT') {
+  //     translator.load(evt.target.value);
+  //   }
+  // });
 
   enableRouting();
 

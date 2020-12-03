@@ -514,6 +514,66 @@ nav {
         font-size: 22px;
         font-weight: 700;
       }
+
+      a, a:visited {
+        color: $darkenRed;
+
+        .contrast-mode & {
+          color: $darkenBlue;
+        }
+      }
+
+      .matchVideo {
+        font-size: 24px;         
+        padding: 10px 15px; 
+        font-weight: 700;
+        position: relative;
+
+        i {
+          font-size: 30px;
+        }
+
+        @keyframes pulse {
+          0% {
+            transform: scale(0.95);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+          }
+        
+          70% {
+            transform: scale(1);
+            color: red;
+            box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+          }
+        
+          100% {
+            transform: scale(0.95);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+          }
+        }
+        
+        &:after {
+          position: absolute;
+          content: "1";
+          background-color: red;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          top: -10px;
+          right: 0;
+          color: $darkenRed;
+          font-size: 20px;
+          box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+          transform: scale(1);          
+          animation: pulse 2s infinite;
+
+          .contrast-mode & {
+            color: $darkenBlue;
+          }
+        }
+      }
     }
 
     .bg__green {
@@ -948,5 +1008,21 @@ canvas {
     .contrast-mode & {
       background-color: $middleBlue;
     }
+  }
+}
+
+.match-details {
+  .video-responsive{
+    overflow:hidden;
+    padding-bottom:56.25%;
+    position:relative;
+    height:0;
+  }
+  .video-responsive iframe{
+      left:0;
+      top:0;
+      height:100%;
+      width:100%;
+      position:absolute;
   }
 }
