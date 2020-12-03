@@ -18,7 +18,8 @@ export function rankingInfo() {
       tab: '1',
     });
 
-    // console.log(historyRanking2);
+    const ourPlayers = document.getElementById('our-players');
+    ourPlayers.innerHTML += `<span>Active users</span><i class="fas fa-users"></i> ${historyRanking2.length}`;
 
     const myArrOfObjects = [
       {

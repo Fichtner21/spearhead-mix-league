@@ -74,6 +74,9 @@ nav {
   color: #ffffc0;
   background-image: linear-gradient(0deg, $lightRed 25%, $middleRed 25%, $middleRed 50%, $lightRed 50%, $lightRed 75%, $middleRed 75%, $middleRed 100%);
   background-size: 12.00px 12.00px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   .contrast-mode & {
     background-image: linear-gradient(0deg, $lightBlue 25%, $middleBlue 25%, $middleBlue 50%, $lightBlue 50%, $lightBlue 75%, $middleBlue 75%, $middleBlue 100%);
@@ -91,6 +94,38 @@ nav {
       text-decoration: underline;
     }
   } 
+
+  .our {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 30px;
+    #our-players {      
+      i {
+        font-size: 32px;
+      }
+
+      span {
+        font-size: 15px;
+        margin-right: 5px;
+        @media screen and (max-width: 999px){
+          display: none;
+        }
+      }
+    }
+
+    #our-matches {
+      margin-left: 10px;
+
+      span {
+        font-size: 15px;
+        margin-right: 5px;
+        @media screen and (max-width: 999px){
+          display: none;
+        }
+      }
+    }
+  }
 }
 
 .wrapper {
@@ -1011,18 +1046,16 @@ canvas {
   }
 }
 
-.match-details {
-  .video-responsive{
-    overflow:hidden;
-    padding-bottom:56.25%;
-    position:relative;
-    height:0;
-  }
-  .video-responsive iframe{
-      left:0;
-      top:0;
-      height:100%;
-      width:100%;
-      position:absolute;
-  }
+.video-responsive{
+  overflow:hidden;
+  padding-bottom:56.25%;
+  position:relative;
+  height:0;
+}
+.video-responsive iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
 }

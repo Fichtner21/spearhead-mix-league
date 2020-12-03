@@ -823,8 +823,10 @@ export function history() {
 
     document.getElementById('matches').innerHTML = value;
 
-    // const matchesList = document.getElementById('matches');
-    // console.log('MATCHES', matchesList);
+    const ourMatches = document.getElementById('our-matches');
+
+    ourMatches.innerHTML += `<span>Matches played</span><img src="./assets/avarage.png"> ${teams.length}`;
+
     const mainApp2 = document.getElementById('app');
     newObj.forEach((war, i) => {
       const warCard = document.createElement('div');
@@ -836,13 +838,24 @@ export function history() {
       const warCardDetail = document.createElement('div');
       warCardDetail.classList.add('match-detail');
       warCardDetail.innerHTML += `<div class="match-details">
-      <div class="">Match #${newObj.length - i}</div>
-      <div class="video-responsive">
-      <iframe id="ytplayer" type="text/html" width="640" height="360"
-      src="https://www.youtube.com/embed/${war.video}"
-      frameborder="0"/>
-      </div>
+      <div class="">Match #${newObj.length - i}</div>       
       </div>`;
+      const iframeMatch = `<iframe
+      id="ytplayer"
+      type="text/html"
+      width="640"
+      height="360"
+      src="https://www.youtube.com/embed/${war.video}"
+      frameborder="0"
+      />`;
+      const videoResponsive = document.createElement('div');
+      videoResponsive.classList.add('video-responsive');
+      warCardDetail.appendChild(videoResponsive);
+      if (war.video) {
+        videoResponsive.innerHTML += iframeMatch;
+      } else {
+        videoResponsive.innerHTML += `No movie.`;
+      }
       warCardWrapper.appendChild(warCardDetail);
 
       mainApp2.appendChild(warCard);
