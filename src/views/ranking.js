@@ -214,77 +214,63 @@ export function rankingInfo() {
       return nameFragsOut;
     }
 
-    // console.log('============>', sumOfFrags('illusion'));
-    // console.log('============>', Math.min(...minMaxFrags('illusion')));
-    // console.log('============>', Math.max(...minMaxFrags('illusion')));
+    function rankHistory(name) {
+      const arrNameRanks = [];
 
-    function destructObj(obj, arr) {
-      for (const key in obj) {
-        if (obj.hasOwnProperty(key)) {
-          // console.log(key + ' -> ' + JSON.stringify(myArrOfObjects[key]));
-          const objInArr = obj[key];
-          for (const key2 in objInArr) {
-            if (objInArr.hasOwnProperty(key2)) {
-              //  console.log(key2 + ' -> ' + JSON.stringify(objInArr[key2]));
-              const elemOfObj = objInArr[key2];
-              // console.log(elemOfObj);
-              arr.push(elemOfObj);
+      function destructObjRanks(obj, arr) {
+        for (const key in obj) {
+          if (obj.hasOwnProperty(key)) {
+            const objInArr = obj[key];
+            for (const key2 in objInArr) {
+              if (objInArr.hasOwnProperty(key2)) {
+                const elemOfObj = objInArr[key2];
+                arr.push(elemOfObj);
+              }
             }
           }
         }
       }
-    }
 
-    destructObj(historyRanking, arrBelusPos);
-    destructObj(historyRanking, arrZielonyPos);
+      destructObjRanks(historyRanking, arrNameRanks);
 
-    function getAllIndexes(arr, val) {
-      const indexes = [];
-      let i = -1;
-      while ((i = arr.indexOf(val, i + 1)) !== -1) {
-        indexes.push(i + 4); // postELO
+      function getIndexesRanks(arr, val) {
+        const indexes = [];
+        let i = -1;
+        while ((i = arr.indexOf(val, i + 1)) !== -1) {
+          indexes.push(i + 4); // postELO
+        }
+        return indexes;
       }
-      return indexes;
-    }
 
-    function getAllIndexesFrags(arr, val) {
-      const indexes = [];
-      let i = -1;
-      while ((i = arr.indexOf(val, i + 1)) !== -1) {
-        indexes.push(i + 3); // frags
-      }
-      return indexes;
-    }
+      const indexesRanksName = getIndexesRanks(arrNameRanks, name);
+      const nameRanksOut = [];
 
-    const indexesBelus = getAllIndexes(arrBelusPos, 'jim');
-    const belusStreakArr = [];
-
-    const indexesZielony = getAllIndexes(arrZielonyPos, 'zielony');
-    const zielonyStreakArr = [];
-
-    function findAllStrikes(playerName, ind, arrIn, arrOut) {
-      if (arrIn.includes(playerName)) {
-        arrIn.forEach(function (el, index) {
-          index += 1;
-          // console.log('INDEX: ' + index + ' EL: ' + el);
-          // console.log('INDEXES FROM FOREACH ');
-          ind.forEach(function (founded, i) {
-            // console.log('FOUNDED: ' + founded + ' INDEX -> ' + i);
-            if (Number(index) === Number(founded)) {
-              // console.log('EL!!! -> ' + el);
-              const foundedStreak = Number(el);
-              arrOut.push(foundedStreak);
-            }
+      function ranksAllStrikes(username, ind, arrIn, arrOut) {
+        if (arrIn.includes(username)) {
+          arrIn.forEach(function (el, index) {
+            index += 1;
+            ind.forEach(function (founded, i) {
+              if (Number(index) === Number(founded)) {
+                const foundedStreak = Number(el).toFixed(2);
+                arrOut.push(Number(foundedStreak));
+              }
+            });
           });
-        });
+        }
       }
+
+      ranksAllStrikes(name, indexesRanksName, arrNameRanks, nameRanksOut);
+
+      // Every player start to play with 1000 ELO rank, so we need to put this before first value in array rank.
+      nameRanksOut.unshift(1000);
+
+      return nameRanksOut;
     }
 
-    findAllStrikes('jim', indexesBelus, arrBelusPos, belusStreakArr);
-    findAllStrikes('zielony', indexesZielony, arrZielonyPos, zielonyStreakArr);
-
-    belusStreakArr.unshift(1000);
-    zielonyStreakArr.unshift(1000);
+    console.log('HWK', rankHistory('hwk'));
+    // console.log('============>', sumOfFrags('illusion'));
+    // console.log('============>', Math.min(...minMaxFrags('illusion')));
+    // console.log('============>', Math.max(...minMaxFrags('illusion')));
 
     // tomStreakArr.reverse();
     // console.log('toms STREAK: ', tomStreakArr);
@@ -564,134 +550,138 @@ export function rankingInfo() {
 
     const increase = document.querySelector('.increaseStreak');
     const decrease = document.querySelector('.decreaseStreak');
-    // console.log('****ZIELONY STREAK ARR*****', zielonyStreakArr);
-    const zielonyInStreak = lenOfLongIncSubArr(zielonyStreakArr, zielonyStreakArr.length);
-    const zielonyDeStreak = lenOfLongDecSubArr(zielonyStreakArr, zielonyStreakArr.length);
-    setTimeout(function () {
-      increase.innerHTML = 'Longest Increase Streak: ' + zielonyInStreak;
-      decrease.innerHTML = 'Longest Decrease Streak: ' + zielonyDeStreak;
-    }, 3000);
 
-    const countZielonyWars = [];
-    for (let i = 0; i < zielonyStreakArr.length; i++) {
-      countZielonyWars.push(i);
+    function countWars(name) {
+      const playerWars = [];
+      const playerRankHistory = rankHistory(name);
+      playerRankHistory.forEach((war, index) => {
+        playerWars.push(index);
+      });
+      // Skip first el of array because is based rank 1000.
+      // playerWars.shift();
+      return playerWars;
     }
 
-    const ctx = document.getElementById(`chart-zielony`).getContext('2d');
-    const chart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: countZielonyWars,
-        datasets: [
-          {
-            label: 'Zielony',
-            borderColor: '#ffffc0',
-            data: zielonyStreakArr,
-            lineTension: 0,
+    console.log('COUNT WARS', countWars('hwk'));
+
+    historyRanking2.forEach((nameUser) => {
+      // console.log('USERNAME', nameUser.username);
+      const ctx = document.getElementById(`chart-${nameUser.username}`).getContext('2d');
+      const chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: countWars(nameUser.username),
+          datasets: [
+            {
+              label: nameUser.playername,
+              borderColor: '#ffffc0',
+              data: rankHistory(nameUser.username),
+              lineTension: 0,
+            },
+          ],
+        },
+        options: {
+          elements: {
+            line: {
+              tension: 0,
+            },
           },
-        ],
-      },
-      options: {
-        elements: {
-          line: {
-            tension: 0,
+          scales: {
+            xAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: 'LICZBA WOJEN',
+                },
+              },
+            ],
+            yAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: 'RANKING',
+                },
+              },
+            ],
+          },
+          annotation: {
+            drawTime: 'afterDatasetsDraw',
+            annotations: [
+              {
+                id: 'hline1',
+                type: 'line',
+                mode: 'horizontal',
+                scaleID: 'y-axis-0',
+                value: 950,
+                borderColor: 'red',
+                borderDash: [10, 5],
+                label: {
+                  backgroundColor: 'red',
+                  content: '950',
+                  enabled: true,
+                },
+              },
+              {
+                id: 'hline3',
+                type: 'line',
+                mode: 'horizontal',
+                scaleID: 'y-axis-0',
+                value: 1000,
+                borderColor: 'red',
+                borderWidth: 3,
+                // borderDash: [10, 5],
+                label: {
+                  backgroundColor: 'red',
+                  content: '1000',
+                  enabled: true,
+                },
+              },
+              {
+                id: 'hline2',
+                type: 'line',
+                mode: 'horizontal',
+                scaleID: 'y-axis-0',
+                value: 1050,
+                borderColor: 'red',
+                borderDash: [10, 5],
+                label: {
+                  backgroundColor: 'red',
+                  content: '1050',
+                  enabled: true,
+                },
+              },
+              // {
+              //   id: 'hline4',
+              //   type: 'line',
+              //   mode: 'horizontal',
+              //   scaleID: 'y-axis-0',
+              //   value: 1100,
+              //   borderColor: 'orange',
+              //   borderDash: [10, 5],
+              //   label: {
+              //     backgroundColor: 'orange',
+              //     content: '1100',
+              //     enabled: true,
+              //   },
+              // },
+              // {
+              //   id: 'hline5',
+              //   type: 'line',
+              //   mode: 'horizontal',
+              //   scaleID: 'y-axis-0',
+              //   value: 1150,
+              //   borderColor: 'lightgreen',
+              //   borderDash: [10, 5],
+              //   label: {
+              //     backgroundColor: 'green',
+              //     content: '1150',
+              //     enabled: true,
+              //   },
+              // },
+            ],
           },
         },
-        scales: {
-          xAxes: [
-            {
-              scaleLabel: {
-                display: true,
-                labelString: 'LICZBA WOJEN',
-              },
-            },
-          ],
-          yAxes: [
-            {
-              scaleLabel: {
-                display: true,
-                labelString: 'RANKING',
-              },
-            },
-          ],
-        },
-        annotation: {
-          drawTime: 'afterDatasetsDraw',
-          annotations: [
-            {
-              id: 'hline1',
-              type: 'line',
-              mode: 'horizontal',
-              scaleID: 'y-axis-0',
-              value: 950,
-              borderColor: 'red',
-              borderDash: [10, 5],
-              label: {
-                backgroundColor: 'red',
-                content: '950',
-                enabled: true,
-              },
-            },
-            {
-              id: 'hline3',
-              type: 'line',
-              mode: 'horizontal',
-              scaleID: 'y-axis-0',
-              value: 1000,
-              borderColor: 'red',
-              borderWidth: 3,
-              // borderDash: [10, 5],
-              label: {
-                backgroundColor: 'red',
-                content: '1000',
-                enabled: true,
-              },
-            },
-            {
-              id: 'hline2',
-              type: 'line',
-              mode: 'horizontal',
-              scaleID: 'y-axis-0',
-              value: 1050,
-              borderColor: 'red',
-              borderDash: [10, 5],
-              label: {
-                backgroundColor: 'red',
-                content: '1050',
-                enabled: true,
-              },
-            },
-            {
-              id: 'hline4',
-              type: 'line',
-              mode: 'horizontal',
-              scaleID: 'y-axis-0',
-              value: 1100,
-              borderColor: 'orange',
-              borderDash: [10, 5],
-              label: {
-                backgroundColor: 'orange',
-                content: '1100',
-                enabled: true,
-              },
-            },
-            {
-              id: 'hline5',
-              type: 'line',
-              mode: 'horizontal',
-              scaleID: 'y-axis-0',
-              value: 1150,
-              borderColor: 'lightgreen',
-              borderDash: [10, 5],
-              label: {
-                backgroundColor: 'green',
-                content: '1150',
-                enabled: true,
-              },
-            },
-          ],
-        },
-      },
+      });
     });
   })();
 }
