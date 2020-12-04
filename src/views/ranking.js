@@ -459,7 +459,8 @@ export function rankingInfo() {
       inDeCont.classList.add('increaseDecrease');
       playerCardWrapper.appendChild(inDeCont);
       const inCont = document.createElement('div');
-      inCont.classList.add('streak', 'increaseStreak');
+      inCont.classList.add('streak');
+      inCont.setAttribute('id', `increase-${name.username}`);
       inDeCont.appendChild(inCont);
       const deCont = document.createElement('div');
       deCont.classList.add('streak', 'decreaseStreak');
@@ -471,7 +472,9 @@ export function rankingInfo() {
 
       const fragContDiv = document.createElement('div');
       fragContDiv.classList.add('frag-sum');
-      fragContDiv.innerHTML += `<div class="frag-item">Sum of Frags: <span class="frag-value">${sumOfFrags(name.username)}</span></div>`;
+      fragContDiv.innerHTML += `<div class="frag-item">Sum of Frags: <span class="frag-value">${sumOfFrags(
+        name.username,
+      )}</span></div><div class="frag-item">Current ranking: <span class="frag-value">${name.ranking}</span></div>`;
       fragCont.appendChild(fragContDiv);
 
       const fragAvarage = document.createElement('div');
@@ -562,6 +565,13 @@ export function rankingInfo() {
       return playerWars;
     }
 
+    historyRanking2.forEach((userNameInStreak) => {
+      const increaseDiv = document.getElementById(`increase-${userNameInStreak.username}`);
+      const playerInStreak = lenOfLongIncSubArr(rankHistory(userNameInStreak.username), rankHistory(userNameInStreak.username).length);
+      console.log('PLAYER STREAK: ', playerInStreak);
+      increaseDiv.innerHTML += `<div class="frag-item">Longest increase streak: <span class="frag-value">${playerInStreak}</span></div>`;
+    });
+
     console.log('COUNT WARS', countWars('hwk'));
 
     historyRanking2.forEach((nameUser) => {
@@ -591,7 +601,7 @@ export function rankingInfo() {
               {
                 scaleLabel: {
                   display: true,
-                  labelString: 'LICZBA WOJEN',
+                  labelString: 'No. of Match',
                 },
               },
             ],
