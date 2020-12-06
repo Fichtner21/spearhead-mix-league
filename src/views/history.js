@@ -13,7 +13,6 @@ export function history() {
     historyMatches.reverse();
 
     const teams = historyMatches.map((entry) => entry);
-    console.log(teams);
 
     const newObj = teams.map((obj) => {
       return {
@@ -874,180 +873,230 @@ export function history() {
       enableRouteWar();
     });
 
-    // <form onsubmit="event.preventDefault();">
-    //     <textarea name="joinDiscussion" id="joinDiscussion" cols=50 placeholder="Join the discussion"></textarea>
-    //     <div id="postComment">
-    //       <label>UserName:</label><input type="input" id="userName"/>
-    //       <input type="button" value="Post" id="post">
-    //     </div>
-    //     <section id="viewComments">
-
-    //     </section>
-    //   </form>
-    // (function () {
-    //   function Comment(userName, text, votes, commentList) {
-    //     this.userName = userName;
-    //     this.text = text;
-    //     this.votes = votes;
-    //     this.commentList = commentList;
-    //   }
-
-    //   Comment.prototype.upvote = function () {
-    //     let commentList = JSON.parse(window.localStorage.getItem('commentList')) || [];
-    //     this.votes = this.votes + 1;
-    //     commentList = findAndUpdateComment(commentList, this);
-    //     createCommentView(commentList);
-    //   };
-
-    //   Comment.prototype.downvote = function () {
-    //     let commentList = JSON.parse(window.localStorage.getItem('commentList')) || [];
-    //     if (this.votes > 0) this.votes = this.votes - 1;
-    //     commentList = findAndUpdateComment(commentList, this);
-    //     createCommentView(commentList);
-    //   };
-
-    //   Comment.prototype.reply = function (userName, text) {
-    //     const reply = new Comment(userName, text, 0, []);
-    //     this.commentList.push(reply);
-    //   };
-
-    //   Comment.prototype.save = function () {
-    //     const commentList = JSON.parse(window.localStorage.getItem('commentList')) || [];
-    //     commentList.push(this);
-    //     createCommentView(commentList);
-    //   };
-
-    //   Comment.prototype.updateReplyList = function () {
-    //     let commentList = JSON.parse(window.localStorage.getItem('commentList')) || [];
-    //     // search for that comment in the list
-    //     commentList = findAndUpdateComment(commentList, this);
-    //     createCommentView(commentList);
-    //   };
-
-    //   function findAndUpdateComment(commentList, comment) {
-    //     for (let i = 0; i < commentList.length; i++) {
-    //       if (commentList[i].text === comment.text && commentList[i].userName === comment.userName) commentList[i] = comment;
-    //       if (commentList[i].commentList.length > 0) findAndUpdateComment(commentList[i].commentList, comment);
-    //     }
-    //     return commentList;
-    //   }
-
-    //   function createCommentView(commentList) {
-    //     const docFrag = document.createDocumentFragment();
-    //     docFrag.appendChild(showComments(commentList));
-    //     document.getElementById('viewComments').innerHTML = '';
-    //     document.getElementById('viewComments').appendChild(docFrag);
-    //     window.localStorage.setItem('commentList', JSON.stringify(commentList));
-    //   }
-
-    //   function createComment(userName, text, votes) {
-    //     const comment = new Comment(userName, text, votes, []);
-    //     comment.save();
-    //     return comment;
-    //   }
-
-    //   function showComments(commentList) {
-    //     const mainUL = document.createElement('ul');
-    //     for (let i = 0; i < commentList.length; i++) {
-    //       const comment = new Comment(commentList[i].userName, commentList[i].text, commentList[i].votes, commentList[i].commentList);
-    //       const li = createLi(comment, i);
-    //       mainUL.appendChild(li);
-    //       if (commentList[i].commentList.length > 0) {
-    //         mainUL.appendChild(showComments(commentList[i].commentList));
-    //       }
-    //     }
-    //     return mainUL;
-    //   }
-
-    //   function createLi(comment, index) {
-    //     // main li element
-    //     const li = document.createElement('li');
-
-    //     // main div for the li element
-    //     const mainDiv = document.createElement('div');
-
-    //     // commentDiv which will have comment and username
-    //     const commentDiv = document.createElement('div');
-    //     const commentNameAndText = document.createTextNode(comment.userName + ': ' + comment.text);
-    //     commentDiv.appendChild(commentNameAndText);
-
-    //     // votes div which will have votes along with upvote and downvote
-    //     const votesDiv = document.createElement('div');
-    //     const votes = document.createTextNode('Votes:' + comment.votes);
-    //     const upvoteBtn = document.createElement('button');
-    //     upvoteBtn.innerHTML = 'Upvote';
-    //     upvoteBtn.onclick = function () {
-    //       comment.upvote();
-    //     };
-    //     const downVoteBtn = document.createElement('button');
-    //     downVoteBtn.innerHTML = 'Downvote';
-
-    //     downVoteBtn.onclick = function () {
-    //       comment.downvote();
-    //     };
-    //     votesDiv.appendChild(votes);
-    //     votesDiv.appendChild(upvoteBtn);
-    //     votesDiv.appendChild(downVoteBtn);
-
-    //     // reply username div
-    //     const userNameDiv = document.createElement('div');
-    //     const userName = document.createTextNode('Username:');
-    //     const usernameInput = document.createElement('input');
-    //     userNameDiv.appendChild(userName);
-    //     userNameDiv.appendChild(usernameInput);
-
-    //     // reply comment div
-    //     const replyCommentDiv = document.createElement('div');
-    //     const commentText = document.createTextNode('Comment:');
-    //     const commentInput = document.createElement('input');
-    //     replyCommentDiv.appendChild(commentText);
-    //     replyCommentDiv.appendChild(commentInput);
-
-    //     // reply post button which will create a new comment
-
-    //     const postReplyBtn = document.createElement('button');
-    //     postReplyBtn.innerHTML = 'POST';
-    //     postReplyBtn.onclick = function () {
-    //       const content = commentInput.value;
-    //       const user = usernameInput.value;
-    //       const reply = new Comment(user, content, 0, []);
-    //       comment.commentList.push(reply);
-    //       comment.updateReplyList();
-    //     };
-
-    //     // reply Div which will show up on click of reply button
-    //     const replyDiv = document.createElement('div');
-
-    //     const hiddenReplyDiv = document.createElement('div');
-    //     hiddenReplyDiv.style.cssText = 'display:none';
-    //     hiddenReplyDiv.appendChild(userNameDiv);
-    //     hiddenReplyDiv.appendChild(replyCommentDiv);
-    //     hiddenReplyDiv.appendChild(postReplyBtn);
-
-    //     const replyBtn = document.createElement('button');
-    //     replyBtn.innerHTML = 'Reply';
-    //     replyBtn.onclick = function () {
-    //       replyBtn.style.cssText = 'display:none';
-    //       hiddenReplyDiv.style.cssText = 'display:block';
-    //     };
-    //     replyDiv.appendChild(replyBtn);
-    //     replyDiv.appendChild(hiddenReplyDiv);
-
-    //     mainDiv.appendChild(commentDiv);
-    //     mainDiv.appendChild(votesDiv);
-    //     mainDiv.appendChild(replyDiv);
-    //     li.appendChild(mainDiv);
-    //     return li;
-    //   }
-
-    //   document.getElementById('post').addEventListener('click', function () {
-    //     const userName = document.getElementById('userName').value;
-    //     const content = document.getElementById('joinDiscussion').value;
-    //     createComment(userName, content, 0);
+    // const valineComments = () => {
+    //   newObj.forEach((comm, index) => {
+    //     console.log('COMM', comm);
     //   });
+    // };
 
+    // const allMatches = document.querySelectorAll('.match');
+    // allMatches.forEach((match, index) => {
+    //   // console.log('MATCH', match);
+    //   const formValine = document.createElement('form');
+    //   formValine.classList.add('formValine');
+    //   formValine.setAttribute('onsubmit', 'event.preventDefault();');
+
+    //   const formValineDiv = document.querySelector('.formValine');
+    //   const textareaValine = document.createElement('textarea');
+    //   textareaValine.setAttribute('name', 'joinDiscussion');
+    //   textareaValine.setAttribute('id', 'joinDiscussion');
+    //   textareaValine.setAttribute('placeholder', 'Write a comment');
+    //   const postComment = document.createElement('div');
+    //   postComment.setAttribute('id', 'postComment');
+    //   const labelUser = document.createElement('label');
+    //   labelUser.innerHTML += 'Your Name: ';
+    //   const inputUserName = document.createElement('input');
+    //   inputUserName.setAttribute('type', 'input');
+    //   inputUserName.setAttribute('id', 'userName');
+    //   const inputPost = document.createElement('input');
+    //   inputPost.setAttribute('type', 'button');
+    //   inputPost.setAttribute('value', 'Post');
+    //   inputPost.setAttribute('id', 'post');
+    //   const sectionComments = document.createElement('section');
+    //   sectionComments.setAttribute('id', 'viewComments');
+    //   formValine.appendChild(textareaValine);
+    //   formValine.appendChild(postComment);
+    //   postComment.appendChild(labelUser);
+    //   postComment.appendChild(inputUserName);
+    //   postComment.appendChild(inputPost);
+    //   formValine.appendChild(sectionComments);
+
+    //   // formValues += `<form onsubmit="event.preventDefault();">
+    //   // <textarea name="joinDiscussion" id="joinDiscussion" cols=50 placeholder="Join the discussion"></textarea>
+    //   //           <div id="postComment">
+    //   //             <label>UserName:</label><input type="input" id="userName"/>
+    //   //             <input type="button" value="Post" id="post">
+    //   //           </div>
+    //   //           <section id="viewComments">
+    //   //      </section>
+    //   // </form>`;
+
+    //   const elem = document.getElementById(`match${index}`);
+
+    //   match.appendChild(formValine);
+    //   new Valine({
+    //     el: `.valine`,
+    //     appId: 'GbCaRUpGLOl1IN6vCnIwMcle-MdYXbMMI',
+    //     appKey: '3YW20TtAKRS89UlzqcMUPQcO',
+    //     lang: 'en',
+    //     path: elem,
+    //   });
+    // });
+
+    // (function () {
+    // function Comment(userName, text, votes, commentList) {
+    //   this.userName = userName;
+    //   this.text = text;
+    //   this.votes = votes;
+    //   this.commentList = commentList;
+    // }
+
+    // Comment.prototype.upvote = function () {
+    //   let commentList = JSON.parse(window.localStorage.getItem('commentList')) || [];
+    //   this.votes = this.votes + 1;
+    //   commentList = findAndUpdateComment(commentList, this);
+    //   createCommentView(commentList);
+    // };
+
+    // Comment.prototype.downvote = function () {
+    //   let commentList = JSON.parse(window.localStorage.getItem('commentList')) || [];
+    //   if (this.votes > 0) this.votes = this.votes - 1;
+    //   commentList = findAndUpdateComment(commentList, this);
+    //   createCommentView(commentList);
+    // };
+
+    // Comment.prototype.reply = function (userName, text) {
+    //   const reply = new Comment(userName, text, 0, []);
+    //   this.commentList.push(reply);
+    // };
+
+    // Comment.prototype.save = function () {
     //   const commentList = JSON.parse(window.localStorage.getItem('commentList')) || [];
-    //   if (commentList.length) createCommentView(commentList);
+    //   commentList.push(this);
+    //   createCommentView(commentList);
+    // };
+
+    // Comment.prototype.updateReplyList = function () {
+    //   let commentList = JSON.parse(window.localStorage.getItem('commentList')) || [];
+    //   // search for that comment in the list
+    //   commentList = findAndUpdateComment(commentList, this);
+    //   createCommentView(commentList);
+    // };
+
+    // function findAndUpdateComment(commentList, comment) {
+    //   for (let i = 0; i < commentList.length; i++) {
+    //     if (commentList[i].text === comment.text && commentList[i].userName === comment.userName) commentList[i] = comment;
+    //     if (commentList[i].commentList.length > 0) findAndUpdateComment(commentList[i].commentList, comment);
+    //   }
+    //   return commentList;
+    // }
+
+    // function createCommentView(commentList) {
+    //   const docFrag = document.createDocumentFragment();
+    //   docFrag.appendChild(showComments(commentList));
+    //   document.getElementById('viewComments').innerHTML = '';
+    //   document.getElementById('viewComments').appendChild(docFrag);
+    //   window.localStorage.setItem('commentList', JSON.stringify(commentList));
+    // }
+
+    // function createComment(userName, text, votes) {
+    //   const comment = new Comment(userName, text, votes, []);
+    //   comment.save();
+    //   return comment;
+    // }
+
+    // function showComments(commentList) {
+    //   const mainUL = document.createElement('ul');
+    //   for (let i = 0; i < commentList.length; i++) {
+    //     const comment = new Comment(commentList[i].userName, commentList[i].text, commentList[i].votes, commentList[i].commentList);
+    //     const li = createLi(comment, i);
+    //     mainUL.appendChild(li);
+    //     if (commentList[i].commentList.length > 0) {
+    //       mainUL.appendChild(showComments(commentList[i].commentList));
+    //     }
+    //   }
+    //   return mainUL;
+    // }
+
+    // function createLi(comment, index) {
+    //   // main li element
+    //   const li = document.createElement('li');
+
+    //   // main div for the li element
+    //   const mainDiv = document.createElement('div');
+
+    //   // commentDiv which will have comment and username
+    //   const commentDiv = document.createElement('div');
+    //   const commentNameAndText = document.createTextNode(comment.userName + ': ' + comment.text);
+    //   commentDiv.appendChild(commentNameAndText);
+
+    //   // votes div which will have votes along with upvote and downvote
+    //   const votesDiv = document.createElement('div');
+    //   const votes = document.createTextNode('Votes:' + comment.votes);
+    //   const upvoteBtn = document.createElement('button');
+    //   upvoteBtn.innerHTML = 'Upvote';
+    //   upvoteBtn.onclick = function () {
+    //     comment.upvote();
+    //   };
+    //   const downVoteBtn = document.createElement('button');
+    //   downVoteBtn.innerHTML = 'Downvote';
+
+    //   downVoteBtn.onclick = function () {
+    //     comment.downvote();
+    //   };
+    //   votesDiv.appendChild(votes);
+    //   votesDiv.appendChild(upvoteBtn);
+    //   votesDiv.appendChild(downVoteBtn);
+
+    //   // reply username div
+    //   const userNameDiv = document.createElement('div');
+    //   const userName = document.createTextNode('Username:');
+    //   const usernameInput = document.createElement('input');
+    //   userNameDiv.appendChild(userName);
+    //   userNameDiv.appendChild(usernameInput);
+
+    //   // reply comment div
+    //   const replyCommentDiv = document.createElement('div');
+    //   const commentText = document.createTextNode('Comment:');
+    //   const commentInput = document.createElement('input');
+    //   replyCommentDiv.appendChild(commentText);
+    //   replyCommentDiv.appendChild(commentInput);
+
+    //   // reply post button which will create a new comment
+
+    //   const postReplyBtn = document.createElement('button');
+    //   postReplyBtn.innerHTML = 'POST';
+    //   postReplyBtn.onclick = function () {
+    //     const content = commentInput.value;
+    //     const user = usernameInput.value;
+    //     const reply = new Comment(user, content, 0, []);
+    //     comment.commentList.push(reply);
+    //     comment.updateReplyList();
+    //   };
+
+    //   // reply Div which will show up on click of reply button
+    //   const replyDiv = document.createElement('div');
+
+    //   const hiddenReplyDiv = document.createElement('div');
+    //   hiddenReplyDiv.style.cssText = 'display:none';
+    //   hiddenReplyDiv.appendChild(userNameDiv);
+    //   hiddenReplyDiv.appendChild(replyCommentDiv);
+    //   hiddenReplyDiv.appendChild(postReplyBtn);
+
+    //   const replyBtn = document.createElement('button');
+    //   replyBtn.innerHTML = 'Reply';
+    //   replyBtn.onclick = function () {
+    //     replyBtn.style.cssText = 'display:none';
+    //     hiddenReplyDiv.style.cssText = 'display:block';
+    //   };
+    //   replyDiv.appendChild(replyBtn);
+    //   replyDiv.appendChild(hiddenReplyDiv);
+
+    //   mainDiv.appendChild(commentDiv);
+    //   mainDiv.appendChild(votesDiv);
+    //   mainDiv.appendChild(replyDiv);
+    //   li.appendChild(mainDiv);
+    //   return li;
+    // }
+
+    // document.getElementById('post').addEventListener('click', function () {
+    //   const userName = document.getElementById('userName').value;
+    //   const content = document.getElementById('joinDiscussion').value;
+    //   createComment(userName, content, 0);
+    // });
+
+    // const commentList = JSON.parse(window.localStorage.getItem('commentList')) || [];
+    // if (commentList.length) createCommentView(commentList);
     // })();
 
     const matchNodeList = document.querySelectorAll('.match');
@@ -1081,21 +1130,6 @@ export function history() {
         // nie dodawaj nic
       }
     });
-
-    // const valineComments = () => {
-    //   for (let i = newObj.length; i > 0; i--) {
-    //     const elem = `#match${i}`;
-    //     new Valine({
-    //       el: `#vcomments${i}`,
-    //       appId: 'GbCaRUpGLOl1IN6vCnIwMcle-MdYXbMMI',
-    //       appKey: '3YW20TtAKRS89UlzqcMUPQcO',
-    //       lang: 'en',
-    //       path: elem.hash,
-    //     });
-    //   }
-    // };
-
-    // valineComments();
 
     const pageSize = 10;
     let incremSlide = 11;

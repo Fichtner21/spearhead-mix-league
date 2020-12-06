@@ -1,5 +1,4 @@
 import drive from 'drive-db';
-import _ from 'lodash';
 import { Chart } from 'chart.js';
 import $ from 'jquery';
 
@@ -20,99 +19,6 @@ export function rankingInfo() {
 
     const ourPlayers = document.getElementById('our-players');
     ourPlayers.innerHTML += `<span>Active users</span><i class="fas fa-users"></i> ${historyRanking2.length}`;
-
-    const myArrOfObjects = [
-      {
-        time: 1111,
-        t1p1name: 'Tom',
-        t1p1pre: '1000',
-        t1p1score: '10',
-        t1p1post: '990',
-        t1p2name: 'Luis',
-        t1p2pre: '1000',
-        t1p2score: '12',
-        t1p2post: '992',
-        t2p1name: 'John',
-        t2p1pre: '1000',
-        t2p1score: '10',
-        t2p1post: '1010',
-        t2p2name: 'David',
-        t2p2pre: '1000',
-        t2p2score: '15',
-        t2p2post: '1012',
-        t1roundswon: '9',
-        t2roundswon: '10',
-      },
-      {
-        time: 2222,
-        t1p1name: 'Tom',
-        t1p1pre: '990',
-        t1p1score: '1',
-        t1p1post: '994',
-        t1p2name: 'Alan',
-        t1p2pre: '1052',
-        t1p2score: '12',
-        t1p2post: '1069',
-        t2p1name: 'Ann',
-        t2p1pre: '1000',
-        t2p1score: '42',
-        t2p1post: '1045',
-        t2p2name: 'John',
-        t2p2pre: '1010',
-        t2p2score: '15',
-        t2p2post: '1029',
-        t1roundswon: '9',
-        t2roundswon: '25',
-      },
-      {
-        time: 3333,
-        t1p1name: 'John',
-        t1p1pre: '1029',
-        t1p1score: '34',
-        t1p1post: '1054',
-        t1p2name: 'Ann',
-        t1p2pre: '1045',
-        t1p2score: '23',
-        t1p2post: '1059',
-        t2p1name: 'David',
-        t2p1pre: '1012',
-        t2p1score: '10',
-        t2p1post: '1001',
-        t2p2name: 'Tom',
-        t2p2pre: '974',
-        t2p2score: '5',
-        t2p2post: '945',
-        t1roundswon: '19',
-        t2roundswon: '10',
-      },
-      {
-        time: 4444,
-        t1p1name: 'John',
-        t1p1pre: '1029',
-        t1p1score: '34',
-        t1p1post: '1054',
-        t1p2name: 'Ann',
-        t1p2pre: '1045',
-        t1p2score: '23',
-        t1p2post: '1059',
-        t2p1name: 'Tom',
-        t2p1pre: '980',
-        t2p1score: '10',
-        t2p1post: '940',
-        t2p2name: 'David',
-        t2p2pre: '974',
-        t2p2score: '5',
-        t2p2post: '960',
-        t1roundswon: '19',
-        t2roundswon: '10',
-      },
-    ];
-    const arrTomPos = [];
-    const arrBelusPos = [];
-    const arrZielonyPos = [];
-    const arrZielonyFrags = [];
-    const arrBatonFrags = [];
-    const arrJimFrags = [];
 
     function sumOfFrags(name) {
       const arrNameFrags = [];
@@ -267,11 +173,6 @@ export function rankingInfo() {
       return nameRanksOut;
     }
 
-    console.log('HWK', rankHistory('hwk'));
-    // console.log('============>', sumOfFrags('illusion'));
-    // console.log('============>', Math.min(...minMaxFrags('illusion')));
-    // console.log('============>', Math.max(...minMaxFrags('illusion')));
-
     // tomStreakArr.reverse();
     // console.log('toms STREAK: ', tomStreakArr);
     // const subarrUp = [];
@@ -325,19 +226,6 @@ export function rankingInfo() {
         max = len;
       }
       return max;
-    }
-
-    for (let i = 1; i <= 2; i++) {
-      for (let j = 1; j <= 2; j++) {
-        // console.log(`t${j}p${i}name`);
-        const tomPos = _.filter(myArrOfObjects, [`t${j}p${i}name`, 'Tom']);
-        // console.log(tomPos);
-        // console.log(_.find(myArrOfObjects, [`t${j}p${i}name`, 'Tom']));
-        // arrTomPos.push(tomPos);
-        // if (tomPos === true) {
-        //   console.log(_.filter(myArrOfObjects, [`t${j}p${i}post`]));
-        // }
-      }
     }
 
     // const players = db.slice(0, 23); // pobranie pierwszych 23 graczy, do poprawy
@@ -445,7 +333,6 @@ export function rankingInfo() {
       playerName.appendChild(playerItem);
     });
 
-    // let valueCard = '';
     const playerCard = players.map((entry) => entry);
     playerCard.forEach(function (name, index) {
       const playerCardDiv = document.createElement('div');
@@ -513,9 +400,8 @@ export function rankingInfo() {
       enableRoute();
     });
 
-    const places = players.map((entry) => entry.place);
     const places2 = players.map((entry) => entry);
-    // console.log(places2);
+
     places2.forEach(function (placeObj, index) {
       const item = document.createElement('div');
       item.classList.add('item');
@@ -568,14 +454,40 @@ export function rankingInfo() {
     historyRanking2.forEach((userNameInStreak) => {
       const increaseDiv = document.getElementById(`increase-${userNameInStreak.username}`);
       const playerInStreak = lenOfLongIncSubArr(rankHistory(userNameInStreak.username), rankHistory(userNameInStreak.username).length);
-      console.log('PLAYER STREAK: ', playerInStreak);
-      increaseDiv.innerHTML += `<div class="frag-item">Longest increase streak: <span class="frag-value">${playerInStreak}</span></div>`;
+      // console.log('PLAYER STREAK: ', playerInStreak);
+      increaseDiv.innerHTML += `<div class="frag-item">Longest increase streak: <span class="frag-value">${playerInStreak}</span><i class="fas fa-arrow-up"></i></div>`;
     });
 
-    console.log('COUNT WARS', countWars('hwk'));
+    function loadPopup() {
+      const randomPlayer = players.map((entry) => entry.username);
+      const randomPlayerLink = randomPlayer[Math.floor(Math.random() * randomPlayer.length)];
+      // console.log(randomPlayerLink);
+      $('#app').css({ opacity: '0.2' });
+      const popup = `<div class="popup"><div>Watch player</div><a href="#charts-${randomPlayerLink}" class="closeLink">${randomPlayerLink}</a><div>statistics.</div><div class="close"><i class="far fa-window-close"></i></div></div>`;
+      $('body').append(popup);
+
+      $(document).click((event) => {
+        if (!$(event.target).closest('.popup').length) {
+          $('#app').css({ opacity: '1' });
+          $('.popup').remove();
+        }
+      });
+
+      $(document).on('click', '.close', function () {
+        $('#app').css({ opacity: '1' });
+        $('.popup').remove();
+      });
+
+      $(document).on('click', '.closeLink', function () {
+        $('#app').css({ opacity: '1' });
+        $('.popup').remove();
+      });
+    }
+    setTimeout(() => {
+      loadPopup();
+    }, 1000);
 
     historyRanking2.forEach((nameUser) => {
-      // console.log('USERNAME', nameUser.username);
       const ctx = document.getElementById(`chart-${nameUser.username}`).getContext('2d');
       const chart = new Chart(ctx, {
         type: 'line',
