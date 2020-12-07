@@ -10,6 +10,11 @@ export function history() {
       tab: '4',
     });
 
+    const playersTab = await drive({
+      sheet: '1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo',
+      tab: '1',
+    });
+
     historyMatches.reverse();
 
     const teams = historyMatches.map((entry) => entry);
@@ -62,615 +67,22 @@ export function history() {
 
     let value = '';
 
+    const playerFromTab = playersTab.map((entry) => entry);
+    function addPlayerLink(player) {
+      let convertedPlayer = '';
+      playerFromTab.forEach((el) => {
+        if (player === el.username) {
+          convertedPlayer = `<a href="#charts-${el.username}">${el.playername}</a>`;
+        } else if (player === '') {
+          // console.log('N/A player');
+        } else {
+          // console.log('Something went wrong.');
+        }
+      });
+      return convertedPlayer;
+    }
+
     newObj.forEach((match, i) => {
-      // for (let j = 0; j < 5; j++) {
-      const yp = 'YOUR_PROBLEM';
-      const zielony = 'Zielony';
-
-      // TEAM 1
-      switch (match.t1p1name) {
-        case 'ryba': {
-          match.t1p1name = 'rybA';
-          break;
-        }
-        case 'grabarz': {
-          match.t1p1name = 'gRaBaRz';
-          break;
-        }
-        case 'tomas': {
-          match.t1p1name = 'Tomas';
-          break;
-        }
-        case 'kapsel': {
-          match.t1p1name = 'KaPsEL';
-          break;
-        }
-        case 'your-problem': {
-          match.t1p1name = yp;
-          break;
-        }
-        case 'illusion': {
-          match.t1p1name = '-Illu$ioN-';
-          break;
-        }
-        case 'baton': {
-          match.t1p1name = 'bAtOn';
-          break;
-        }
-        default: {
-          console.log('nickname coverted invalid');
-          break;
-        }
-      }
-      switch (match.t1p2name) {
-        case 'ryba': {
-          match.t1p2name = 'rybA';
-          break;
-        }
-        case 'grabarz': {
-          match.t1p2name = 'gRaBaRz';
-          break;
-        }
-        case 'tomas': {
-          match.t1p2name = 'Tomas';
-          break;
-        }
-        case 'kapsel': {
-          match.t1p2name = 'KaPsEL';
-          break;
-        }
-        case 'your-problem': {
-          match.t1p2name = yp;
-          break;
-        }
-        case 'illusion': {
-          match.t1p2name = '-Illu$ioN-';
-          break;
-        }
-        case 'baton': {
-          match.t1p2name = 'bAtOn';
-          break;
-        }
-        case 'jim': {
-          match.t1p2name = 'Jim';
-          break;
-        }
-        case 'moses': {
-          match.t1p2name = 'MoSeS';
-          break;
-        }
-        case 'zielak': {
-          match.t1p2name = 'ZielakPr0';
-          break;
-        }
-        case 'lechu': {
-          match.t1p2name = 'Lechu';
-          break;
-        }
-        case 'k4ps': {
-          match.t1p2name = 'k4ps';
-          break;
-        }
-        case 'belus': {
-          match.t1p2name = 'Belu$';
-          break;
-        }
-        case 'zielony': {
-          match.t1p2name = zielony;
-          break;
-        }
-        case '': {
-          match.t1p2name = '';
-          break;
-        }
-        default: {
-          console.log('nickname coverted invalid');
-          break;
-        }
-      }
-      switch (match.t1p3name) {
-        case 'ryba': {
-          match.t1p3name = 'rybA';
-          break;
-        }
-        case 'moses': {
-          match.t1p3name = 'MoSeS';
-          break;
-        }
-        case 'grabarz': {
-          match.t1p3name = 'gRaBaRz';
-          break;
-        }
-        case 'tomas': {
-          match.t1p3name = 'Tomas';
-          break;
-        }
-        case 'kapsel': {
-          match.t1p3name = 'KaPsEL';
-          break;
-        }
-        case 'josh': {
-          match.t1p3name = 'josh';
-          break;
-        }
-        case 'your-problem': {
-          match.t1p3name = yp;
-          break;
-        }
-        case 'illusion': {
-          match.t1p3name = '-Illu$ioN-';
-          break;
-        }
-        case 'baton': {
-          match.t1p3name = 'bAtOn';
-          break;
-        }
-        case 'dts': {
-          match.t1p3name = 'DtS';
-          break;
-        }
-        case 'belus': {
-          match.t1p3name = 'Belu$';
-          break;
-        }
-        case 'jim': {
-          match.t1p3name = 'Jim';
-          break;
-        }
-        case 'hwk': {
-          match.t1p3name = 'Hwk';
-          break;
-        }
-        case 'zielony': {
-          match.t1p3name = zielony;
-          break;
-        }
-        case '': {
-          match.t1p3name = '';
-          break;
-        }
-        default: {
-          console.log('nickname coverted invalid');
-          break;
-        }
-      }
-      switch (match.t1p4name) {
-        case 'ryba': {
-          match.t1p4name = 'rybA';
-          break;
-        }
-        case 'grabarz': {
-          match.t1p4name = 'gRaBaRz';
-          break;
-        }
-        case 'tomas': {
-          match.t1p4name = 'Tomas';
-          break;
-        }
-        case 'kapsel': {
-          match.t1p4name = 'KaPsEL';
-          break;
-        }
-        case 'your-problem': {
-          match.t1p4name = yp;
-          break;
-        }
-        case 'illusion': {
-          match.t1p4name = '-Illu$ioN-';
-          break;
-        }
-        case 'baton': {
-          match.t1p4name = 'bAtOn';
-          break;
-        }
-        case 'dts': {
-          match.t1p4name = 'DtS';
-          break;
-        }
-        case 'zielony': {
-          match.t1p4name = zielony;
-          break;
-        }
-        case 'zielak': {
-          match.t1p4name = 'ZielakPr0';
-          break;
-        }
-        case 'moses': {
-          match.t1p4name = 'MoSeS';
-          break;
-        }
-        case 'belus': {
-          match.t1p4name = 'Belu$';
-          break;
-        }
-        case 'wiggles': {
-          match.t1p4name = 'Mr.Wiggles';
-          break;
-        }
-        case 'jim': {
-          match.t1p4name = 'Jim';
-          break;
-        }
-        case '': {
-          match.t1p4name = '';
-          break;
-        }
-        default: {
-          console.log('nickname coverted invalid');
-          break;
-        }
-      }
-      switch (match.t1p5name) {
-        case 'ryba': {
-          match.t1p5name = 'rybA';
-          break;
-        }
-        case 'hwk': {
-          match.t1p5name = 'Hwk';
-          break;
-        }
-        case 'grabarz': {
-          match.t1p5name = 'gRaBaRz';
-          break;
-        }
-        case 'tomas': {
-          match.t1p5name = 'Tomas';
-          break;
-        }
-        case 'kapsel': {
-          match.t1p5name = 'KaPsEL';
-          break;
-        }
-        case 'your-problem': {
-          match.t1p5name = yp;
-          break;
-        }
-        case 'illusion': {
-          match.t1p5name = '-Illu$ioN-';
-          break;
-        }
-        case 'baton': {
-          match.t1p5name = 'bAtOn';
-          break;
-        }
-        case 'dts': {
-          match.t1p5name = 'DtS';
-          break;
-        }
-        case 'zielony': {
-          match.t1p5name = zielony;
-          break;
-        }
-        case 'zielak': {
-          match.t1p5name = 'ZielakPr0';
-          break;
-        }
-        case 'belus': {
-          match.t1p5name = 'Belu$';
-          break;
-        }
-        case 'moses': {
-          match.t1p5name = 'MoSeS';
-          break;
-        }
-        case '': {
-          match.t1p5name = '';
-          break;
-        }
-        default: {
-          console.log('nickname coverted invalid');
-          break;
-        }
-      }
-      // TEAM 2 //
-      switch (match.t2p1name) {
-        case 'ryba': {
-          match.t2p1name = 'rybA';
-          break;
-        }
-        case 'josh': {
-          match.t2p1name = 'josh';
-          break;
-        }
-        case 'zielak': {
-          match.t2p1name = 'ZielakPr0';
-          break;
-        }
-        case 'grabarz': {
-          match.t2p1name = 'gRaBaRz';
-          break;
-        }
-        case 'tomas': {
-          match.t2p1name = 'Tomas';
-          break;
-        }
-        case 'kapsel': {
-          match.t2p1name = 'KaPsEL';
-          break;
-        }
-        case 'your-problem': {
-          match.t2p1name = yp;
-          break;
-        }
-        case 'illusion': {
-          match.t2p1name = '-Illu$ioN-';
-          break;
-        }
-        case 'baton': {
-          match.t2p1name = 'bAtOn';
-          break;
-        }
-        case 'belus': {
-          match.t2p1name = 'Belu$';
-          break;
-        }
-        case 'jim': {
-          match.t2p1name = 'Jim';
-          break;
-        }
-        case 'moses': {
-          match.t2p1name = 'MoSeS';
-          break;
-        }
-        case 'hwk': {
-          match.t2p1name = 'Hwk';
-          break;
-        }
-        default: {
-          console.log('nickname coverted invalid');
-          break;
-        }
-      }
-      switch (match.t2p2name) {
-        case 'ryba': {
-          match.t2p2name = 'rybA';
-          break;
-        }
-        case 'wiggles': {
-          match.t2p2name = 'Mr.Wiggles';
-          break;
-        }
-        case 'jim': {
-          match.t2p2name = 'Jim';
-          break;
-        }
-        case 'zielony': {
-          match.t2p2name = zielony;
-          break;
-        }
-        case 'aker': {
-          match.t2p2name = 'Aker';
-          break;
-        }
-        case 'hwk': {
-          match.t2p2name = 'Hwk';
-          break;
-        }
-        case 'grabarz': {
-          match.t2p2name = 'gRaBaRz';
-          break;
-        }
-        case 'tomas': {
-          match.t2p2name = 'Tomas';
-          break;
-        }
-        case 'kapsel': {
-          match.t2p2name = 'KaPsEL';
-          break;
-        }
-        case 'your-problem': {
-          match.t2p2name = yp;
-          break;
-        }
-        case 'illusion': {
-          match.t2p2name = '-Illu$ioN-';
-          break;
-        }
-        case 'baton': {
-          match.t2p2name = 'bAtOn';
-          break;
-        }
-        case 'belus': {
-          match.t2p2name = 'Belu$';
-          break;
-        }
-        case 'zielak': {
-          match.t2p2name = 'ZielakPr0';
-          break;
-        }
-        case 'moses': {
-          match.t2p2name = 'MoSeS';
-          break;
-        }
-        case '': {
-          match.t2p2name = '';
-          break;
-        }
-        default: {
-          console.log('nickname coverted invalid');
-          break;
-        }
-      }
-      switch (match.t2p3name) {
-        case 'ryba': {
-          match.t2p3name = 'rybA';
-          break;
-        }
-        case 'aker': {
-          match.t2p3name = 'Aker';
-          break;
-        }
-        case 'hwk': {
-          match.t2p3name = 'Hwk';
-          break;
-        }
-        case 'oprawca': {
-          match.t2p3name = 'Oprawca';
-          break;
-        }
-        case 'zielak': {
-          match.t2p3name = 'ZielakPr0';
-          break;
-        }
-        case 'grabarz': {
-          match.t2p3name = 'gRaBaRz';
-          break;
-        }
-        case 'tomas': {
-          match.t2p3name = 'Tomas';
-          break;
-        }
-        case 'kapsel': {
-          match.t2p3name = 'KaPsEL';
-          break;
-        }
-        case 'your-problem': {
-          match.t2p3name = yp;
-          break;
-        }
-        case 'illusion': {
-          match.t2p3name = '-Illu$ioN-';
-          break;
-        }
-        case 'ultrakiller': {
-          match.t2p3name = 'Ultrakiller';
-          break;
-        }
-        case 'baton': {
-          match.t2p3name = 'bAtOn';
-          break;
-        }
-        case 'belus': {
-          match.t2p3name = 'Belu$';
-          break;
-        }
-        case 'zielony': {
-          match.t2p3name = zielony;
-          break;
-        }
-        case 'moses': {
-          match.t2p3name = 'MoSeS';
-          break;
-        }
-        case 'dziadek': {
-          match.t2p3name = '-insaNe! >';
-          break;
-        }
-        case '': {
-          match.t2p3name = '';
-          break;
-        }
-        default: {
-          console.log('nickname coverted invalid');
-          break;
-        }
-      }
-      switch (match.t2p4name) {
-        case 'ryba': {
-          match.t2p4name = 'rybA';
-          break;
-        }
-        case 'grabarz': {
-          match.t2p4name = 'gRaBaRz';
-          break;
-        }
-        case 'tomas': {
-          match.t2p4name = 'Tomas';
-          break;
-        }
-        case 'kapsel': {
-          match.t2p4name = 'KaPsEL';
-          break;
-        }
-        case 'your-problem': {
-          match.t2p4name = yp;
-          break;
-        }
-        case 'illusion': {
-          match.t2p4name = '-Illu$ioN-';
-          break;
-        }
-        case 'baton': {
-          match.t2p4name = 'bAtOn';
-          break;
-        }
-        case 'belus': {
-          match.t2p4name = 'Belu$';
-          break;
-        }
-        case 'zielony': {
-          match.t2p4name = zielony;
-          break;
-        }
-        case 'moses': {
-          match.t2p4name = 'MoSeS';
-          break;
-        }
-        case 'zielak': {
-          match.t2p4name = 'ZielakPr0';
-          break;
-        }
-        case 'lechu': {
-          match.t2p4name = 'Lechu';
-          break;
-        }
-        case '': {
-          match.t2p4name = '';
-          break;
-        }
-        default: {
-          console.log('nickname coverted invalid');
-          break;
-        }
-      }
-      switch (match.t2p5name) {
-        case 'ryba': {
-          match.t2p2name = 'rybA';
-          break;
-        }
-        case 'grabarz': {
-          match.t2p5name = 'gRaBaRz';
-          break;
-        }
-        case 'tomas': {
-          match.t2p5name = 'Tomas';
-          break;
-        }
-        case 'kapsel': {
-          match.t2p5name = 'KaPsEL';
-          break;
-        }
-        case 'your-problem': {
-          match.t2p5name = yp;
-          break;
-        }
-        case 'illusion': {
-          match.t2p5name = '-Illu$ioN-';
-          break;
-        }
-        case 'baton': {
-          match.t2p5name = 'bAtOn';
-          break;
-        }
-        case 'belus': {
-          match.t2p5name = 'Belu$';
-          break;
-        }
-        case 'zielony': {
-          match.t2p5name = zielony;
-          break;
-        }
-        case '': {
-          match.t2p5name = '';
-          break;
-        }
-        default: {
-          console.log('nickname coverted invalid');
-          break;
-        }
-      }
-      // }
-
       value += `<div class="match" id="match${newObj.length - i}">          
           <div class="date">
             <div class="matchId" id="matchId-${newObj.length - i}">
@@ -690,7 +102,7 @@ export function history() {
 
               <div class="player">
                 <div class="preelo">${match.t1p1preelo}</div>
-                <div class="name">${match.t1p1name}</div>
+                <div class="name">${addPlayerLink(match.t1p1name)}</div>
                 <div class="score">${match.t1p1score}</div>
                 <div class="postelo">${match.t1p1postelo}</div>
                 <div class="difference">${Number(parseFloat(match.t1p1postelo - match.t1p1preelo).toFixed(2))}
@@ -699,7 +111,7 @@ export function history() {
 
               <div class="player">
                 <div class="preelo">${match.t1p2preelo}</div>
-                <div class="name">${match.t1p2name}</div>
+                <div class="name">${addPlayerLink(match.t1p2name)}</div>
                 <div class="score">${match.t1p2score}</div>
                 <div class="postelo">${match.t1p2postelo}</div>
                 <div class="difference">${
@@ -712,7 +124,7 @@ export function history() {
 
               <div class="player">
                 <div class="preelo">${match.t1p3preelo}</div>
-                <div class="name">${match.t1p3name}</div>
+                <div class="name">${addPlayerLink(match.t1p3name)}</div>
                 <div class="score">${match.t1p3score}</div>
                 <div class="postelo">${match.t1p3postelo}</div>
                 <div class="difference">${
@@ -725,7 +137,7 @@ export function history() {
 
               <div class="player">
                 <div class="preelo">${match.t1p4preelo}</div>
-                <div class="name">${match.t1p4name}</div>
+                <div class="name">${addPlayerLink(match.t1p4name)}</div>
                 <div class="score">${match.t1p4score}</div>
                 <div class="postelo">${match.t1p4postelo}</div>
                 <div class="difference">${
@@ -738,7 +150,7 @@ export function history() {
 
               <div class="player">
                 <div class="preelo">${match.t1p5preelo}</div>
-                <div class="name">${match.t1p5name}</div>
+                <div class="name">${addPlayerLink(match.t1p5name)}</div>
                 <div class="score">${match.t1p5score}</div>
                 <div class="postelo">${match.t1p5postelo}</div>
                 <div class="difference">${
@@ -756,7 +168,7 @@ export function history() {
             <div class="players">
                <div class="player">
                 <div class="preelo">${match.t2p1preelo}</div>
-                <div class="name">${match.t2p1name}</div>
+                <div class="name">${addPlayerLink(match.t2p1name)}</div>
                 <div class="score">${match.t2p1score}</div>
                 <div class="postelo">${match.t2p1postelo}</div>
                 <div class="difference">${
@@ -768,7 +180,7 @@ export function history() {
               </div>
               <div class="player">    
                 <div class="preelo">${match.t2p2preelo}</div>
-                <div class="name">${match.t2p2name}</div>
+                <div class="name">${addPlayerLink(match.t2p2name)}</div>
                 <div class="score">${match.t2p2score}</div>
                 <div class="postelo">${match.t2p2postelo}</div>
                 <div class="difference">${
@@ -780,7 +192,7 @@ export function history() {
               </div>
               <div class="player">
                 <div class="preelo">${match.t2p3preelo}</div>
-                <div class="name">${match.t2p3name}</div>
+                <div class="name">${addPlayerLink(match.t2p3name)}</div>
                 <div class="score">${match.t2p3score}</div>
                 <div class="postelo">${match.t2p3postelo}</div>
                 <div class="difference">${
@@ -792,7 +204,7 @@ export function history() {
               </div>
               <div class="player">
                 <div class="preelo">${match.t2p4preelo}</div>
-                <div class="name">${match.t2p4name}</div>
+                <div class="name">${addPlayerLink(match.t2p4name)}</div>
                 <div class="score">${match.t2p4score}</div>
                 <div class="postelo">${match.t2p4postelo}</div>
                 <div class="difference">${
@@ -804,7 +216,7 @@ export function history() {
               </div>
               <div class="player">
                 <div class="preelo">${match.t2p5preelo}</div>
-                <div class="name">${match.t2p5name}</div>
+                <div class="name">${addPlayerLink(match.t2p5name)}</div>
                 <div class="score">${match.t2p5score}</div>
                 <div class="postelo">${match.t2p5postelo}</div>
                 <div class="difference">${

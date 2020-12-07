@@ -233,18 +233,57 @@ document.addEventListener('DOMContentLoaded', () => {
     const chanceT2ID1 = document.getElementById('chanceT2ID1');
     const chanceT2ID2 = document.getElementById('chanceT2ID2');
 
-    // Wywyłanie dynamicznej wartości zmiennej
-    // function getDynamicVariableValue(name) {
-    //   return eval(name);
-    // }
-    // ${getDynamicVariableValue('t1p' + i)}
+    function addPlayerLinkHome(player) {
+      let convertedPlayer = '';
+      teamSel.forEach((el) => {
+        if (player === el.username) {
+          convertedPlayer = `<a href="#charts-${el.username}">${el.playername}</a>`;
+        } else if (player === '') {
+          // console.log('N/A player');
+        } else {
+          // console.log('Something went wrong.');
+        }
+      });
+      return convertedPlayer;
+    }
+
+    function loadPopup() {
+      const randomPlayer = teamSel.map((entry) => entry.username);
+      const randomPlayerLink = randomPlayer[Math.floor(Math.random() * randomPlayer.length)];
+      // console.log(randomPlayerLink);
+      $('#app').css({ opacity: '0.2' });
+      const popup = `<div class="popup"><div>Watch player</div><a href="#charts-${randomPlayerLink}" class="closeLink">${addPlayerLinkHome(
+        randomPlayerLink,
+      )}</a><div>statistics.</div><div class="close"><i class="far fa-window-close"></i></div></div>`;
+      $('body').append(popup);
+
+      $(document).click((event) => {
+        if (!$(event.target).closest('.popup').length) {
+          $('#app').css({ opacity: '1' });
+          $('.popup').remove();
+        }
+      });
+
+      $(document).on('click', '.close', function () {
+        $('#app').css({ opacity: '1' });
+        $('.popup').remove();
+      });
+
+      $(document).on('click', '.closeLink', function () {
+        $('#app').css({ opacity: '1' });
+        $('.popup').remove();
+      });
+    }
+    setTimeout(() => {
+      loadPopup();
+    }, 1000);
 
     let team1ID1 = '';
     for (let i = 0; i < 5; i++) {
       team1ID1 += `
       <div class="player">
         <div class="preelo">${team1ID1playersEloArr[i]}</div>
-        <div class="name">${team1ID1playersArr[i]}</div>
+        <div class="name">${addPlayerLinkHome(team1ID1playersArr[i])}</div>
         <div class="score"></div>
         <div class="postelo"></div>
       </div>`;
@@ -255,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
       team1ID2 += `
       <div class="player">
         <div class="preelo">${team1ID2playersEloArr[i]}</div>
-        <div class="name">${team1ID2playersArr[i]}</div>
+        <div class="name">${addPlayerLinkHome(team1ID2playersArr[i])}</div>
         <div class="score"></div>
         <div class="postelo"></div>
       </div>`;
@@ -266,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
       team2ID1 += `
       <div class="player">
         <div class="preelo">${team2ID1playersEloArr[i]}</div>
-        <div class="name">${team2ID1playersArr[i]}</div>
+        <div class="name">${addPlayerLinkHome(team2ID1playersArr[i])}</div>
         <div class="score"></div>
         <div class="postelo"></div>
       </div>`;
@@ -277,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
       team2ID2 += `
       <div class="player">
         <div class="preelo">${team2ID2playersEloArr[i]}</div>
-        <div class="name">${team2ID2playersArr[i]}</div>
+        <div class="name">${addPlayerLinkHome(team2ID2playersArr[i])}</div>
         <div class="score"></div>
         <div class="postelo"></div>
       </div>`;

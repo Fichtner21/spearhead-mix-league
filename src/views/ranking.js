@@ -458,35 +458,6 @@ export function rankingInfo() {
       increaseDiv.innerHTML += `<div class="frag-item">Longest increase streak: <span class="frag-value">${playerInStreak}</span><i class="fas fa-arrow-up"></i></div>`;
     });
 
-    function loadPopup() {
-      const randomPlayer = players.map((entry) => entry.username);
-      const randomPlayerLink = randomPlayer[Math.floor(Math.random() * randomPlayer.length)];
-      // console.log(randomPlayerLink);
-      $('#app').css({ opacity: '0.2' });
-      const popup = `<div class="popup"><div>Watch player</div><a href="#charts-${randomPlayerLink}" class="closeLink">${randomPlayerLink}</a><div>statistics.</div><div class="close"><i class="far fa-window-close"></i></div></div>`;
-      $('body').append(popup);
-
-      $(document).click((event) => {
-        if (!$(event.target).closest('.popup').length) {
-          $('#app').css({ opacity: '1' });
-          $('.popup').remove();
-        }
-      });
-
-      $(document).on('click', '.close', function () {
-        $('#app').css({ opacity: '1' });
-        $('.popup').remove();
-      });
-
-      $(document).on('click', '.closeLink', function () {
-        $('#app').css({ opacity: '1' });
-        $('.popup').remove();
-      });
-    }
-    setTimeout(() => {
-      loadPopup();
-    }, 1000);
-
     historyRanking2.forEach((nameUser) => {
       const ctx = document.getElementById(`chart-${nameUser.username}`).getContext('2d');
       const chart = new Chart(ctx, {
