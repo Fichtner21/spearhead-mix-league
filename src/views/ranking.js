@@ -66,8 +66,14 @@ export function rankingInfo() {
       }
 
       foundAllStrikes(name, indexesFragsName, arrNameFrags, nameFragsOut);
+      let nameFragsOutExist = '';
+      if (Array.isArray(nameFragsOut) && nameFragsOut.length) {
+        nameFragsOutExist = nameFragsOut.reduce((a, b) => a + b);
+      } else {
+        nameFragsOutExist = 'Unknown';
+      }
 
-      return nameFragsOut.reduce((a, b) => a + b);
+      return nameFragsOutExist;
     }
 
     function minMaxFrags(name) {
@@ -217,7 +223,14 @@ export function rankingInfo() {
 
     function findPlayerLastWar(name) {
       const findeLastWar = historyRanking.filter((item) => JSON.stringify(item).includes(name)).pop();
-      const findLastTimeStamp = findeLastWar.timestamp;
+      let findLastTimeStamp = '';
+      if (findeLastWar) {
+        findLastTimeStamp = findeLastWar.timestamp;
+      } else if (findeLastWar === 'undefined') {
+        findLastTimeStamp = 'Unknown Date';
+      } else {
+        findLastTimeStamp = 'Unknown Date';
+      }
       return findLastTimeStamp;
     }
 
