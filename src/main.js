@@ -99,23 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const teamSel = playersTab.map((entry) => entry);
-    // function playerName(name) {
-    //   const arr = [];
-
-    //   arr.push(name);
-    // arr.forEach((el) => {
-    //   // teamSel.forEach((player) => {
-    //   console.log('PLAYER NAME: ', el.playername, ' USER NAME: ', el.username);
-    //   if (el === el.username) {
-    //     console.log('NASTĄPIŁA ZMIANA Z', el, ' NA: ', el.playername);
-    //   } else {
-    //     console.log('BEZ ZMIANY', el.username);
-    //   }
-    //   // });
-    // });
-    // }
-
-    // console.log('WYWOŁANIE playerName()', playerName('zielony', 'jim', 'tomas', 'your-problem', 'illusion'));
 
     const [
       // team1 ID 1 players
@@ -250,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadPopup() {
       const randomPlayer = teamSel.map((entry) => entry.username);
       const randomPlayerLink = randomPlayer[Math.floor(Math.random() * randomPlayer.length)];
-      // console.log(randomPlayerLink);
+
       $('#app').css({ opacity: '0.2' });
       const popup = `<div class="popup"><div>Watch player</div><a href="#charts-${randomPlayerLink}" class="closeLink">${addPlayerLinkHome(
         randomPlayerLink,
