@@ -70,7 +70,7 @@ export function rankingInfo() {
       if (Array.isArray(nameFragsOut) && nameFragsOut.length) {
         nameFragsOutExist = nameFragsOut.reduce((a, b) => a + b);
       } else {
-        nameFragsOutExist = 'Unknown';
+        nameFragsOutExist = 0;
       }
 
       return nameFragsOutExist;
@@ -227,9 +227,9 @@ export function rankingInfo() {
       if (findeLastWar) {
         findLastTimeStamp = findeLastWar.timestamp;
       } else if (findeLastWar === 'undefined') {
-        findLastTimeStamp = 'Unknown Date';
+        findLastTimeStamp = 'No match';
       } else {
-        findLastTimeStamp = 'Unknown Date';
+        findLastTimeStamp = 'No match';
       }
       return findLastTimeStamp;
     }

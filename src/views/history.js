@@ -249,7 +249,8 @@ export function history() {
       const warCardDetail = document.createElement('div');
       warCardDetail.classList.add('match-detail');
       warCardDetail.innerHTML += `<div class="match-details">
-      <div class="">Match #${newObj.length - i}</div>       
+      <div class="">Match #${newObj.length - i}</div> 
+      <div class="info">Info: ${war.info}</div>      
       </div>`;
       const iframeMatch = `<iframe
       id="ytplayer"

@@ -252,6 +252,11 @@ document.addEventListener('DOMContentLoaded', () => {
         $('.popup').remove();
       });
 
+      $(document).on('click', '.popup a', function () {
+        $('#app').css({ opacity: '1' });
+        $('.popup').remove();
+      });
+
       $(document).on('click', '.closeLink', function () {
         $('#app').css({ opacity: '1' });
         $('.popup').remove();

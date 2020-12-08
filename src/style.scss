@@ -47,7 +47,7 @@ body{
 }
 
 #app {
-  transition: all .5s;
+  transition: all .5s;  
 }
 
 img {
@@ -140,7 +140,50 @@ nav, footer {
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
-  color: #ffffc0;
+  color: #ffffc0;  
+
+  .important {
+    background-color: $middleRed;
+    padding: 30px 0;
+    margin: 15px 0;
+    background-image: url("/assets/panorama.png"); 
+    background-size: contain;      
+
+    .contrast-mode & {
+      background-color: $middleBlue;      
+    }
+
+    &--home {
+      padding: 0 20px;  
+      margin: 0 20px;
+      background-color: $middleRed;
+      opacity: .9;
+
+      .contrast-mode & {
+        background-color: $middleBlue;
+      }   
+  
+      h2 {
+        font-weight: 700;
+        padding-top: 15px;
+      }
+
+      .fa-arrow-circle-right {
+        font-size: 30px;
+        color: $darkenBlue;
+        margin: 0 20px;
+        
+        .contrast-mode & {
+          color: red;
+        }
+      } 
+      
+      &__info {
+        padding-bottom: 15px;
+      }
+    }
+  }
+  
 
   h2 {
     padding: 20px 0;
@@ -151,6 +194,38 @@ nav, footer {
     font-size: 48px;
     display: flex;
     justify-content: center;
+    position: relative;
+    z-index: 1;
+
+    &:before {
+      position: absolute;
+      top: 50px;
+      left: 50px;
+      content: "";
+      background-image: url("/assets/mp40.png");
+      width: 200px;
+      height: 100px;
+      transform: rotate(45deg);
+
+      @media screen and (max-width: 992px){
+        display: none;
+      }
+    }
+
+    &:after {
+      position: absolute;
+      top: 50px;
+      left: 0px;
+      content: "";
+      background-image: url("/assets/tommy.png");
+      width: 200px;
+      height: 100px;
+      transform: rotate(45deg);
+
+      @media screen and (max-width: 992px){
+        display: none;
+      }
+    }
   }
 
   .intro {
@@ -167,7 +242,7 @@ nav, footer {
       padding: 20px 10px;
       margin: 15px 30px;
       font-style: italic;
-    }
+    }    
   }
 
   .mainTitle {  
@@ -192,9 +267,19 @@ nav, footer {
     &__left {
       height: 225px;       
       overflow: hidden; 
+      position: relative;
       
       @media screen and (max-width: 599px){
         height: auto;
+      }
+
+      &:before {
+        content: "Click here to download";
+        position: absolute;
+        top: 0;
+        left: 10px;
+        font-size: 20px;
+        color: $darkenRed;
       }
       
       &:hover {
@@ -1091,57 +1176,50 @@ canvas {
     position:absolute;
 }
 
-.item2, .item8, .item21 {
-  position: relative;
+// .item2, .item8, .item21 {
+//   position: relative;
 
-  a:before {
-    // position: absolute;
-    // top: 0;
-    // left: 0;
-    // content: 'Tap to check statistics!';
-    // transform: rotate(320deg);
-    // background-color: red;
-    // padding: 5px 15px;
-  }
+//   a:before {   
+//   }
 
-  @keyframes tap {
-    0% {
-      background-color: rgba(255,0,0,0.3);
-    }
+//   @keyframes tap {
+//     0% {
+//       background-color: rgba(255,0,0,0.3);
+//     }
 
-    50% {
-      background-color: rgba(255,0,0,0);
-      transform: scale(1.2);
-    }
+//     50% {
+//       background-color: rgba(255,0,0,0);
+//       transform: scale(1.2);
+//     }
 
-    100% {
-      background-color: rgba(255,0,0,0.3);
-    }
-  }
+//     100% {
+//       background-color: rgba(255,0,0,0.3);
+//     }
+//   }
 
-  &:before {
-    position: absolute;
-    top: 5px;
-    right: -60px;
-    left: 0;
-    content:"\f0a6";
-    width: 70px;
-    height: 70px;
-    color: #ffffc0;
-    font-family: "Font Awesome 5 Free";
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    background-color: rgba(255,0,0,0.3);
-    font-size: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transform: rotate(320deg);
-    animation: tap 3s infinite;    
-  }
-}
+//   &:before {
+//     position: absolute;
+//     top: 5px;
+//     right: -60px;
+//     left: 0;
+//     content:"\f0a6";
+//     width: 70px;
+//     height: 70px;
+//     color: #ffffc0;
+//     font-family: "Font Awesome 5 Free";
+//     margin-left: auto;
+//     margin-right: auto;
+//     text-align: center;
+//     background-color: rgba(255,0,0,0.3);
+//     font-size: 30px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     border-radius: 50%;
+//     transform: rotate(320deg);
+//     animation: tap 3s infinite;    
+//   }
+// }
 
 .popup {
   width: fit-content;
