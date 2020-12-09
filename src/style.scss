@@ -33,6 +33,16 @@ ol,
   font-weight: normal;
 }
 
+@font-face {
+  font-family: impactedFont;
+  src: url("/src/assets/impacted2.0.ttf");
+}
+
+.mix {
+  font-family: impactedFont;
+  font-size: 30px;
+}
+
 ol,
 {
   list-style: none;
@@ -73,14 +83,51 @@ img {
 }
 
 nav, footer {
-  padding: 20px;  
+  padding:  10px 20px 20px 20px;  
   font-weight: 700;  
   color: #ffffc0;
   background-image: linear-gradient(0deg, $lightRed 25%, $middleRed 25%, $middleRed 50%, $lightRed 50%, $lightRed 75%, $middleRed 75%, $middleRed 100%);
   background-size: 12.00px 12.00px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: center;  
+
+  .nav-left {
+    display: flex;   
+    align-items: center;  
+    flex-wrap: wrap;  
+
+    .logo {
+      max-width: 150px;
+      position: relative;
+
+      @media screen and (max-width: 992px){
+        display: none;
+      }
+
+      .mix {
+        color: #fff;
+        text-align: center;
+        letter-spacing: 1px;
+        position: absolute;
+        bottom: -13px;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    } 
+    
+    .home {
+      @media screen and (min-width: 993px){
+        display: none;
+      }
+    }
+  }  
 
   .contrast-mode & {
     background-image: linear-gradient(0deg, $lightBlue 25%, $middleBlue 25%, $middleBlue 50%, $lightBlue 50%, $lightBlue 75%, $middleBlue 75%, $middleBlue 100%);
@@ -90,7 +137,7 @@ nav, footer {
   a {    
     text-decoration: none;
     color: #ffffc0;
-    margin: 10px 20px 10px 0;
+    margin: 0 20px 0 0;
     line-height: 30px;
     padding: 5px;
 
@@ -100,6 +147,10 @@ nav, footer {
 
     &:hover {
       text-decoration: underline;
+
+      &:first-of-type {
+        text-decoration: none;
+      }
     }
   } 
 
@@ -1081,6 +1132,10 @@ nav, footer {
     background-color: $lightRed;
     padding: 15px;
 
+    a {
+      color: #ffffc0;
+    }
+
     .contrast-mode & {
       background-color: $lightBlue;
     }
@@ -1237,6 +1292,7 @@ canvas {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   box-shadow: 0 0 1000px rgba(255,0,0,0.3);
 
   a {

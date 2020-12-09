@@ -282,7 +282,8 @@ export function rankingInfo() {
       inCont.setAttribute('id', `increase-${name.username}`);
       inDeCont.appendChild(inCont);
       const deCont = document.createElement('div');
-      deCont.classList.add('streak', 'decreaseStreak');
+      deCont.classList.add('streak');
+      deCont.setAttribute('id', `decrease-${name.username}`);
       inDeCont.appendChild(deCont);
 
       const fragCont = document.createElement('div');
@@ -291,9 +292,10 @@ export function rankingInfo() {
 
       const fragContDiv = document.createElement('div');
       fragContDiv.classList.add('frag-sum');
-      fragContDiv.innerHTML += `<div class="frag-item">Sum of Frags: <span class="frag-value">${sumOfFrags(
-        name.username,
-      )}</span></div><div class="frag-item">Current ranking: <span class="frag-value">${name.ranking}</span></div>`;
+      fragContDiv.innerHTML += `<div class="frag-item">Sum of Frags: <span class="frag-value">${sumOfFrags(name.username)}</span></div>
+      <div class="frag-item">Highest ranking: <span class="frag-value">${Math.max(...rankHistory(name.username))}</span></div>
+      <div class="frag-item">Current ranking: <span class="frag-value">${name.ranking}</span></div>      
+      <div class="frag-item">Lowest ranking: <span class="frag-value">${Math.min(...rankHistory(name.username))}</span></div>`;
       fragCont.appendChild(fragContDiv);
 
       const fragAvarage = document.createElement('div');
@@ -389,6 +391,10 @@ export function rankingInfo() {
       // console.log('PLAYER STREAK: ', playerInStreak);
       increaseDiv.innerHTML += `<div class="frag-item">Longest increase streak: <span class="frag-value">${playerInStreak}</span><i class="fas fa-arrow-up"></i></div>`;
     });
+
+    // document.getElementById(
+    //   'decrease-illusion',
+    // ).innerHTML = `Forbidden behavior (granade through the door) penalty -10pc. <a href="#match-64">7.12.2020, #match-64</a>`;
 
     historyRanking2.forEach((nameUser) => {
       const ctx = document.getElementById(`chart-${nameUser.username}`).getContext('2d');
