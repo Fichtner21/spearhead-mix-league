@@ -651,9 +651,215 @@ nav, footer {
 }
 
 #history {
+  .nomatch-video {
+    display: grid;
+    grid-template-columns: 120px 4fr 4fr;
+    grid-template-rows: auto;    
+    border: 1px solid $darkenRed;   
+    padding-bottom: 15px; 
+    background-color: $darkenRed;
+
+    .contrast-mode & {
+      border-color: $darkenBlue;
+      background-color: $darkenBlue;
+    }
+
+    @media screen and (max-width: 1100px){
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      gap: 15px 15px;
+    }
+
+    .date {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;      
+      padding: 10px;
+      background-color: #ffffc0;
+      color: $middleRed;
+      max-width: 120px;
+
+      @media screen and (max-width: 1100px){
+        min-width: 100%;
+      }
+
+      .contrast-mode & {
+        background-color: lighten($lightBlue, 15%);
+        color: $darkenBlue;
+      }
+
+      .matchId {
+        font-size: 22px;
+        font-weight: 700;
+      }
+
+      a, a:visited {
+        color: $darkenRed;
+
+        .contrast-mode & {
+          color: $darkenBlue;
+        }
+      }
+
+      .matchVideo {
+        font-size: 24px;         
+        padding: 10px 15px; 
+        font-weight: 700;
+        position: relative;
+
+        i {
+          font-size: 30px;
+        }
+
+        @keyframes pulse {
+          0% {
+            transform: scale(0.95);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+          }
+        
+          70% {
+            transform: scale(1);
+            color: red;
+            box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+          }
+        
+          100% {
+            transform: scale(0.95);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+          }
+        }
+        
+        &:after {
+          position: absolute;
+          content: "1";
+          background-color: red;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          top: -10px;
+          right: 0;
+          color: $darkenRed;
+          font-size: 20px;
+          box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+          transform: scale(1);          
+          animation: pulse 2s infinite;
+
+          .contrast-mode & {
+            color: $darkenBlue;
+          }
+        }
+      }
+    }
+
+    .bg__green {
+      background-color: $lightRed;
+
+      .contrast-mode & {
+        background-color: $lightBlue;
+      }
+    }
+
+    .bg__red {
+      background-color: $middleRed;
+
+      .contrast-mode & {
+        background-color: $middleBlue;
+      }
+    }
+
+    .bg__gray {
+      background-color: gray;
+    }
+
+    .team {
+      .roudswon1, .roudswon2 {
+        padding: 10px;
+        display: flex;
+        justify-content:center;
+        font-size: 28px;
+        font-weight: 700; 
+        border-bottom: 2px solid #ffffc0; 
+        color: #ffffc0;      
+      }      
+
+      .players {
+        padding: 10px;
+        color: darken(#ffffc0,10%);
+        .player {
+          display: flex;
+          align-items: flex-end;
+          
+          .preelo {
+            font-size: 12px;
+          }
+
+          .name {
+            font-size: 18px;
+            margin: 0 10px;
+
+            a {
+              text-decoration: none;
+              color: #ffff8d;
+
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+          }
+
+          .score {
+            font-size: 18px;
+            margin-right: 10px;
+          }
+
+          .postelo {
+            font-size: 12px;
+          }
+
+          .difference {
+            font-size: 12px;
+            margin-left: 10px;
+          }
+        }
+
+        .won {
+          position: relative;
+
+          &:after {
+            position: absolute;
+            top: 5px;
+            margin-left: 5px;
+            content: " ";
+            background-image: url("/assets/uprate.gif");
+            width: 10px;
+            height: 5px;
+          }
+        }
+
+        .lost {
+          position: relative;
+
+          &:after {
+            position: absolute;
+            top: 5px;
+            margin-left: 5px;
+            content: "";
+            background-image: url("/assets/downrate.gif");
+            width: 10px;
+            height: 5px;
+          }
+        }
+      }
+    }
+  }
+
   .match {
     display: grid;
-    grid-template-columns: 1fr 4.5fr 4.5fr;
+    grid-template-columns: 120px 3fr 3fr 2fr;
     grid-template-rows: auto;    
     border: 1px solid $darkenRed;   
     padding-bottom: 15px; 
@@ -669,7 +875,7 @@ nav, footer {
       background-color: $darkenBlue;
     }
 
-    @media screen and (max-width: 800px){
+    @media screen and (max-width: 1100px){
       grid-template-columns: 1fr;
       grid-template-rows: auto;
       gap: 15px 15px;
@@ -683,6 +889,11 @@ nav, footer {
       padding: 10px;
       background-color: #ffffc0;
       color: $middleRed;
+      max-width: 120px;
+
+      @media screen and (max-width: 1100px){
+        min-width: 100%;
+      }
 
       .contrast-mode & {
         background-color: lighten($lightBlue, 15%);

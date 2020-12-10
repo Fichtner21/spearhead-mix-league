@@ -82,8 +82,10 @@ export function history() {
       return convertedPlayer;
     }
 
+    console.log('newObj', newObj);
+
     newObj.forEach((match, i) => {
-      value += `<div class="match" id="match${newObj.length - i}">          
+      value += `<div class="warmatch ${match.video ? `match` : `nomatch-video`}" id="match${newObj.length - i}">          
           <div class="date">
             <div class="matchId" id="matchId-${newObj.length - i}">
               <a href="#match-${newObj.length - i}">#${newObj.length - i}</a></div>
@@ -95,7 +97,7 @@ export function history() {
                     }" title="Watch movie from match."><div class="matchVideo"><i class="fas fa-film"></i></div></a>`
                   : ''
               }                     
-          </div>
+          </div>          
           <div class="team">
             <div class="roudswon1">${match.t1roundswon}</div>
             <div class="players">
@@ -227,7 +229,19 @@ export function history() {
                 </div>
               </div>  
             </div>           
-          </div>
+          </div>           
+            ${
+              match.video
+                ? `<div class="thumbnail" id="thumbnail-${newObj.length - i}"><iframe 
+            id="ytplayer-${newObj.length - i}"
+            type="text/html"
+            height="100%"
+            frameborder="0"
+            allowfullscreen
+            src="https://www.youtube.com/embed/${match.video}"
+            ></iframe></div>`
+                : ''
+            }          
         </div>
        `;
     });
@@ -533,6 +547,27 @@ export function history() {
       }
     }
 
+    const matchNodeListNo = document.querySelectorAll('.nomatch-video');
+    const matchArrNo = Array.prototype.slice.call(matchNodeListNo);
+    for (let i = 0; i < matchArr.length; i++) {
+      const resultT1no = Number(parseInt(matchArrNo[i].children[1].children[0].innerHTML, 10));
+      const resultT2no = Number(parseInt(matchArrNo[i].children[2].children[0].innerHTML, 10));
+
+      const parentResultT1no = matchArrNo[i].children[1];
+      const parentResultT2no = matchArrNo[i].children[2];
+
+      if (resultT1no > resultT2no) {
+        parentResultT1no.classList.add('bg__green');
+        parentResultT2no.classList.add('bg__red');
+      } else if (resultT1no < resultT2no) {
+        parentResultT1no.classList.add('bg__red');
+        parentResultT2no.classList.add('bg__green');
+      } else {
+        parentResultT1no.classList.add('bg__gray');
+        parentResultT2no.classList.add('bg__gray');
+      }
+    }
+
     const diff = document.querySelectorAll('.difference');
     diff.forEach(function (elem) {
       if (Number(parseFloat(elem.innerHTML)) > 0) {
@@ -549,7 +584,7 @@ export function history() {
     let startPage = 0;
     let numberPage = 0;
 
-    const pageCount = $('.match').length / pageSize;
+    const pageCount = $('.warmatch').length / pageSize;
     const totalSlidepPage = Math.floor(pageCount / incremSlide);
 
     for (let i = 0; i < pageCount; i++) {
@@ -606,8 +641,8 @@ export function history() {
     };
 
     const showPage = function (page) {
-      $('.match').hide();
-      $('.match').each(function (n) {
+      $('.warmatch').hide();
+      $('.warmatch').each(function (n) {
         if (n >= pageSize * (page - 1) && n < pageSize * page) $(this).show();
       });
     };
