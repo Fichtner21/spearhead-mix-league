@@ -325,6 +325,7 @@ export function history() {
 
         const commentForm = document.createElement('form');
         commentForm.setAttribute(`id`, `comment${newObj.length - ind}`);
+        commentForm.classList.add('comment-form');
         commentMatch.appendChild(commentForm);
 
         const labelMessage = document.createElement('label');
@@ -364,6 +365,7 @@ export function history() {
 
         const commentsContainer = document.createElement('div');
         commentsContainer.setAttribute('id', `comments-container${newObj.length - ind}`);
+        commentsContainer.classList.add('comments-container');
         commentMatch.appendChild(commentsContainer);
 
         const postComments = rootRef.child(`postComments${newObj.length - ind}`);
@@ -396,10 +398,11 @@ export function history() {
         postRef.on('child_added', function (snapshot) {
           const newComment = snapshot.val();
           let html = `<div class='comment comment${newObj.length - ind}' data-comment='${newObj.length - ind}'>`;
+          html += '<div class="comment--left">';
           html += '<h4>' + newComment.name + '</h4>';
-          html += "<div class='profile-image'><img src='https://www.gravatar.com/avatar/" + newComment.email + "?s100&d=retro'/></div>";
-          html += "<span class='date'></span>" + $.timeago(newComment.postedAt) + '</span>';
-          html += '<p>' + newComment.message + '</p></div>';
+          // html += "<div class='profile-image'><img src='https://www.gravatar.com/avatar/" + newComment.email + "?s100&d=retro'/></div>";
+          html += "<span class='date'>" + $.timeago(newComment.postedAt) + '</span></div>';
+          html += '<div class="comment--right">' + newComment.message + '</div></div>';
           $(`#comments-container${newObj.length - ind}`).prepend(html);
           const countComments = document.querySelectorAll(`.comment${newObj.length - ind}`);
           document.querySelector(
