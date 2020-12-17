@@ -46,12 +46,18 @@
     "chartjs-plugin-annotation": "^0.5.7",
     "drive-db": "^6.0.1",
     "express": "^4.17.1",
+    "firebase": "^8.1.2",
     "jquery": "^3.5.1",
     "js-cookie": "^2.2.1",
     "jw-paginate": "^1.0.4",
     "lodash": "^4.17.20",
+    "md5": "^2.3.0",
     "pusher": "^4.0.2",
-    "valine": "^1.4.14"
+    "showdown": "^1.9.1",
+    "showdown-xss-filter": "^0.2.0",
+    "timeago": "^1.6.7",
+    "valine": "^1.4.14",
+    "xss": "^1.0.8"
   },
   "repository": {
     "type": "git",

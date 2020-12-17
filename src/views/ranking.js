@@ -247,6 +247,7 @@ export function rankingInfo() {
     });
 
     const playerName = document.getElementById('playerName');
+    const nationality = document.getElementById('nationality');
     const place = document.getElementById('place');
     const ranking = document.getElementById('overall');
     const frags = document.getElementById('frags');
@@ -335,12 +336,75 @@ export function rankingInfo() {
     });
 
     const places2 = players.map((entry) => entry);
-
     places2.forEach(function (placeObj, index) {
       const item = document.createElement('div');
       item.classList.add('item');
       item.innerHTML += ++index;
       place.appendChild(item);
+    });
+
+    const national = players.map((entry) => entry);
+    national.forEach(function (nat) {
+      const item = document.createElement('div');
+      item.classList.add('item');
+      switch (nat.nationality) {
+        case 'EU': {
+          nat.nationality = `<img src="/assets/flags/_e.gif">`;
+          break;
+        }
+        case 'PL': {
+          nat.nationality = `<img src="/assets/flags/pl.gif">`;
+          break;
+        }
+        case 'EG': {
+          nat.nationality = `<img src="/assets/flags/EG.gif">`;
+          break;
+        }
+        case 'NL': {
+          nat.nationality = `<img src="/assets/flags/nl.gif">`;
+          break;
+        }
+        case 'RU': {
+          nat.nationality = `<img src="/assets/flags/RU.gif">`;
+          break;
+        }
+        case 'RO': {
+          nat.nationality = `<img src="/assets/flags/ro.gif">`;
+          break;
+        }
+        case 'FR': {
+          nat.nationality = `<img src="/assets/flags/fr.gif">`;
+          break;
+        }
+        case 'UK': {
+          nat.nationality = `<img src="/assets/flags/uk.gif">`;
+          break;
+        }
+        case 'BE': {
+          nat.nationality = `<img src="/assets/flags/be.gif">`;
+          break;
+        }
+        case 'GR': {
+          nat.nationality = `<img src="/assets/flags/gr.gif">`;
+          break;
+        }
+        case 'DE': {
+          nat.nationality = `<img src="/assets/flags/de.gif">`;
+          break;
+        }
+        case 'ES': {
+          nat.nationality = `<img src="/assets/flags/es.gif">`;
+          break;
+        }
+        case 'PT': {
+          nat.nationality = `<img src="/assets/flags/pt.gif">`;
+          break;
+        }
+        default:
+          console.log('Nie pasuje');
+      }
+      item.innerHTML += nat.nationality;
+      nationality.appendChild(item);
     });
 
     const rankings = players.map((entry) => entry);
@@ -385,16 +449,80 @@ export function rankingInfo() {
       return playerWars;
     }
 
+    // const lastPlayedWar = historyRanking.pop();
+    // const lastWarWrapper = document.createElement('div');
+    // lastWarWrapper.classList.add('list__item');
+    // const lastWarList = document.createElement('ul');
+    // const lastWarItem = document.createElement('li');
+    // console.log(lastPlayedWar);
+    // const lastWarValues = `<div class="last-match">
+    //   <div>#ID ${historyRanking.length + 1}</div>
+    //   <div>${lastPlayedWar.timestamp}</div>
+
+    //     <div>${lastPlayedWar.t1p1preelo} </div>
+    //     <div>${lastPlayedWar.t1p1name} </div>
+    //     <div>${lastPlayedWar.t1p1score} </div>
+    //     <div>${lastPlayedWar.t1p1postelo} </div>
+
+    //     <div>${lastPlayedWar.t1p2preelo} </div>
+    //     <div>${lastPlayedWar.t1p2name} </div>
+    //     <div>${lastPlayedWar.t1p2score} </div>
+    //     <div>${lastPlayedWar.t1p2postelo} </div>
+
+    //     <div>${lastPlayedWar.t1p3preelo} </div>
+    //     <div>${lastPlayedWar.t1p3name} </div>
+    //     <div>${lastPlayedWar.t1p3score} </div>
+    //     <div>${lastPlayedWar.t1p3postelo} </div>
+
+    //     <div>${lastPlayedWar.t1p4preelo} </div>
+    //     <div>${lastPlayedWar.t1p4name} </div>
+    //     <div>${lastPlayedWar.t1p4score} </div>
+    //     <div>${lastPlayedWar.t1p4postelo} </div>
+
+    //     <div>${lastPlayedWar.t1p5preelo} </div>
+    //     <div>${lastPlayedWar.t1p5name} </div>
+    //     <div>${lastPlayedWar.t1p5score} </div>
+    //     <div>${lastPlayedWar.t1p5postelo} </div>
+
+    //   <div>${lastPlayedWar.t1roundswon} </div>
+    //   <div>${lastPlayedWar.t2roundswon} </div>
+
+    //     <div>${lastPlayedWar.t2p1preelo} </div>
+    //     <div>${lastPlayedWar.t2p1name} </div>
+    //     <div>${lastPlayedWar.t2p1score} </div>
+    //     <div>${lastPlayedWar.t2p1postelo} </div>
+
+    //     <div>${lastPlayedWar.t2p2preelo} </div>
+    //     <div>${lastPlayedWar.t2p2name} </div>
+    //     <div>${lastPlayedWar.t2p2score} </div>
+    //     <div>${lastPlayedWar.t2p2postelo} </div>
+
+    //     <div>${lastPlayedWar.t2p3preelo} </div>
+    //     <div>${lastPlayedWar.t2p3name} </div>
+    //     <div>${lastPlayedWar.t2p3score} </div>
+    //     <div>${lastPlayedWar.t2p3postelo} </div>
+
+    //     <div>${lastPlayedWar.t2p4preelo} </div>
+    //     <div>${lastPlayedWar.t2p4name} </div>
+    //     <div>${lastPlayedWar.t2p4score} </div>
+    //     <div>${lastPlayedWar.t2p4postelo} </div>
+
+    //     <div>${lastPlayedWar.t2p5preelo} </div>
+    //     <div>${lastPlayedWar.t2p5name} </div>
+    //     <div>${lastPlayedWar.t2p5score} </div>
+    //     <div>${lastPlayedWar.t2p5postelo} </div>
+
+    // </div>`;
+
+    // lastWarWrapper.innerHTML = lastWarValues;
+    // document.getElementById('list').appendChild(lastWarWrapper);
+
     historyRanking2.forEach((userNameInStreak) => {
       const increaseDiv = document.getElementById(`increase-${userNameInStreak.username}`);
       const playerInStreak = lenOfLongIncSubArr(rankHistory(userNameInStreak.username), rankHistory(userNameInStreak.username).length);
       // console.log('PLAYER STREAK: ', playerInStreak);
       increaseDiv.innerHTML += `<div class="frag-item">Longest increase streak: <span class="frag-value">${playerInStreak}</span><i class="fas fa-arrow-up"></i></div>`;
     });
-
-    // document.getElementById(
-    //   'decrease-illusion',
-    // ).innerHTML = `Forbidden behavior (granade through the door) penalty -10pc. <a href="#match-64">7.12.2020, #match-64</a>`;
 
     historyRanking2.forEach((nameUser) => {
       const ctx = document.getElementById(`chart-${nameUser.username}`).getContext('2d');

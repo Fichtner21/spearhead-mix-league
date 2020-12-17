@@ -15,10 +15,7 @@
       gtag('js', new Date());
 
       gtag('config', 'UA-98834408-2');
-    </script>
-
-    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    </script>  
     <title>MoH:AA Spearhead Mix League</title>
   </head>
   <body>
@@ -44,7 +41,18 @@
           <div id="our-players"></div>
           <div id="our-matches"></div>
         </div>
-      </nav>
+        <!-- <div class="marquee-cont">
+          <div class="marquee marquee--warbar" id="containerElem">
+            <ul class="list" id="list">
+              <li class="list__item">match 1</li>
+              <li class="list__item">match 2</li>
+              <li class="list__item">match 3</li>
+               <li class="list__item">match 4</li> 
+               <li class="list__item">match 5</li>                
+            </ul>
+          </div>
+        </div> -->
+      </nav>      
       <div class="container view hidden" id="home">
         <div class="wrapper">
             <div class="mainSh">MoH: AA Spearhead Mix League</div>
@@ -60,7 +68,7 @@
               <div class="matchSelection">          
                 <div class="date">
                   <div class="matchId">ID 1</div>
-                  <div class="dateDetail">Upcoming War</div>
+                  <div class="dateDetail">Upcoming War <img src="/src/assets/gid46_small.gif"></div>
                   <div class="matchDate"></div>
                 </div>
                 <div class="team">        
@@ -87,7 +95,7 @@
               <div class="matchSelection">          
                 <div class="date">
                   <div class="matchId">ID 2</div>
-                  <div class="dateDetail">Upcoming War</div>
+                  <div class="dateDetail">Upcoming War <img src="/src/assets/gid46_small.gif"></div>
                 </div>
                 <div class="team">        
                   <div id="" class="players">
@@ -146,6 +154,10 @@
               <div class="subcolumn" id="playerName"></div>
             </div>          
             <div class="column">
+              <h2></h2>
+              <div class="subcolumn" id="nationality"></div>
+            </div>          
+            <div class="column">
               <h2>Ranking</h2>
               <div class="subcolumn" id="overall"></div>
             </div>      
@@ -183,6 +195,24 @@
             <a href="https://drive.google.com/u/0/uc?id=1IMftokjG3wD4PDM0okiLSFzsTKUru5-W&amp;export=download" class="file mappack"><div>Map Pack</div></a>            
             <a href="http://chomikuj.pl/alias_pl/Dokumenty/The+All+Seeing+Eye/ASEv2.6,1355520649.zip(archive)" class="file tase"><div>The All Seeing Eye</div></a>
           </div>
+          
+          <h3>Leave a comment</h3>
+
+          <form id="comment">
+            <label for="message">Message</label>
+            <textarea id="message"></textarea>
+
+            <label for="name">Name</label>
+            <input type="text" id="name">
+
+            <label for="email">Email</label>
+            <input type="text" id="email">
+
+            <input type="submit" value="Post Comment">
+          </form>
+
+          <div id="comments-container"></div>
+        
         </div>  
       </div>             
       <div class="container view hidden" id="server">        
@@ -206,33 +236,34 @@
             <p>Last most important thing is type password: <strong>heroes</strong></p>
           </div>
         </div>
-      </div>
-      <div class="container view hidden" id="charts">
-        <div class="wrapper">
-          <nav class="navbar navbar-light bg-light">                
-            <a href="#charts-zielony" class="rank">Zielony</a>
-            <a href="#charts-baton" class="rank">bAtOn</a>
-            <a href="#charts-illusion" class="rank">-Illu$ioN-</a>
-            <a href="#charts-belus" class="rank">Belu$</a>
-            <a href="#charts-cwieku" class="rank">cwq</a>
+      </div>       
+      
+    </div>   
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
 
-            <a href="#charts-jim">Jim</a> 
-                     
-          </nav>
-        </div>
-        
-          
-        <!-- </div> -->
-      </div>
-      <div id="boxes">
-        <div style="top: 50%; left: 50%; display: none;" id="dialog" class="window"> 
-        <div id="san">
-        <a href="#" class="close agree"><img src="close-icon.png" width="25" style="float:right; margin-right: -25px; margin-top: -20px;"></a>
-        <img src="san-web-corner.png" width="450">
-        </div>
-        </div>
-        <div style="width: 2478px; font-size: 32pt; color:white; height: 1202px; display: none; opacity: 0.4;" id="mask"></div>
-        </div>
-    </div>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyBO4nqpO3FSeXJqHV0qYuPVRi4XLiJEujo",
+        authDomain: "spearhead-mix-league.firebaseapp.com",
+        databaseURL: "https://spearhead-mix-league-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "spearhead-mix-league",
+        storageBucket: "spearhead-mix-league.appspot.com",
+        messagingSenderId: "719531931759",
+        appId: "1:719531931759:web:7fe514dce675b8e19cf59a",
+        measurementId: "G-7WB1MRGPB5"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
+    
+   
   </body>
 </html>

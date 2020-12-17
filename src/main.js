@@ -11,13 +11,16 @@ import { chartsSite } from './views/charts';
 function enableRouting() {
   function setRoute() {
     $('.view').hide();
+
     const { hash } = window.location;
+
     if (hash === '') {
       $('#home').show();
     }
     $(hash).show();
   }
   setRoute();
+
   window.addEventListener('hashchange', setRoute);
 }
 
@@ -27,6 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
   filesSite();
   serverSite();
   chartsSite();
+
+  // if (window.history.pushState) {
+  //   window.history.pushState('', '/', window.location.pathname);
+  // } else {
+  //   window.location.hash = '';
+  // }
   // const translator = new Translator({
   //   persist: false,
   //   languages: ['de', 'en', 'es'],
