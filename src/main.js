@@ -6,6 +6,7 @@ import { history } from './views/history';
 import { filesSite } from './views/files';
 import { serverSite } from './views/server';
 import { chartsSite } from './views/charts';
+import { inactivePlayers } from './views/inactive';
 // import Translator from './translator.js';
 
 function enableRouting() {
@@ -30,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   filesSite();
   serverSite();
   chartsSite();
+  inactivePlayers();
 
   // if (window.history.pushState) {
   //   window.history.pushState('', '/', window.location.pathname);
@@ -229,7 +231,63 @@ document.addEventListener('DOMContentLoaded', () => {
       let convertedPlayer = '';
       teamSel.forEach((el) => {
         if (player === el.username) {
-          convertedPlayer = `<a href="#charts-${el.username}">${el.playername}</a>`;
+          switch (el.nationality) {
+            case 'EU': {
+              el.nationality = `<img src="/assets/flags/_e.gif">`;
+              break;
+            }
+            case 'PL': {
+              el.nationality = `<img src="/assets/flags/pl.gif">`;
+              break;
+            }
+            case 'EG': {
+              el.nationality = `<img src="/assets/flags/EG.gif">`;
+              break;
+            }
+            case 'NL': {
+              el.nationality = `<img src="/assets/flags/nl.gif">`;
+              break;
+            }
+            case 'RU': {
+              el.nationality = `<img src="/assets/flags/RU.gif">`;
+              break;
+            }
+            case 'RO': {
+              el.nationality = `<img src="/assets/flags/ro.gif">`;
+              break;
+            }
+            case 'FR': {
+              el.nationality = `<img src="/assets/flags/fr.gif">`;
+              break;
+            }
+            case 'UK': {
+              el.nationality = `<img src="/assets/flags/uk.gif">`;
+              break;
+            }
+            case 'BE': {
+              el.nationality = `<img src="/assets/flags/be.gif">`;
+              break;
+            }
+            case 'GR': {
+              el.nationality = `<img src="/assets/flags/gr.gif">`;
+              break;
+            }
+            case 'DE': {
+              el.nationality = `<img src="/assets/flags/de.gif">`;
+              break;
+            }
+            case 'ES': {
+              el.nationality = `<img src="/assets/flags/es.gif">`;
+              break;
+            }
+            case 'PT': {
+              el.nationality = `<img src="/assets/flags/pt.gif">`;
+              break;
+            }
+            default:
+            // console.log('Nie pasuje');
+          }
+          convertedPlayer = `<a href="#charts-${el.username}">${el.playername} ${el.nationality}</a>`;
         } else if (player === '') {
           // console.log('N/A player');
         } else {
@@ -239,41 +297,42 @@ document.addEventListener('DOMContentLoaded', () => {
       return convertedPlayer;
     }
 
-    function loadPopup() {
-      const randomPlayer = teamSel.map((entry) => entry.username);
-      const randomPlayerLink = randomPlayer[Math.floor(Math.random() * randomPlayer.length)];
+    // function loadPopup() {
+    //   const randomPlayer = teamSel.map((entry) => entry.username);
+    //   const randomPlayerLink = randomPlayer[Math.floor(Math.random() * randomPlayer.length)];
 
-      $('#app').css({ opacity: '0.2' });
-      const popup = `<div class="popup"><div>Watch player</div><a href="#charts-${randomPlayerLink}" class="closeLink">${addPlayerLinkHome(
-        randomPlayerLink,
-      )}</a><div>statistics.</div><div class="close"><i class="far fa-window-close"></i></div></div>`;
-      $('body').append(popup);
+    //   $('#app').css({ opacity: '0.2' });
+    //   // const popup = `<div class="popup"><div>Watch player</div><a href="#charts-${randomPlayerLink}" class="closeLink">${addPlayerLinkHome(
+    //   //   randomPlayerLink,
+    //   // )}</a><div>statistics.</div><div class="close"><i class="far fa-window-close"></i></div></div>`;
+    //   const popup = `<div class="popup"><div>PIEKŁO SH <a href="#charts-kapsel" class="closeLink">#kapselwroc</a></div><div class="close"><i class="far fa-window-close"></i></div></div>`;
+    //   $('body').append(popup);
 
-      $(document).click((event) => {
-        if (!$(event.target).closest('.popup').length) {
-          $('#app').css({ opacity: '1' });
-          $('.popup').remove();
-        }
-      });
+    //   $(document).click((event) => {
+    //     if (!$(event.target).closest('.popup').length) {
+    //       $('#app').css({ opacity: '1' });
+    //       $('.popup').remove();
+    //     }
+    //   });
 
-      $(document).on('click', '.close', function () {
-        $('#app').css({ opacity: '1' });
-        $('.popup').remove();
-      });
+    //   $(document).on('click', '.close', function () {
+    //     $('#app').css({ opacity: '1' });
+    //     $('.popup').remove();
+    //   });
 
-      $(document).on('click', '.popup a', function () {
-        $('#app').css({ opacity: '1' });
-        $('.popup').remove();
-      });
+    //   $(document).on('click', '.popup a', function () {
+    //     $('#app').css({ opacity: '1' });
+    //     $('.popup').remove();
+    //   });
 
-      $(document).on('click', '.closeLink', function () {
-        $('#app').css({ opacity: '1' });
-        $('.popup').remove();
-      });
-    }
-    setTimeout(() => {
-      loadPopup();
-    }, 1000);
+    //   $(document).on('click', '.closeLink', function () {
+    //     $('#app').css({ opacity: '1' });
+    //     $('.popup').remove();
+    //   });
+    // }
+    // setTimeout(() => {
+    //   loadPopup();
+    // }, 1000);
 
     let team1ID1 = '';
     for (let i = 0; i < 5; i++) {

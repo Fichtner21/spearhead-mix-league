@@ -2,23 +2,27 @@ import drive from 'drive-db';
 import { Chart } from 'chart.js';
 import $ from 'jquery';
 
-export function rankingInfo() {
+export function inactivePlayers() {
   (async () => {
-    // Load the data from the Drive Spreadsheet
-    const players = await drive('1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo');
+    const players = await drive({
+      sheet: '1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo',
+      tab: '7',
+    });
 
-    const historyRanking = await drive({
+    const historyRanking4 = await drive({
       sheet: '1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo',
       tab: '4',
     });
 
-    const historyRanking2 = await drive({
+    const historyRanking47 = await drive({
       sheet: '1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo',
-      tab: '1',
+      tab: '7',
     });
 
-    const ourPlayers = document.getElementById('our-players');
-    ourPlayers.innerHTML += `<span>Active users</span><i class="fas fa-users"></i> ${historyRanking2.length}`;
+    // console.log(historyRanking47);
+
+    // const ourPlayers = document.getElementById('our-players');
+    // ourPlayers.innerHTML += `<span>Active users</span><i class="fas fa-users"></i> ${historyRanking47.length}`;
 
     function sumOfFrags(name) {
       const arrNameFrags = [];
@@ -37,7 +41,7 @@ export function rankingInfo() {
         }
       }
 
-      destructObjFrags(historyRanking, arrNameFrags);
+      destructObjFrags(historyRanking4, arrNameFrags);
 
       function getIndexesFrags(arr, val) {
         const indexes = [];
@@ -93,7 +97,7 @@ export function rankingInfo() {
         }
       }
 
-      destructObjFrags(historyRanking, arrNameFrags);
+      destructObjFrags(historyRanking4, arrNameFrags);
 
       function getIndexesFrags(arr, val) {
         const indexes = [];
@@ -143,7 +147,7 @@ export function rankingInfo() {
         }
       }
 
-      destructObjRanks(historyRanking, arrNameRanks);
+      destructObjRanks(historyRanking4, arrNameRanks);
 
       function getIndexesRanks(arr, val) {
         const indexes = [];
@@ -219,10 +223,10 @@ export function rankingInfo() {
       return max;
     }
 
-    const lastWar = document.getElementById('lastWar');
+    const lastWar = document.getElementById('lastWar_inactive');
 
     function findPlayerLastWar(name) {
-      const findeLastWar = historyRanking.filter((item) => JSON.stringify(item).includes(name)).pop();
+      const findeLastWar = historyRanking4.filter((item) => JSON.stringify(item).includes(name)).pop();
       let findLastTimeStamp = '';
       if (findeLastWar) {
         findLastTimeStamp = findeLastWar.timestamp;
@@ -246,18 +250,18 @@ export function rankingInfo() {
       lastWar.appendChild(userItemTimestamp);
     });
 
-    const playerName = document.getElementById('playerName');
-    const nationality = document.getElementById('nationality');
-    const place = document.getElementById('place');
-    const ranking = document.getElementById('overall');
-    const frags = document.getElementById('frags');
-    const warCount = document.getElementById('warCount');
+    const playerName = document.getElementById('playerName_inactive');
+    const nationality = document.getElementById('nationality_inactive');
+    const place = document.getElementById('place_inactive');
+    const ranking = document.getElementById('overall_inactive');
+    const frags = document.getElementById('frags_inactive');
+    const warCount = document.getElementById('warCount_inactive');
     const mainApp = document.getElementById('app');
 
     const player = players.map((entry) => entry);
     player.forEach(function (name, index) {
       const playerItem = document.createElement('div');
-      playerItem.classList.add('item' + index, 'item');
+      playerItem.classList.add('item');
       const playerItemLink = document.createElement('a');
       playerItemLink.setAttribute('href', `#charts-${name.username}`);
       playerItemLink.setAttribute('title', `Watch ${name.playername} profile.`);
@@ -266,14 +270,14 @@ export function rankingInfo() {
       playerName.appendChild(playerItem);
     });
 
-    // const playersCompared = players.map((entry) => entry);
-    // const playersCompArr = [];
-    // playersCompared.forEach((name) => {
-    //   // console.log('NAME: ', name);
-    //   const playerToCompare = { comparePlayerName: name.playername, compareUserName: name.username };
-    //   // console.log('playerToCompare', playerToCompare);
-    //   playersCompArr.push(playerToCompare);
-    // });
+    const playersCompared = players.map((entry) => entry);
+    const playersCompArr = [];
+    playersCompared.forEach((name) => {
+      // console.log('NAME: ', name);
+      const playerToCompare = { comparePlayerName: name.playername, compareUserName: name.username };
+      // console.log('playerToCompare', playerToCompare);
+      playersCompArr.push(playerToCompare);
+    });
 
     const playerCard = players.map((entry) => entry);
     playerCard.forEach(function (name, index) {
@@ -310,7 +314,7 @@ export function rankingInfo() {
       fragContDiv.classList.add('frag-sum');
       fragContDiv.innerHTML += `<div class="frag-item">Sum of Frags: <span class="frag-value">${sumOfFrags(name.username)}</span></div>
       <div class="frag-item">Highest ranking: <span class="frag-value">${Math.max(...rankHistory(name.username))}</span></div>
-      <div class="frag-item">Current ranking: <span class="frag-value">${name.ranking}</span></div>      
+      <div class="frag-item">Current ranking: <span class="frag-value">${name.ranking}</span></div>
       <div class="frag-item">Lowest ranking: <span class="frag-value">${Math.min(...rankHistory(name.username))}</span></div>`;
       fragCont.appendChild(fragContDiv);
 
@@ -328,44 +332,46 @@ export function rankingInfo() {
         2,
       )}</span><img src="./assets/avarage.png"></div><div class="frag-item">Lowest frags per war: <span class="frag-value frag-low">${Math.min(
         ...minMaxFrags(name.username),
-      )}</span><img src="./assets/low.png"></div>`;
+      )}</span><img src="./assets/low.png"></div>${
+        name.due ? `<div class="frag-item">Inactive due:<span class="frag-value">${name.due}</span></div>` : ''
+      }`;
       fragAvarage.appendChild(fragAvarageDiv);
 
-      // const comparePlayer = document.createElement('div');
-      // comparePlayer.classList.add('frag-avarage');
-      // fragAvarage.appendChild(comparePlayer);
-      // const comparePlayerSelect = document.createElement('select');
-      // comparePlayerSelect.setAttribute('name', 'comparePlayers');
-      // comparePlayerSelect.setAttribute('id', 'comparePlayers');
-      // // comparePlayerSelect.setAttribute('onclick', 'valSelected()');
+      //   // const comparePlayer = document.createElement('div');
+      //   // comparePlayer.classList.add('frag-avarage');
+      //   // fragAvarage.appendChild(comparePlayer);
+      //   // const comparePlayerSelect = document.createElement('select');
+      //   // comparePlayerSelect.setAttribute('name', 'comparePlayers');
+      //   // comparePlayerSelect.setAttribute('id', 'comparePlayers');
+      //   // // comparePlayerSelect.setAttribute('onclick', 'valSelected()');
 
-      // comparePlayer.appendChild(comparePlayerSelect);
-      // const compareInfo = document.createElement('option');
-      // compareInfo.setAttribute('value', '');
-      // compareInfo.innerHTML += '--Select to compare--';
-      // comparePlayerSelect.appendChild(compareInfo);
+      //   // comparePlayer.appendChild(comparePlayerSelect);
+      //   // const compareInfo = document.createElement('option');
+      //   // compareInfo.setAttribute('value', '');
+      //   // compareInfo.innerHTML += '--Select to compare--';
+      //   // comparePlayerSelect.appendChild(compareInfo);
 
-      // playersCompArr.forEach((item) => {
-      //   const newOptCompare = document.createElement('option');
-      //   newOptCompare.setAttribute('value', `${item.compareUserName}`);
+      //   // playersCompArr.forEach((item) => {
+      //   //   const newOptCompare = document.createElement('option');
+      //   //   newOptCompare.setAttribute('value', `${item.compareUserName}`);
 
-      //   newOptCompare.innerHTML += `${item.comparePlayerName}`;
-      //   comparePlayerSelect.appendChild(newOptCompare);
-      // });
+      //   //   newOptCompare.innerHTML += `${item.comparePlayerName}`;
+      //   //   comparePlayerSelect.appendChild(newOptCompare);
+      //   // });
 
-      // for (let i = 0; i < playersCompArr.length; i++) {
-      //   const optionCompare = document.createElement('option');
-      //   optionCompare.setAttribute('value', `${playersCompArr[i].compareUserName}`);
-      //   optionCompare.innerHTML += `${playersCompArr[i].comparePlayerName}`;
-      //   comparePlayerSelect.appendChild(optionCompare);
-      // }
+      //   // for (let i = 0; i < playersCompArr.length; i++) {
+      //   //   const optionCompare = document.createElement('option');
+      //   //   optionCompare.setAttribute('value', `${playersCompArr[i].compareUserName}`);
+      //   //   optionCompare.innerHTML += `${playersCompArr[i].comparePlayerName}`;
+      //   //   comparePlayerSelect.appendChild(optionCompare);
+      //   // }
 
-      // function valSelected() {
-      //   const selectedPlayer = document.getElementById('comparePlayers');
-      //   const selectedToDisplay = selectedPlayer.options[selectedPlayer.selectedIndex].text;
-      //   console.log('selected Players', selectedToDisplay);
-      //   return selectedToDisplay;
-      // }
+      //   // function valSelected() {
+      //   //   const selectedPlayer = document.getElementById('comparePlayers');
+      //   //   const selectedToDisplay = selectedPlayer.options[selectedPlayer.selectedIndex].text;
+      //   //   console.log('selected Players', selectedToDisplay);
+      //   //   return selectedToDisplay;
+      //   // }
 
       const playerCardDivChart = document.createElement('canvas');
       playerCardDivChart.setAttribute('id', `chart-${name.username}`);
@@ -496,14 +502,14 @@ export function rankingInfo() {
       return playerWars;
     }
 
-    // const lastPlayedWar = historyRanking.pop();
+    // const lastPlayedWar = historyRanking4.pop();
     // const lastWarWrapper = document.createElement('div');
     // lastWarWrapper.classList.add('list__item');
     // const lastWarList = document.createElement('ul');
     // const lastWarItem = document.createElement('li');
     // console.log(lastPlayedWar);
     // const lastWarValues = `<div class="last-match">
-    //   <div>#ID ${historyRanking.length + 1}</div>
+    //   <div>#ID ${historyRanking4.length + 1}</div>
     //   <div>${lastPlayedWar.timestamp}</div>
 
     //     <div>${lastPlayedWar.t1p1preelo} </div>
@@ -564,14 +570,14 @@ export function rankingInfo() {
     // lastWarWrapper.innerHTML = lastWarValues;
     // document.getElementById('list').appendChild(lastWarWrapper);
 
-    historyRanking2.forEach((userNameInStreak) => {
+    historyRanking47.forEach((userNameInStreak) => {
       const increaseDiv = document.getElementById(`increase-${userNameInStreak.username}`);
       const playerInStreak = lenOfLongIncSubArr(rankHistory(userNameInStreak.username), rankHistory(userNameInStreak.username).length);
       // console.log('PLAYER STREAK: ', playerInStreak);
       increaseDiv.innerHTML += `<div class="frag-item">Longest increase streak: <span class="frag-value">${playerInStreak}</span><i class="fas fa-arrow-up"></i></div>`;
     });
 
-    historyRanking2.forEach((nameUser) => {
+    historyRanking47.forEach((nameUser) => {
       const ctx = document.getElementById(`chart-${nameUser.username}`).getContext('2d');
       const chart = new Chart(ctx, {
         type: 'line',

@@ -32,6 +32,7 @@
           <a href="#history" data-i18n="history">Match History</a>
           <a href="#files" data-i18n="files">Files</a>
           <a href="#server">Server</a>  
+          <a href="#inactive">Inactive</a>
           <!-- <a href="#charts">Charts</a>       -->
           <button data-action="contrast-mode" class="contrast__button" title="Wersja kontrastowa">
             <i class="fas fa-adjust"></i>         
@@ -60,7 +61,7 @@
               <div class="important--home">           
                 <h2>What to do to play a match?</h2>
                 <div class="important--home__info">
-                  <span>Join to Mumble </span><i class="fas fa-arrow-circle-right"></i> <span>request to play </span><i class="fas fa-arrow-circle-right"></i> <span>administrator will draw teams </span><i class="fas fa-arrow-circle-right"></i><span>The draw is done automatically by the ELO algorithm. <i class="fas fa-arrow-circle-right"></i> <span>That's all, go to server and start to play! GL & HF!</span>
+                  <span>Join to our <a href="https://discord.gg/u4MCqKSKZf">Discord <i class="fab fa-discord"></i></a> </span><i class="fas fa-arrow-circle-right"></i> <span>request to play </span><i class="fas fa-arrow-circle-right"></i> <span>administrator will draw teams </span><i class="fas fa-arrow-circle-right"></i><span>The draw is done automatically by the ELO algorithm. <i class="fas fa-arrow-circle-right"></i> <span>That's all, go to server and start to play! GL & HF!</span>
               </div>
               </div>   
             </div>
@@ -95,7 +96,7 @@
               <div class="matchSelection">          
                 <div class="date">
                   <div class="matchId">ID 2</div>
-                  <div class="dateDetail">Upcoming War <img src="/src/assets/gid46_small.gif"></div>
+                  <div class="dateDetail">Upcoming War <img src="/src/assets/gid46_small.gif"><img src="/src/assets/gid46_small.gif"></div>
                 </div>
                 <div class="team">        
                   <div id="" class="players">
@@ -122,14 +123,22 @@
             
             <div class="main">
               <div class="main__left">                
-                <a href="https://drive.google.com/file/d/10HVCOKbxRNW-fDc5hfpMJXjx2QJrnNM8/view" class="file" title="Download MoH:AA Spearhead">
+                <a href="https://1drv.ms/u/s!ApJ-yZadNIlniDOUv6nMiygSW8P3?e=6wgWgv" class="file" title="Download MoH:AA Spearhead">
                 <img src="assets/cropped-Medal-of-Honor-Allied-Assault-Spearhead-Cover.jpg"></a>               
               </div>
               <div class="main__right">
-                <a class="wp-block-button__link" href="mumble://nowy:heroes@m2.gametris.com:60139/">
+                <!-- <a class="wp-block-button__link" href="mumble://nowy:heroes@m2.gametris.com:60139/">
                   <div class="join">Join to MUMBLE</div>
                   <img src="assets/1200px-Icons_mumble.svg.png">
-                </a>
+                </a> -->
+                <a href="https://www.gametracker.com/server_info/173.199.83.169:12203/" target="_blank"><img src="https://cache.gametracker.com/server_info/173.199.83.169:12203/b_560_95_1.png" border="0" width="560" height="95" alt=""/></a>
+                <a href="https://www.gametracker.com/server_info/173.199.83.172:12203/" target="_blank"><img src="https://cache.gametracker.com/server_info/173.199.83.172:12203/b_560_95_1.png" border="0" width="560" height="95" alt=""/></a>
+                <!-- <div class="main__right--server">
+                  War server <span>173.199.83.169:12203</span>
+                </div>
+                <div class="main__right--server">
+                  Public server |=AK=| - FFA/TDM <span>108.61.98.17:12203</span>
+                </div> -->
               </div>
             </div> 
             <div class="intro">              
@@ -190,13 +199,13 @@
         <div class="wrapper">
           <h2>Files to download:</h2>
           <div class="files">
-            <a href="https://drive.google.com/file/d/10HVCOKbxRNW-fDc5hfpMJXjx2QJrnNM8/view" class="file sh"><div>Spearhead</div></a>           
+            <a href="https://drive.google.com/file/d/1NDqN1RUs3XONcwYEfB_3h0h406GVQMx8/view" class="file sh"><div>Spearhead</div></a>           
             <a href="http://download.mumble.com/en/mumble-1.3.3.msi" class="file mumble"><div>Mumble</div></a>
             <a href="https://drive.google.com/u/0/uc?id=1IMftokjG3wD4PDM0okiLSFzsTKUru5-W&amp;export=download" class="file mappack"><div>Map Pack</div></a>            
             <a href="http://chomikuj.pl/alias_pl/Dokumenty/The+All+Seeing+Eye/ASEv2.6,1355520649.zip(archive)" class="file tase"><div>The All Seeing Eye</div></a>
           </div>
           
-          <h3>Leave a comment</h3>
+          <!-- <h3>Leave a comment</h3>
 
           <form id="comment">
             <label for="message">Message</label>
@@ -211,7 +220,7 @@
             <input type="submit" value="Post Comment">
           </form>
 
-          <div id="comments-container"></div>
+          <div id="comments-container"></div> -->
         
         </div>  
       </div>             
@@ -236,7 +245,43 @@
             <p>Last most important thing is type password: <strong>heroes</strong></p>
           </div>
         </div>
-      </div>       
+      </div>  
+      <div class="container view hidden" id="inactive">
+        <div class="wrapper">
+          <h2>Inactive players due long inactivity (over 1 month)</h2>
+          <div id="pml">
+            <div class="column">
+              <h2>Place</h2>
+              <div class="subcolumn" id="place_inactive"></div>
+            </div>
+            <div class="column">
+              <h2>Player Name</h2>
+              <div class="subcolumn" id="playerName_inactive"></div>
+            </div>          
+            <div class="column">
+              <h2></h2>
+              <div class="subcolumn" id="nationality_inactive"></div>
+            </div>          
+            <div class="column">
+              <h2>Ranking</h2>
+              <div class="subcolumn" id="overall_inactive"></div>
+            </div>      
+            <div class="column">
+              <h2>Frags</h2>
+              <div class="subcolumn" id="frags_inactive"></div>
+            </div>              
+            <div class="column">
+              <h2>War Count</h2>
+              <div class="subcolumn" id="warCount_inactive"></div>
+            </div>
+            <div class="column">
+              <h2>Last War</h2>
+              <div class="subcolumn" id="lastWar_inactive"></div>
+            </div>
+          </div>
+          <div id="items"></div>
+        </div>
+      </div>     
       
     </div>   
     <!-- The core Firebase JS SDK is always required and must be listed first -->

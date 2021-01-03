@@ -238,6 +238,7 @@ export function history() {
             height="100%"
             frameborder="0"
             allowfullscreen
+            loading="lazy"
             src="https://www.youtube.com/embed/${match.video}"
             ></iframe></div>`
                 : ''
@@ -265,13 +266,142 @@ export function history() {
       warCardDetail.dataset.match = `${newObj.length - i}`;
       warCardDetail.innerHTML += `<div class="match-details">
       <div class="">Match #${newObj.length - i}</div> 
-      <div class="info">Info: ${war.info}</div>      
+      <div class="info">Info: ${war.info}</div>
+        <div class="match-single">
+          <div class="date">
+              <div class="matchId" id="matchId-${newObj.length - i}">
+                <a href="#match-${newObj.length - i}">#${newObj.length - i}</a></div>
+              <div class="dateDetail">${war.timestamp}</div>            
+                ${
+                  war.video
+                    ? `<a href="#match-${
+                        newObj.length - i
+                      }" title="Watch movie from match."><div class="matchVideo"><i class="fas fa-film"></i></div></a>`
+                    : ''
+                }  
+              <div class="comment-info comment-info${newObj.length - i}" data-war="${newObj.length - i}"></div>                     
+          </div>
+          <div class="team">
+            <div class="roudswon1">${war.t1roundswon}</div>
+            <div class="players">            
+              <div class="player">
+                <div class="preelo">${war.t1p1preelo}</div>
+                <div class="name">${addPlayerLink(war.t1p1name)}</div>
+                <div class="score">${war.t1p1score}</div>
+                <div class="postelo">${war.t1p1postelo}</div>
+                <div class="difference">${Number(parseFloat(war.t1p1postelo - war.t1p1preelo).toFixed(2))}</div>
+              </div>
+              <div class="player">
+                <div class="preelo">${war.t1p2preelo}</div>
+                <div class="name">${addPlayerLink(war.t1p2name)}</div>
+                <div class="score">${war.t1p2score}</div>
+                <div class="postelo">${war.t1p2postelo}</div>
+                <div class="difference">${Number(parseFloat(war.t1p2postelo - war.t1p2preelo).toFixed(2))}</div>
+              </div>
+              <div class="player">
+                <div class="preelo">${war.t1p3preelo}</div>
+                <div class="name">${addPlayerLink(war.t1p3name)}</div>
+                <div class="score">${war.t1p3score}</div>
+                <div class="postelo">${war.t1p3postelo}</div>
+                <div class="difference">${
+                  Number(parseFloat(war.t1p3postelo - war.t1p3preelo).toFixed(2))
+                    ? Number(parseFloat(war.t1p3postelo - war.t1p3preelo).toFixed(2))
+                    : ''
+                }
+                </div>
+              </div>
+              <div class="player">
+                <div class="preelo">${war.t1p4preelo}</div>
+                <div class="name">${addPlayerLink(war.t1p4name)}</div>
+                <div class="score">${war.t1p4score}</div>
+                <div class="postelo">${war.t1p4postelo}</div>
+                <div class="difference">${
+                  Number(parseFloat(war.t1p4postelo - war.t1p4preelo).toFixed(2))
+                    ? Number(parseFloat(war.t1p4postelo - war.t1p4preelo).toFixed(2))
+                    : ''
+                }</div>
+              </div>
+              <div class="player">
+                <div class="preelo">${war.t1p5preelo}</div>
+                <div class="name">${addPlayerLink(war.t1p5name)}</div>
+                <div class="score">${war.t1p5score}</div>
+                <div class="postelo">${war.t1p5postelo}</div>
+                <div class="difference">${
+                  Number(parseFloat(war.t1p5postelo - war.t1p5preelo).toFixed(2))
+                    ? Number(parseFloat(war.t1p5postelo - war.t1p5preelo).toFixed(2))
+                    : ''
+                }</div>
+              </div>
+            </div>            
+          </div>
+          <div class="team">
+          <div class="roudswon2">${war.t2roundswon}</div>
+          <div class="players">
+            <div class="player">
+              <div class="preelo">${war.t2p1preelo}</div>
+              <div class="name">${addPlayerLink(war.t2p1name)}</div>
+              <div class="score">${war.t2p1score}</div>
+              <div class="postelo">${war.t2p1postelo}</div>
+              <div class="difference">${Number(parseFloat(war.t2p1postelo - war.t2p1preelo).toFixed(2))}
+              </div>
+            </div>
+            <div class="player">
+              <div class="preelo">${war.t2p2preelo}</div>
+              <div class="name">${addPlayerLink(war.t2p2name)}</div>
+              <div class="score">${war.t2p2score}</div>
+              <div class="postelo">${war.t2p2postelo}</div>
+              <div class="difference">${
+                Number(parseFloat(war.t2p2postelo - war.t2p2preelo).toFixed(2))
+                  ? Number(parseFloat(war.t2p2postelo - war.t2p2preelo).toFixed(2))
+                  : ''
+              }
+              </div>
+            </div>
+            <div class="player">
+              <div class="preelo">${war.t2p3preelo}</div>
+              <div class="name">${addPlayerLink(war.t2p3name)}</div>
+              <div class="score">${war.t2p3score}</div>
+              <div class="postelo">${war.t2p3postelo}</div>
+              <div class="difference">${
+                Number(parseFloat(war.t2p3postelo - war.t2p3preelo).toFixed(2))
+                  ? Number(parseFloat(war.t2p3postelo - war.t2p3preelo).toFixed(2))
+                  : ''
+              }
+              </div>
+            </div>
+            <div class="player">
+              <div class="preelo">${war.t2p4preelo}</div>
+              <div class="name">${addPlayerLink(war.t2p4name)}</div>
+              <div class="score">${war.t2p4score}</div>
+              <div class="postelo">${war.t2p4postelo}</div>
+              <div class="difference">${
+                Number(parseFloat(war.t2p4postelo - war.t2p4preelo).toFixed(2))
+                  ? Number(parseFloat(war.t2p4postelo - war.t2p4preelo).toFixed(2))
+                  : ''
+              }
+              </div>
+            </div>
+            <div class="player">
+              <div class="preelo">${war.t2p5preelo}</div>
+              <div class="name">${addPlayerLink(war.t2p5name)}</div>
+              <div class="score">${war.t2p5score}</div>
+              <div class="postelo">${war.t2p5postelo}</div>
+              <div class="difference">${
+                Number(parseFloat(war.t2p5postelo - war.t2p5preelo).toFixed(2))
+                  ? Number(parseFloat(war.t2p5postelo - war.t2p5preelo).toFixed(2))
+                  : ''
+              }
+              </div>
+            </div>
+          </div>
+        </div>
       </div>`;
       const iframeMatch = `<iframe
       id="ytplayer"
       type="text/html"
       width="640"
       height="360"
+      loading="lazy"
       src="https://www.youtube.com/embed/${war.video}"
       frameborder="0"
       />`;
@@ -330,21 +460,23 @@ export function history() {
 
         const labelMessage = document.createElement('label');
         labelMessage.setAttribute('for', 'message');
-        labelMessage.innerHTML = 'Message';
+        labelMessage.innerHTML = 'Message*';
         commentForm.appendChild(labelMessage);
 
         const textareaMessage = document.createElement('textarea');
         textareaMessage.setAttribute('id', `message${newObj.length - ind}`);
+        textareaMessage.required = true;
         commentForm.appendChild(textareaMessage);
 
         const labelName = document.createElement('label');
         labelName.setAttribute('for', 'name');
-        labelName.innerHTML = 'Name';
+        labelName.innerHTML = 'Name*';
         commentForm.appendChild(labelName);
 
         const inputName = document.createElement('input');
         inputName.setAttribute('type', 'text');
         inputName.setAttribute('id', `name${newObj.length - ind}`);
+        inputName.required = true;
         commentForm.appendChild(inputName);
 
         const labelEmail = document.createElement('label');
@@ -391,7 +523,7 @@ export function history() {
               }),
             ),
           );
-          $('input[type=text], textarea').val();
+          $('input[type=text], textarea').val('');
           return false;
         });
 
@@ -399,15 +531,17 @@ export function history() {
           const newComment = snapshot.val();
           let html = `<div class='comment comment${newObj.length - ind}' data-comment='${newObj.length - ind}'>`;
           html += '<div class="comment--left">';
-          html += '<h4>' + newComment.name + '</h4>';
+          html += '<h4><a href="mailto:' + newComment.email + '">' + newComment.name + '</a></h4>';
           // html += "<div class='profile-image'><img src='https://www.gravatar.com/avatar/" + newComment.email + "?s100&d=retro'/></div>";
           html += "<span class='date'>" + $.timeago(newComment.postedAt) + '</span></div>';
           html += '<div class="comment--right">' + newComment.message + '</div></div>';
           $(`#comments-container${newObj.length - ind}`).prepend(html);
           const countComments = document.querySelectorAll(`.comment${newObj.length - ind}`);
-          document.querySelector(
-            `.comment-info${newObj.length - ind}`,
-          ).innerHTML = `<div class="counter-comments">${countComments.length}</div><div class="counter-icon"><i class="far fa-comment-dots"></i></div>`;
+          document.querySelector(`.comment-info${newObj.length - ind}`).innerHTML = `<a title="Leave a comment to match #${
+            newObj.length - ind
+          }" href="#match-${newObj.length - ind}"><div class="counter-comments">${
+            countComments.length
+          }</div><div class="counter-icon"><i class="far fa-comment-dots"></i></div></a>`;
         });
       });
     });
@@ -430,6 +564,27 @@ export function history() {
       } else {
         parentResultT1.classList.add('bg__gray');
         parentResultT2.classList.add('bg__gray');
+      }
+    }
+
+    const matchNodeListSingle = document.querySelectorAll('.match-single');
+    const matchArrSingle = Array.prototype.slice.call(matchNodeListSingle);
+    for (let i = 0; i < matchArr.length; i++) {
+      const resultT1Single = Number(parseInt(matchArrSingle[i].children[1].children[0].innerHTML, 10));
+      const resultT2Single = Number(parseInt(matchArrSingle[i].children[2].children[0].innerHTML, 10));
+
+      const parentResultT1Single = matchArrSingle[i].children[1];
+      const parentResultT2Single = matchArrSingle[i].children[2];
+
+      if (resultT1Single > resultT2Single) {
+        parentResultT1Single.classList.add('bg__green');
+        parentResultT2Single.classList.add('bg__red');
+      } else if (resultT1Single < resultT2Single) {
+        parentResultT1Single.classList.add('bg__red');
+        parentResultT2Single.classList.add('bg__green');
+      } else {
+        parentResultT1Single.classList.add('bg__gray');
+        parentResultT2Single.classList.add('bg__gray');
       }
     }
 

@@ -83,7 +83,7 @@ img {
 }
 
 nav, footer {
-  padding:  10px 0 20px 0;    
+  padding:  10px 10px 20px 10px;    
   font-weight: 700;  
   color: #ffffc0;
   background-image: linear-gradient(0deg, $lightRed 25%, $middleRed 25%, $middleRed 50%, $lightRed 50%, $lightRed 75%, $middleRed 75%, $middleRed 100%);
@@ -285,6 +285,17 @@ nav, footer {
       
       &__info {
         padding-bottom: 15px;
+
+        a {
+          color: #ffffc0;
+          text-decoration: none;
+          font-weight: 700;
+          font-size: 20px;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
       }
     }
   }
@@ -404,47 +415,65 @@ nav, footer {
     &__right {
       height: 225px;      
       background-color: $lightRed;
+      text-align: center;
+      padding: 13px 5px;
 
       @media screen and (max-width: 599px){
         height: auto;
+      }
+
+      &--server {
+        padding: 10px;
+
+        span {
+          background-color: $middleRed;
+          display: inline-block;
+          padding: 5px;
+          font-weight: 700;
+          font-size: 22px;
+
+          .contrast-mode & {
+            background-color: $middleBlue;
+          }
+        }
       }
 
       .contrast-mode & {
         background-color: $lightBlue;
       }
 
-      a {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        color: #ffffc0;
-        text-decoration: none;
-        font-size: 30px;
-        transition: all .4s;
+      // a {
+      //   width: 100%;
+      //   height: 100%;
+      //   display: flex;
+      //   justify-content: space-evenly;
+      //   align-items: center;
+      //   color: #ffffc0;
+      //   text-decoration: none;
+      //   font-size: 30px;
+      //   transition: all .4s;
 
-        @media screen and (max-width: 599px){
-          display: block;
-          text-align: center;
-        }
+      //   @media screen and (max-width: 599px){
+      //     display: block;
+      //     text-align: center;
+      //   }
 
-        &:hover {
-          background-color: lighten($middleRed, 15%);
+      //   &:hover {
+      //     background-color: lighten($middleRed, 15%);
 
-          .contrast-mode & {
-            background-color: lighten($middleBlue, 15%);
-          }
+      //     .contrast-mode & {
+      //       background-color: lighten($middleBlue, 15%);
+      //     }
 
-          img {
-            transform: rotate3d(1, 1, 1, 45deg);
-          }
-        }
-        img {
-          transition: all .4s;
-          max-height: 218px;
-        }
-      }
+      //     img {
+      //       transform: rotate3d(1, 1, 1, 45deg);
+      //     }
+      //   }
+      //   img {
+      //     transition: all .4s;
+      //     max-height: 218px;
+      //   }
+      // }
     }
   }
 
@@ -1180,6 +1209,244 @@ nav, footer {
   }  
 }
 
+.match-detail {
+  .match-details {
+    .match-single {
+      display: grid;
+      grid-template-columns: 120px 4fr 4fr;
+      grid-template-rows: auto;    
+      border: 1px solid $darkenRed;   
+      padding-bottom: 15px; 
+      background-color: $darkenRed;
+  
+      .contrast-mode & {
+        border-color: $darkenBlue;
+        background-color: $darkenBlue;
+      }
+  
+      .vComments {
+        grid-column-start: 1;
+        grid-column-end: 4;
+      }
+  
+      @media screen and (max-width: 1100px){
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        gap: 15px 15px;
+      }
+  
+      .date {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;      
+        padding: 10px;
+        background-color: #ffffc0;
+        color: $middleRed;
+        max-width: 120px;
+  
+        @media screen and (max-width: 1100px){
+          min-width: 100%;
+        }
+  
+        .contrast-mode & {
+          background-color: lighten($lightBlue, 15%);
+          color: $darkenBlue;
+        }
+  
+        .matchId {
+          font-size: 22px;
+          font-weight: 700;
+        }
+  
+        a, a:visited {
+          color: $darkenRed;
+  
+          .contrast-mode & {
+            color: $darkenBlue;
+          }
+        }
+  
+        .matchVideo {
+          font-size: 24px;         
+          padding: 10px 15px; 
+          font-weight: 700;
+          position: relative;
+  
+          i {
+            font-size: 30px;
+          }
+  
+          @keyframes pulse {
+            0% {
+              transform: scale(0.95);
+              box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+            }
+          
+            70% {
+              transform: scale(1);
+              color: red;
+              box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+            }
+          
+            100% {
+              transform: scale(0.95);
+              box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+            }
+          }
+          
+          &:after {
+            position: absolute;
+            content: "1";
+            background-color: red;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            top: -10px;
+            right: 0;
+            color: $darkenRed;
+            font-size: 20px;
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
+            transform: scale(1);          
+            animation: pulse 2s infinite;
+  
+            .contrast-mode & {
+              color: $darkenBlue;
+            }
+          }
+        }
+  
+        .comment-info {
+          position: relative;
+  
+          .counter-comments {
+            position: absolute;
+            right: -13px;
+            top: -10px; 
+            background-color: #fff;
+            font-size: 18px;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: 700;         
+          }
+  
+          .counter-icon {
+            font-size: 30px;
+          }
+        }
+      }
+  
+      .bg__green {
+        background-color: $lightRed;
+  
+        .contrast-mode & {
+          background-color: $lightBlue;
+        }
+      }
+  
+      .bg__red {
+        background-color: $middleRed;
+  
+        .contrast-mode & {
+          background-color: $middleBlue;
+        }
+      }
+  
+      .bg__gray {
+        background-color: gray;
+      }
+  
+      .team {
+        .roudswon1, .roudswon2 {
+          padding: 10px;
+          display: flex;
+          justify-content:center;
+          font-size: 28px;
+          font-weight: 700; 
+          border-bottom: 2px solid #ffffc0; 
+          color: #ffffc0;      
+        }      
+  
+        .players {
+          padding: 10px;
+          color: darken(#ffffc0,10%);
+          .player {
+            display: flex;
+            align-items: flex-end;
+            
+            .preelo {
+              font-size: 12px;
+            }
+  
+            .name {
+              font-size: 18px;
+              margin: 0 10px;
+  
+              a {
+                text-decoration: none;
+                color: #ffff8d;
+  
+                &:hover {
+                  text-decoration: underline;
+                }
+              }
+            }
+  
+            .score {
+              font-size: 18px;
+              margin-right: 10px;
+            }
+  
+            .postelo {
+              font-size: 12px;
+            }
+  
+            .difference {
+              font-size: 12px;
+              margin-left: 10px;
+            }
+          }
+  
+          .won {
+            position: relative;
+  
+            &:after {
+              position: absolute;
+              top: 5px;
+              margin-left: 5px;
+              content: " ";
+              background-image: url("/assets/uprate.gif");
+              width: 10px;
+              height: 5px;
+            }
+          }
+  
+          .lost {
+            position: relative;
+  
+            &:after {
+              position: absolute;
+              top: 5px;
+              margin-left: 5px;
+              content: "";
+              background-image: url("/assets/downrate.gif");
+              width: 10px;
+              height: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 #pagin {
   background-color: $middleRed;
   margin: 0;
@@ -1476,8 +1743,6 @@ canvas {
   margin-top: 30px;
 }
 
-
-
 .frag-item {
   padding: 10px; 
   position: relative; 
@@ -1686,6 +1951,10 @@ canvas {
         h4 {
           font-weight: 700;
           text-decoration: underline;
+
+          a, a:visited {
+            color: #ffffc0;
+          }
         }
 
         span {
@@ -1703,4 +1972,153 @@ canvas {
       }
     }
   }  
+}
+
+#inactive {
+  #pml {
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.2fr 1fr 0.8fr 1fr 1fr;
+    grid-template-rows: auto;  
+  
+    @media screen and (max-width: 800px){
+      grid-template-columns: 0.5fr 1fr 18px 1fr 0.5fr 0.5fr 1fr;
+    }
+  
+    .column {
+      border-right: 1px solid $darkenRed;
+      position: relative;
+      .contrast-mode & {
+        border-right-color: $darkenBlue;
+      }
+      &:last-of-type {
+        border-right: none;
+      }
+  
+      h2 {
+        text-align: center;
+        border-bottom: 3px solid $darkenRed;
+        color: #ffffc0; 
+        background-color: #333;
+        height: 78px;
+        
+        .contrast-mode & {
+          background-color: $lightBlue;
+          border-bottom-color: $darkenBlue;
+        }
+  
+        @media screen and (max-width: 800px){
+          width: 100%;
+          display: flex;
+          align-items: center;
+          writing-mode: tb-rl;
+          font-size: 18px;
+          font-weight: 700;
+          height: 125px;  
+          padding: 5px 0;      
+        }
+      }    
+  
+      .subcolumn {
+        text-align: center;
+        color: #ffffc0;
+  
+        .item {
+          @media screen and (max-width: 800px){
+            height: 50px;
+            font-size: 14px;
+            padding-top: 10px;
+          }
+  
+          &:hover {
+            a {
+              color: $middleBlue;
+  
+              .contrast-mode & {
+                color: red;
+              }
+            }
+          }
+  
+          a {
+            color: #ffffc0;
+            text-decoration: none;          
+          }
+        }
+  
+        > :nth-child(2n-1){
+         background-color: lighten(gray,10%);
+  
+         .contrast-mode & {
+           background-color: lighten(gray, 10%);
+         }
+        }
+  
+        > :nth-child(2n){
+          background-color: gray;
+          .contrast-mode & {
+            background-color: gray;
+          }
+        }
+  
+        > :nth-child(n){
+          border-bottom: 1px solid $darkenRed;
+          .contrast-mode & {
+            border-bottom-color: $darkenBlue;
+          }
+        }     
+  
+        .item0 {
+          position: relative;
+          font-weight: 700;
+          &:after {
+            position: absolute;
+            top: 5px;          
+            margin-left: 5px;
+            content: "";
+            height: 13px;
+            width: 10px;
+            background-image: url("/assets/ladder1.gif");
+  
+            @media screen and (max-width: 800px) {
+              top: 15px;
+            }
+          }
+        }
+  
+        .item1 {
+          position: relative;
+          &:after {
+            position: absolute;
+            top: 5px;         
+            margin-left: 5px;
+            content: "";
+            height: 13px;
+            width: 10px;
+            background-image: url("/assets/ladder2.gif");
+  
+            @media screen and (max-width: 800px) {
+              top: 15px;
+            }
+          }
+        }
+  
+        .item2 {
+          position: relative;
+          &:after {
+            position: absolute;
+            top: 5px;          
+            margin-left: 5px;
+            content: "";
+            height: 13px;
+            width: 10px;
+            background-image: url("/assets/ladder3.gif");
+  
+            @media screen and (max-width: 800px) {
+              top: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
 }
