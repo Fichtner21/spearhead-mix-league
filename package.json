@@ -52,6 +52,7 @@
     "jw-paginate": "^1.0.4",
     "lodash": "^4.17.20",
     "md5": "^2.3.0",
+    "promise-loading-spinner": "^2.2.0",
     "pusher": "^4.0.2",
     "showdown": "^1.9.1",
     "showdown-xss-filter": "^0.2.0",

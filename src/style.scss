@@ -1285,7 +1285,7 @@ nav, footer {
           
             70% {
               transform: scale(1);
-              color: red;
+              //color: red;
               box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
             }
           
@@ -2119,6 +2119,16 @@ canvas {
           }
         }
       }
+    }
+  }
+}
+
+#log {
+  .log {
+    background-color: $middleRed; 
+    padding: 20px;
+    .contrast-mode & {
+      background-color: $middleBlue;
     }
   }
 }

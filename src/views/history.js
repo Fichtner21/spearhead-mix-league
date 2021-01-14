@@ -162,6 +162,22 @@ export function history() {
                 }
                 </div>
               </div>
+
+              ${
+                match.t1p6name
+                  ? `<div class="player">
+                <div class="preelo">${match.t1p6preelo}</div>
+                <div class="name">${addPlayerLink(match.t1p6name)}</div>
+                <div class="score">${match.t1p6score}</div>
+                <div class="postelo">${match.t1p6postelo}</div>
+                <div class="difference">${
+                  Number(parseFloat(match.t1p6postelo - match.t1p6preelo).toFixed(2))
+                    ? Number(parseFloat(match.t1p6postelo - match.t1p6preelo).toFixed(2))
+                    : ''
+                }</div>
+              </div>`
+                  : ''
+              }
               
             </div>            
           </div> 
@@ -227,7 +243,22 @@ export function history() {
                     : Number(parseFloat(match.t2p5postelo - match.t2p5preelo).toFixed(2))
                 }
                 </div>
-              </div>  
+              </div> 
+              ${
+                match.t2p6name
+                  ? `<div class="player">
+                <div class="preelo">${match.t2p6preelo}</div>
+                <div class="name">${addPlayerLink(match.t2p6name)}</div>
+                <div class="score">${match.t2p6score}</div>
+                <div class="postelo">${match.t2p6postelo}</div>
+                <div class="difference">${
+                  Number(parseFloat(match.t2p6postelo - match.t2p6preelo).toFixed(2))
+                    ? Number(parseFloat(match.t2p6postelo - match.t2p6preelo).toFixed(2))
+                    : ''
+                }</div>
+              </div>`
+                  : ''
+              } 
             </div>           
           </div>           
             ${
@@ -238,6 +269,9 @@ export function history() {
             height="100%"
             frameborder="0"
             allowfullscreen
+            srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/${
+              match.video
+            }/?autoplay=1><img src='https://img.youtube.com/vi/${match.video}/hqdefault.jpg' alt='AltTagContent'><span>▶</span></a>"
             loading="lazy"
             src="https://www.youtube.com/embed/${match.video}"
             ></iframe></div>`
@@ -332,6 +366,21 @@ export function history() {
                     : ''
                 }</div>
               </div>
+              ${
+                war.t1p6name
+                  ? `<div class="player">
+                <div class="preelo">${war.t1p6preelo}</div>
+                <div class="name">${addPlayerLink(war.t1p6name)}</div>
+                <div class="score">${war.t1p6score}</div>
+                <div class="postelo">${war.t1p6postelo}</div>
+                <div class="difference">${
+                  Number(parseFloat(war.t1p6postelo - war.t1p6preelo).toFixed(2))
+                    ? Number(parseFloat(war.t1p6postelo - war.t1p6preelo).toFixed(2))
+                    : ''
+                }</div>
+              </div>`
+                  : ''
+              }
             </div>            
           </div>
           <div class="team">
@@ -393,6 +442,21 @@ export function history() {
               }
               </div>
             </div>
+            ${
+              war.t2p6name
+                ? `<div class="player">
+              <div class="preelo">${war.t2p6preelo}</div>
+              <div class="name">${addPlayerLink(war.t2p6name)}</div>
+              <div class="score">${war.t2p6score}</div>
+              <div class="postelo">${war.t2p6postelo}</div>
+              <div class="difference">${
+                Number(parseFloat(war.t2p6postelo - war.t2p6preelo).toFixed(2))
+                  ? Number(parseFloat(war.t2p6postelo - war.t2p6preelo).toFixed(2))
+                  : ''
+              }</div>
+            </div>`
+                : ''
+            }
           </div>
         </div>
       </div>`;
@@ -402,9 +466,11 @@ export function history() {
       width="640"
       height="360"
       loading="lazy"
+      srcdoc="<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/${war.video}/?autoplay=1><img src='https://img.youtube.com/vi/${war.video}/hqdefault.jpg' alt='AltTagContent'><span>▶</span></a>"
       src="https://www.youtube.com/embed/${war.video}"
       frameborder="0"
-      />`;
+      ></iframe>`;
+
       const videoResponsive = document.createElement('div');
       videoResponsive.classList.add('video-responsive');
       warCardDetail.appendChild(videoResponsive);
