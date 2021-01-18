@@ -17,8 +17,8 @@ export function rankingInfo() {
       tab: '1',
     });
 
-    const ourPlayers = document.getElementById('our-players');
-    ourPlayers.innerHTML += `<span>Active users</span><i class="fas fa-users"></i> ${historyRanking2.length}`;
+    const ourPlayers = document.getElementById('our-players2');
+    ourPlayers.innerHTML = ` ${historyRanking2.length}`;
 
     function sumOfFrags(name) {
       const arrNameFrags = [];
@@ -490,7 +490,7 @@ export function rankingInfo() {
     places2.forEach(function (placeObj, index) {
       const item = document.createElement('div');
       item.classList.add('item');
-      item.innerHTML += ++index;
+      item.innerHTML = ++index;
       place.appendChild(item);
     });
 

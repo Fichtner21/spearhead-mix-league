@@ -40,8 +40,8 @@
           </button>
         </div>
         <div class="our">
-          <div id="our-players"></div>
-          <div id="our-matches"></div>
+          <div id="our-players"><span>Active users</span><i class="fas fa-users"></i><div id="our-players2"><div class="lds-dual-ring"></div></div></div>
+          <div id="our-matches"><span>Matches played</span><img src="./assets/avarage.png"><div id="our-matches2"><div class="lds-dual-ring"></div></div></div>
         </div>
         <!-- <div class="marquee-cont">
           <div class="marquee marquee--warbar" id="containerElem">
@@ -56,6 +56,18 @@
         </div> -->
       </nav>      
       <div class="container view hidden" id="home">
+        <div class="marquee">
+          <div class="swiper-container swiper--top">
+            <div class="swiper-wrapper">
+                <!-- <div class="swiper-slide">Data & Analytics</div>
+                <div class="swiper-slide">Prototyping</div>
+                <div class="swiper-slide">Research, Strategy & Design</div>
+                <div class="swiper-slide">Digital Product Design & Development</div>
+                <div class="swiper-slide">Mobile (App) Design</div> -->
+                <div id="last-match" class="swiper-slide"></div>
+            </div>
+          </div>
+        </div>
         <div class="wrapper">
             <div class="mainSh">MoH: AA Spearhead Mix League</div>
             <div class="important">
@@ -75,7 +87,7 @@
                 </div>
                 <div class="team">        
                   <div id="" class="players">
-                    <div id="team1ID1"></div>
+                    <div id="team1ID1"><div class="lds-dual-ring3"></div></div>
                     <div class="chance-cont">
                       <div class="chance-desc">Chance of Winning</div>
                       <div id="chanceT1ID1" class="chance"></div>
@@ -85,7 +97,7 @@
                 </div>
                 <div class="team">        
                   <div id="" class="players">
-                      <div id="team2ID1"></div>
+                      <div id="team2ID1"><div class="lds-dual-ring3"></div></div>
                       <div class="chance-cont">
                         <div class="chance-desc">Chance of Winning</div>
                         <div id="chanceT2ID1" class="chance"></div>
@@ -101,7 +113,7 @@
                 </div>
                 <div class="team">        
                   <div id="" class="players">
-                    <div id="team1ID2"></div>
+                    <div id="team1ID2"><div class="lds-dual-ring3"></div></div>
                     <div class="chance-cont">
                       <div class="chance-desc">Chance of Winning</div>
                       <div id="chanceT1ID2" class="chance"></div>
@@ -111,7 +123,7 @@
                 </div>
                 <div class="team">        
                   <div id="" class="players">
-                      <div id="team2ID2"></div>
+                      <div id="team2ID2"><div class="lds-dual-ring3"></div></div>
                       <div class="chance-cont">
                         <div class="chance-desc">Chance of Winning</div>
                         <div id="chanceT2ID2" class="chance"></div>
@@ -142,6 +154,7 @@
                 </div> -->
               </div>
             </div> 
+            
             <div class="intro">              
               <p>There are also positive aspects to the coronavirus, and it's basically one. Old friends reunited for the first lockdown in March 2020. Since then, we play almost every day, and from November 2020 we created the <strong>Spearhead Mix League</strong>. Come to us on Mumble, play, see for yourself that it's worth it.</p>              
               <p>You think the site is ugly? Hmm .. that would mean you haven't played Spearhead for too long. Got something to make up for.</p>
@@ -154,35 +167,50 @@
       </div>
       <div class="container view hidden" id="ranking"> 
         <div class="wrapper">
-          <div id="pml">
+          <div id="pml">            
             <div class="column">
               <h2>Place</h2>
-              <div class="subcolumn" id="place"></div>
+              <div class="subcolumn" id="place">
+                <!-- <div class="lds-dual-ring-rank"></div> -->
+              </div>
             </div>
             <div class="column">
               <h2>Player Name</h2>
-              <div class="subcolumn" id="playerName"></div>
+              <div class="subcolumn" id="playerName">
+                <!-- <div class="lds-dual-ring-rank"></div> -->
+              </div>
             </div>          
             <div class="column">
               <h2></h2>
-              <div class="subcolumn" id="nationality"></div>
+              <div class="subcolumn" id="nationality">
+                <!-- <div class="lds-dual-ring-rank"></div> -->
+              </div>
             </div>          
             <div class="column">
               <h2>Ranking</h2>
-              <div class="subcolumn" id="overall"></div>
+              <div class="subcolumn" id="overall">
+                <!-- <div class="lds-dual-ring-rank"></div> -->
+              </div>
             </div>      
             <div class="column">
               <h2>Frags</h2>
-              <div class="subcolumn" id="frags"></div>
+              <div class="subcolumn" id="frags">
+                <!-- <div class="lds-dual-ring-rank"></div> -->
+              </div>
             </div>              
             <div class="column">
               <h2>War Count</h2>
-              <div class="subcolumn" id="warCount"></div>
+              <div class="subcolumn" id="warCount">
+                <!-- <div class="lds-dual-ring-rank"></div> -->
+              </div>
             </div>
             <div class="column">
               <h2>Last War</h2>
-              <div class="subcolumn" id="lastWar"></div>
+              <div class="subcolumn" id="lastWar">
+                <!-- <div class="lds-dual-ring-rank"></div> -->
+              </div>
             </div>
+            <div class="lds-dual-ring-rank"></div>
           </div>
           <div id="items"></div>
         </div>
@@ -249,7 +277,7 @@
       </div>  
       <div class="container view hidden" id="inactive">
         <div class="wrapper">
-          <h2>Inactive players due long inactivity (over 1 month)</h2>
+          <h2>Inactive players</h2>
           <div id="pml">
             <div class="column">
               <h2>Place</h2>

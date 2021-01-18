@@ -1,6 +1,8 @@
 import $ from 'jquery';
 import drive from 'drive-db';
 import Cookies from 'js-cookie';
+import Swiper from 'swiper/bundle';
+import 'swiper/swiper-bundle.css';
 import { rankingInfo } from './views/ranking';
 import { history } from './views/history';
 import { filesSite } from './views/files';
@@ -297,6 +299,26 @@ document.addEventListener('DOMContentLoaded', () => {
       return convertedPlayer;
     }
 
+    const SwiperTop = new Swiper('.swiper--top', {
+      spaceBetween: 0,
+      // centeredSlides: true,
+      speed: 22000,
+      autoplay: {
+        delay: 1,
+      },
+      loop: true,
+      slidesPerView: 'auto',
+      allowTouchMove: false,
+      disableOnInteraction: true,
+    });
+
+    $('.logo').on('click', function () {
+      // if (window.location.hash === '') {
+      SwiperTop.autoplay.stop();
+      SwiperTop.autoplay.start();
+      // }
+    });
+
     // function loadPopup() {
     //   const randomPlayer = teamSel.map((entry) => entry.username);
     //   const randomPlayerLink = randomPlayer[Math.floor(Math.random() * randomPlayer.length)];
@@ -305,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //   // const popup = `<div class="popup"><div>Watch player</div><a href="#charts-${randomPlayerLink}" class="closeLink">${addPlayerLinkHome(
     //   //   randomPlayerLink,
     //   // )}</a><div>statistics.</div><div class="close"><i class="far fa-window-close"></i></div></div>`;
-    //   const popup = `<div class="popup"><div>PIEKŁO SH <a href="#charts-kapsel" class="closeLink">#kapselwroc</a></div><div class="close"><i class="far fa-window-close"></i></div></div>`;
+    //   const popup = `<div class="popup"><div>ELO ranking has changed <a href="#log" class="closeLink">check new ELO</a></div><div class="close"><i class="far fa-window-close"></i></div></div>`;
     //   $('body').append(popup);
 
     //   $(document).click((event) => {
@@ -333,6 +355,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // setTimeout(() => {
     //   loadPopup();
     // }, 1000);
+
+    $(document).ready(function () {
+      $('.lds-dual-ring-rank').remove();
+    });
 
     let team1ID1 = '';
     for (let i = 0; i < 5; i++) {

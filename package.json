@@ -56,6 +56,7 @@
     "pusher": "^4.0.2",
     "showdown": "^1.9.1",
     "showdown-xss-filter": "^0.2.0",
+    "swiper": "^6.4.5",
     "timeago": "^1.6.7",
     "valine": "^1.4.14",
     "xss": "^1.0.8"

@@ -83,6 +83,152 @@ export function history() {
       return convertedPlayer;
     }
 
+    const lastMatch = document.getElementById('last-match');
+
+    let lastMatchInfo = `<div class="last">Last match: #${teams.length} `;
+    lastMatchInfo += `<div class="last-match-timestamp"> ${teams[0].timestamp}</div>`;
+    lastMatchInfo += `<div class="last-match-team">`;
+    lastMatchInfo += `<div class="last-match-player last-match-t1-player">    
+    <div class="name">${addPlayerLink(teams[0].t1p1name)}</div>
+    <div class="score">${teams[0].t1p1score}</div>    
+    <div class="difference-last">${Number(parseFloat(teams[0].t1p1postelo - teams[0].t1p1preelo).toFixed(2))}</div>
+    </div>`;
+    lastMatchInfo += `${
+      teams[0].t1p2name
+        ? `<div class="last-match-player last-match-t1-player">    
+    <div class="name">${addPlayerLink(teams[0].t1p2name)}</div>
+    <div class="score">${teams[0].t1p2score}</div>    
+    <div class="difference-last">${Number(parseFloat(teams[0].t1p2postelo - teams[0].t1p2preelo).toFixed(2))}</div>
+    </div>`
+        : ''
+    }`;
+    lastMatchInfo += `${
+      teams[0].t1p3name
+        ? `<div class="last-match-player last-match-t1-player">    
+    <div class="name">${addPlayerLink(teams[0].t1p3name)}</div>
+    <div class="score">${teams[0].t1p3score}</div>    
+    <div class="difference-last">${Number(parseFloat(teams[0].t1p3postelo - teams[0].t1p3preelo).toFixed(2))}</div>
+    </div>`
+        : ''
+    }`;
+    lastMatchInfo += `${
+      teams[0].t1p4name
+        ? `<div class="last-match-player last-match-t1-player">    
+    <div class="name">${addPlayerLink(teams[0].t1p4name)}</div>
+    <div class="score">${teams[0].t1p4score}</div>    
+    <div class="difference-last">${Number(parseFloat(teams[0].t1p4postelo - teams[0].t1p4preelo).toFixed(2))}</div>
+    </div>`
+        : ''
+    }`;
+    lastMatchInfo += `${
+      teams[0].t1p5name
+        ? `<div class="last-match-player last-match-t1-player">    
+    <div class="name">${addPlayerLink(teams[0].t1p5name)}</div>
+    <div class="score">${teams[0].t1p5score}</div>    
+    <div class="difference-last">${Number(parseFloat(teams[0].t1p5postelo - teams[0].t1p5preelo).toFixed(2))}</div>
+    </div>`
+        : ''
+    }`;
+    lastMatchInfo += `${
+      teams[0].t1p6name
+        ? `<div class="last-match-player last-match-t1-player">    
+    <div class="name">${addPlayerLink(teams[0].t1p6name)}</div>
+    <div class="score">${teams[0].t1p6score}</div>    
+    <div class="difference-last">${Number(parseFloat(teams[0].t1p6postelo - teams[0].t1p6preelo).toFixed(2))}</div>
+    </div>`
+        : ''
+    }`;
+
+    lastMatchInfo += `<div class="last-match-t1-score">${teams[0].t1roundswon}</div>`;
+    lastMatchInfo += `</div>`;
+
+    lastMatchInfo += `<div class="last-match-separator"> - </div>`;
+
+    lastMatchInfo += `<div class="last-match-team">`;
+    lastMatchInfo += `<div class="last-match-t2-score">${teams[0].t2roundswon}</div>`;
+    lastMatchInfo += `<div class="last-match-player last-match-t2-player">    
+    <div class="name">${addPlayerLink(teams[0].t2p1name)}</div>
+    <div class="score">${teams[0].t2p1score}</div>    
+    <div class="difference-last">${
+      teams[0].t2p1preelo ? Number(parseFloat(teams[0].t2p1postelo - teams[0].t2p1preelo).toFixed(2)) : ''
+    }</div>
+    </div>`;
+    lastMatchInfo += `${
+      teams[0].t2p2name
+        ? `<div class="last-match-player last-match-t2-player">    
+    <div class="name">${addPlayerLink(teams[0].t2p2name)}</div>
+    <div class="score">${teams[0].t2p2score}</div>    
+    <div class="difference-last">${Number(parseFloat(teams[0].t2p2postelo - teams[0].t2p2preelo).toFixed(2))}</div>
+    </div>`
+        : ''
+    }`;
+    lastMatchInfo += `${
+      teams[0].t2p3name
+        ? `<div class="last-match-player last-match-t2-player">    
+    <div class="name">${addPlayerLink(teams[0].t2p3name)}</div>
+    <div class="score">${teams[0].t2p3score}</div>    
+    <div class="difference-last">${Number(parseFloat(teams[0].t2p3postelo - teams[0].t2p3preelo).toFixed(2))}</div>
+    </div>`
+        : ''
+    }`;
+    lastMatchInfo += `${
+      teams[0].t2p4name
+        ? `<div class="last-match-player last-match-t2-player">    
+    <div class="name">${addPlayerLink(teams[0].t2p4name)}</div>
+    <div class="score">${teams[0].t2p4score}</div>    
+    <div class="difference-last">${Number(parseFloat(teams[0].t2p4postelo - teams[0].t2p4preelo).toFixed(2))}</div>
+    </div>`
+        : ''
+    }`;
+    lastMatchInfo += `${
+      teams[0].t2p5name
+        ? `<div class="last-match-player last-match-t2-player">    
+    <div class="name">${addPlayerLink(teams[0].t2p5name)}</div>
+    <div class="score">${teams[0].t2p5score}</div>    
+    <div class="difference-last">${Number(parseFloat(teams[0].t2p5postelo - teams[0].t2p5preelo).toFixed(2))}</div>
+    </div>`
+        : ''
+    }`;
+    lastMatchInfo += `${
+      teams[0].t2p6name
+        ? `<div class="last-match-player last-match-t2-player">    
+    <div class="name">${addPlayerLink(teams[0].t2p6name)}</div>
+    <div class="score">${teams[0].t2p6score}</div>    
+    <div class="difference-last">${Number(parseFloat(teams[0].t2p6postelo - teams[0].t2p6preelo).toFixed(2))}</div>
+    </div>`
+        : ''
+    }`;
+
+    lastMatchInfo += `</div>`;
+    lastMatchInfo += `</div>`; // zamkniecie .last
+
+    lastMatch.innerHTML = lastMatchInfo;
+
+    const diffLast = document.querySelectorAll('.difference-last');
+    diffLast.forEach(function (elem) {
+      if (Number(parseFloat(elem.innerHTML)) > 0) {
+        elem.classList.add('won-last');
+      } else if (Number(parseFloat(elem.innerHTML)) < 0) {
+        elem.classList.add('lost-last');
+      } else {
+        // nie dodawaj nic
+      }
+    });
+
+    const team1score = document.querySelector('.last-match-t1-score');
+    const team2score = document.querySelector('.last-match-t2-score');
+
+    if (team1score.innerText > team2score.innerText) {
+      team1score.style.backgroundColor = 'green';
+      team2score.style.backgroundColor = 'red';
+    } else if (team1score.innerText < team2score.innerText) {
+      team1score.style.backgroundColor = 'red';
+      team2score.style.backgroundColor = 'green';
+    } else {
+      team1score.style.backgroundColor = 'gray';
+      team2score.style.backgroundColor = 'gray';
+    }
+
     newObj.forEach((match, i) => {
       value += `<div class="warmatch ${match.video ? `match` : `nomatch-video`}" id="match${newObj.length - i}">          
           <div class="date">
@@ -283,9 +429,9 @@ export function history() {
 
     document.getElementById('matches').innerHTML = value;
 
-    const ourMatches = document.getElementById('our-matches');
+    const ourMatches = document.getElementById('our-matches2');
 
-    ourMatches.innerHTML += `<span>Matches played</span><img src="./assets/avarage.png"> ${teams.length}`;
+    ourMatches.innerHTML = ` ${teams.length}`;
 
     const mainApp2 = document.getElementById('app');
     newObj.forEach((war, i) => {
