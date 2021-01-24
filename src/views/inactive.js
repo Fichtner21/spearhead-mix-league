@@ -223,6 +223,48 @@ export function inactivePlayers() {
       return max;
     }
 
+    function searchPlayerWars(name) {
+      const exampleArr = [];
+      function searchPlayerKeyNameWar(nameKey, myArray) {
+        for (let i = 0; i < myArray.length; i++) {
+          if (myArray[i].t1p1name === nameKey) {
+            exampleArr.push(myArray[i]);
+          } else if (myArray[i].t1p2name === nameKey) {
+            exampleArr.push(myArray[i]);
+          } else if (myArray[i].t1p3name === nameKey) {
+            exampleArr.push(myArray[i]);
+          } else if (myArray[i].t1p4name === nameKey) {
+            exampleArr.push(myArray[i]);
+          } else if (myArray[i].t1p5name === nameKey) {
+            exampleArr.push(myArray[i]);
+          } else if (myArray[i].t1p6name === nameKey) {
+            exampleArr.push(myArray[i]);
+          } else if (myArray[i].t2p1name === nameKey) {
+            exampleArr.push(myArray[i]);
+          } else if (myArray[i].t2p2name === nameKey) {
+            exampleArr.push(myArray[i]);
+          } else if (myArray[i].t2p3name === nameKey) {
+            exampleArr.push(myArray[i]);
+          } else if (myArray[i].t2p4name === nameKey) {
+            exampleArr.push(myArray[i]);
+          } else if (myArray[i].t2p5name === nameKey) {
+            exampleArr.push(myArray[i]);
+          } else if (myArray[i].t2p6name === nameKey) {
+            exampleArr.push(myArray[i]);
+          }
+        }
+        return exampleArr;
+      }
+
+      const resultObject = searchPlayerKeyNameWar(name, historyRanking4);
+      const warIDs = [];
+      resultObject.forEach((elem) => {
+        warIDs.push(elem.idwar);
+      });
+      const showIDwars = warIDs.join(', ');
+      return showIDwars;
+    }
+
     const lastWar = document.getElementById('lastWar_inactive');
 
     function findPlayerLastWar(name) {
@@ -334,7 +376,7 @@ export function inactivePlayers() {
         ...minMaxFrags(name.username),
       )}</span><img src="./assets/low.png"></div>${
         name.due ? `<div class="frag-item">Inactive due:<span class="frag-value">${name.due}</span></div>` : ''
-      }`;
+      }</div><div class="frag-item">ID wars: <span class="frag-value">${searchPlayerWars(name.username)}</span></div>`;
       fragAvarage.appendChild(fragAvarageDiv);
 
       //   // const comparePlayer = document.createElement('div');

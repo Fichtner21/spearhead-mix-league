@@ -9,6 +9,8 @@ import { filesSite } from './views/files';
 import { serverSite } from './views/server';
 import { chartsSite } from './views/charts';
 import { inactivePlayers } from './views/inactive';
+import { historyTdm } from './views/history_tdm';
+import { rankingTdm } from './views/ranking_tdm';
 // import Translator from './translator.js';
 
 function enableRouting() {
@@ -34,6 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
   serverSite();
   chartsSite();
   inactivePlayers();
+  historyTdm();
+  rankingTdm();
 
   // if (window.history.pushState) {
   //   window.history.pushState('', '/', window.location.pathname);
@@ -229,6 +233,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const chanceT2ID1 = document.getElementById('chanceT2ID1');
     const chanceT2ID2 = document.getElementById('chanceT2ID2');
 
+    function addPlayerPos(player) {
+      let playerPos = '';
+      playerPos = teamSel.findIndex((x) => x.username === player);
+      playerPos++;
+      if (playerPos === 1) {
+        playerPos = `<div class="item0" title="${playerPos}st in OBJ ladder" >(${playerPos})</div>`;
+      } else if (playerPos === 2) {
+        playerPos = `<div class="item1" title="${playerPos}nd in OBJ ladder">(${playerPos})</div>`;
+      } else if (playerPos === 3) {
+        playerPos = `<div class="item2" title="${playerPos}th in OBJ ladder">(${playerPos})</div>`;
+      } else if (playerPos === 0) {
+        playerPos = '';
+      } else {
+        playerPos = `<span title="${playerPos}th in OBJ ladder">(${playerPos})</span>`;
+      }
+      return playerPos;
+    }
+
     function addPlayerLinkHome(player) {
       let convertedPlayer = '';
       teamSel.forEach((el) => {
@@ -319,6 +341,14 @@ document.addEventListener('DOMContentLoaded', () => {
       // }
     });
 
+    // $('#play').on('click', function () {
+    //   SwiperTop.autoplay.start();
+    // });
+
+    // $('#stop').on('click', function () {
+    //   SwiperTop.autoplay.stop();
+    // });
+
     // function loadPopup() {
     //   const randomPlayer = teamSel.map((entry) => entry.username);
     //   const randomPlayerLink = randomPlayer[Math.floor(Math.random() * randomPlayer.length)];
@@ -366,7 +396,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="player">
         <div class="preelo">${team1ID1playersEloArr[i]}</div>
         <div class="name">${addPlayerLinkHome(team1ID1playersArr[i])}</div>
-        <div class="score"></div>
+        <div class="score">${addPlayerPos(team1ID1playersArr[i])}</div>
         <div class="postelo"></div>
       </div>`;
     }
@@ -377,7 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="player">
         <div class="preelo">${team1ID2playersEloArr[i]}</div>
         <div class="name">${addPlayerLinkHome(team1ID2playersArr[i])}</div>
-        <div class="score"></div>
+        <div class="score">${addPlayerPos(team1ID2playersArr[i])}</div>
         <div class="postelo"></div>
       </div>`;
     }
@@ -388,7 +418,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="player">
         <div class="preelo">${team2ID1playersEloArr[i]}</div>
         <div class="name">${addPlayerLinkHome(team2ID1playersArr[i])}</div>
-        <div class="score"></div>
+        <div class="score">${addPlayerPos(team2ID1playersArr[i])}</div>
         <div class="postelo"></div>
       </div>`;
     }
@@ -399,7 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="player">
         <div class="preelo">${team2ID2playersEloArr[i]}</div>
         <div class="name">${addPlayerLinkHome(team2ID2playersArr[i])}</div>
-        <div class="score"></div>
+        <div class="score">${addPlayerPos(team2ID2playersArr[i])}</div>
         <div class="postelo"></div>
       </div>`;
     }

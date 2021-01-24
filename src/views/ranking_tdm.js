@@ -1,20 +1,16 @@
 import drive from 'drive-db';
 import { Chart } from 'chart.js';
 import $ from 'jquery';
+import { forEach } from 'lodash';
 
-export function rankingInfo() {
+export function rankingTdm() {
   (async () => {
     // Load the data from the Drive Spreadsheet
-    const players = await drive('1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo');
+    const playersTdm = await drive('1tcSgDUSxwrHQclfxdOKQDabZGQOAeb1E7GVTvitdfu4');
 
-    const historyRanking = await drive({
-      sheet: '1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo',
+    const historyRankingTdmPlayers = await drive({
+      sheet: '1tcSgDUSxwrHQclfxdOKQDabZGQOAeb1E7GVTvitdfu4',
       tab: '4',
-    });
-
-    const historyRanking2 = await drive({
-      sheet: '1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo',
-      tab: '1',
     });
 
     const historyRankingTdm = await drive({
@@ -22,8 +18,34 @@ export function rankingInfo() {
       tab: '1',
     });
 
-    const ourPlayers = document.getElementById('our-players2');
-    ourPlayers.innerHTML = ` ${historyRanking2.length}`;
+    // historyRankingTdmPlayers.reverse();
+    // const ourPlayers = document.getElementById('our-players2');
+    // ourPlayers.innerHTML = ` ${historyRankingTdm.length}`;
+
+    const playersObj = await drive({
+      sheet: '1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo',
+      tab: 1,
+    });
+
+    function findPlayerCard(name) {
+      let objPlayer = '';
+      playersObj.forEach((el) => {
+        objPlayer = el.username;
+      });
+
+      let tdmPlayer = '';
+      historyRankingTdm.forEach((el) => {
+        tdmPlayer = el.username;
+      });
+
+      if (objPlayer) {
+        if (tdmPlayer === objPlayer) {
+          name = tdmPlayer;
+        }
+      }
+
+      return name;
+    }
 
     function sumOfFrags(name) {
       const arrNameFrags = [];
@@ -42,7 +64,7 @@ export function rankingInfo() {
         }
       }
 
-      destructObjFrags(historyRanking, arrNameFrags);
+      destructObjFrags(historyRankingTdmPlayers, arrNameFrags);
 
       function getIndexesFrags(arr, val) {
         const indexes = [];
@@ -98,7 +120,7 @@ export function rankingInfo() {
         }
       }
 
-      destructObjFrags(historyRanking, arrNameFrags);
+      destructObjFrags(historyRankingTdmPlayers, arrNameFrags);
 
       function getIndexesFrags(arr, val) {
         const indexes = [];
@@ -148,7 +170,7 @@ export function rankingInfo() {
         }
       }
 
-      destructObjRanks(historyRanking, arrNameRanks);
+      destructObjRanks(historyRankingTdmPlayers, arrNameRanks);
 
       function getIndexesRanks(arr, val) {
         const indexes = [];
@@ -200,8 +222,6 @@ export function rankingInfo() {
             exampleArr.push(myArray[i]);
           } else if (myArray[i].t1p6name === nameKey) {
             exampleArr.push(myArray[i]);
-          } else if (myArray[i].t1p7name === nameKey) {
-            exampleArr.push(myArray[i]);
           } else if (myArray[i].t2p1name === nameKey) {
             exampleArr.push(myArray[i]);
           } else if (myArray[i].t2p2name === nameKey) {
@@ -214,14 +234,12 @@ export function rankingInfo() {
             exampleArr.push(myArray[i]);
           } else if (myArray[i].t2p6name === nameKey) {
             exampleArr.push(myArray[i]);
-          } else if (myArray[i].t2p7name === nameKey) {
-            exampleArr.push(myArray[i]);
           }
         }
         return exampleArr;
       }
 
-      const resultObject = searchPlayerKeyName(name, historyRanking);
+      const resultObject = searchPlayerKeyName(name, historyRankingTdmPlayers);
       const warDates = [];
       resultObject.forEach((elem) => {
         warDates.push(elem.timestamp);
@@ -247,8 +265,6 @@ export function rankingInfo() {
             exampleArr.push(myArray[i]);
           } else if (myArray[i].t1p6name === nameKey) {
             exampleArr.push(myArray[i]);
-          } else if (myArray[i].t1p7name === nameKey) {
-            exampleArr.push(myArray[i]);
           } else if (myArray[i].t2p1name === nameKey) {
             exampleArr.push(myArray[i]);
           } else if (myArray[i].t2p2name === nameKey) {
@@ -261,14 +277,12 @@ export function rankingInfo() {
             exampleArr.push(myArray[i]);
           } else if (myArray[i].t2p6name === nameKey) {
             exampleArr.push(myArray[i]);
-          } else if (myArray[i].t2p7name === nameKey) {
-            exampleArr.push(myArray[i]);
           }
         }
         return exampleArr;
       }
 
-      const resultObject = searchPlayerKeyNameWar(name, historyRanking);
+      const resultObject = searchPlayerKeyNameWar(name, historyRankingTdmPlayers);
       const warIDs = [];
       resultObject.forEach((elem) => {
         warIDs.push(elem.idwar);
@@ -294,7 +308,7 @@ export function rankingInfo() {
         }
       }
 
-      destructObjRanks(historyRanking, arrNameRanks);
+      destructObjRanks(historyRankingTdmPlayers, arrNameRanks);
 
       function getIndexesRanks(arr, val) {
         const indexes = [];
@@ -370,10 +384,10 @@ export function rankingInfo() {
       return max;
     }
 
-    const lastWar = document.getElementById('lastWar');
+    const lastWar = document.getElementById('lastWarTdm');
 
     function findPlayerLastWar(name) {
-      const findeLastWar = historyRanking.filter((item) => JSON.stringify(item).includes(name)).pop();
+      const findeLastWar = historyRankingTdmPlayers.filter((item) => JSON.stringify(item).includes(name)).pop();
       let findLastTimeStamp = '';
       if (findeLastWar) {
         findLastTimeStamp = findeLastWar.timestamp;
@@ -385,25 +399,7 @@ export function rankingInfo() {
       return findLastTimeStamp;
     }
 
-    function findPlayerCard(name) {
-      let objPlayer = '';
-      players.forEach((el) => {
-        objPlayer = el.username;
-      });
-
-      let tdmPlayer = '';
-      historyRankingTdm.forEach((el) => {
-        tdmPlayer = el.username;
-      });
-
-      if (tdmPlayer === objPlayer) {
-        name = tdmPlayer;
-      }
-
-      return name;
-    }
-
-    const userNameTimeStamp = players.map((entry) => entry.username);
+    const userNameTimeStamp = playersTdm.map((entry) => entry.username);
     userNameTimeStamp.forEach((user) => {
       const userItemTimestamp = document.createElement('div');
       userItemTimestamp.classList.add('item');
@@ -415,20 +411,20 @@ export function rankingInfo() {
       lastWar.appendChild(userItemTimestamp);
     });
 
-    const playerName = document.getElementById('playerName');
-    const nationality = document.getElementById('nationality');
-    const place = document.getElementById('place');
-    const ranking = document.getElementById('overall');
-    const frags = document.getElementById('frags');
-    const warCount = document.getElementById('warCount');
-    const mainApp = document.getElementById('app');
+    const playerName = document.getElementById('playerName-tdm');
+    const nationality = document.getElementById('nationality-tdm');
+    const place = document.getElementById('place-tdm');
+    const ranking = document.getElementById('overall-tdm');
+    const frags = document.getElementById('frags-tdm');
+    const warCount = document.getElementById('warCount-tdm');
+    const mainAppTdm = document.getElementById('app');
 
-    const player = players.map((entry) => entry);
+    const player = playersTdm.map((entry) => entry);
     player.forEach(function (name, index) {
       const playerItem = document.createElement('div');
       playerItem.classList.add('item' + index, 'item');
       const playerItemLink = document.createElement('a');
-      playerItemLink.setAttribute('href', `#charts-${name.username}`);
+      playerItemLink.setAttribute('href', `#charts-tdm-${name.username}`);
       playerItemLink.setAttribute('title', `Watch ${name.playername} profile.`);
       playerItemLink.innerHTML += name.playername;
       playerItem.dataset.place = ++index;
@@ -436,20 +432,11 @@ export function rankingInfo() {
       playerName.appendChild(playerItem);
     });
 
-    // const playersCompared = players.map((entry) => entry);
-    // const playersCompArr = [];
-    // playersCompared.forEach((name) => {
-    //   // console.log('NAME: ', name);
-    //   const playerToCompare = { comparePlayerName: name.playername, compareUserName: name.username };
-    //   // console.log('playerToCompare', playerToCompare);
-    //   playersCompArr.push(playerToCompare);
-    // });
-
-    const playerCard = players.map((entry) => entry);
+    const playerCard = playersTdm.map((entry) => entry);
     playerCard.forEach(function (name, index) {
       const playerCardDiv = document.createElement('div');
       playerCardDiv.classList.add('container', 'view', 'hidden', 'card');
-      playerCardDiv.setAttribute('id', `charts-${name.username}`);
+      playerCardDiv.setAttribute('id', `charts-tdm-${name.username}`);
       const playerCardWrapper = document.createElement('div');
       playerCardWrapper.classList.add('wrapper');
       playerCardDiv.appendChild(playerCardWrapper);
@@ -457,19 +444,19 @@ export function rankingInfo() {
         name.playername
       }</span> has played <span class="frag-name">${
         name.warcount
-      }</span> OBJ wars.</div><div class="frag-title">Check <a href="#charts-tdm-${findPlayerCard(
+      }</span> TDM wars.</div><div><div class="frag-title">Check <a href="#charts-${findPlayerCard(
         name.username,
-      )}"><span class="frag-name">${name.playername}</span></a> statistics in TDM.</div>`;
+      )}"><span class="frag-name">${name.playername}</span></a> statistics in OBJ.</div>`;
       const inDeCont = document.createElement('div');
       inDeCont.classList.add('increaseDecrease');
       playerCardWrapper.appendChild(inDeCont);
       const inCont = document.createElement('div');
       inCont.classList.add('streak');
-      inCont.setAttribute('id', `increase-${name.username}`);
+      inCont.setAttribute('id', `increase-tdm-${name.username}`);
       inDeCont.appendChild(inCont);
       const deCont = document.createElement('div');
       deCont.classList.add('streak');
-      deCont.setAttribute('id', `decrease-${name.username}`);
+      deCont.setAttribute('id', `decrease-tdm-${name.username}`);
       // deCont.innerHTML += `Clan History: ${name.clanhistory}`;
       inDeCont.appendChild(deCont);
 
@@ -479,14 +466,14 @@ export function rankingInfo() {
       deCont.appendChild(clanHistoryCont);
 
       const fragCont = document.createElement('div');
-      fragCont.classList.add('streak', 'frag-cont', 'frag-cont-obj');
+      fragCont.classList.add('streak', 'frag-cont', 'frag-cont-tdm');
       inDeCont.appendChild(fragCont);
 
       const fragContDiv = document.createElement('div');
       fragContDiv.classList.add('frag-sum');
       fragContDiv.innerHTML += `<div class="frag-item">Sum of Frags: <span class="frag-value">${sumOfFrags(name.username)}</span></div>
       <div class="frag-item">Highest ranking: <span class="frag-value">${Math.max(...rankHistory(name.username))}</span></div>
-      <div class="frag-item">Current ranking: <span class="frag-value">${name.ranking}</span></div>      
+      <div class="frag-item">Current ranking: <span class="frag-value">${name.elotdm}</span></div>
       <div class="frag-item">Lowest ranking: <span class="frag-value">${Math.min(...rankHistory(name.username))}</span></div>`;
       fragCont.appendChild(fragContDiv);
 
@@ -509,50 +496,14 @@ export function rankingInfo() {
       )}</span></div>`;
       fragAvarage.appendChild(fragAvarageDiv);
 
-      // const comparePlayer = document.createElement('div');
-      // comparePlayer.classList.add('frag-avarage');
-      // fragAvarage.appendChild(comparePlayer);
-      // const comparePlayerSelect = document.createElement('select');
-      // comparePlayerSelect.setAttribute('name', 'comparePlayers');
-      // comparePlayerSelect.setAttribute('id', 'comparePlayers');
-      // // comparePlayerSelect.setAttribute('onclick', 'valSelected()');
-
-      // comparePlayer.appendChild(comparePlayerSelect);
-      // const compareInfo = document.createElement('option');
-      // compareInfo.setAttribute('value', '');
-      // compareInfo.innerHTML += '--Select to compare--';
-      // comparePlayerSelect.appendChild(compareInfo);
-
-      // playersCompArr.forEach((item) => {
-      //   const newOptCompare = document.createElement('option');
-      //   newOptCompare.setAttribute('value', `${item.compareUserName}`);
-
-      //   newOptCompare.innerHTML += `${item.comparePlayerName}`;
-      //   comparePlayerSelect.appendChild(newOptCompare);
-      // });
-
-      // for (let i = 0; i < playersCompArr.length; i++) {
-      //   const optionCompare = document.createElement('option');
-      //   optionCompare.setAttribute('value', `${playersCompArr[i].compareUserName}`);
-      //   optionCompare.innerHTML += `${playersCompArr[i].comparePlayerName}`;
-      //   comparePlayerSelect.appendChild(optionCompare);
-      // }
-
-      // function valSelected() {
-      //   const selectedPlayer = document.getElementById('comparePlayers');
-      //   const selectedToDisplay = selectedPlayer.options[selectedPlayer.selectedIndex].text;
-      //   console.log('selected Players', selectedToDisplay);
-      //   return selectedToDisplay;
-      // }
-
       const playerCardDivChart = document.createElement('canvas');
-      playerCardDivChart.setAttribute('id', `chart-${name.username}`);
+      playerCardDivChart.setAttribute('id', `chart-tdm-${name.username}`);
       playerCardWrapper.appendChild(playerCardDivChart);
       const playerCardFragsChart = document.createElement('canvas');
-      playerCardFragsChart.setAttribute('id', `chart-frags-${name.username}`);
+      playerCardFragsChart.setAttribute('id', `chart-frags-tdm-${name.username}`);
       playerCardWrapper.appendChild(playerCardFragsChart);
 
-      mainApp.appendChild(playerCardDiv);
+      mainAppTdm.appendChild(playerCardDiv);
       function enableRoute() {
         function setRoute() {
           $('.view').hide();
@@ -568,7 +519,7 @@ export function rankingInfo() {
       enableRoute();
     });
 
-    const places2 = players.map((entry) => entry);
+    const places2 = playersTdm.map((entry) => entry);
     places2.forEach(function (placeObj, index) {
       const item = document.createElement('div');
       item.classList.add('item');
@@ -576,7 +527,7 @@ export function rankingInfo() {
       place.appendChild(item);
     });
 
-    const national = players.map((entry) => entry);
+    const national = playersTdm.map((entry) => entry);
     national.forEach(function (nat) {
       const item = document.createElement('div');
       item.classList.add('item');
@@ -640,15 +591,15 @@ export function rankingInfo() {
       nationality.appendChild(item);
     });
 
-    const rankings = players.map((entry) => entry);
+    const rankings = playersTdm.map((entry) => entry);
     rankings.forEach(function (elorank) {
       const eloItem = document.createElement('div');
       eloItem.classList.add('item');
-      eloItem.innerHTML += elorank.ranking;
+      eloItem.innerHTML += elorank.elotdm;
       ranking.appendChild(eloItem);
     });
 
-    const showFrags = players.map((entry) => entry);
+    const showFrags = playersTdm.map((entry) => entry);
     showFrags.forEach(function (frag) {
       const fragItem = document.createElement('div');
       fragItem.classList.add('item');
@@ -656,7 +607,7 @@ export function rankingInfo() {
       frags.appendChild(fragItem);
     });
 
-    const wars = players.map((entry) => entry.warcount);
+    const wars = playersTdm.map((entry) => entry.warcount);
     wars.forEach(function (matches) {
       const warItem = document.createElement('div');
       warItem.classList.add('item');
@@ -678,15 +629,15 @@ export function rankingInfo() {
       return playerWars;
     }
 
-    historyRanking2.forEach((userNameInStreak) => {
-      const increaseDiv = document.getElementById(`increase-${userNameInStreak.username}`);
+    historyRankingTdm.forEach((userNameInStreak) => {
+      const increaseDiv = document.getElementById(`increase-tdm-${userNameInStreak.username}`);
       const playerInStreak = lenOfLongIncSubArr(rankHistory(userNameInStreak.username), rankHistory(userNameInStreak.username).length);
       // console.log('PLAYER STREAK: ', playerInStreak);
       increaseDiv.innerHTML += `<div class="frag-item">Longest increase streak: <span class="frag-value">${playerInStreak}</span><i class="fas fa-arrow-up"></i></div>`;
     });
 
-    historyRanking2.forEach((nameUser) => {
-      const ctx = document.getElementById(`chart-${nameUser.username}`).getContext('2d');
+    historyRankingTdm.forEach((nameUser) => {
+      const ctx = document.getElementById(`chart-tdm-${nameUser.username}`).getContext('2d');
       const chart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -820,8 +771,8 @@ export function rankingInfo() {
         },
       });
     });
-    historyRanking2.forEach((nameUser) => {
-      const ctx = document.getElementById(`chart-frags-${nameUser.username}`).getContext('2d');
+    historyRankingTdm.forEach((nameUser) => {
+      const ctx = document.getElementById(`chart-frags-tdm-${nameUser.username}`).getContext('2d');
       const someArr = ['a', 'b', 'c', 'd', 'e', ''];
       const chart = new Chart(ctx, {
         type: 'line',
@@ -878,26 +829,11 @@ export function rankingInfo() {
                 mode: 'horizontal',
                 scaleID: 'y-axis-0',
                 value: sumOfFrags(nameUser.username) / nameUser.warcount,
-                borderColor: 'orange',
-                borderDash: [10, 5],
-                label: {
-                  fontColor: '#000',
-                  backgroundColor: 'rgba(250, 190, 88, 0.7)',
-                  content: (sumOfFrags(nameUser.username) / nameUser.warcount).toFixed(2) + ' Avg.',
-                  enabled: true,
-                },
-              },
-              {
-                id: 'more-28',
-                type: 'line',
-                mode: 'horizontal',
-                scaleID: 'y-axis-0',
-                value: 28,
                 borderColor: 'red',
                 borderDash: [10, 5],
                 label: {
                   backgroundColor: 'rgba(207, 0, 15, 0.5)',
-                  content: 'More then 1 kill per round (KDR > 1.0)',
+                  content: sumOfFrags(nameUser.username) / nameUser.warcount + ' Avg.',
                   enabled: true,
                 },
               },
