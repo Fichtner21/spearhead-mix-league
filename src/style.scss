@@ -932,7 +932,8 @@ nav, footer {
 
         a {
           color: #ffffc0;
-          text-decoration: none;          
+          text-decoration: none;  
+          position: relative;        
         }
       }
 
@@ -2957,36 +2958,7 @@ canvas {
   100% {
     transform: rotate(360deg);
   }
-}     
-
-[data-title]:hover:after {
-  opacity: 1;
-  transition: all 0.1s ease 0.5s;
-  visibility: visible;
-}
-/* box for title text */
-[data-title]:after {
-  content: attr(data-title);
-  /* position for title view box */
-  position: absolute;
-  bottom: -1.6em;  	
-  left: 100%;
-  z-index: 99999;
-  visibility: hidden;
-  /* optional */
-  white-space: nowrap;
-  /* stilization */
-  background-color: #00FF00;
-  color: #111;
-  font-size: 150%;
-  padding: 1px 5px 2px 5px;
-  box-shadow: 1px 1px 3px #222222;
-  opacity: 0;
-  border: 1px solid #111111;
-}
-[data-title] {
-  position: relative;
-}
+} 
 
 .frag-cont-obj {
   position: relative;
@@ -3025,3 +2997,138 @@ canvas {
     }
   }
 }
+
+.item0, .item1, .item2 {
+  .down-streak {
+    position: absolute;
+    right: -15px;
+    top: 10px;  
+    outline:4px red solid;
+    outline-offset:-6px;
+  
+    &:after {
+      position: absolute;    
+      margin-left: 5px;
+      content: "";
+      background-image: url("/assets/downrate.gif");
+      width: 10px;
+      height: 5px;
+    }
+  }
+  
+  .up-streak {
+    position: absolute;
+    right: -15px;
+    top: 10px;  
+    outline:4px green solid;
+    outline-offset:-6px;      
+  
+    &:after {
+      position: absolute;    
+      margin-left: 5px;
+      content: " ";
+      background-image: url("/assets/uprate.gif");
+      width: 10px;
+      height: 5px;      
+    }    
+
+    [data-title]:hover:before {
+      opacity: 1;
+      transition: all 0.1s ease 0.5s;
+      visibility: visible;
+    }
+    /* box for title text */
+    [data-title]:before {
+      content: attr(data-title);
+      /* position for title view box */
+      position: absolute;
+      bottom: -1.6em;  	
+      left: 100%;
+      z-index: 99999;
+      visibility: hidden;
+      /* optional */
+      white-space: nowrap;
+      /* stilization */
+      background-color: #00FF00;
+      color: #111;
+      font-size: 150%;
+      padding: 1px 5px 2px 5px;
+      box-shadow: 1px 1px 3px #222222;
+      opacity: 0;
+      border: 1px solid #111111;
+    }
+    [data-title] {
+      position: relative;
+    }
+  }
+  
+  .draw-streak {
+    position: absolute;
+    right: -15px;
+    top: 10px;  
+    outline:4px green solid;
+    outline-offset:-6px;      
+  
+    &:after {
+      position: absolute;    
+      margin-left: 5px;
+      content: " ";
+      background-color: #000;
+      width: 10px;
+      height: 4px;
+    }    
+  }
+}
+
+.down-streak {
+  position: absolute;
+  right: -5px;
+  top: 10px;  
+  outline:4px red solid;
+  outline-offset:-6px;
+
+  &:after {
+    position: absolute;    
+    margin-left: 5px;
+    content: "";
+    background-image: url("/assets/downrate.gif");
+    width: 10px;
+    height: 5px;
+  }
+}
+
+.up-streak {
+  [data-title]:hover:before {
+    opacity: 1;
+    transition: all 0.1s ease 0.5s;
+    visibility: visible;
+  }
+  /* box for title text */
+  [data-title]:before {
+    content: attr(data-title);
+    /* position for title view box */
+    position: absolute;
+    bottom: -1.6em;  	
+    left: 100%;
+    z-index: 99999;
+    visibility: hidden;
+    /* optional */
+    white-space: nowrap;
+    /* stilization */
+    background-color: #00FF00;
+    color: #111;
+    font-size: 150%;
+    padding: 1px 5px 2px 5px;
+    box-shadow: 1px 1px 3px #222222;
+    opacity: 0;
+    border: 1px solid #111111;
+  }
+  [data-title] {
+    position: relative;
+  }
+}
+
+.up-streak { position: absolute;  right: -5px;  top: 10px;    outline:4px green solid;  outline-offset:-6px;    &:after {    position: absolute;     margin-left: 5px;    content: " ";    background-image: url("/assets/uprate.gif");    width: 10px;    height: 5px;  }} .draw-streak {  position: absolute;  right: -5px;  top: 10px;    outline:4px green solid;  outline-offset:-6px;  &:after {    position: absolute;        margin-left: 5px;    content: " ";    background-color: #000;    width: 10px;    height: 4px;  }}
+
+
+

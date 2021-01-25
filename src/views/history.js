@@ -265,7 +265,7 @@ export function history() {
       return mockInactive;
     }
 
-    console.log(newObj[4]);
+    // console.log(newObj[4]);
 
     newObj.forEach((match, i) => {
       value += `<div class="warmatch ${match.video ? `match` : `nomatch-video`}" id="match${newObj.length - i}">          
@@ -934,17 +934,6 @@ export function history() {
         // nie dodawaj nic
       }
     });
-
-    // const warMatchDiv = document.querySelectorAll('.warmatch');
-
-    // $('#pagin').pagination({
-    //   dataSource: warMatchDiv,
-    //   callback: function (data, pagination) {
-    //     // template method of yourself
-    //     const html = template(data);
-    //     $('#matches').html(html);
-    //   },
-    // });
 
     const pageSize = 10;
     let incremSlide = 100;

@@ -3,6 +3,26 @@ import { Chart } from 'chart.js';
 import $ from 'jquery';
 
 export function rankingInfo() {
+  function smallStrike(name, arr) {
+    const littleStrike = document.createElement('div');
+    const firstFromEnd = arr(name)[arr(name).length - 1];
+    const secondFromEnd = arr(name)[arr(name).length - 2];
+    const countingPoints = firstFromEnd - secondFromEnd;
+
+    if (firstFromEnd > secondFromEnd) {
+      littleStrike.classList.add('up-streak');
+      littleStrike.setAttribute('title', `${countingPoints.toFixed(2)} pc in last war`);
+    } else if (firstFromEnd < secondFromEnd) {
+      littleStrike.classList.add('down-streak');
+      littleStrike.setAttribute('title', `${countingPoints.toFixed(2)} pc in last war`);
+    } else {
+      littleStrike.classList.add('draw-streak');
+      littleStrike.setAttribute('title', `${countingPoints.toFixed(2)} pc in last war`);
+    }
+
+    return littleStrike;
+  }
+
   (async () => {
     // Load the data from the Drive Spreadsheet
     const players = await drive('1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo');
@@ -183,6 +203,12 @@ export function rankingInfo() {
 
       return nameRanksOut;
     }
+
+    // console.log(
+    //   'Rank History 2: ',
+    //   rankHistory('boogie')[rankHistory('boogie').length - 1],
+    //   rankHistory('boogie')[rankHistory('boogie').length - 2],
+    // );
 
     function searchPlayer(name) {
       const exampleArr = [];
@@ -429,10 +455,11 @@ export function rankingInfo() {
       playerItem.classList.add('item' + index, 'item');
       const playerItemLink = document.createElement('a');
       playerItemLink.setAttribute('href', `#charts-${name.username}`);
-      playerItemLink.setAttribute('title', `Watch ${name.playername} profile.`);
+      // playerItemLink.setAttribute('title', `Watch ${name.playername} profile.`);
       playerItemLink.innerHTML += name.playername;
       playerItem.dataset.place = ++index;
       playerItem.appendChild(playerItemLink);
+      playerItemLink.appendChild(smallStrike(name.username, rankHistory));
       playerName.appendChild(playerItem);
     });
 
