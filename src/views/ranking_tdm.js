@@ -483,13 +483,13 @@ export function rankingTdm() {
 
       const fragAvarageDiv = document.createElement('div');
       fragAvarageDiv.classList.add('frag-avarage');
-      fragAvarageDiv.innerHTML += `<div class="frag-item">Highest frags per war: <span class="frag-value frag-high">${Math.max(
+      fragAvarageDiv.innerHTML += `<div class="frag-item">Highest KD Ratio per war: <span class="frag-value frag-high">${Math.max(
         ...minMaxFrags(name.username),
-      )}</span><img src="./assets/high.png"></div><div class="frag-item">Avarage frags per war: <span class="frag-value frag-avarage">${(
+      )}</span><img src="./assets/high.png"></div><div class="frag-item">Avarage KD Ratio per war: <span class="frag-value frag-avarage">${(
         sumOfFrags(name.username) / name.warcount
       ).toFixed(
         2,
-      )}</span><img src="./assets/avarage.png"></div><div class="frag-item">Lowest frags per war: <span class="frag-value frag-low">${Math.min(
+      )}</span><img src="./assets/avarage.png"></div><div class="frag-item">Lowest KD Ratio per war: <span class="frag-value frag-low">${Math.min(
         ...minMaxFrags(name.username),
       )}</span><img src="./assets/low.png"></div><div class="frag-item">ID wars: <span class="frag-value">${searchPlayerWars(
         name.username,

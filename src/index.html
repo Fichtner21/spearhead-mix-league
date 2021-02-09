@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="MoH:AA Spearhead Mix League - play with us in the best multiplayer game from WWII since 2002!">
     <meta name="keywords" content="Medal of Honor, Allied Assault, Spearhead, Breaktrough, Mix League, WWII, Multiplayer, FPS, ELO ranking">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>    
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700,900" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />    
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-98834408-2"></script>    
     <script>
@@ -16,6 +17,8 @@
 
       gtag('config', 'UA-98834408-2');
     </script>  
+    <script src="https://cdn.jsdelivr.net/npm/drive-db@6.0.1/index.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bracket/0.11.1/jquery.bracket.min.js"></script>  
     <title>MoH:AA Spearhead Mix League</title>
   </head>
   <body>
@@ -31,15 +34,18 @@
             </a> 
           </div>
           <div class="nav-left-grid">                     
-            <a href="#ranking" class="rank">OBJ Ranking</a>    
-            <a href="#ranking-tdm" class="rank">TDM Ranking</a> 
+            <a href="#ranking" class="rank">OBJ <span>Ranking</span> <img src="assets/podium_w.svg"></a>    
+            <a href="#ranking-tdm" class="rank">TDM <span>Ranking</span> <img src="assets/podium_w.svg"></a> 
             <a href="#server">Server</a>          
-            <a href="#history" data-i18n="history">OBJ Matches</a>
-            <a href="#history-tdm" data-i18n="history-tdm">TDM Matches</a>
+            <a href="#history" data-i18n="history" class="rank">OBJ <span>Matches</span> <i class="fas fa-th-list"></i></a>
+            <a href="#history-tdm" data-i18n="history-tdm" class="rank">TDM <span>Matches</span> <i class="fas fa-th-list"></i></a>
             <a href="#files" data-i18n="files">Files</a>
-            <a href="#inactive">OBJ Inactive</a>    
-            <a href="#inactive-tdm">TDM Inactive</a> 
-            <a href="#log">Log</a>          
+            <a href="#inactive" class="rank">OBJ <span>Inactive</span> <img src="assets/player_time.svg"></a>    
+            <a href="#inactive-tdm" class="rank">TDM <span>Inactive</span> <img src="assets/player_time.svg"></a> 
+            <a href="#log">Log</a> 
+            <a href="#cup">CUP <span>1on1</span> <img src="assets/smallcup.gif"></a>
+            <a href="#cup-rules">CUP Rules <span>1on1</span></a> 
+            <a href="#wanted">Wanted</a>         
             <button data-action="contrast-mode" class="contrast__button" title="Wersja kontrastowa">
               <i class="fas fa-adjust"></i>         
             </button>
@@ -67,6 +73,38 @@
         </div>
         <div class="wrapper">
             <div class="mainSh">MoH: AA Spearhead Mix League</div>
+            <div class="intro highlight1">
+              <div class="cup-info">
+                <div class="big-cup">The first CUP 1on1 OBJ has started, you can follow it <a href="#cup">here</a></div>
+                <!-- <div class="big-cup">1st Winter Cup 1on1 Obj start:<span> 05.02.2021</span></div> -->
+                
+                <!-- <div class="big-cup">Current lineup for CUP:</div>                 -->
+                
+                <!-- <ol>
+                  <li>bAtOn ☑</li>
+                  <li>-Illu$ioN- ☑</li>
+                  <li>Jim ☑</li>
+                  <li>Wariat ☑</li>
+                  <li>gRaBaRz ☑</li>
+                  <li>MoSeS ☑</li>
+                  <li>k4ps ☑</li>
+                  <li>Zielony ☑</li>
+                  <li>Zielakpr0 ☑</li>
+                  <li>KaPsEL ☑</li>
+                  <li>Mr. Wiggles ☑</li>
+                  <li>Markos ☑</li>
+                  <li>L4mer™ ☑</li>
+                  <li>Sn@ke ☑</li>
+                  <li>-insaNe! > ☑</li>
+                  <li>YOUR_PROBLEM ☑</li>
+                  <li>Meg@Sh!ra ☑ (new)</li>
+                  <li>Wiktor ☑ (new)</li>
+                  <li>booGie ☑ (new)</li>
+                </ol>  -->
+                
+              </div>
+              <!-- <div style="margin-left: 20px;">Last modified: <strong>01.02.2021 - 16:34</strong></div> -->
+            </div>
             <div class="important">
               <div class="important--home">           
                 <h2>What to do to play a match?</h2>
@@ -242,7 +280,7 @@
               </div>
             </div>      
             <div class="column">
-              <h2>Frags</h2>
+              <h2 title="Relation Kills to Death">KD Ratio</h2>
               <div class="subcolumn" id="frags-tdm">
                 <!-- <div class="lds-dual-ring-rank"></div> -->
               </div>
@@ -410,6 +448,7 @@
         <div class="wrapper">
           <div class="log">
             <ul>
+              <li>05.02.2021 - Started first CUP 1on1 in MoH:SH MIX LEAGUE</li>
               <li>13.01.2021 - Change convertion rate of each player on the team, in case of win best player get more points and worst get less in winnig team. Before this change, the point distribution was almost equal (equal responsiblity per team).
                 <img src="assets/STARY_NOWY_ELO.jpg">
               </li>
@@ -419,29 +458,717 @@
           </div>
         </div>
       </div>
+      <div class="container view hidden" id="cup">
+        <div class="wrapper">
+          <h2>Cup</h2>     
+          <h2>Seeded/Unseeded depends of ranking OBJ 05.02.2021</h2>     
+          <div class="positions">
+            
+              <div class="unseeded-el">
+                <h3>Unseeded in elimination (Nie rozstawieni w el.)</h3>
+                <ol>
+                  <li>Meg@Sh!ra</li>
+                  <li>MoSeS</li>
+                  <li>gRaBaRz</li>
+                </ol>
+              </div>
+              <div class="seeded-el">
+                <h3>Seeded in elimnation (Rozstawieni w el.)</h3>
+                <ol>
+                  <li>YOUR_PROBLEM</li>
+                  <li>Sn@ke</li>
+                  <li>Wariat</li>
+                </ol>
+              </div>
+            
+            
+              <div class="unseeded">
+                <h3>Unseeded in best of 16 (nie rozstawieni w najlepszej 16)</h3>
+                <ol>
+                  <li>Jim</li>
+                  <li>Wiktor</li>
+                  <li>L4mer</li>
+                  <li>Markos</li>
+                  <li>k4ps</li>
+                  <li>Match EL #1</li>
+                  <li>Match EL #2</li>
+                  <li>Match EL #3</li>
+                </ol>
+              </div>
+              <div class="seeded">
+                <h3>Seeded in best of 16 (rozstawieni w najlepszej 16)</h3>
+                <ol>                  
+                  <li>Zielony</li>
+                  <li>booGie</li>
+                  <li>-Illu$ioN-</li>
+                  <li>KaPsEL</li>
+                  <li>bAtOn</li>
+                  <li>Mr.Wiggles</li>
+                  <li>Zielakpr0</li>
+                  <li>-insaNe! ></li>
+                </ol>
+              </div>
+            
+          </div>
+          <div id="play1" class="playersToSelect"></div>
+          <div id="play2" class="playersToSelect"></div>
+          <div class="container-pairs">
+            <div id="studentElOne" class="playersToSelect">
+              <h2>Unseeded Player (el.)</h2>
+              <div id="pos-el-0">YOUR_PROBLEM</div>
+              <div id="pos-el-2">Wariat</div>
+              <div id="pos-el-4">Sn@ke</div>
+            </div>
+            <div class="playersToSelect">
+              <h2>?</h2>              
+              <div>vs.</div>
+              <div>vs.</div>
+              <div>vs.</div>
+            </div>
+            <div id="studentElTwo" class="playersToSelect">
+              <h2>Seeded Player(el.)</h2>
+              <div id="pos-el-1">MoSeS</div>
+              <div id="pos-el-3">Meg@Sh!ra</div>
+              <div id="pos-el-5">gRaBaRz</div>
+            </div>
+
+            <div id="studentOne" class="playersToSelect">
+              <h2>Unseeded Player</h2>
+              <div id="pos-0">Markos</div>
+              <div id="pos-2">Sn@ke/gRaBaRz</div>
+              <div id="pos-4">L4mer</div>
+              <div id="pos-6">YOUR_PROBLEM/MoSeS</div>
+              <div id="pos-8">k4ps</div>
+              <div id="pos-10">Jim</div>
+              <div id="pos-12">Wiktor</div>
+              <div id="pos-14">Wariat/Meg@Sh!ra</div>
+              <!-- <div id="pos-16"></div>
+              <div id="pos-18"></div>
+              <div id="pos-20"></div>
+              <div id="pos-22"></div>
+              <div id="pos-24"></div>
+              <div id="pos-26"></div>
+              <div id="pos-28"></div>
+              <div id="pos-30"></div> -->
+            </div>
+            <div class="playersToSelect">
+              <h2>?</h2>              
+              <div>vs.</div>
+              <div>vs.</div>
+              <div>vs.</div>
+              <div>vs.</div>
+              <div>vs.</div>
+              <div>vs.</div>
+              <div>vs.</div>
+              <div>vs.</div>
+              <!-- <div>vs.</div>
+              <div>vs.</div>
+              <div>vs.</div>
+              <div>vs.</div>
+              <div>vs.</div>
+              <div>vs.</div>
+              <div>vs.</div>
+              <div>vs.</div> -->
+            </div>
+            <div id="studentTwo" class="playersToSelect">
+              <h2>Seeded Player</h2>
+              <div id="pos-1">KaPsEL</div>
+              <div id="pos-3">-Illu$ioN-</div>
+              <div id="pos-5">Zielakpr0</div>
+              <div id="pos-7">-insaNe! ></div>
+              <div id="pos-9">Mr.Wiggles</div>
+              <div id="pos-11">booGie</div>
+              <div id="pos-13">bAtOn</div>
+              <div id="pos-15">Zielony</div>
+              <!-- <div id="pos-17"></div>
+              <div id="pos-19"></div>
+              <div id="pos-21"></div>
+              <div id="pos-23"></div>
+              <div id="pos-25"></div>
+              <div id="pos-27"></div>
+              <div id="pos-29"></div>
+              <div id="pos-31"></div> -->
+            </div>
+          </div>
+          <div id="container-footer">
+            <!-- <button class="button-newPairsEl">
+              GENERE QUALIFICATION PAIRS
+            </button>  
+            <button class="button-newPairs">
+              GENERE PAIRS BEST OF 16
+            </button>            -->
+          </div> 
+          <!-- <button class="generate-cup">
+            Generate CUP, BATON TERAZ W TO SE KLIKAM I SIE ZROBI SAMO HEHE
+          </button> -->
+          <div id="tournament"></div>
+            <!-- <div id="match-cup" style="border: 3px solid yellow; padding: 10px;"></div> -->
+          <h2 class="head-el">Elimination to best of 16</h2>
+          <div class="match-el">
+            <div class="player-el">
+              <div class="player-el__name" style="background:#fff;">YOUR_PROBLEM</div>
+              <div class="player-el__score" style="color:green; background: #fff;">18</div>
+            </div>
+            <div class="player-el">
+              <div class="player-el__name">MoSeS</div>
+              <div class="player-el__score" style="color:red;">15</div>
+            </div>
+          </div>
+          <div class="match-el">
+            <div class="player-el">
+              <div class="player-el__name">Wariat</div>
+              <div class="player-el__score" style="color:red;">3</div>
+            </div>
+            <div class="player-el">
+              <div class="player-el__name" style="background:#fff;">Meg@Sh!ra</div>
+              <div class="player-el__score" style="color:green; background: #fff;">20</div>
+            </div>
+          </div>
+          <div class="match-el">
+            <div class="player-el">
+              <div class="player-el__name" style="background:#fff;">Sn@ke</div>
+              <div class="player-el__score" style="color:green; background: #fff;">15</div>
+            </div>
+            <div class="player-el">
+              <div class="player-el__name">gRaBaRz</div>
+              <div class="player-el__score" style="color:red;">11</div>
+            </div>
+          </div>                  
+
+          <div id="tournamentcup"></div>
+          <script>    
+
+              function makePairs() {
+               // We will clear our lists before each run of the function.
+                $('#studentOne').html('<h2>Unseeded</h2>');
+                $('#studentTwo').html('<h2>Seeded</h2>');
+                let arr1 = [];
+                let arr2 = [];
+               
+                const students = [
+                  'Zielony', 'bAtOn',
+                  'Mr.Wiggles', '-Illu$ioN-' ,
+                  'KaPsEL', 'booGie', 
+                  'Zielakpr0', '-insaNe! >', 
+                  'Wiktor', 'Match EL #1', 
+                  'Match EL #2', 'Jim',
+                  'L4mer', 'Markos ', 
+                  'Match EL #3', 'k4ps', 
+                  ];
+
+                  // 'Slash', 'Antiher0', 'Wiktor','Hwk', 'Tomas', '&elu$', 'f1sh', 'Mr.Wiggles', 'MoSeS', 'malysw', 'wiNt', 'Kurian', 'Wildcard#1', 'Wildcard#2','Wildcard#3','Wildcard#4'
+                // By capturing these nodes in variables, we can reference them as our targets for insertion, below.
+                const studentOne = document.querySelector('#studentOne');
+                const studentTwo = document.querySelector('#studentTwo');
+
+                if (students.length % 2 !== 0) {
+                  alert('You must have an even number of students. You currently have ' + students.length + ' students.');
+                } else {
+                  arr1 = students.slice(0,8);
+                  // arr1 = students.slice(0,16); losowanie do 32
+                  arr2 = students.slice(8,16);
+                  // arr2 = students.slice(16,32); losowanie do 32                  
+
+                  arr1.sort(function () {
+                    return 0.5 - Math.random();
+                  });
+                  arr2.sort(function () {
+                    return 0.5 - Math.random();
+                  });
+
+                  // Here we make a function that will insert a DOM fragment inside a target node
+                  let index = '';
+                  const insertFragment = (output, target) => {
+                    let el = '';
+                    const fragment = document.createElement('div');
+                    fragment.classList.add('player-type');                    
+                    el = document.createElement('p');
+                    el.classList.add('pos-' + index++);
+                    el.innerText = output;
+                    fragment.appendChild(el);
+                    target.appendChild(fragment);
+                  };
+
+                  while (arr1.length) {
+                    const student1 = arr1.pop();
+                    const student2 = arr2[0] === student1 ? arr2.pop() : arr2.shift();
+
+                    // Here we use the function, sending student1 (the student) to studentOne (the target DOM node specified at the very top, #studentOne)
+                    insertFragment(student1, studentOne);
+                    insertFragment(student2, studentTwo);                    
+                  }
+                }
+              }
+
+              // Run the function on load
+              // makePairs();              
+
+              function addClicks(){
+                for(let i = 0; i < 16; i++){
+                  if(i % 2 === 0){
+                    const players1 = document.querySelectorAll(`.pos-${i}`);
+                    console.log('gracze 1: ', players1);
+                    players1.forEach((player) => {
+                      console.log('NICK: ', player.innerHTML);
+                      const btnShow = document.createElement('div');
+                      btnShow.classList.add(`btn-${i}`, `btn-show`);
+                      btnShow.innerText = 'SHOW';
+                      console.log('rodzic: ', player.parentNode);
+                      player.parentNode.appendChild(btnShow); 
+                      const btnPos = $('.btn-show');
+                      btnPos.on('click', function(){
+                        $(this).siblings(`.pos-${i}`).addClass('scalePlayer');
+                        $(this).siblings(`.pos-${i}`).attr('style', 'filter: blur(0px)');
+                        $(this).parent('.player-type').addClass('earthquake');
+                        $(this).remove();
+                      });                     
+                    });
+                  }
+                }                
+              }              
+             
+              let teamsPlayers = '';
+              const btn = $('.button-newPairs');
+              btn.on('click', function () {                
+                makePairs();
+                addClicks();
+                // $.ajax({
+                //   url:makePairs(),
+                //   success: function(){
+                //     method2();
+                //   }
+                // })                
+              }); 
+
+              function makeEl(){
+                $('#studentElOne').html('<h2>Unseeded Player (el.)</h2>');
+                $('#studentElTwo').html('<h2>Seeded Player (el.)</h2>');
+
+                let arr1 = [];
+                let arr2 = []; 
+
+                const students = [
+                  'Sn@ke', 'YOUR_PROBLEM',
+                  'Wariat', 'gRaBaRz',
+                  'Meg@Sh!ra', 'MoSeS'
+                ];
+
+                const studentElOne = document.querySelector('#studentElOne');
+                const studentElTwo = document.querySelector('#studentElTwo');
+
+                if (students.length % 2 !== 0) {
+                  alert('You must have an even number of students. You currently have ' + students.length + ' students.');
+                } else {
+                  arr1 = students.slice(0,3);
+                  // arr1 = students.slice(0,16); losowanie do 32
+                  arr2 = students.slice(3,6);
+                  // arr2 = students.slice(16,32); losowanie do 32  
+
+                  arr1.sort(function () {
+                    return 0.5 - Math.random();
+                  });
+                  arr2.sort(function () {
+                    return 0.5 - Math.random();
+                  });
+
+                  let index = '';
+                  const insertFragment = (output, target) => {
+                    let el = '';
+                    const fragment = document.createElement('div');
+                    fragment.classList.add('player-type');                    
+                    el = document.createElement('p');
+                    el.classList.add('pos-el-' + index++);
+                    el.innerText = output;
+                    fragment.appendChild(el);
+                    target.appendChild(fragment);
+                  };
+
+                  while (arr1.length) {
+                    const student1 = arr1.pop();
+                    const student2 = arr2[0] === student1 ? arr2.pop() : arr2.shift();
+
+                    // Here we use the function, sending student1 (the student) to studentOne (the target DOM node specified at the very top, #studentOne)
+                    insertFragment(student1, studentElOne);
+                    insertFragment(student2, studentElTwo);                    
+                  }
+                }
+              }
+
+              function addClicksEl(){
+                for(let i = 0; i < 5; i++){
+                  if(i % 2 === 0){
+                    const players1 = document.querySelectorAll(`.pos-el-${i}`);
+                    players1.forEach((player) => {
+                      const btnShow = document.createElement('div');
+                      btnShow.classList.add(`btn-el-${i}`, `btn-show`);
+                      btnShow.innerText = 'SHOW';                      
+                      player.parentNode.appendChild(btnShow); 
+                      const btnPos = $('.btn-show');
+                      btnPos.on('click', function(){
+                        $(this).siblings(`.pos-el-${i}`).addClass('scalePlayer');
+                        $(this).siblings(`.pos-el-${i}`).attr('style', 'filter: blur(0px)');
+                        $(this).parent('.player-type').addClass('earthquake');
+                        $(this).remove();
+                      });                     
+                    });
+                  }
+                }                
+              }      
+
+              const btnEl = $('.button-newPairsEl');
+              btnEl.on('click', function () {                
+                makeEl();
+                addClicksEl();                              
+              }); 
+
+              $('.positions h3').on('click', function(){
+                $(this).siblings('ol').slideToggle();
+              });
+             
+              const genCup = $('.generate-cup');
+              genCup.on('click', function(){                              
+                  
+                $('#tournamentcup').show();
+                // $('#tournament').bracket({
+                //   init: teamsPlayersCup,         
+                // });
+                $(this).prop('disabled', true);
+                $(this).html('GENERATED');                
+              });      
+                  
+              (async () => {
+                const cupStart = await drive({
+                  sheet: '1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo',
+                  tab: '8',
+                });
+                function getInfo(data){
+                  $('#match-cup').text("Match(data: '" + data +"')");
+                }
+                // console.log('CCCCCC => ',cupStart);
+                // document.getElementById(`pos-0`).innerHTML = cupStart[0].pos0;
+                // document.getElementById(`pos-1`).innerHTML = cupStart[0].pos1;
+                // document.getElementById(`pos-2`).innerHTML = cupStart[0].pos2;
+                // document.getElementById(`pos-3`).innerHTML = cupStart[0].pos3;
+                // document.getElementById(`pos-4`).innerHTML = cupStart[0].pos4;
+                // document.getElementById(`pos-5`).innerHTML = cupStart[0].pos5;
+                // document.getElementById(`pos-6`).innerHTML = cupStart[0].pos6;
+                // document.getElementById(`pos-7`).innerHTML = cupStart[0].pos7;
+                // document.getElementById(`pos-8`).innerHTML = cupStart[0].pos8;
+                // document.getElementById(`pos-9`).innerHTML = cupStart[0].pos9;
+                // document.getElementById(`pos-10`).innerHTML = cupStart[0].pos10;
+                // document.getElementById(`pos-11`).innerHTML = cupStart[0].pos11;
+                // document.getElementById(`pos-12`).innerHTML = cupStart[0].pos12;
+                // document.getElementById(`pos-13`).innerHTML = cupStart[0].pos13;
+                // document.getElementById(`pos-14`).innerHTML = cupStart[0].pos14;
+                // document.getElementById(`pos-15`).innerHTML = cupStart[0].pos15;
+                // const pos0 = document.getElementById('pos-0').innerText;
+                // const pos1 = document.getElementById('pos-1').innerText;
+                // const pos2 = document.getElementById('pos-2').innerText;
+                // const pos3 = document.getElementById('pos-3').innerText;
+                // const pos4 = document.getElementById('pos-4').innerText;
+                // const pos5 = document.getElementById('pos-5').innerText;
+                // const pos6 = document.getElementById('pos-6').innerText;
+                // const pos7 = document.getElementById('pos-7').innerText;
+                // const pos8 = document.getElementById('pos-8').innerText;
+                // const pos9 = document.getElementById('pos-9').innerText;
+                // const pos10 = document.getElementById('pos-10').innerText;
+                // const pos11 = document.getElementById('pos-11').innerText;
+                // const pos12 = document.getElementById('pos-12').innerText;
+                // const pos13 = document.getElementById('pos-13').innerText;
+                // const pos14 = document.getElementById('pos-14').innerText;
+                // const pos15 = document.getElementById('pos-15').innerText;
+                const pos0 = cupStart[0].pos0;
+                const pos1 = cupStart[0].pos1;
+                const pos2 = cupStart[0].pos2;
+                const pos3 = cupStart[0].pos3;
+                const pos4 = cupStart[0].pos4;
+                const pos5 = cupStart[0].pos5;
+                const pos6 = cupStart[0].pos6;
+                const pos7 = cupStart[0].pos7;
+                const pos8 = cupStart[0].pos8;
+                const pos9 = cupStart[0].pos9;
+                const pos10 = cupStart[0].pos10;
+                const pos11 = cupStart[0].pos11;
+                const pos12 = cupStart[0].pos12;
+                const pos13 = cupStart[0].pos13;
+                const pos14 = cupStart[0].pos14;
+                const pos15 = cupStart[0].pos15;
+
+                  const teamsPlayersCup = {
+                      teams: [
+                        [pos0,pos1],
+                        [pos2,pos3],
+                        [pos4,pos5],
+                        [pos6,pos7],
+                        [pos8,pos9],
+                        [pos10,pos11],
+                        [pos12,pos13],
+                        [pos14,pos15],
+                        ['Slash', 'Antiher0'],
+                        ['Wiktor','Hwk'],
+                        ['Tomas', 'Wildcard#1'],
+                        ['&elu$', 'f1sh'],
+                        ['Wildcard#4', 'MoSeS'],
+                        ['Kurian', 'malysw'],
+                        ['wiNt','Wildcard#2'],
+                        ['Mr.Wiggles', 'Wildcard#3'],             
+                 
+                      ],
+                      results : [[ /* WINNER BRACKET */
+                      [
+                        [17,11,'1 round winner bracket'], [15,13], [12,16], [18,10], [19,9], [11,17], [10,18], [12,16],
+                        [11,17], [15,13], [16,12], [18,10], [19,9], [11,17], [18,10], [12,16], // 17-32
+                      ],
+                      [
+                        [17,11], [15,13], [15,13], [18,10],
+                        [17,11], [15,13], [12,16], [18,10] // 17-32
+                      ],
+                      [
+                        [17,11], [15,13],
+                        [17,11], [15,13], // 17-32
+                      ],
+                      [                        
+                        [17,11], [15,13] // 17-32
+                      ],
+                      [
+                        [8,20],
+                      ]
+                    ], [         /* LOSER BRACKET */
+                      [
+                        [17,11], [15,13], [12,16], [18,10],
+                        [17,11], [13,15], [12,16], [10,18] // 17-32
+                      ],
+                      [
+                        [17,11], [15,13], [12,16], [18,10],
+                        [17,11], [13,15], [12,16], [10,18] // 17-32
+                      ],
+                      [
+                        [12,16], [18,10],
+                        [12,16], [18,10] // 17-32
+                      ],
+                      [
+                        [12,16], [18,10],
+                        [12,16], [18,10] // 17-32
+                      ],
+                      [
+                        [12,16],
+                        [12,16] // 17-32
+                      ],
+                      [
+                        [12,16],
+                        [12,16] // 17-32
+                      ],
+                      [
+                        [13, 15]
+                      ],
+                      [
+                        [21,7]
+                      ]
+                    ], [         /* FINALS */
+                      [
+                        [22,6], [11,17],
+                         // 17-32
+                      ],                      
+                      [
+                        [8,20]
+                      ],
+                      
+                    ]]
+                    };
+                  const resizeParameters = {
+                    teamWidth: 100,
+                    scoreWidth: 40,
+                    matchMargin: 50,
+                    roundMargin: 50,
+                    init: teamsPlayersCup,
+                    onMatchClick: getInfo
+                  };
+                  
+                  function updateResizeDemo() {
+                    $('#tournamentcup').bracket(resizeParameters);
+                  }
+              
+                  // $(updateResizeDemo) // odkomentuj jeśli chcesz pokazac CUP!!!!
+
+                  // $('#tournamentcup').bracket({
+                  //   init: teamsPlayersCup,         
+                  // });
+                })();                
+               
+              const bigData = {
+                teams : [
+                  // ['Zielony', 'Wariat'] /* first matchup */,
+                  // ['Mr.Wiggles', 'L4mer'] /* second matchup */,
+                  // ['KaPsEL', 'gRaBaRz'] /* second matchup */,
+                  // ['Zielakpr0', 'YOUR_PROBLEM'] /* second matchup */,
+                  // ['MoSeS', '-insaNe! >'] /* first matchup */,
+                  // ['Jim', 'Sn@ke'] /* second matchup */,
+                  // ['-Illu$ioN-', 'Markos'] /* second matchup */,
+                  // ['bAtOn', 'k4ps'] /* second matchup */,
+                  ['KaPsEL','Markos'],
+                  ['-Illu$ioN-','Sn@ke'],
+                  ['Zielakpr0','L4mer'],
+                  ['-insaNe! >','YOUR_PROBLEM'],
+                  ['Mr.Wiggles','k4ps'],
+                  ['booGie','Jim'],
+                  ['bAtOn','Wiktor'],
+                  ['Zielony','Meg@Sh!ra']
+                ],
+                // results : [[ /* WINNER BRACKET */
+                //   [[3,5], [2,4], [6,3], [2,3], [1,5], [5,3], [7,2], [1,2]],
+                //   [[1,2], [3,4], [5,6], [7,8]],
+                //   [[9,1], [8,9]],
+                //   [[4,5]]
+                // ], [         /* LOSER BRACKET */
+                //   [[5,1], [1,2], [3,2], [6,9]],
+                //   [[8,2], [1,2], [6,2], [4,3]],
+                //   [[1,2], [3,5]],
+                //   [[3,0], [1,9]],
+                //   [[3,2]],
+                //   [[4,2]]
+                // ], [         /* FINALS */
+                //   [[3,8], [4,6]],
+                //   [[2,1]]
+                // ]]
+                results : [[ /* WINNER BRACKET */
+                  [[20,4], [14,17], [20,6], [null,null], [0,1], [20,5], [20,12], [19,13]],
+                  [[null,null], [null,null], [null,null], [null,null]],
+                  [[null,null], [null,null]],
+                  [[null,null]]
+                ], [         /* LOSER BRACKET */
+                  [[16,18], [null,null], [null,null], [null,null]],
+                  [[null,null], [null,null], [null,null], [null,null]],
+                  [[null,null], [null,null]],
+                  [[null,null], [null,null]],
+                  [[null,null]],
+                  [[null,null]]
+                ], [         /* FINALS */
+                  [[null,null], [null,null]],
+                  [[null,null]]
+                ]]
+              }
+
+              const resizeParametersCup = {
+                    teamWidth: 120,
+                    scoreWidth: 40,
+                    matchMargin: 20,
+                    roundMargin: 30,
+                    init: bigData,
+                    // onMatchClick: getInfo
+                  };
+              
+                  function cupReady(){
+                    $('#tournament').bracket(resizeParametersCup);
+                  }
+              
+                  $(cupReady);
+              
+          </script>
+      
+          
+        </div>
+      </div>
+      <div class="container view hidden" id="cup-rules">
+        <div class="wrapper">
+          <div class="cup-info">
+            <div class="popup__sub">First CUP 1on1 </div>
+            <div class="popup__sub">in MoH:SH MIX League</div>
+            <div class="popup__sub">Rules:</div>
+            <ol>
+              <li>Register on <a href="https://discord.gg/u4MCqKSKZf">Discord <i class="fab fa-discord"></i></a> until <strong>20:00, 05.02.2021</strong></li>
+              <li>Draw pairs <strong>20:00 - 21:00, 05.02.2021</strong></li>
+              <li>CUP based rules: DOUBLE ELIMINATION (Winner and Loser Brackets)</li>
+              <li>Players have 3 days(72hours) from selected to play their war</li>
+              <li>Time play: First to 5 rounds</li>
+              <li>Each round 4 minutes</li>
+              <li>Maps: The Hunt, V2, The Bridge, Stlo, VSUK Abbey - each player before war start baning maps i.e:<br> Player 1 - ban Stlo, Player 2 - ban VSUK Abbey, Player 1 - chose The Bridge, Player 2 - chose V2, <br>so they play The Bridge & V2 in case of draw next map will be The Hunt.</li>
+              <li>Disputes are settled by the league committee (-Illu$ioN-, KaPsEL, bAtOn).</li>
+            </ol>
+            <div class="popup__sub">Current lineup: <a href="#">On main page <i class="fas fa-list-ol"></i></a></div>        
+            <div class="popup__sub">Good Luck!</div>
+          </div>
+        </div>
+      </div>
+      <div class="container view hidden" id="wanted">
+        <div class="wrapper">
+          <div class="wanted">
+            <h2>[EN] Wanted players from old times, with yellow background are the most wanted at all! Try to find them! [PL] Znajdźmy się na nowo!</h2>
+            <ol>
+              <li class="most-wanted hess">|-HEROES-|> Rudolff Hess<span></span></li>
+              <li class="most-wanted" data-wanted="znaleziony, ale nie chce grać">|-HEROES-|> Maliniak</li>
+              <li class="most-wanted">-2fast4u | TOUGH^GUY</li>
+              <li>-2fast4u | Alien</li>
+              <li>-2fast4u | Neo</li>
+              <li>-2fast4u | Magic</li>
+              <li>-2fast4u | Paradox</li>
+              <li>-2fast4u | Scarface (Albin)</li>
+              <li>GLOWA</li>
+              <li>nudE | MaMa</li>
+              <li>nudE | Saggitarius</li>
+              <li>|=AK=| Ramzes</li>
+              <li>Robert Rath</li>
+              <li>Miguel Bain</li>              
+              <li>-{=breslau=}- Bols</li>
+              <li>-{=breslau=}- Seba</li>
+              <li>-{=breslau=}- ChemilO</li>
+              <li class="most-wanted">-{=breslau=}- PiOD</li>
+              <li>-{=breslau=}- Nadol</li>
+              <li>-{=breslau=}- Sadza</li>
+              <li>-{=breslau=}- Zawisza</li>
+              <li>-{=breslau=}- jasio</li>
+              <li>-{=breslau=}- Kuduk</li>
+              <li>-{=breslau=}- mystek</li>
+              <li>-{=breslau=}- Kosa</li>
+              <li>-{=breslau=}- Pigeon</li>
+              <li>-{=breslau=}- pdm</li>
+              <li>Chudy_Ed</li>
+              <li>Mortiusz</li>
+              <li>SiD</li>
+              <li>SanCho</li>
+              <li>Hulk</li>
+              <li>-[T]eamForce- | KopeR</li>
+              <li>MySzArD</li>
+              <li>Vicas</li>
+              <li>Gro$hman</li>
+              <li>sZyCha!</li>
+              <li>vtRn!</li>
+              <li>Rzirek</li>
+              <li>sniper</li>
+              <li>xhee</li>
+              <li>BL@DY</li>
+              <li>Wesoły</li>
+              <li>ArGoNq</li>
+              <li>fawkes!</li>
+              <li>Shadow</li>
+              <li>Angelo</li>
+              <li>Makutra</li>
+            </ol>
+          </div>
+        </div>
+      </div>
     </div>   
     <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script> -->
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
         https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script> -->
 
     <script>
       // Your web app's Firebase configuration
       // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-      const firebaseConfig = {
-        apiKey: "AIzaSyBO4nqpO3FSeXJqHV0qYuPVRi4XLiJEujo",
-        authDomain: "spearhead-mix-league.firebaseapp.com",
-        databaseURL: "https://spearhead-mix-league-default-rtdb.europe-west1.firebasedatabase.app",
-        projectId: "spearhead-mix-league",
-        storageBucket: "spearhead-mix-league.appspot.com",
-        messagingSenderId: "719531931759",
-        appId: "1:719531931759:web:7fe514dce675b8e19cf59a",
-        measurementId: "G-7WB1MRGPB5"
-      };
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
+      // const firebaseConfig = {
+      //   apiKey: "AIzaSyBO4nqpO3FSeXJqHV0qYuPVRi4XLiJEujo",
+      //   authDomain: "spearhead-mix-league.firebaseapp.com",
+      //   databaseURL: "https://spearhead-mix-league-default-rtdb.europe-west1.firebasedatabase.app",
+      //   projectId: "spearhead-mix-league",
+      //   storageBucket: "spearhead-mix-league.appspot.com",
+      //   messagingSenderId: "719531931759",
+      //   appId: "1:719531931759:web:7fe514dce675b8e19cf59a",
+      //   measurementId: "G-7WB1MRGPB5"
+      // };
+      // // Initialize Firebase
+      // firebase.initializeApp(firebaseConfig);
       // firebase.analytics();
 
       // const firebaseConfigTdm = {
@@ -455,8 +1182,7 @@
       //   measurementId: "G-KZZ2V9JTKC"
       // };
       // firebase.initializeApp(firebaseConfigTdm);
-    </script>
-    
-    
+      
+    </script>     
   </body>
 </html>

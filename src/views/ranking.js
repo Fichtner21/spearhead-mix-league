@@ -1,26 +1,46 @@
 import drive from 'drive-db';
 import { Chart } from 'chart.js';
 import $ from 'jquery';
+import { iteratee } from 'lodash';
 
 export function rankingInfo() {
   function smallStrike(name, arr) {
     const littleStrike = document.createElement('div');
+    const spanStrike = document.createElement('span');
     const firstFromEnd = arr(name)[arr(name).length - 1];
     const secondFromEnd = arr(name)[arr(name).length - 2];
     const countingPoints = firstFromEnd - secondFromEnd;
 
     if (firstFromEnd > secondFromEnd) {
       littleStrike.classList.add('up-streak');
-      littleStrike.setAttribute('title', `${countingPoints.toFixed(2)} pc in last war`);
+      spanStrike.setAttribute('data-title', `${countingPoints > 0 ? `+${countingPoints.toFixed(2)}` : ''} pc in last war`);
+      littleStrike.appendChild(spanStrike);
     } else if (firstFromEnd < secondFromEnd) {
       littleStrike.classList.add('down-streak');
-      littleStrike.setAttribute('title', `${countingPoints.toFixed(2)} pc in last war`);
+      spanStrike.setAttribute('data-title', `${countingPoints.toFixed(2)} pc in last war`);
+      littleStrike.appendChild(spanStrike);
+      // littleStrike.setAttribute('title', `${countingPoints.toFixed(2)} pc in last war`);
     } else {
       littleStrike.classList.add('draw-streak');
-      littleStrike.setAttribute('title', `${countingPoints.toFixed(2)} pc in last war`);
+      spanStrike.setAttribute('data-title', `${countingPoints.toFixed(2)} pc in last war`);
+      littleStrike.appendChild(spanStrike);
+      // littleStrike.setAttribute('title', `${countingPoints.toFixed(2)} pc in last war`);
     }
 
     return littleStrike;
+  }
+
+  function findPlayerLastWar(name, obj) {
+    const findeLastWar = obj.filter((item) => JSON.stringify(item).includes(name)).pop();
+    let findLastTimeStamp = '';
+    if (findeLastWar) {
+      findLastTimeStamp = findeLastWar.timestamp;
+    } else if (findeLastWar === 'undefined') {
+      findLastTimeStamp = 'No match';
+    } else {
+      findLastTimeStamp = 'No match';
+    }
+    return findLastTimeStamp;
   }
 
   (async () => {
@@ -40,6 +60,11 @@ export function rankingInfo() {
     const historyRankingTdm = await drive({
       sheet: '1tcSgDUSxwrHQclfxdOKQDabZGQOAeb1E7GVTvitdfu4',
       tab: '1',
+    });
+
+    const historyMatchesTdm = await drive({
+      sheet: '1tcSgDUSxwrHQclfxdOKQDabZGQOAeb1E7GVTvitdfu4',
+      tab: '4',
     });
 
     const ourPlayers = document.getElementById('our-players2');
@@ -204,11 +229,58 @@ export function rankingInfo() {
       return nameRanksOut;
     }
 
-    // console.log(
-    //   'Rank History 2: ',
-    //   rankHistory('boogie')[rankHistory('boogie').length - 1],
-    //   rankHistory('boogie')[rankHistory('boogie').length - 2],
-    // );
+    function rankHistoryTdm(name) {
+      const arrNameRanks = [];
+
+      function destructObjRanks(obj, arr) {
+        for (const key in obj) {
+          if (obj.hasOwnProperty(key)) {
+            const objInArr = obj[key];
+            for (const key2 in objInArr) {
+              if (objInArr.hasOwnProperty(key2)) {
+                const elemOfObj = objInArr[key2];
+                arr.push(elemOfObj);
+              }
+            }
+          }
+        }
+      }
+
+      destructObjRanks(historyMatchesTdm, arrNameRanks);
+
+      function getIndexesRanks(arr, val) {
+        const indexes = [];
+        let i = -1;
+        while ((i = arr.indexOf(val, i + 1)) !== -1) {
+          indexes.push(i + 4); // postELO
+        }
+        return indexes;
+      }
+
+      const indexesRanksName = getIndexesRanks(arrNameRanks, name);
+      const nameRanksOut = [];
+
+      function ranksAllStrikes(username, ind, arrIn, arrOut) {
+        if (arrIn.includes(username)) {
+          arrIn.forEach(function (el, index) {
+            index += 1;
+            ind.forEach(function (founded, i) {
+              if (Number(index) === Number(founded)) {
+                const foundedStreak = Number(el).toFixed(2);
+                arrOut.push(Number(foundedStreak));
+              }
+            });
+          });
+        }
+      }
+
+      ranksAllStrikes(name, indexesRanksName, arrNameRanks, nameRanksOut);
+
+      // Every player start to play with 1000 ELO rank, so we need to put this before first value in array rank.
+      nameRanksOut.unshift(1000);
+
+      return nameRanksOut;
+    }
 
     function searchPlayer(name) {
       const exampleArr = [];
@@ -299,7 +371,16 @@ export function rankingInfo() {
       resultObject.forEach((elem) => {
         warIDs.push(elem.idwar);
       });
-      const showIDwars = warIDs.join(', ');
+
+      const linkWars = [];
+      warIDs.forEach((el) => {
+        let linkWar = '';
+        linkWar = `<a href="#match-${el}" title="Show war #${el}."><span>#</span>${el}</a>`;
+        linkWars.push(linkWar);
+      });
+
+      const showIDwars = linkWars.join(', ');
+
       return showIDwars;
     }
 
@@ -398,43 +479,44 @@ export function rankingInfo() {
 
     const lastWar = document.getElementById('lastWar');
 
-    function findPlayerLastWar(name) {
-      const findeLastWar = historyRanking.filter((item) => JSON.stringify(item).includes(name)).pop();
-      let findLastTimeStamp = '';
-      if (findeLastWar) {
-        findLastTimeStamp = findeLastWar.timestamp;
-      } else if (findeLastWar === 'undefined') {
-        findLastTimeStamp = 'No match';
-      } else {
-        findLastTimeStamp = 'No match';
-      }
-      return findLastTimeStamp;
-    }
+    // function findPlayerLastWar(name) {
+    //   const findeLastWar = historyRanking.filter((item) => JSON.stringify(item).includes(name)).pop();
+    //   let findLastTimeStamp = '';
+    //   if (findeLastWar) {
+    //     findLastTimeStamp = findeLastWar.timestamp;
+    //   } else if (findeLastWar === 'undefined') {
+    //     findLastTimeStamp = 'No match';
+    //   } else {
+    //     findLastTimeStamp = 'No match';
+    //   }
+    //   return findLastTimeStamp;
+    // }
 
     function findPlayerCard(name) {
       let objPlayer = '';
+      let tdmPlayer = '';
       players.forEach((el) => {
         objPlayer = el.username;
       });
 
-      let tdmPlayer = '';
       historyRankingTdm.forEach((el) => {
         tdmPlayer = el.username;
       });
 
+      let passPlayer = '';
       if (tdmPlayer === objPlayer) {
-        name = tdmPlayer;
+        passPlayer = name;
       }
 
-      return name;
+      return passPlayer;
     }
 
     const userNameTimeStamp = players.map((entry) => entry.username);
     userNameTimeStamp.forEach((user) => {
       const userItemTimestamp = document.createElement('div');
       userItemTimestamp.classList.add('item');
-      if (findPlayerLastWar(user)) {
-        userItemTimestamp.innerHTML += findPlayerLastWar(user);
+      if (findPlayerLastWar(user, historyRanking)) {
+        userItemTimestamp.innerHTML += findPlayerLastWar(user, historyRanking);
       } else {
         console.log('Can not find last timestamp war of: ' + user);
       }
@@ -482,11 +564,13 @@ export function rankingInfo() {
       playerCardDiv.appendChild(playerCardWrapper);
       playerCardWrapper.innerHTML += `<div class="frag-title"><span class="frag-name">${
         name.playername
-      }</span> has played <span class="frag-name">${
-        name.warcount
-      }</span> OBJ wars.</div><div class="frag-title">Check <a href="#charts-tdm-${findPlayerCard(
-        name.username,
-      )}"><span class="frag-name">${name.playername}</span></a> statistics in TDM.</div>`;
+      }</span> has played <span class="frag-name">${name.warcount}</span> OBJ wars.</div>
+      ${
+        countWarsTdm(name.username).length > 1
+          ? `<div class="frag-title">
+      Check <a href="#charts-tdm-${name.username}"><span class="frag-name">${name.playername}</span></a> statistics in TDM.</div>`
+          : ''
+      }`;
       const inDeCont = document.createElement('div');
       inDeCont.classList.add('increaseDecrease');
       playerCardWrapper.appendChild(inDeCont);
@@ -531,9 +615,9 @@ export function rankingInfo() {
         2,
       )}</span><img src="./assets/avarage.png"></div><div class="frag-item">Lowest frags per war: <span class="frag-value frag-low">${Math.min(
         ...minMaxFrags(name.username),
-      )}</span><img src="./assets/low.png"></div><div class="frag-item">ID wars: <span class="frag-value">${searchPlayerWars(
-        name.username,
-      )}</span></div>`;
+      )}</span><img src="./assets/low.png"></div><div class="frag-item wars-cont">ID wars:
+     <span class="frag-value wars-id short">
+      ${searchPlayerWars(name.username)}</span></div>`;
       fragAvarage.appendChild(fragAvarageDiv);
 
       // const comparePlayer = document.createElement('div');
@@ -703,6 +787,17 @@ export function rankingInfo() {
       // Skip first el of array because is based rank 1000.
       // playerWars.shift();
       return playerWars;
+    }
+
+    function countWarsTdm(name) {
+      const playerWarsTdm = [];
+      const playerRankHistory = rankHistoryTdm(name);
+      playerRankHistory.forEach((war, index) => {
+        playerWarsTdm.push(index);
+      });
+      // Skip first el of array because is based rank 1000.
+      // playerWars.shift();
+      return playerWarsTdm;
     }
 
     historyRanking2.forEach((userNameInStreak) => {

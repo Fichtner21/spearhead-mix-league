@@ -48,6 +48,7 @@
     "express": "^4.17.1",
     "firebase": "^8.1.2",
     "jquery": "^3.5.1",
+    "jquery-bracket": "^0.11.1",
     "js-cookie": "^2.2.1",
     "jw-paginate": "^1.0.4",
     "lodash": "^4.17.20",

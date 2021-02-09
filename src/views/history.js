@@ -539,21 +539,21 @@ export function history() {
             <div class="players">            
               <div class="player">
                 <div class="preelo">${war.t1p1preelo}</div>
-                <div class="name">${addPlayerLink(war.t1p1name)}</div>
+                <div class="name">${addPlayerLink(war.t1p1name) ? addPlayerLink(war.t1p1name) : getFromInactive(war.t1p1name)}</div>
                 <div class="score">${war.t1p1score}</div>
                 <div class="postelo">${war.t1p1postelo}</div>
                 <div class="difference">${Number(parseFloat(war.t1p1postelo - war.t1p1preelo).toFixed(2))}</div>
               </div>
               <div class="player">
                 <div class="preelo">${war.t1p2preelo}</div>
-                <div class="name">${addPlayerLink(war.t1p2name)}</div>
+                <div class="name">${addPlayerLink(war.t1p2name) ? addPlayerLink(war.t1p2name) : getFromInactive(war.t1p2name)}</div>
                 <div class="score">${war.t1p2score}</div>
                 <div class="postelo">${war.t1p2postelo}</div>
                 <div class="difference">${Number(parseFloat(war.t1p2postelo - war.t1p2preelo).toFixed(2))}</div>
               </div>
               <div class="player">
                 <div class="preelo">${war.t1p3preelo}</div>
-                <div class="name">${addPlayerLink(war.t1p3name)}</div>
+                <div class="name">${addPlayerLink(war.t1p3name) ? addPlayerLink(war.t1p3name) : getFromInactive(war.t1p3name)}</div>
                 <div class="score">${war.t1p3score}</div>
                 <div class="postelo">${war.t1p3postelo}</div>
                 <div class="difference">${
@@ -565,7 +565,7 @@ export function history() {
               </div>
               <div class="player">
                 <div class="preelo">${war.t1p4preelo}</div>
-                <div class="name">${addPlayerLink(war.t1p4name)}</div>
+                <div class="name">${addPlayerLink(war.t1p4name) ? addPlayerLink(war.t1p4name) : getFromInactive(war.t1p4name)}</div>
                 <div class="score">${war.t1p4score}</div>
                 <div class="postelo">${war.t1p4postelo}</div>
                 <div class="difference">${
@@ -576,7 +576,7 @@ export function history() {
               </div>
               <div class="player">
                 <div class="preelo">${war.t1p5preelo}</div>
-                <div class="name">${addPlayerLink(war.t1p5name)}</div>
+                <div class="name">${addPlayerLink(war.t1p5name) ? addPlayerLink(war.t1p5name) : getFromInactive(war.t1p5name)}</div>
                 <div class="score">${war.t1p5score}</div>
                 <div class="postelo">${war.t1p5postelo}</div>
                 <div class="difference">${
@@ -589,7 +589,7 @@ export function history() {
                 war.t1p6name
                   ? `<div class="player">
                 <div class="preelo">${war.t1p6preelo}</div>
-                <div class="name">${addPlayerLink(war.t1p6name)}</div>
+                <div class="name">${addPlayerLink(war.t1p6name) ? addPlayerLink(war.t1p6name) : getFromInactive(war.t1p6name)}</div>
                 <div class="score">${war.t1p6score}</div>
                 <div class="postelo">${war.t1p6postelo}</div>
                 <div class="difference">${
@@ -604,7 +604,7 @@ export function history() {
                 war.t1p7name
                   ? `<div class="player">
                 <div class="preelo">${war.t1p7preelo}</div>
-                <div class="name">${addPlayerLink(war.t1p7name)}</div>
+                <div class="name">${addPlayerLink(war.t1p7name) ? addPlayerLink(war.t1p7name) : getFromInactive(war.t1p7name)}</div>
                 <div class="score">${war.t1p7score}</div>
                 <div class="postelo">${war.t1p7postelo}</div>
                 <div class="difference">${
@@ -622,7 +622,7 @@ export function history() {
           <div class="players">
             <div class="player">
               <div class="preelo">${war.t2p1preelo}</div>
-              <div class="name">${addPlayerLink(war.t2p1name)}</div>
+              <div class="name">${addPlayerLink(war.t2p1name) ? addPlayerLink(war.t2p1name) : getFromInactive(war.t2p1name)}</div>
               <div class="score">${war.t2p1score}</div>
               <div class="postelo">${war.t2p1postelo}</div>
               <div class="difference">${Number(parseFloat(war.t2p1postelo - war.t2p1preelo).toFixed(2))}
@@ -630,7 +630,7 @@ export function history() {
             </div>
             <div class="player">
               <div class="preelo">${war.t2p2preelo}</div>
-              <div class="name">${addPlayerLink(war.t2p2name)}</div>
+              <div class="name">${addPlayerLink(war.t2p2name) ? addPlayerLink(war.t2p2name) : getFromInactive(war.t2p2name)}</div>
               <div class="score">${war.t2p2score}</div>
               <div class="postelo">${war.t2p2postelo}</div>
               <div class="difference">${
@@ -642,7 +642,7 @@ export function history() {
             </div>
             <div class="player">
               <div class="preelo">${war.t2p3preelo}</div>
-              <div class="name">${addPlayerLink(war.t2p3name)}</div>
+              <div class="name">${addPlayerLink(war.t2p3name) ? addPlayerLink(war.t2p3name) : getFromInactive(war.t2p3name)}</div>
               <div class="score">${war.t2p3score}</div>
               <div class="postelo">${war.t2p3postelo}</div>
               <div class="difference">${
@@ -654,7 +654,7 @@ export function history() {
             </div>
             <div class="player">
               <div class="preelo">${war.t2p4preelo}</div>
-              <div class="name">${addPlayerLink(war.t2p4name)}</div>
+              <div class="name">${addPlayerLink(war.t2p4name) ? addPlayerLink(war.t2p4name) : getFromInactive(war.t2p4name)}</div>
               <div class="score">${war.t2p4score}</div>
               <div class="postelo">${war.t2p4postelo}</div>
               <div class="difference">${
@@ -666,7 +666,7 @@ export function history() {
             </div>
             <div class="player">
               <div class="preelo">${war.t2p5preelo}</div>
-              <div class="name">${addPlayerLink(war.t2p5name)}</div>
+              <div class="name">${addPlayerLink(war.t2p5name) ? addPlayerLink(war.t2p5name) : getFromInactive(war.t2p5name)}</div>
               <div class="score">${war.t2p5score}</div>
               <div class="postelo">${war.t2p5postelo}</div>
               <div class="difference">${
@@ -680,7 +680,7 @@ export function history() {
               war.t2p6name
                 ? `<div class="player">
               <div class="preelo">${war.t2p6preelo}</div>
-              <div class="name">${addPlayerLink(war.t2p6name)}</div>
+              <div class="name">${addPlayerLink(war.t2p6name) ? addPlayerLink(war.t2p6name) : getFromInactive(war.t2p6name)}</div>
               <div class="score">${war.t2p6score}</div>
               <div class="postelo">${war.t2p6postelo}</div>
               <div class="difference">${
@@ -695,7 +695,7 @@ export function history() {
               war.t2p7name
                 ? `<div class="player">
               <div class="preelo">${war.t2p7preelo}</div>
-              <div class="name">${addPlayerLink(war.t2p7name)}</div>
+              <div class="name">${addPlayerLink(war.t2p7name) ? addPlayerLink(war.t2p7name) : getFromInactive(war.t2p7name)}</div>
               <div class="score">${war.t2p7score}</div>
               <div class="postelo">${war.t2p7postelo}</div>
               <div class="difference">${
@@ -861,7 +861,7 @@ export function history() {
       });
     });
 
-    const matchNodeList = document.querySelectorAll('.match');
+    const matchNodeList = document.querySelectorAll('.warmatch.match');
     const matchArr = Array.prototype.slice.call(matchNodeList);
     for (let i = 0; i < matchArr.length; i++) {
       const resultT1 = Number(parseInt(matchArr[i].children[1].children[0].innerHTML, 10));
@@ -884,7 +884,7 @@ export function history() {
 
     const matchNodeListSingle = document.querySelectorAll('.match-single');
     const matchArrSingle = Array.prototype.slice.call(matchNodeListSingle);
-    for (let i = 0; i < matchArr.length; i++) {
+    for (let i = 0; i < matchArrSingle.length; i++) {
       const resultT1Single = Number(parseInt(matchArrSingle[i].children[1].children[0].innerHTML, 10));
       const resultT2Single = Number(parseInt(matchArrSingle[i].children[2].children[0].innerHTML, 10));
 
@@ -905,7 +905,7 @@ export function history() {
 
     const matchNodeListNo = document.querySelectorAll('.nomatch-video');
     const matchArrNo = Array.prototype.slice.call(matchNodeListNo);
-    for (let i = 0; i < matchArr.length; i++) {
+    for (let i = 0; i < matchArrNo.length; i++) {
       const resultT1no = Number(parseInt(matchArrNo[i].children[1].children[0].innerHTML, 10));
       const resultT2no = Number(parseInt(matchArrNo[i].children[2].children[0].innerHTML, 10));
 

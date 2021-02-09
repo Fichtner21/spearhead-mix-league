@@ -4,6 +4,13 @@ import firebase from 'firebase';
 import timeago from 'timeago';
 
 export function historyTdm() {
+  function addPlus(score) {
+    if (score > 0) {
+      score = `+` + score;
+    }
+    return score;
+  }
+
   (async () => {
     const db = await drive({
       sheet: '1tcSgDUSxwrHQclfxdOKQDabZGQOAeb1E7GVTvitdfu4',
@@ -131,7 +138,7 @@ export function historyTdm() {
               <div class="player">
                 <div class="preelo">${match.t1p1preelo}</div>
                 <div class="name">${addPlayerLink(match.t1p1name) ? addPlayerLink(match.t1p1name) : getFromInactive(match.t1p1name)}</div>
-                <div class="score">${match.t1p1score}</div>
+                <div class="score">${addPlus(match.t1p1score)}</div>
                 <div class="postelo">${match.t1p1postelo}</div>
                 <div class="difference">${Number(parseFloat(match.t1p1postelo - match.t1p1preelo).toFixed(2))}
                 </div>
@@ -140,7 +147,7 @@ export function historyTdm() {
               <div class="player">
                 <div class="preelo">${match.t1p2preelo}</div>
                 <div class="name">${addPlayerLink(match.t1p2name) ? addPlayerLink(match.t1p2name) : getFromInactive(match.t1p2name)}</div>
-                <div class="score">${match.t1p2score}</div>
+                <div class="score">${addPlus(match.t1p2score)}</div>
                 <div class="postelo">${match.t1p2postelo}</div>
                 <div class="difference">${
                   Number(parseFloat(match.t1p2postelo - match.t1p2preelo).toFixed(2) === 'NaN')
@@ -153,7 +160,7 @@ export function historyTdm() {
               <div class="player">
                 <div class="preelo">${match.t1p3preelo}</div>
                 <div class="name">${addPlayerLink(match.t1p3name) ? addPlayerLink(match.t1p3name) : getFromInactive(match.t1p3name)}</div>
-                <div class="score">${match.t1p3score}</div>
+                <div class="score">${addPlus(match.t1p3score)}</div>
                 <div class="postelo">${match.t1p3postelo}</div>
                 <div class="difference">${
                   Number(parseFloat(match.t1p3postelo - match.t1p3preelo).toFixed(2) === 'NaN')
@@ -166,7 +173,7 @@ export function historyTdm() {
               <div class="player">
                 <div class="preelo">${match.t1p4preelo}</div>
                 <div class="name">${addPlayerLink(match.t1p4name) ? addPlayerLink(match.t1p4name) : getFromInactive(match.t1p4name)}</div>
-                <div class="score">${match.t1p4score}</div>
+                <div class="score">${addPlus(match.t1p4score)}</div>
                 <div class="postelo">${match.t1p4postelo}</div>
                 <div class="difference">${
                   Number(parseFloat(match.t1p4postelo - match.t1p4preelo).toFixed(2) === 'NaN')
@@ -179,7 +186,7 @@ export function historyTdm() {
               <div class="player">
                 <div class="preelo">${match.t1p5preelo}</div>
                 <div class="name">${addPlayerLink(match.t1p5name) ? addPlayerLink(match.t1p5name) : getFromInactive(match.t1p5name)}</div>
-                <div class="score">${match.t1p5score}</div>
+                <div class="score">${addPlus(match.t1p5score)}</div>
                 <div class="postelo">${match.t1p5postelo}</div>
                 <div class="difference">${
                   Number(parseFloat(match.t1p5postelo - match.t1p5preelo).toFixed(2) === 'NaN')
@@ -194,7 +201,7 @@ export function historyTdm() {
                   ? `<div class="player">
                 <div class="preelo">${match.t1p6preelo}</div>
                 <div class="name">${addPlayerLink(match.t1p6name) ? addPlayerLink(match.t1p6name) : getFromInactive(match.t1p6name)}</div>
-                <div class="score">${match.t1p6score}</div>
+                <div class="score">${addPlus(match.t1p6score)}</div>
                 <div class="postelo">${match.t1p6postelo}</div>
                 <div class="difference">${
                   Number(parseFloat(match.t1p6postelo - match.t1p6preelo).toFixed(2))
@@ -213,7 +220,7 @@ export function historyTdm() {
                <div class="player">
                 <div class="preelo">${match.t2p1preelo}</div>
                 <div class="name">${addPlayerLink(match.t2p1name) ? addPlayerLink(match.t2p1name) : getFromInactive(match.t2p1name)}</div>
-                <div class="score">${match.t2p1score}</div>
+                <div class="score">${addPlus(match.t2p1score)}</div>
                 <div class="postelo">${match.t2p1postelo}</div>
                 <div class="difference">${
                   Number(parseFloat(match.t2p1postelo - match.t2p1preelo).toFixed(2) === 'NaN')
@@ -225,7 +232,7 @@ export function historyTdm() {
               <div class="player">    
                 <div class="preelo">${match.t2p2preelo}</div>
                 <div class="name">${addPlayerLink(match.t2p2name) ? addPlayerLink(match.t2p2name) : getFromInactive(match.t2p2name)}</div>
-                <div class="score">${match.t2p2score}</div>
+                <div class="score">${addPlus(match.t2p2score)}</div>
                 <div class="postelo">${match.t2p2postelo}</div>
                 <div class="difference">${
                   Number(parseFloat(match.t2p2postelo - match.t2p2preelo).toFixed(2) === 'NaN')
@@ -237,7 +244,7 @@ export function historyTdm() {
               <div class="player">
                 <div class="preelo">${match.t2p3preelo}</div>
                 <div class="name">${addPlayerLink(match.t2p3name) ? addPlayerLink(match.t2p3name) : getFromInactive(match.t2p3name)}</div>
-                <div class="score">${match.t2p3score}</div>
+                <div class="score">${addPlus(match.t2p3score)}</div>
                 <div class="postelo">${match.t2p3postelo}</div>
                 <div class="difference">${
                   Number(parseFloat(match.t2p3postelo - match.t2p3preelo).toFixed(2) === 'NaN')
@@ -249,7 +256,7 @@ export function historyTdm() {
               <div class="player">
                 <div class="preelo">${match.t2p4preelo}</div>
                 <div class="name">${addPlayerLink(match.t2p4name) ? addPlayerLink(match.t2p4name) : getFromInactive(match.t2p4name)}</div>
-                <div class="score">${match.t2p4score}</div>
+                <div class="score">${addPlus(match.t2p4score)}</div>
                 <div class="postelo">${match.t2p4postelo}</div>
                 <div class="difference">${
                   Number(parseFloat(match.t2p4postelo - match.t2p4preelo).toFixed(2) === 'NaN')
@@ -261,7 +268,7 @@ export function historyTdm() {
               <div class="player">
                 <div class="preelo">${match.t2p5preelo}</div>
                 <div class="name">${addPlayerLink(match.t2p5name) ? addPlayerLink(match.t2p5name) : getFromInactive(match.t2p5name)}</div>
-                <div class="score">${match.t2p5score}</div>
+                <div class="score">${addPlus(match.t2p5score)}</div>
                 <div class="postelo">${match.t2p5postelo}</div>
                 <div class="difference">${
                   Number(parseFloat(match.t2p5postelo - match.t2p5preelo).toFixed(2) === 'NaN')
@@ -275,7 +282,7 @@ export function historyTdm() {
                   ? `<div class="player">
                 <div class="preelo">${match.t2p6preelo}</div>
                 <div class="name">${addPlayerLink(match.t2p6name) ? addPlayerLink(match.t2p6name) : getFromInactive(match.t2p6name)}</div>
-                <div class="score">${match.t2p6score}</div>
+                <div class="score">${addPlus(match.t2p6score)}</div>
                 <div class="postelo">${match.t2p6postelo}</div>
                 <div class="difference">${
                   Number(parseFloat(match.t2p6postelo - match.t2p6preelo).toFixed(2))
@@ -342,21 +349,21 @@ export function historyTdm() {
               <div class="player">
                 <div class="preelo">${war.t1p1preelo}</div>
                 <div class="name">${addPlayerLink(war.t1p1name)}</div>
-                <div class="score">${war.t1p1score}</div>
+                <div class="score">${addPlus(war.t1p1score)}</div>
                 <div class="postelo">${war.t1p1postelo}</div>
                 <div class="difference">${Number(parseFloat(war.t1p1postelo - war.t1p1preelo).toFixed(2))}</div>
               </div>
               <div class="player">
                 <div class="preelo">${war.t1p2preelo}</div>
                 <div class="name">${addPlayerLink(war.t1p2name)}</div>
-                <div class="score">${war.t1p2score}</div>
+                <div class="score">${addPlus(war.t1p2score)}</div>
                 <div class="postelo">${war.t1p2postelo}</div>
                 <div class="difference">${Number(parseFloat(war.t1p2postelo - war.t1p2preelo).toFixed(2))}</div>
               </div>
               <div class="player">
                 <div class="preelo">${war.t1p3preelo}</div>
                 <div class="name">${addPlayerLink(war.t1p3name)}</div>
-                <div class="score">${war.t1p3score}</div>
+                <div class="score">${addPlus(war.t1p3score)}</div>
                 <div class="postelo">${war.t1p3postelo}</div>
                 <div class="difference">${
                   Number(parseFloat(war.t1p3postelo - war.t1p3preelo).toFixed(2))
@@ -368,7 +375,7 @@ export function historyTdm() {
               <div class="player">
                 <div class="preelo">${war.t1p4preelo}</div>
                 <div class="name">${addPlayerLink(war.t1p4name)}</div>
-                <div class="score">${war.t1p4score}</div>
+                <div class="score">${addPlus(war.t1p4score)}</div>
                 <div class="postelo">${war.t1p4postelo}</div>
                 <div class="difference">${
                   Number(parseFloat(war.t1p4postelo - war.t1p4preelo).toFixed(2))
@@ -379,7 +386,7 @@ export function historyTdm() {
               <div class="player">
                 <div class="preelo">${war.t1p5preelo}</div>
                 <div class="name">${addPlayerLink(war.t1p5name)}</div>
-                <div class="score">${war.t1p5score}</div>
+                <div class="score">${addPlus(war.t1p5score)}</div>
                 <div class="postelo">${war.t1p5postelo}</div>
                 <div class="difference">${
                   Number(parseFloat(war.t1p5postelo - war.t1p5preelo).toFixed(2))
@@ -392,7 +399,7 @@ export function historyTdm() {
                   ? `<div class="player">
                 <div class="preelo">${war.t1p6preelo}</div>
                 <div class="name">${addPlayerLink(war.t1p6name)}</div>
-                <div class="score">${war.t1p6score}</div>
+                <div class="score">${addPlus(war.t1p6score)}</div>
                 <div class="postelo">${war.t1p6postelo}</div>
                 <div class="difference">${
                   Number(parseFloat(war.t1p6postelo - war.t1p6preelo).toFixed(2))
@@ -410,7 +417,7 @@ export function historyTdm() {
             <div class="player">
               <div class="preelo">${war.t2p1preelo}</div>
               <div class="name">${addPlayerLink(war.t2p1name)}</div>
-              <div class="score">${war.t2p1score}</div>
+              <div class="score">${addPlus(war.t2p1score)}</div>
               <div class="postelo">${war.t2p1postelo}</div>
               <div class="difference">${Number(parseFloat(war.t2p1postelo - war.t2p1preelo).toFixed(2))}
               </div>
@@ -418,7 +425,7 @@ export function historyTdm() {
             <div class="player">
               <div class="preelo">${war.t2p2preelo}</div>
               <div class="name">${addPlayerLink(war.t2p2name)}</div>
-              <div class="score">${war.t2p2score}</div>
+              <div class="score">${addPlus(war.t2p2score)}</div>
               <div class="postelo">${war.t2p2postelo}</div>
               <div class="difference">${
                 Number(parseFloat(war.t2p2postelo - war.t2p2preelo).toFixed(2))
@@ -430,7 +437,7 @@ export function historyTdm() {
             <div class="player">
               <div class="preelo">${war.t2p3preelo}</div>
               <div class="name">${addPlayerLink(war.t2p3name)}</div>
-              <div class="score">${war.t2p3score}</div>
+              <div class="score">${addPlus(war.t2p3score)}</div>
               <div class="postelo">${war.t2p3postelo}</div>
               <div class="difference">${
                 Number(parseFloat(war.t2p3postelo - war.t2p3preelo).toFixed(2))
@@ -442,7 +449,7 @@ export function historyTdm() {
             <div class="player">
               <div class="preelo">${war.t2p4preelo}</div>
               <div class="name">${addPlayerLink(war.t2p4name)}</div>
-              <div class="score">${war.t2p4score}</div>
+              <div class="score">${addPlus(war.t2p4score)}</div>
               <div class="postelo">${war.t2p4postelo}</div>
               <div class="difference">${
                 Number(parseFloat(war.t2p4postelo - war.t2p4preelo).toFixed(2))
@@ -454,7 +461,7 @@ export function historyTdm() {
             <div class="player">
               <div class="preelo">${war.t2p5preelo}</div>
               <div class="name">${addPlayerLink(war.t2p5name)}</div>
-              <div class="score">${war.t2p5score}</div>
+              <div class="score">${addPlus(war.t2p5score)}</div>
               <div class="postelo">${war.t2p5postelo}</div>
               <div class="difference">${
                 Number(parseFloat(war.t2p5postelo - war.t2p5preelo).toFixed(2))
@@ -468,7 +475,7 @@ export function historyTdm() {
                 ? `<div class="player">
               <div class="preelo">${war.t2p6preelo}</div>
               <div class="name">${addPlayerLink(war.t2p6name)}</div>
-              <div class="score">${war.t2p6score}</div>
+              <div class="score">${addPlus(war.t2p6score)}</div>
               <div class="postelo">${war.t2p6postelo}</div>
               <div class="difference">${
                 Number(parseFloat(war.t2p6postelo - war.t2p6preelo).toFixed(2))
@@ -520,18 +527,23 @@ export function historyTdm() {
 
     // $.getScript('https://www.gstatic.com/firebasejs/3.4.0/firebase.js', function () {
     //   const firebaseConfigTdm = {
-    //     apiKey: 'AIzaSyBO4nqpO3FSeXJqHV0qYuPVRi4XLiJEujo',
-    //     authDomain: 'spearhead-mix-league.firebaseapp.com',
-    //     databaseURL: 'https://spearhead-mix-league-default-rtdb.europe-west1.firebasedatabase.app',
-    //     projectId: 'spearhead-mix-league',
-    //     storageBucket: 'spearhead-mix-league.appspot.com',
-    //     messagingSenderId: '719531931759',
-    //     appId: '1:719531931759:web:7fe514dce675b8e19cf59a',
-    //     measurementId: 'G-7WB1MRGPB5',
+    //     apiKey: 'AIzaSyAtg_vZcjPpVnu6zVahBcCjG70uPN8S_yY',
+    //     authDomain: 'spearhead-mix-league-tdm.firebaseapp.com',
+    //     databaseURL: 'https://spearhead-mix-league-tdm-default-rtdb.europe-west1.firebasedatabase.app',
+    //     projectId: 'spearhead-mix-league-tdm',
+    //     storageBucket: 'spearhead-mix-league-tdm.appspot.com',
+    //     messagingSenderId: '437971097271',
+    //     appId: '1:437971097271:web:6b1dbf71344edf50bc9f32',
+    //     measurementId: 'G-KZZ2V9JTKC',
     //   };
 
+    //   // if (!firebase.apps.length) {
+    //   //   firebase.initializeApp(firebaseConfigTdm);
+    //   // } else {
+    //   //   firebase.app(); // if already initialized, use that one
+    //   // }
     //   firebase.initializeApp(firebaseConfigTdm);
-    //    const rootRef = firebase.database().ref();
+    //   const rootRef = firebase.database().ref();
 
     //   newObj.forEach((warComment, ind) => {
     //     const warCardWrapper = document.querySelectorAll('.match-detail');
@@ -633,7 +645,7 @@ export function historyTdm() {
     //   });
     // });
 
-    const matchNodeList = document.querySelectorAll('.match');
+    const matchNodeList = document.querySelectorAll('.warmatchtdm');
     const matchArr = Array.prototype.slice.call(matchNodeList);
     for (let i = 0; i < matchArr.length; i++) {
       const resultT1 = Number(parseInt(matchArr[i].children[1].children[0].innerHTML, 10));
@@ -656,7 +668,7 @@ export function historyTdm() {
 
     const matchNodeListSingle = document.querySelectorAll('.match-single');
     const matchArrSingle = Array.prototype.slice.call(matchNodeListSingle);
-    for (let i = 0; i < matchArr.length; i++) {
+    for (let i = 0; i < matchArrSingle.length; i++) {
       const resultT1Single = Number(parseInt(matchArrSingle[i].children[1].children[0].innerHTML, 10));
       const resultT2Single = Number(parseInt(matchArrSingle[i].children[2].children[0].innerHTML, 10));
 

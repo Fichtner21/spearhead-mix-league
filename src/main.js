@@ -11,6 +11,7 @@ import { chartsSite } from './views/charts';
 import { inactivePlayers } from './views/inactive';
 import { historyTdm } from './views/history_tdm';
 import { rankingTdm } from './views/ranking_tdm';
+import { cup } from './views/cup';
 // import Translator from './translator.js';
 
 function enableRouting() {
@@ -38,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
   inactivePlayers();
   historyTdm();
   rankingTdm();
+  cup();
 
   // if (window.history.pushState) {
   //   window.history.pushState('', '/', window.location.pathname);
@@ -357,7 +359,24 @@ document.addEventListener('DOMContentLoaded', () => {
     //   // const popup = `<div class="popup"><div>Watch player</div><a href="#charts-${randomPlayerLink}" class="closeLink">${addPlayerLinkHome(
     //   //   randomPlayerLink,
     //   // )}</a><div>statistics.</div><div class="close"><i class="far fa-window-close"></i></div></div>`;
-    //   const popup = `<div class="popup"><div>ELO ranking has changed <a href="#log" class="closeLink">check new ELO</a></div><div class="close"><i class="far fa-window-close"></i></div></div>`;
+    //   const popup = `<div class="popup">
+    //     <div class="popup__sub">First CUP 1on1 </div>
+    //     <div class="popup__sub">in MoH:SH MIX League</div>
+    //     <div class="popup__sub">Rules:</div>
+    //     <ol>
+    //       <li>Register on <a href="https://discord.gg/u4MCqKSKZf">Discord <i class="fab fa-discord"></i></a> until <strong>20:00, 05.02.2021</strong></li>
+    //       <li>CUP based rules: DOUBLE ELIMINATION (Winner and Loser Brackets)</li>
+    //       <li>Draw pairs <strong>20:00 - 21:00, 05.02.2021</strong></li>
+    //       <li>Players have 3 days(72hours) from selected to play their war</li>
+    //       <li>Time play: First to 5 rounds</li>
+    //       <li>Each round 4 minutes</li>
+    //       <li>Maps: The Hunt, V2, The Bridge, Stlo, VSUK Abbey - each player before war start baning maps i.e:<br> Player 1 - ban Stlo, Player 2 - ban VSUK Abbey, Player 1 - chose The Bridge, Player 2 - chose V2, <br>so they play The Bridge & V2 in case of draw next map will be The Hunt.</li>
+    //       <li>Disputes are settled by the league committee (-Illu$ioN-, KaPsEL, bAtOn).</li>
+    //     </ol>
+    //     <div class="popup__sub">Current lineup: <a href="#">On main page <i class="fas fa-list-ol"></i></a></div>
+    //     <div class="popup__sub">Good Luck!</div>
+
+    //   <div class="close"><i class="far fa-window-close"></i></div></div>`;
     //   $('body').append(popup);
 
     //   $(document).click((event) => {
