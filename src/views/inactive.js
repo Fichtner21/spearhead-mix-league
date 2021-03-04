@@ -205,24 +205,6 @@ export function inactivePlayers() {
       return max;
     }
 
-    function lenOfLongDecSubArr(arr, n) {
-      let max = 1;
-      let len = 1;
-      for (let i = 1; i < n; i++) {
-        if (arr[i] <= arr[i + 1]) {
-          len++;
-        } else {
-          if (max < len) {
-            max = len;
-          }
-        }
-      }
-      if (max < len) {
-        max = len;
-      }
-      return max;
-    }
-
     function searchPlayerWars(name) {
       const exampleArr = [];
       function searchPlayerKeyNameWar(nameKey, myArray) {
@@ -267,25 +249,27 @@ export function inactivePlayers() {
 
     const lastWar = document.getElementById('lastWar_inactive');
 
-    function findPlayerLastWar(name) {
-      const findeLastWar = historyRanking4.filter((item) => JSON.stringify(item).includes(name)).pop();
+    function findPlayerLastWar(name, obj) {
+      const findeLastWar = obj.filter((item) => JSON.stringify(item).includes(name)).pop();
       let findLastTimeStamp = '';
+      let newTimestampElem = '';
       if (findeLastWar) {
         findLastTimeStamp = findeLastWar.timestamp;
+        newTimestampElem = new Date(findLastTimeStamp).toLocaleDateString('pl-PL', { hour: '2-digit', minute: '2-digit' });
       } else if (findeLastWar === 'undefined') {
         findLastTimeStamp = 'No match';
       } else {
         findLastTimeStamp = 'No match';
       }
-      return findLastTimeStamp;
+      return newTimestampElem;
     }
 
     const userNameTimeStamp = players.map((entry) => entry.username);
     userNameTimeStamp.forEach((user) => {
       const userItemTimestamp = document.createElement('div');
       userItemTimestamp.classList.add('item');
-      if (findPlayerLastWar(user)) {
-        userItemTimestamp.innerHTML += findPlayerLastWar(user);
+      if (findPlayerLastWar(user, historyRanking4)) {
+        userItemTimestamp.innerHTML += findPlayerLastWar(user, historyRanking4);
       } else {
         console.log('Can not find last timestamp war of: ' + user);
       }
@@ -529,9 +513,6 @@ export function inactivePlayers() {
       warItem.innerHTML += matches;
       warCount.appendChild(warItem);
     });
-
-    const increase = document.querySelector('.increaseStreak');
-    const decrease = document.querySelector('.decreaseStreak');
 
     function countWars(name) {
       const playerWars = [];

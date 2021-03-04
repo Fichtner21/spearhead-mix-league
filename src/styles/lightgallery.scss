@@ -1,0 +1,60 @@
+.light-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  gap: 15px 15px;
+
+  @media screen and (max-width: 800px){
+    grid-template-columns: 1fr;
+  }
+
+  a {
+    img {
+      min-height: 100%;
+    }
+  }
+}
+
+.back-map-descriptions {
+  color: #ffffc0;
+  text-decoration: none;
+  font-weight: 700;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.map-descriptions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  gap: 15px 15px;
+
+  img {
+    transition: all .4s;
+
+    &:hover {
+      filter: contrast(120%);
+    }
+  }
+
+  .coming-soon {
+    position: relative;
+    pointer-events: none;
+
+    img {
+      filter: grayscale(1);
+    }
+    
+    .info-soon {
+      position: absolute;
+      background-color: rgba(0,0,0,0.5);
+      color: #fff;
+      padding: 10px;
+      bottom: 0;
+      left: 0; 
+      right: 0;
+    }
+  }
+}

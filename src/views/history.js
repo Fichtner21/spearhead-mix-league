@@ -106,8 +106,11 @@ export function history() {
 
     const lastMatch = document.getElementById('last-match');
 
+    const oldTimestampLast = teams[0].timestamp;
+    const newTimestampLast = new Date(oldTimestampLast).toLocaleDateString('pl-PL', { hour: '2-digit', minute: '2-digit' });
+
     let lastMatchInfo = `<div class="last">Last match: #${teams.length} `;
-    lastMatchInfo += `<div class="last-match-timestamp"> ${teams[0].timestamp}</div>`;
+    lastMatchInfo += `<div class="last-match-timestamp"> ${newTimestampLast}</div>`;
     lastMatchInfo += `<div class="last-match-team">`;
     lastMatchInfo += `<div class="last-match-player last-match-t1-player">    
     <div class="name">${addPlayerLink(teams[0].t1p1name)}</div>
@@ -265,14 +268,15 @@ export function history() {
       return mockInactive;
     }
 
-    // console.log(newObj[4]);
-
     newObj.forEach((match, i) => {
-      value += `<div class="warmatch ${match.video ? `match` : `nomatch-video`}" id="match${newObj.length - i}">          
+      const oldTimestamp = match.timestamp;
+      const newTimestamp = new Date(oldTimestamp).toLocaleDateString('pl-PL', { hour: '2-digit', minute: '2-digit' });
+      if (match.timestamp !== '') {
+        value += `<div class="warmatch ${match.video ? `match` : `nomatch-video`}" id="match${newObj.length - i}">          
           <div class="date">
             <div class="matchId" id="matchId-${newObj.length - i}">
               <a href="#match-${newObj.length - i}">#${newObj.length - i}</a></div>
-            <div class="dateDetail">${match.timestamp}</div>            
+            <div class="dateDetail">${newTimestamp}</div>            
               ${
                 match.video
                   ? `<a href="#match-${
@@ -498,13 +502,16 @@ export function history() {
             }          
         </div>
        `;
+      }
     });
 
     document.getElementById('matches').innerHTML = value;
 
     const ourMatches = document.getElementById('our-matches2');
 
-    ourMatches.innerHTML = ` ${teams.length}`;
+    const lastNotEmpty = teams.findIndex((x) => x.timestamp !== '');
+    const teamsLength = teams.length;
+    ourMatches.innerHTML = ` ${teamsLength - lastNotEmpty}`;
 
     const mainApp2 = document.getElementById('app');
     newObj.forEach((war, i) => {
@@ -517,6 +524,8 @@ export function history() {
       const warCardDetail = document.createElement('div');
       warCardDetail.classList.add('match-detail');
       warCardDetail.dataset.match = `${newObj.length - i}`;
+      const oldTimestamp = war.timestamp;
+      const newTimestamp = new Date(oldTimestamp).toLocaleDateString('pl-PL', { hour: '2-digit', minute: '2-digit' });
       warCardDetail.innerHTML += `<div class="match-details">
       <div class="">Match #${newObj.length - i}</div> 
       <div class="info">Info: ${war.info}</div>
@@ -524,7 +533,7 @@ export function history() {
           <div class="date">
               <div class="matchId" id="matchId-${newObj.length - i}">
                 <a href="#match-${newObj.length - i}">#${newObj.length - i}</a></div>
-              <div class="dateDetail">${war.timestamp}</div>            
+              <div class="dateDetail">${newTimestamp}</div>            
                 ${
                   war.video
                     ? `<a href="#match-${
@@ -746,120 +755,121 @@ export function history() {
       enableRouteWar();
     });
 
-    $.getScript('https://www.gstatic.com/firebasejs/3.4.0/firebase.js', function () {
-      const firebaseConfig = {
-        apiKey: 'AIzaSyBO4nqpO3FSeXJqHV0qYuPVRi4XLiJEujo',
-        authDomain: 'spearhead-mix-league.firebaseapp.com',
-        databaseURL: 'https://spearhead-mix-league-default-rtdb.europe-west1.firebasedatabase.app',
-        projectId: 'spearhead-mix-league',
-        storageBucket: 'spearhead-mix-league.appspot.com',
-        messagingSenderId: '719531931759',
-        appId: '1:719531931759:web:7fe514dce675b8e19cf59a',
-        measurementId: 'G-7WB1MRGPB5',
-      };
+    // $.getScript('https://www.gstatic.com/firebasejs/3.4.0/firebase.js', function () {
+    const firebaseConfig = {
+      apiKey: 'AIzaSyBO4nqpO3FSeXJqHV0qYuPVRi4XLiJEujo',
+      authDomain: 'spearhead-mix-league.firebaseapp.com',
+      databaseURL: 'https://spearhead-mix-league-default-rtdb.europe-west1.firebasedatabase.app',
+      projectId: 'spearhead-mix-league',
+      storageBucket: 'spearhead-mix-league.appspot.com',
+      messagingSenderId: '719531931759',
+      appId: '1:719531931759:web:7fe514dce675b8e19cf59a',
+      measurementId: 'G-7WB1MRGPB5',
+    };
 
-      firebase.initializeApp(firebaseConfig);
-      const rootRef = firebase.database().ref();
+    firebase.initializeApp(firebaseConfig);
 
-      newObj.forEach((warComment, ind) => {
-        const warCardWrapper = document.querySelectorAll('.match-detail');
+    const rootRef = firebase.database().ref();
 
-        const commentMatch = document.createElement('div');
-        commentMatch.classList.add('comment-match');
-        commentMatch.dataset.match = `${newObj.length - ind}`;
+    newObj.forEach((warComment, ind) => {
+      const warCardWrapper = document.querySelectorAll('.match-detail');
 
-        const commentForm = document.createElement('form');
-        commentForm.setAttribute(`id`, `comment${newObj.length - ind}`);
-        commentForm.classList.add('comment-form');
-        commentMatch.appendChild(commentForm);
+      const commentMatch = document.createElement('div');
+      commentMatch.classList.add('comment-match');
+      commentMatch.dataset.match = `${newObj.length - ind}`;
 
-        const labelMessage = document.createElement('label');
-        labelMessage.setAttribute('for', 'message');
-        labelMessage.innerHTML = 'Message*';
-        commentForm.appendChild(labelMessage);
+      const commentForm = document.createElement('form');
+      commentForm.setAttribute(`id`, `comment${newObj.length - ind}`);
+      commentForm.classList.add('comment-form');
+      commentMatch.appendChild(commentForm);
 
-        const textareaMessage = document.createElement('textarea');
-        textareaMessage.setAttribute('id', `message${newObj.length - ind}`);
-        textareaMessage.required = true;
-        commentForm.appendChild(textareaMessage);
+      const labelMessage = document.createElement('label');
+      labelMessage.setAttribute('for', 'message');
+      labelMessage.innerHTML = 'Message*';
+      commentForm.appendChild(labelMessage);
 
-        const labelName = document.createElement('label');
-        labelName.setAttribute('for', 'name');
-        labelName.innerHTML = 'Name*';
-        commentForm.appendChild(labelName);
+      const textareaMessage = document.createElement('textarea');
+      textareaMessage.setAttribute('id', `message${newObj.length - ind}`);
+      textareaMessage.required = true;
+      commentForm.appendChild(textareaMessage);
 
-        const inputName = document.createElement('input');
-        inputName.setAttribute('type', 'text');
-        inputName.setAttribute('id', `name${newObj.length - ind}`);
-        inputName.required = true;
-        commentForm.appendChild(inputName);
+      const labelName = document.createElement('label');
+      labelName.setAttribute('for', 'name');
+      labelName.innerHTML = 'Name*';
+      commentForm.appendChild(labelName);
 
-        const labelEmail = document.createElement('label');
-        labelEmail.setAttribute('for', 'email');
-        labelEmail.innerHTML = 'E-mail';
-        commentForm.appendChild(labelEmail);
+      const inputName = document.createElement('input');
+      inputName.setAttribute('type', 'text');
+      inputName.setAttribute('id', `name${newObj.length - ind}`);
+      inputName.required = true;
+      commentForm.appendChild(inputName);
 
-        const inputEmail = document.createElement('input');
-        inputEmail.setAttribute('type', 'text');
-        inputEmail.setAttribute('id', `email${newObj.length - ind}`);
-        commentForm.appendChild(inputEmail);
+      const labelEmail = document.createElement('label');
+      labelEmail.setAttribute('for', 'email');
+      labelEmail.innerHTML = 'E-mail';
+      commentForm.appendChild(labelEmail);
 
-        const inputSubmit = document.createElement('input');
-        inputSubmit.setAttribute('type', 'submit');
-        inputSubmit.setAttribute('value', 'Post Comment');
-        inputSubmit.setAttribute('id', `submit-${newObj.length - ind}`);
-        commentForm.appendChild(inputSubmit);
+      const inputEmail = document.createElement('input');
+      inputEmail.setAttribute('type', 'text');
+      inputEmail.setAttribute('id', `email${newObj.length - ind}`);
+      commentForm.appendChild(inputEmail);
 
-        const commentsContainer = document.createElement('div');
-        commentsContainer.setAttribute('id', `comments-container${newObj.length - ind}`);
-        commentsContainer.classList.add('comments-container');
-        commentMatch.appendChild(commentsContainer);
+      const inputSubmit = document.createElement('input');
+      inputSubmit.setAttribute('type', 'submit');
+      inputSubmit.setAttribute('value', 'Post Comment');
+      inputSubmit.setAttribute('id', `submit-${newObj.length - ind}`);
+      commentForm.appendChild(inputSubmit);
 
-        const postComments = rootRef.child(`postComments${newObj.length - ind}`);
-        const linkComment = window.location.pathname;
-        const pathkey = decodeURI(linkComment.replace(new RegExp('\\/|\\.', 'g'), '_'));
+      const commentsContainer = document.createElement('div');
+      commentsContainer.setAttribute('id', `comments-container${newObj.length - ind}`);
+      commentsContainer.classList.add('comments-container');
+      commentMatch.appendChild(commentsContainer);
 
-        const postRef = postComments.child(pathkey);
+      const postComments = rootRef.child(`postComments${newObj.length - ind}`);
+      const linkComment = window.location.pathname;
+      const pathkey = decodeURI(linkComment.replace(new RegExp('\\/|\\.', 'g'), '_'));
 
-        warCardWrapper.forEach((el, i) => {
-          if (el.dataset.match === commentMatch.dataset.match) {
-            el.appendChild(commentMatch);
-          }
-        });
+      const postRef = postComments.child(pathkey);
 
-        $(`#comment${newObj.length - ind}`).submit(function () {
-          JSON.parse(
-            JSON.stringify(
-              postRef.push().set({
-                name: $(`#name${newObj.length - ind}`).val(),
-                message: $(`#message${newObj.length - ind}`).val(),
-                email: $(`#email${newObj.length - ind}`).val(),
-                postedAt: firebase.database.ServerValue.TIMESTAMP,
-              }),
-            ),
-          );
-          $('input[type=text], textarea').val('');
-          return false;
-        });
+      warCardWrapper.forEach((el, i) => {
+        if (el.dataset.match === commentMatch.dataset.match) {
+          el.appendChild(commentMatch);
+        }
+      });
 
-        postRef.on('child_added', function (snapshot) {
-          const newComment = snapshot.val();
-          let html = `<div class='comment comment${newObj.length - ind}' data-comment='${newObj.length - ind}'>`;
-          html += '<div class="comment--left">';
-          html += '<h4><a href="mailto:' + newComment.email + '">' + newComment.name + '</a></h4>';
-          // html += "<div class='profile-image'><img src='https://www.gravatar.com/avatar/" + newComment.email + "?s100&d=retro'/></div>";
-          html += "<span class='date'>" + $.timeago(newComment.postedAt) + '</span></div>';
-          html += '<div class="comment--right">' + newComment.message + '</div></div>';
-          $(`#comments-container${newObj.length - ind}`).prepend(html);
-          const countComments = document.querySelectorAll(`.comment${newObj.length - ind}`);
-          document.querySelector(`.comment-info${newObj.length - ind}`).innerHTML = `<a title="Leave a comment to match #${
-            newObj.length - ind
-          }" href="#match-${newObj.length - ind}"><div class="counter-comments">${
-            countComments.length
-          }</div><div class="counter-icon"><i class="far fa-comment-dots"></i></div></a>`;
-        });
+      $(`#comment${newObj.length - ind}`).submit(function () {
+        JSON.parse(
+          JSON.stringify(
+            postRef.push().set({
+              name: $(`#name${newObj.length - ind}`).val(),
+              message: $(`#message${newObj.length - ind}`).val(),
+              email: $(`#email${newObj.length - ind}`).val(),
+              postedAt: firebase.database.ServerValue.TIMESTAMP,
+            }),
+          ),
+        );
+        $('input[type=text], textarea').val('');
+        return false;
+      });
+
+      postRef.on('child_added', function (snapshot) {
+        const newComment = snapshot.val();
+        let html = `<div class='comment comment${newObj.length - ind}' data-comment='${newObj.length - ind}'>`;
+        html += '<div class="comment--left">';
+        html += '<h4><a href="mailto:' + newComment.email + '">' + newComment.name + '</a></h4>';
+        // html += "<div class='profile-image'><img src='https://www.gravatar.com/avatar/" + newComment.email + "?s100&d=retro'/></div>";
+        html += "<span class='date'>" + $.timeago(newComment.postedAt) + '</span></div>';
+        html += '<div class="comment--right">' + newComment.message + '</div></div>';
+        $(`#comments-container${newObj.length - ind}`).prepend(html);
+        const countComments = document.querySelectorAll(`.comment${newObj.length - ind}`);
+        document.querySelector(`.comment-info${newObj.length - ind}`).innerHTML = `<a title="Leave a comment to match #${
+          newObj.length - ind
+        }" href="#match-${newObj.length - ind}"><div class="counter-comments">${
+          countComments.length
+        }</div><div class="counter-icon"><i class="far fa-comment-dots"></i></div></a>`;
       });
     });
+    // });
 
     const matchNodeList = document.querySelectorAll('.warmatch.match');
     const matchArr = Array.prototype.slice.call(matchNodeList);

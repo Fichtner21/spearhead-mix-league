@@ -3,15 +3,15 @@ import drive from 'drive-db';
 import Cookies from 'js-cookie';
 import Swiper from 'swiper/bundle';
 import 'swiper/swiper-bundle.css';
+import Accordion from 'accordion-js';
+import 'offside-js/dist/offside.css';
+import offside from 'offside-js';
+import 'accordion-js/dist/accordion.min.css';
 import { rankingInfo } from './views/ranking';
 import { history } from './views/history';
-import { filesSite } from './views/files';
-import { serverSite } from './views/server';
-import { chartsSite } from './views/charts';
 import { inactivePlayers } from './views/inactive';
 import { historyTdm } from './views/history_tdm';
 import { rankingTdm } from './views/ranking_tdm';
-import { cup } from './views/cup';
 // import Translator from './translator.js';
 
 function enableRouting() {
@@ -33,13 +33,9 @@ function enableRouting() {
 document.addEventListener('DOMContentLoaded', () => {
   rankingInfo();
   history();
-  filesSite();
-  serverSite();
-  chartsSite();
   inactivePlayers();
   historyTdm();
   rankingTdm();
-  cup();
 
   // if (window.history.pushState) {
   //   window.history.pushState('', '/', window.location.pathname);
@@ -99,6 +95,29 @@ document.addEventListener('DOMContentLoaded', () => {
       Cookies.set(cookieName, `${thisDataAction}`);
     }
   });
+
+  offside('#nav-left-grid', {
+    slidingElementsSelector: '.container',
+    buttonsSelector: '#my-button',
+  });
+
+  $('.hamburger').click(function (e) {
+    e.preventDefault();
+    $(this).toggleClass('is-active');
+  });
+
+  new Accordion('.accordion-container');
+
+  setTimeout(function () {
+    $('.slowly').fadeOut(1500);
+  }, 12000);
+
+  let timeleft = 10;
+  const downloadTimer = setInterval(function () {
+    timeleft--;
+    document.getElementById('countdown').textContent = timeleft;
+    if (timeleft <= 0) clearInterval(downloadTimer);
+  }, 1000);
 
   (async () => {
     // Load the data from the Drive Spreadsheet

@@ -1,7 +1,7 @@
 import drive from 'drive-db';
 import { Chart } from 'chart.js';
 import $ from 'jquery';
-import { forEach } from 'lodash';
+import * as ChartAnnotation from 'chartjs-plugin-annotation';
 
 export function rankingTdm() {
   (async () => {
@@ -17,10 +17,6 @@ export function rankingTdm() {
       sheet: '1tcSgDUSxwrHQclfxdOKQDabZGQOAeb1E7GVTvitdfu4',
       tab: '1',
     });
-
-    // historyRankingTdmPlayers.reverse();
-    // const ourPlayers = document.getElementById('our-players2');
-    // ourPlayers.innerHTML = ` ${historyRankingTdm.length}`;
 
     const playersObj = await drive({
       sheet: '1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo',
@@ -366,24 +362,6 @@ export function rankingTdm() {
       return max;
     }
 
-    function lenOfLongDecSubArr(arr, n) {
-      let max = 1;
-      let len = 1;
-      for (let i = 1; i < n; i++) {
-        if (arr[i] <= arr[i + 1]) {
-          len++;
-        } else {
-          if (max < len) {
-            max = len;
-          }
-        }
-      }
-      if (max < len) {
-        max = len;
-      }
-      return max;
-    }
-
     const lastWar = document.getElementById('lastWarTdm');
 
     function findPlayerLastWar(name) {
@@ -584,6 +562,10 @@ export function rankingTdm() {
           nat.nationality = `<img src="/assets/flags/pt.gif" title="Portugal">`;
           break;
         }
+        case 'FI': {
+          nat.nationality = `<img src="/assets/flags/fi.gif" title="Finland">`;
+          break;
+        }
         default:
           console.log('Nie pasuje');
       }
@@ -614,9 +596,6 @@ export function rankingTdm() {
       warItem.innerHTML += matches;
       warCount.appendChild(warItem);
     });
-
-    const increase = document.querySelector('.increaseStreak');
-    const decrease = document.querySelector('.decreaseStreak');
 
     function countWars(name) {
       const playerWars = [];
@@ -773,7 +752,6 @@ export function rankingTdm() {
     });
     historyRankingTdm.forEach((nameUser) => {
       const ctx = document.getElementById(`chart-frags-tdm-${nameUser.username}`).getContext('2d');
-      const someArr = ['a', 'b', 'c', 'd', 'e', ''];
       const chart = new Chart(ctx, {
         type: 'line',
         data: {

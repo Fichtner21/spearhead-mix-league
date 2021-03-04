@@ -1,6 +1,6 @@
 import drive from 'drive-db';
 import $ from 'jquery';
-import firebase from 'firebase';
+// import firebase from 'firebase';
 import timeago from 'timeago';
 
 export function historyTdm() {
@@ -56,7 +56,7 @@ export function historyTdm() {
         t1p6preelo: Number(parseFloat(obj.t1p6preelo, 10).toFixed(2) === 'NaN') ? ' - ' : Number(parseFloat(obj.t1p6preelo, 10).toFixed(2)),
         t1p6postelo: Number(parseFloat(obj.t1p6postelo, 10).toFixed(2) === 'NaN')
           ? ' - '
-          : Number(parseFloat(obj.t1p5postelo, 10).toFixed(2)),
+          : Number(parseFloat(obj.t1p6postelo, 10).toFixed(2)),
         t2p1preelo: Number(parseFloat(obj.t2p1preelo, 10).toFixed(2) === 'NaN') ? ' - ' : Number(parseFloat(obj.t2p1preelo, 10).toFixed(2)),
         t2p1postelo: Number(parseFloat(obj.t2p1postelo, 10).toFixed(2) === 'NaN')
           ? ' - '
@@ -526,123 +526,124 @@ export function historyTdm() {
     });
 
     // $.getScript('https://www.gstatic.com/firebasejs/3.4.0/firebase.js', function () {
-    //   const firebaseConfigTdm = {
-    //     apiKey: 'AIzaSyAtg_vZcjPpVnu6zVahBcCjG70uPN8S_yY',
-    //     authDomain: 'spearhead-mix-league-tdm.firebaseapp.com',
-    //     databaseURL: 'https://spearhead-mix-league-tdm-default-rtdb.europe-west1.firebasedatabase.app',
-    //     projectId: 'spearhead-mix-league-tdm',
-    //     storageBucket: 'spearhead-mix-league-tdm.appspot.com',
-    //     messagingSenderId: '437971097271',
-    //     appId: '1:437971097271:web:6b1dbf71344edf50bc9f32',
-    //     measurementId: 'G-KZZ2V9JTKC',
-    //   };
+    // const firebaseConfigTdm = {
+    //   apiKey: 'AIzaSyAtg_vZcjPpVnu6zVahBcCjG70uPN8S_yY',
+    //   authDomain: 'spearhead-mix-league-tdm.firebaseapp.com',
+    //   databaseURL: 'https://spearhead-mix-league-tdm-default-rtdb.europe-west1.firebasedatabase.app',
+    //   projectId: 'spearhead-mix-league-tdm',
+    //   storageBucket: 'spearhead-mix-league-tdm.appspot.com',
+    //   messagingSenderId: '437971097271',
+    //   appId: '1:437971097271:web:6b1dbf71344edf50bc9f32',
+    //   measurementId: 'G-KZZ2V9JTKC',
+    // };
 
-    //   // if (!firebase.apps.length) {
-    //   //   firebase.initializeApp(firebaseConfigTdm);
-    //   // } else {
-    //   //   firebase.app(); // if already initialized, use that one
-    //   // }
+    // if (!firebase.apps.length) {
     //   firebase.initializeApp(firebaseConfigTdm);
-    //   const rootRef = firebase.database().ref();
+    // } else {
+    //   firebase.app(); // if already initialized, use that one
+    // }
 
-    //   newObj.forEach((warComment, ind) => {
-    //     const warCardWrapper = document.querySelectorAll('.match-detail');
+    // firebase.initializeApp(firebaseConfigTdm);
+    // const rootRefTdm = firebase.database().ref();
 
-    //     const commentMatch = document.createElement('div');
-    //     commentMatch.classList.add('comment-match');
-    //     commentMatch.dataset.match = `${newObj.length - ind}`;
+    // newObj.forEach((warComment, ind) => {
+    //   const warCardWrapper = document.querySelectorAll('.match-detail');
 
-    //     const commentForm = document.createElement('form');
-    //     commentForm.setAttribute(`id`, `commenttdm${newObj.length - ind}`);
-    //     commentForm.classList.add('comment-form');
-    //     commentMatch.appendChild(commentForm);
+    //   const commentMatch = document.createElement('div');
+    //   commentMatch.classList.add('comment-match');
+    //   commentMatch.dataset.match = `${newObj.length - ind}`;
 
-    //     const labelMessage = document.createElement('label');
-    //     labelMessage.setAttribute('for', 'message');
-    //     labelMessage.innerHTML = 'Message*';
-    //     commentForm.appendChild(labelMessage);
+    //   const commentForm = document.createElement('form');
+    //   commentForm.setAttribute(`id`, `commenttdm${newObj.length - ind}`);
+    //   commentForm.classList.add('comment-form');
+    //   commentMatch.appendChild(commentForm);
 
-    //     const textareaMessage = document.createElement('textarea');
-    //     textareaMessage.setAttribute('id', `messagetdm${newObj.length - ind}`);
-    //     textareaMessage.required = true;
-    //     commentForm.appendChild(textareaMessage);
+    //   const labelMessage = document.createElement('label');
+    //   labelMessage.setAttribute('for', 'message');
+    //   labelMessage.innerHTML = 'Message*';
+    //   commentForm.appendChild(labelMessage);
 
-    //     const labelName = document.createElement('label');
-    //     labelName.setAttribute('for', 'name');
-    //     labelName.innerHTML = 'Name*';
-    //     commentForm.appendChild(labelName);
+    //   const textareaMessage = document.createElement('textarea');
+    //   textareaMessage.setAttribute('id', `messagetdm${newObj.length - ind}`);
+    //   textareaMessage.required = true;
+    //   commentForm.appendChild(textareaMessage);
 
-    //     const inputName = document.createElement('input');
-    //     inputName.setAttribute('type', 'text');
-    //     inputName.setAttribute('id', `nametdm${newObj.length - ind}`);
-    //     inputName.required = true;
-    //     commentForm.appendChild(inputName);
+    //   const labelName = document.createElement('label');
+    //   labelName.setAttribute('for', 'name');
+    //   labelName.innerHTML = 'Name*';
+    //   commentForm.appendChild(labelName);
 
-    //     const labelEmail = document.createElement('label');
-    //     labelEmail.setAttribute('for', 'email');
-    //     labelEmail.innerHTML = 'E-mail';
-    //     commentForm.appendChild(labelEmail);
+    //   const inputName = document.createElement('input');
+    //   inputName.setAttribute('type', 'text');
+    //   inputName.setAttribute('id', `nametdm${newObj.length - ind}`);
+    //   inputName.required = true;
+    //   commentForm.appendChild(inputName);
 
-    //     const inputEmail = document.createElement('input');
-    //     inputEmail.setAttribute('type', 'text');
-    //     inputEmail.setAttribute('id', `emailtdm${newObj.length - ind}`);
-    //     commentForm.appendChild(inputEmail);
+    //   const labelEmail = document.createElement('label');
+    //   labelEmail.setAttribute('for', 'email');
+    //   labelEmail.innerHTML = 'E-mail';
+    //   commentForm.appendChild(labelEmail);
 
-    //     const inputSubmit = document.createElement('input');
-    //     inputSubmit.setAttribute('type', 'submit');
-    //     inputSubmit.setAttribute('value', 'Post Comment');
-    //     inputSubmit.setAttribute('id', `submittdm-${newObj.length - ind}`);
-    //     commentForm.appendChild(inputSubmit);
+    //   const inputEmail = document.createElement('input');
+    //   inputEmail.setAttribute('type', 'text');
+    //   inputEmail.setAttribute('id', `emailtdm${newObj.length - ind}`);
+    //   commentForm.appendChild(inputEmail);
 
-    //     const commentsContainer = document.createElement('div');
-    //     commentsContainer.setAttribute('id', `comments-containertdm${newObj.length - ind}`);
-    //     commentsContainer.classList.add('comments-container');
-    //     commentMatch.appendChild(commentsContainer);
+    //   const inputSubmit = document.createElement('input');
+    //   inputSubmit.setAttribute('type', 'submit');
+    //   inputSubmit.setAttribute('value', 'Post Comment');
+    //   inputSubmit.setAttribute('id', `submittdm-${newObj.length - ind}`);
+    //   commentForm.appendChild(inputSubmit);
 
-    //     const postComments = rootRef.child(`postComments${newObj.length - ind}`);
-    //     const linkComment = window.location.pathname;
-    //     const pathkey = decodeURI(linkComment.replace(new RegExp('\\/|\\.', 'g'), '_'));
+    //   const commentsContainer = document.createElement('div');
+    //   commentsContainer.setAttribute('id', `comments-containertdm${newObj.length - ind}`);
+    //   commentsContainer.classList.add('comments-container');
+    //   commentMatch.appendChild(commentsContainer);
 
-    //     const postRef = postComments.child(pathkey);
+    //   const postComments = rootRefTdm.child(`postComments${newObj.length - ind}`);
+    //   const linkComment = window.location.pathname;
+    //   const pathkey = decodeURI(linkComment.replace(new RegExp('\\/|\\.', 'g'), '_tdm'));
 
-    //     warCardWrapper.forEach((el, i) => {
-    //       if (el.dataset.match === commentMatch.dataset.match) {
-    //         el.appendChild(commentMatch);
-    //       }
-    //     });
+    //   const postRef = postComments.child(pathkey);
 
-    //     $(`#commenttdm${newObj.length - ind}`).submit(function () {
-    //       JSON.parse(
-    //         JSON.stringify(
-    //           postRef.push().set({
-    //             name: $(`#nametdm${newObj.length - ind}`).val(),
-    //             message: $(`#messagetdm${newObj.length - ind}`).val(),
-    //             email: $(`#emailtdm${newObj.length - ind}`).val(),
-    //             postedAt: firebase.database.ServerValue.TIMESTAMP,
-    //           }),
-    //         ),
-    //       );
-    //       $('input[type=text], textarea').val('');
-    //       return false;
-    //     });
-
-    //     postRef.on('child_added', function (snapshot) {
-    //       const newComment = snapshot.val();
-    //       let html = `<div class='comment commenttdm${newObj.length - ind}' data-comment='${newObj.length - ind}'>`;
-    //       html += '<div class="comment--left">';
-    //       html += '<h4><a href="mailto:' + newComment.email + '">' + newComment.name + '</a></h4>';
-    //       // html += "<div class='profile-image'><img src='https://www.gravatar.com/avatar/" + newComment.email + "?s100&d=retro'/></div>";
-    //       html += "<span class='date'>" + $.timeago(newComment.postedAt) + '</span></div>';
-    //       html += '<div class="comment--right">' + newComment.message + '</div></div>';
-    //       $(`#comments-containertdm${newObj.length - ind}`).prepend(html);
-    //       const countComments = document.querySelectorAll(`.commenttdm${newObj.length - ind}`);
-    //       document.querySelector(`.commenttdm-info${newObj.length - ind}`).innerHTML = `<a title="Leave a comment to match #${
-    //         newObj.length - ind
-    //       }" href="#matchtdm-${newObj.length - ind}"><div class="counter-comments">${
-    //         countComments.length
-    //       }</div><div class="counter-icon"><i class="far fa-comment-dots"></i></div></a>`;
-    //     });
+    //   warCardWrapper.forEach((el, i) => {
+    //     if (el.dataset.match === commentMatch.dataset.match) {
+    //       el.appendChild(commentMatch);
+    //     }
     //   });
+
+    //   $(`#commenttdm${newObj.length - ind}`).submit(function () {
+    //     JSON.parse(
+    //       JSON.stringify(
+    //         postRef.push().set({
+    //           name: $(`#nametdm${newObj.length - ind}`).val(),
+    //           message: $(`#messagetdm${newObj.length - ind}`).val(),
+    //           email: $(`#emailtdm${newObj.length - ind}`).val(),
+    //           postedAt: firebase.database.ServerValue.TIMESTAMP,
+    //         }),
+    //       ),
+    //     );
+    //     $('input[type=text], textarea').val('');
+    //     return false;
+    //   });
+
+    //   postRef.on('child_added', function (snapshot) {
+    //     const newComment = snapshot.val();
+    //     let html = `<div class='comment commenttdm${newObj.length - ind}' data-comment='${newObj.length - ind}'>`;
+    //     html += '<div class="comment--left">';
+    //     html += '<h4><a href="mailto:' + newComment.email + '">' + newComment.name + '</a></h4>';
+    //     // html += "<div class='profile-image'><img src='https://www.gravatar.com/avatar/" + newComment.email + "?s100&d=retro'/></div>";
+    //     html += "<span class='date'>" + $.timeago(newComment.postedAt) + '</span></div>';
+    //     html += '<div class="comment--right">' + newComment.message + '</div></div>';
+    //     $(`#comments-containertdm${newObj.length - ind}`).prepend(html);
+    //     const countComments = document.querySelectorAll(`.commenttdm${newObj.length - ind}`);
+    //     document.querySelector(`.commenttdm-info${newObj.length - ind}`).innerHTML = `<a title="Leave a comment to match #${
+    //       newObj.length - ind
+    //     }" href="#matchtdm-${newObj.length - ind}"><div class="counter-comments">${
+    //       countComments.length
+    //     }</div><div class="counter-icon"><i class="far fa-comment-dots"></i></div></a>`;
+    //   });
+    // });
     // });
 
     const matchNodeList = document.querySelectorAll('.warmatchtdm');
