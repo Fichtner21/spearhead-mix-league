@@ -12,6 +12,7 @@ import { history } from './views/history';
 import { inactivePlayers } from './views/inactive';
 import { historyTdm } from './views/history_tdm';
 import { rankingTdm } from './views/ranking_tdm';
+import { cupTwo } from './views/cup_two';
 // import Translator from './translator.js';
 
 function enableRouting() {
@@ -36,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
   inactivePlayers();
   historyTdm();
   rankingTdm();
+  cupTwo();
 
   // if (window.history.pushState) {
   //   window.history.pushState('', '/', window.location.pathname);
@@ -135,8 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
       sheet: '1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo',
       tab: 1,
     });
-
-    const teamSel = playersTab.map((entry) => entry);
 
     const [
       // team1 ID 1 players
@@ -254,94 +254,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const chanceT2ID1 = document.getElementById('chanceT2ID1');
     const chanceT2ID2 = document.getElementById('chanceT2ID2');
 
-    function addPlayerPos(player) {
-      let playerPos = '';
-      playerPos = teamSel.findIndex((x) => x.username === player);
-      playerPos++;
-      if (playerPos === 1) {
-        playerPos = `<div class="item0" title="${playerPos}st in OBJ ladder" >(${playerPos})</div>`;
-      } else if (playerPos === 2) {
-        playerPos = `<div class="item1" title="${playerPos}nd in OBJ ladder">(${playerPos})</div>`;
-      } else if (playerPos === 3) {
-        playerPos = `<div class="item2" title="${playerPos}th in OBJ ladder">(${playerPos})</div>`;
-      } else if (playerPos === 0) {
-        playerPos = '';
-      } else {
-        playerPos = `<span title="${playerPos}th in OBJ ladder">(${playerPos})</span>`;
-      }
-      return playerPos;
-    }
-
-    function addPlayerLinkHome(player) {
-      let convertedPlayer = '';
-      teamSel.forEach((el) => {
-        if (player === el.username) {
-          switch (el.nationality) {
-            case 'EU': {
-              el.nationality = `<img src="/assets/flags/_e.gif">`;
-              break;
-            }
-            case 'PL': {
-              el.nationality = `<img src="/assets/flags/pl.gif">`;
-              break;
-            }
-            case 'EG': {
-              el.nationality = `<img src="/assets/flags/EG.gif">`;
-              break;
-            }
-            case 'NL': {
-              el.nationality = `<img src="/assets/flags/nl.gif">`;
-              break;
-            }
-            case 'RU': {
-              el.nationality = `<img src="/assets/flags/RU.gif">`;
-              break;
-            }
-            case 'RO': {
-              el.nationality = `<img src="/assets/flags/ro.gif">`;
-              break;
-            }
-            case 'FR': {
-              el.nationality = `<img src="/assets/flags/fr.gif">`;
-              break;
-            }
-            case 'UK': {
-              el.nationality = `<img src="/assets/flags/uk.gif">`;
-              break;
-            }
-            case 'BE': {
-              el.nationality = `<img src="/assets/flags/be.gif">`;
-              break;
-            }
-            case 'GR': {
-              el.nationality = `<img src="/assets/flags/gr.gif">`;
-              break;
-            }
-            case 'DE': {
-              el.nationality = `<img src="/assets/flags/de.gif">`;
-              break;
-            }
-            case 'ES': {
-              el.nationality = `<img src="/assets/flags/es.gif">`;
-              break;
-            }
-            case 'PT': {
-              el.nationality = `<img src="/assets/flags/pt.gif">`;
-              break;
-            }
-            default:
-            // console.log('Nie pasuje');
-          }
-          convertedPlayer = `<a href="#charts-${el.username}">${el.playername} ${el.nationality}</a>`;
-        } else if (player === '') {
-          // console.log('N/A player');
-        } else {
-          // console.log('Something went wrong.');
-        }
-      });
-      return convertedPlayer;
-    }
-
     const SwiperTop = new Swiper('.swiper--top', {
       spaceBetween: 0,
       // centeredSlides: true,
@@ -433,8 +345,8 @@ document.addEventListener('DOMContentLoaded', () => {
       team1ID1 += `
       <div class="player">
         <div class="preelo">${team1ID1playersEloArr[i]}</div>
-        <div class="name">${addPlayerLinkHome(team1ID1playersArr[i])}</div>
-        <div class="score">${addPlayerPos(team1ID1playersArr[i])}</div>
+        <div class="name">${addPlayerLinkHome2(team1ID1playersArr[i], playersTab)}</div>
+        <div class="score">${addPlayerPos2(team1ID1playersArr[i], playersTab)}</div>
         <div class="postelo"></div>
       </div>`;
     }
@@ -444,8 +356,8 @@ document.addEventListener('DOMContentLoaded', () => {
       team1ID2 += `
       <div class="player">
         <div class="preelo">${team1ID2playersEloArr[i]}</div>
-        <div class="name">${addPlayerLinkHome(team1ID2playersArr[i])}</div>
-        <div class="score">${addPlayerPos(team1ID2playersArr[i])}</div>
+        <div class="name">${addPlayerLinkHome2(team1ID2playersArr[i], playersTab)}</div>
+        <div class="score">${addPlayerPos2(team1ID2playersArr[i], playersTab)}</div>
         <div class="postelo"></div>
       </div>`;
     }
@@ -455,8 +367,8 @@ document.addEventListener('DOMContentLoaded', () => {
       team2ID1 += `
       <div class="player">
         <div class="preelo">${team2ID1playersEloArr[i]}</div>
-        <div class="name">${addPlayerLinkHome(team2ID1playersArr[i])}</div>
-        <div class="score">${addPlayerPos(team2ID1playersArr[i])}</div>
+        <div class="name">${addPlayerLinkHome2(team2ID1playersArr[i], playersTab)}</div>
+        <div class="score">${addPlayerPos2(team2ID1playersArr[i], playersTab)}</div>
         <div class="postelo"></div>
       </div>`;
     }
@@ -466,8 +378,8 @@ document.addEventListener('DOMContentLoaded', () => {
       team2ID2 += `
       <div class="player">
         <div class="preelo">${team2ID2playersEloArr[i]}</div>
-        <div class="name">${addPlayerLinkHome(team2ID2playersArr[i])}</div>
-        <div class="score">${addPlayerPos(team2ID2playersArr[i])}</div>
+        <div class="name">${addPlayerLinkHome2(team2ID2playersArr[i], playersTab)}</div>
+        <div class="score">${addPlayerPos2(team2ID2playersArr[i], playersTab)}</div>
         <div class="postelo"></div>
       </div>`;
     }
@@ -519,4 +431,105 @@ document.addEventListener('DOMContentLoaded', () => {
       chanceT1ID2.classList.add('chance-lose');
     }
   })();
+
+  function addPlayerPos2(player, obj) {
+    let playerPos = '';
+    playerPos = obj.findIndex((x) => x.username === player);
+    playerPos++;
+    if (playerPos === 1) {
+      playerPos = `<div class="item0" title="${playerPos}st in OBJ ladder" >(${playerPos})</div>`;
+    } else if (playerPos === 2) {
+      playerPos = `<div class="item1" title="${playerPos}nd in OBJ ladder">(${playerPos})</div>`;
+    } else if (playerPos === 3) {
+      playerPos = `<div class="item2" title="${playerPos}th in OBJ ladder">(${playerPos})</div>`;
+    } else if (playerPos === 0) {
+      playerPos = '';
+    } else {
+      playerPos = `<span title="${playerPos}th in OBJ ladder">(${playerPos})</span>`;
+    }
+    return playerPos;
+  }
+
+  function getPlayerFlag(playerFlag) {
+    let flag = '';
+    switch (playerFlag) {
+      case 'EU': {
+        flag = `<img src="/assets/flags/_e.gif" title="EU">`;
+        break;
+      }
+      case 'PL': {
+        flag = `<img src="/assets/flags/pl.gif" title="Poland">`;
+        break;
+      }
+      case 'EG': {
+        flag = `<img src="/assets/flags/EG.gif" title="Egypt">`;
+        break;
+      }
+      case 'NL': {
+        flag = `<img src="/assets/flags/nl.gif" title="Netherlands">`;
+        break;
+      }
+      case 'RU': {
+        flag = `<img src="/assets/flags/RU.gif" title="Russia">`;
+        break;
+      }
+      case 'RO': {
+        flag = `<img src="/assets/flags/ro.gif" title="Romania">`;
+        break;
+      }
+      case 'FR': {
+        flag = `<img src="/assets/flags/fr.gif" title="France">`;
+        break;
+      }
+      case 'UK': {
+        flag = `<img src="/assets/flags/uk.gif" title"United Kingdom">`;
+        break;
+      }
+      case 'BE': {
+        flag = `<img src="/assets/flags/be.gif" title="Belgium">`;
+        break;
+      }
+      case 'GR': {
+        flag = `<img src="/assets/flags/gr.gif" title="Greece">`;
+        break;
+      }
+      case 'DE': {
+        flag = `<img src="/assets/flags/de.gif" title="Germany">`;
+        break;
+      }
+      case 'ES': {
+        flag = `<img src="/assets/flags/es.gif" title="Spain">`;
+        break;
+      }
+      case 'PT': {
+        flag = `<img src="/assets/flags/pt.gif" title="Portugal">`;
+        break;
+      }
+      case 'FI': {
+        flag = `<img src="/assets/flags/fi.gif" title="Finland">`;
+        break;
+      }
+      case 'AM': {
+        flag = `<img src="/assets/flags/am.gif" title="Armenia">`;
+        break;
+      }
+      default:
+      // console.log('Nie pasuje');
+    }
+    return flag;
+  }
+
+  function addPlayerLinkHome2(player, obj) {
+    let convertedPlayer = '';
+    obj.forEach((el) => {
+      if (player === el.username) {
+        convertedPlayer = `<a href="#charts-${el.username}">${el.playername} ${getPlayerFlag(el.nationality)}</a>`;
+      } else if (player === '') {
+        // console.log('N/A player');
+      } else {
+        // console.log('Something went wrong.');
+      }
+    });
+    return convertedPlayer;
+  }
 });

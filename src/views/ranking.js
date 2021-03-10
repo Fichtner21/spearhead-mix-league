@@ -4,355 +4,6 @@ import $ from 'jquery';
 import * as ChartAnnotation from 'chartjs-plugin-annotation';
 
 export function rankingInfo() {
-  function smallStrike(name, arr) {
-    const littleStrike = document.createElement('div');
-    const spanStrike = document.createElement('span');
-    const firstFromEnd = arr(name)[arr(name).length - 1];
-    const secondFromEnd = arr(name)[arr(name).length - 2];
-    const countingPoints = firstFromEnd - secondFromEnd;
-
-    if (firstFromEnd > secondFromEnd) {
-      littleStrike.classList.add('up-streak');
-      spanStrike.setAttribute('data-title', `${countingPoints > 0 ? `+${countingPoints.toFixed(2)}` : ''} pc in last war`);
-      littleStrike.appendChild(spanStrike);
-    } else if (firstFromEnd < secondFromEnd) {
-      littleStrike.classList.add('down-streak');
-      spanStrike.setAttribute('data-title', `${countingPoints.toFixed(2)} pc in last war`);
-      littleStrike.appendChild(spanStrike);
-      // littleStrike.setAttribute('title', `${countingPoints.toFixed(2)} pc in last war`);
-    } else {
-      littleStrike.classList.add('draw-streak');
-      spanStrike.setAttribute('data-title', `${countingPoints.toFixed(2)} pc in last war`);
-      littleStrike.appendChild(spanStrike);
-      // littleStrike.setAttribute('title', `${countingPoints.toFixed(2)} pc in last war`);
-    }
-
-    return littleStrike;
-  }
-
-  function findPlayerLastWar(name, obj) {
-    const findeLastWar = obj.filter((item) => JSON.stringify(item).includes(name)).pop();
-    let findLastTimeStamp = '';
-    let newTimestampElem = '';
-    if (findeLastWar) {
-      findLastTimeStamp = findeLastWar.timestamp;
-      newTimestampElem = new Date(findLastTimeStamp).toLocaleDateString('pl-PL', { hour: '2-digit', minute: '2-digit' });
-    } else if (findeLastWar === 'undefined') {
-      findLastTimeStamp = 'No match';
-    } else if (findeLastWar === null) {
-      findLastTimeStamp = 'No match';
-    } else {
-      findLastTimeStamp = 'No match';
-    }
-    return newTimestampElem;
-  }
-
-  function longestWinning(arr, n) {
-    let max = 1;
-    let len = 1;
-
-    for (let i = 1; i < n; i++) {
-      if (arr[i] > arr[i - 1]) {
-        len++;
-      } else {
-        if (max < len) {
-          max = len;
-        }
-        len = 1;
-      }
-    }
-
-    if (max < len) {
-      max = len;
-    }
-    return max;
-  }
-
-  function getPlayerFlag(playerFlag) {
-    let flag = '';
-    switch (playerFlag) {
-      case 'EU': {
-        flag = `<img src="/assets/flags/_e.gif" title="EU">`;
-        break;
-      }
-      case 'PL': {
-        flag = `<img src="/assets/flags/pl.gif" title="Poland">`;
-        break;
-      }
-      case 'EG': {
-        flag = `<img src="/assets/flags/EG.gif" title="Egypt">`;
-        break;
-      }
-      case 'NL': {
-        flag = `<img src="/assets/flags/nl.gif" title="Netherlands">`;
-        break;
-      }
-      case 'RU': {
-        flag = `<img src="/assets/flags/RU.gif" title="Russia">`;
-        break;
-      }
-      case 'RO': {
-        flag = `<img src="/assets/flags/ro.gif" title="Romania">`;
-        break;
-      }
-      case 'FR': {
-        flag = `<img src="/assets/flags/fr.gif" title="France">`;
-        break;
-      }
-      case 'UK': {
-        flag = `<img src="/assets/flags/uk.gif" title"United Kingdom">`;
-        break;
-      }
-      case 'BE': {
-        flag = `<img src="/assets/flags/be.gif" title="Belgium">`;
-        break;
-      }
-      case 'GR': {
-        flag = `<img src="/assets/flags/gr.gif" title="Greece">`;
-        break;
-      }
-      case 'DE': {
-        flag = `<img src="/assets/flags/de.gif" title="Germany">`;
-        break;
-      }
-      case 'ES': {
-        flag = `<img src="/assets/flags/es.gif" title="Spain">`;
-        break;
-      }
-      case 'PT': {
-        flag = `<img src="/assets/flags/pt.gif" title="Portugal">`;
-        break;
-      }
-      case 'FI': {
-        flag = `<img src="/assets/flags/fi.gif" title="Finland">`;
-        break;
-      }
-      default:
-      // console.log('Nie pasuje');
-    }
-    return flag;
-  }
-
-  function destructObjRanks2(obj, arr) {
-    for (const key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        const objInArr = obj[key];
-        for (const key2 in objInArr) {
-          if (objInArr.hasOwnProperty(key2)) {
-            const elemOfObj = objInArr[key2];
-            arr.push(elemOfObj);
-          }
-        }
-      }
-    }
-  }
-
-  function getIndexesRanks2(arr, val) {
-    const indexes = [];
-    let i = -1;
-    while ((i = arr.indexOf(val, i + 1)) !== -1) {
-      indexes.push(i + 4); // postELO
-    }
-    return indexes;
-  }
-
-  function getIndexesFrags2(arr, val) {
-    const indexes = [];
-    let i = -1;
-    while ((i = arr.indexOf(val, i + 1)) !== -1) {
-      indexes.push(i + 3); // frags
-    }
-    return indexes;
-  }
-
-  function ranksAllStrikes2(username, ind, arrIn, arrOut) {
-    if (arrIn.includes(username)) {
-      arrIn.forEach(function (el, index) {
-        index += 1;
-        ind.forEach(function (founded, i) {
-          if (Number(index) === Number(founded)) {
-            const foundedStreak = Number(el).toFixed(2);
-            arrOut.push(Number(foundedStreak));
-          }
-        });
-      });
-    }
-  }
-
-  function rankHistory2(name, obj) {
-    const arrNameRanks2 = [];
-    destructObjRanks2(obj, arrNameRanks2);
-    const indexesRanksName2 = getIndexesRanks2(arrNameRanks2, name);
-    const nameRanksOut2 = [];
-    ranksAllStrikes2(name, indexesRanksName2, arrNameRanks2, nameRanksOut2);
-    nameRanksOut2.unshift(1000);
-    return nameRanksOut2;
-  }
-
-  function sumOfFrags2(name, obj) {
-    const arrNameFrags2 = [];
-    destructObjRanks2(obj, arrNameFrags2);
-    const indexesFragsName2 = getIndexesFrags2(arrNameFrags2, name);
-    const nameFragsOut2 = [];
-    ranksAllStrikes2(name, indexesFragsName2, arrNameFrags2, nameFragsOut2);
-    let nameFragsOutExist2 = '';
-    if (Array.isArray(nameFragsOut2) && nameFragsOut2.length) {
-      nameFragsOutExist2 = nameFragsOut2.reduce((a, b) => a + b);
-    } else {
-      nameFragsOutExist2 = 0;
-    }
-    return nameFragsOutExist2;
-  }
-
-  function minMaxFrags2(name, obj) {
-    const arrNameFrags2 = [];
-    destructObjRanks2(obj, arrNameFrags2);
-    const indexesFragsName2 = getIndexesFrags2(arrNameFrags2, name);
-    const nameFragsOut2 = [];
-    ranksAllStrikes2(name, indexesFragsName2, arrNameFrags2, nameFragsOut2);
-    nameFragsOut2.unshift(0);
-    return nameFragsOut2;
-  }
-
-  function countWars(name, obj) {
-    const playerWarsObj = [];
-    const playerRankHistory2 = rankHistory2(name, obj);
-    playerRankHistory2.forEach((war, index) => {
-      playerWarsObj.push(index);
-    });
-    return playerWarsObj;
-  }
-
-  function getNumOfPlayers(obj) {
-    return obj.length;
-  }
-
-  function searchPlayerKeyName2(name, obj) {
-    const searchPlayerKeyNameArr = [];
-    for (let i = 0; i < obj.length; i++) {
-      if (obj[i].t1p1name === name) {
-        searchPlayerKeyNameArr.push(obj[i]);
-      } else if (obj[i].t1p2name === name) {
-        searchPlayerKeyNameArr.push(obj[i]);
-      } else if (obj[i].t1p3name === name) {
-        searchPlayerKeyNameArr.push(obj[i]);
-      } else if (obj[i].t1p4name === name) {
-        searchPlayerKeyNameArr.push(obj[i]);
-      } else if (obj[i].t1p5name === name) {
-        searchPlayerKeyNameArr.push(obj[i]);
-      } else if (obj[i].t1p6name === name) {
-        searchPlayerKeyNameArr.push(obj[i]);
-      } else if (obj[i].t1p7name === name) {
-        searchPlayerKeyNameArr.push(obj[i]);
-      } else if (obj[i].t2p1name === name) {
-        searchPlayerKeyNameArr.push(obj[i]);
-      } else if (obj[i].t2p2name === name) {
-        searchPlayerKeyNameArr.push(obj[i]);
-      } else if (obj[i].t2p3name === name) {
-        searchPlayerKeyNameArr.push(obj[i]);
-      } else if (obj[i].t2p4name === name) {
-        searchPlayerKeyNameArr.push(obj[i]);
-      } else if (obj[i].t2p5name === name) {
-        searchPlayerKeyNameArr.push(obj[i]);
-      } else if (obj[i].t2p6name === name) {
-        searchPlayerKeyNameArr.push(obj[i]);
-      } else if (obj[i].t2p7name === name) {
-        searchPlayerKeyNameArr.push(obj[i]);
-      }
-    }
-    return searchPlayerKeyNameArr;
-  }
-
-  function searchPlayerActivity2(name, obj) {
-    const resultObject = searchPlayerKeyName2(name, obj);
-    const warDates = [];
-    resultObject.forEach((elem) => {
-      const newTimestampElem = elem.timestamp;
-      warDates.push(newTimestampElem);
-    });
-
-    warDates.unshift(0);
-    return warDates;
-  }
-
-  function pastMonthActivity2(name, obj) {
-    const playerDates = searchPlayerActivity2(name, obj);
-
-    const todayUnix = Date.now();
-    const lastMonthEvent = new Date(new Date().setDate(new Date().getDate() - 30));
-    const resultLastMonth = Date.parse(lastMonthEvent);
-    const unixArr = [];
-
-    playerDates.forEach((el) => {
-      const elWar = Date.parse(el);
-      let lastMonthActivity = '';
-
-      if (elWar > resultLastMonth && elWar < todayUnix) {
-        lastMonthActivity += elWar;
-        unixArr.push(lastMonthActivity);
-      } else {
-        // console.log('nie ma takich dat');
-      }
-    });
-
-    let actSquare = '';
-    if (unixArr.length === 0) {
-      actSquare = `<div class="green0" title="${unixArr.length} wars in last month."></div>`;
-    } else if (unixArr.length > 0 && unixArr.length <= 5) {
-      actSquare = `<div class="green1_5" title="${unixArr.length} wars in last month."></div>`;
-    } else if (unixArr.length > 5 && unixArr.length <= 10) {
-      actSquare = `<div class="green6_10" title="${unixArr.length} wars in last month."></div>`;
-    } else if (unixArr.length > 10 && unixArr.length <= 20) {
-      actSquare = `<div class="green11_20" title="${unixArr.length} wars in last month."></div>`;
-    } else if (unixArr.length > 20 && unixArr.length <= 50) {
-      actSquare = `<div class="green21_50" title="${unixArr.length} wars in last month."></div>`;
-    } else if (unixArr.length > 50 && unixArr.length <= 79) {
-      actSquare = `<div class="green51_100" title="${unixArr.length} wars in last month."></div>`;
-    } else if (unixArr.length > 79) {
-      actSquare = `<div class="green101" title="${unixArr.length} wars in last month."></div>`;
-    } else {
-      // console.log('reszta ma inne niz 0');
-    }
-    return actSquare;
-  }
-
-  function searchPlayer2(name, obj) {
-    const resultObject = searchPlayerKeyName2(name, obj);
-    const warDates = [];
-    resultObject.forEach((elem) => {
-      const oldTimestampElem = elem.timestamp;
-      const newTimestampElem = new Date(oldTimestampElem).toLocaleDateString('pl-PL', { hour: '2-digit', minute: '2-digit' });
-
-      warDates.push(newTimestampElem);
-    });
-
-    warDates.unshift(0);
-    return warDates;
-  }
-
-  function searchPlayerWars2(name, obj) {
-    const resultObject = searchPlayerKeyName2(name, obj);
-    const warIDs = [];
-
-    resultObject.forEach((elem) => {
-      warIDs.push(elem);
-    });
-
-    const linkWars = [];
-    warIDs.forEach((el) => {
-      const oldTimestampEl = el.timestamp;
-      const newTimestampEl = new Date(oldTimestampEl).toLocaleDateString('pl-PL', { hour: '2-digit', minute: '2-digit' });
-
-      let linkWar = '';
-      linkWar = `<a href="#match-${el.idwar}" title="Show war #${el.idwar} - ${newTimestampEl}"><span>#</span>${el.idwar}</a>`;
-      linkWars.push(linkWar);
-    });
-
-    const showIDwars = linkWars.join(', ');
-
-    return showIDwars;
-  }
-
   (async () => {
     // Load the data from the Drive Spreadsheet
 
@@ -458,18 +109,18 @@ export function rankingInfo() {
       playerItemLink.setAttribute('href', `#charts-${name.username}`);
       playerItemLink.classList.add(`${name.username}`);
 
-      // if (name.cup1on1edition1 === '1') {
-      //   playerItemLink.setAttribute('title', `Winner in 1on1 CUP 1st Edition.`);
-      //   playerItemLink.dataset.cup1on1first = 'winner';
-      // } else if (name.cup1on1edition1 === '2') {
-      //   playerItemLink.setAttribute('title', `2nd place in 1on1 CUP 1st Edition.`);
-      //   playerItemLink.dataset.cup1on1first = 'second';
-      // } else if (name.cup1on1edition1 === '3') {
-      //   playerItemLink.setAttribute('title', `3rd place in 1on1 CUP 1st Edition.`);
-      //   playerItemLink.dataset.cup1on1first = 'third';
-      // } else {
-      //   //
-      // }
+      if (name.cup1on1edition1 === '1') {
+        playerItemLink.setAttribute('title', `Winner in 1on1 CUP 1st Edition.`);
+        playerItemLink.dataset.cup1on1first = 'winner';
+      } else if (name.cup1on1edition1 === '2') {
+        playerItemLink.setAttribute('title', `2nd place in 1on1 CUP 1st Edition.`);
+        playerItemLink.dataset.cup1on1first = 'second';
+      } else if (name.cup1on1edition1 === '3') {
+        playerItemLink.setAttribute('title', `3rd place in 1on1 CUP 1st Edition.`);
+        playerItemLink.dataset.cup1on1first = 'third';
+      } else {
+        //
+      }
       // playerItemLink.setAttribute('title', `Watch ${name.playername} profile.`);
       playerItemLink.innerHTML += name.playername;
 
@@ -541,7 +192,10 @@ export function rankingInfo() {
       <div class="frag-item">Current ranking: <span class="frag-value">${name.ranking}</span></div>      
       <div class="frag-item">Lowest ranking: <span class="frag-value">${Math.min(
         ...rankHistory2(name.username, historyRanking),
-      )}</span></div>`;
+      )}</span></div>
+      <div class="frag-item">Achievements: <span class="frag-value">${
+        name.cup1on1edition1 !== '' ? name.cup1on1edition1 + ' place in cup 1on1 OBJ 1st edition 05.02.2021 - 05.03.2021' : '-'
+      }</span></div>`;
       fragCont.appendChild(fragContDiv);
 
       const fragAvarage = document.createElement('div');
@@ -557,7 +211,7 @@ export function rankingInfo() {
       ).toFixed(
         2,
       )}</span><img src="./assets/avarage.png"></div><div class="frag-item">Lowest frags per war: <span class="frag-value frag-low">${Math.min(
-        ...minMaxFrags2(name.username, historyRanking),
+        ...minFrags(name.username, historyRanking),
       )}</span><img src="./assets/low.png"></div><div class="frag-item wars-cont">ID wars:
      <span class="frag-value wars-id short">
       ${searchPlayerWars2(name.username, historyRanking)}</span></div>`;
@@ -638,6 +292,28 @@ export function rankingInfo() {
       // }
       // enableRoute();
     });
+
+    // ROZWIĄZANIE W JEDNYM RZĘDZIE
+
+    // const items = document.getElementById('items');
+    // const row = players.map((entry) => entry);
+    // row.forEach((el, index) => {
+    //   const item = document.createElement('div');
+    //   item.classList.add('item');
+    //   item.innerHTML +=
+    //     ++index +
+    //     ' - ' +
+    //     el.playername +
+    //     ' - ' +
+    //     el.nationality +
+    //     ' - ' +
+    //     el.ranking +
+    //     ' - ' +
+    //     sumOfFrags2(el.username, historyRanking) +
+    //     ' - ' +
+    //     el.warcount;
+    //   items.appendChild(item);
+    // });
 
     const places2 = players.map((entry) => entry);
     places2.forEach(function (placeObj, index) {
@@ -930,4 +606,381 @@ export function rankingInfo() {
       // });
     });
   })();
+
+  function smallStrike(name, arr) {
+    const littleStrike = document.createElement('div');
+    const spanStrike = document.createElement('span');
+    const firstFromEnd = arr(name)[arr(name).length - 1];
+    const secondFromEnd = arr(name)[arr(name).length - 2];
+    const countingPoints = firstFromEnd - secondFromEnd;
+
+    if (firstFromEnd > secondFromEnd) {
+      littleStrike.classList.add('up-streak');
+      spanStrike.setAttribute('data-title', `${countingPoints > 0 ? `+${countingPoints.toFixed(2)}` : ''} pc in last war`);
+      littleStrike.appendChild(spanStrike);
+    } else if (firstFromEnd < secondFromEnd) {
+      littleStrike.classList.add('down-streak');
+      spanStrike.setAttribute('data-title', `${countingPoints.toFixed(2)} pc in last war`);
+      littleStrike.appendChild(spanStrike);
+      // littleStrike.setAttribute('title', `${countingPoints.toFixed(2)} pc in last war`);
+    } else {
+      littleStrike.classList.add('draw-streak');
+      spanStrike.setAttribute('data-title', `${countingPoints.toFixed(2)} pc in last war`);
+      littleStrike.appendChild(spanStrike);
+      // littleStrike.setAttribute('title', `${countingPoints.toFixed(2)} pc in last war`);
+    }
+
+    return littleStrike;
+  }
+
+  function findPlayerLastWar(name, obj) {
+    const findeLastWar = obj.filter((item) => JSON.stringify(item).includes(name)).pop();
+    let findLastTimeStamp = '';
+    let newTimestampElem = '';
+    if (findeLastWar) {
+      findLastTimeStamp = findeLastWar.timestamp;
+      newTimestampElem = new Date(findLastTimeStamp).toLocaleDateString('pl-PL', { hour: '2-digit', minute: '2-digit' });
+    } else if (findeLastWar === 'undefined') {
+      findLastTimeStamp = 'No match';
+    } else if (findeLastWar === null) {
+      findLastTimeStamp = 'No match';
+    } else {
+      findLastTimeStamp = 'No match';
+    }
+    return newTimestampElem;
+  }
+
+  function longestWinning(arr, n) {
+    let max = 1;
+    let len = 1;
+
+    for (let i = 1; i < n; i++) {
+      if (arr[i] > arr[i - 1]) {
+        len++;
+      } else {
+        if (max < len) {
+          max = len;
+        }
+        len = 1;
+      }
+    }
+
+    if (max < len) {
+      max = len;
+    }
+    return max;
+  }
+
+  // function cupAchivments(string) {
+  //   if ('1') {
+  //     playerItemLink.setAttribute('title', `Winner in 1on1 CUP 1st Edition.`);
+  //     playerItemLink.dataset.cup1on1first = 'winner';
+  //   } else if ('2') {
+  //     playerItemLink.setAttribute('title', `2nd place in 1on1 CUP 1st Edition.`);
+  //     playerItemLink.dataset.cup1on1first = 'second';
+  //   } else if ('3') {
+  //     playerItemLink.setAttribute('title', `3rd place in 1on1 CUP 1st Edition.`);
+  //     playerItemLink.dataset.cup1on1first = 'third';
+  //   } else {
+  //     //
+  //   }
+  // }
+
+  function getPlayerFlag(playerFlag) {
+    let flag = '';
+    switch (playerFlag) {
+      case 'EU': {
+        flag = `<img src="/assets/flags/_e.gif" title="EU">`;
+        break;
+      }
+      case 'PL': {
+        flag = `<img src="/assets/flags/pl.gif" title="Poland">`;
+        break;
+      }
+      case 'EG': {
+        flag = `<img src="/assets/flags/EG.gif" title="Egypt">`;
+        break;
+      }
+      case 'NL': {
+        flag = `<img src="/assets/flags/nl.gif" title="Netherlands">`;
+        break;
+      }
+      case 'RU': {
+        flag = `<img src="/assets/flags/RU.gif" title="Russia">`;
+        break;
+      }
+      case 'RO': {
+        flag = `<img src="/assets/flags/ro.gif" title="Romania">`;
+        break;
+      }
+      case 'FR': {
+        flag = `<img src="/assets/flags/fr.gif" title="France">`;
+        break;
+      }
+      case 'UK': {
+        flag = `<img src="/assets/flags/uk.gif" title"United Kingdom">`;
+        break;
+      }
+      case 'BE': {
+        flag = `<img src="/assets/flags/be.gif" title="Belgium">`;
+        break;
+      }
+      case 'GR': {
+        flag = `<img src="/assets/flags/gr.gif" title="Greece">`;
+        break;
+      }
+      case 'DE': {
+        flag = `<img src="/assets/flags/de.gif" title="Germany">`;
+        break;
+      }
+      case 'ES': {
+        flag = `<img src="/assets/flags/es.gif" title="Spain">`;
+        break;
+      }
+      case 'PT': {
+        flag = `<img src="/assets/flags/pt.gif" title="Portugal">`;
+        break;
+      }
+      case 'FI': {
+        flag = `<img src="/assets/flags/fi.gif" title="Finland">`;
+        break;
+      }
+      case 'AM': {
+        flag = `<img src="/assets/flags/am.gif" title="Armenia">`;
+        break;
+      }
+      default:
+      // console.log('Nie pasuje');
+    }
+    return flag;
+  }
+
+  function destructObjRanks2(obj, arr) {
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        const objInArr = obj[key];
+        for (const key2 in objInArr) {
+          if (objInArr.hasOwnProperty(key2)) {
+            const elemOfObj = objInArr[key2];
+            arr.push(elemOfObj);
+          }
+        }
+      }
+    }
+  }
+
+  function getIndexesRanks2(arr, val) {
+    const indexes = [];
+    let i = -1;
+    while ((i = arr.indexOf(val, i + 1)) !== -1) {
+      indexes.push(i + 4); // postELO
+    }
+    return indexes;
+  }
+
+  function getIndexesFrags2(arr, val) {
+    const indexes = [];
+    let i = -1;
+    while ((i = arr.indexOf(val, i + 1)) !== -1) {
+      indexes.push(i + 3); // frags
+    }
+    return indexes;
+  }
+
+  function ranksAllStrikes2(username, ind, arrIn, arrOut) {
+    if (arrIn.includes(username)) {
+      arrIn.forEach(function (el, index) {
+        index += 1;
+        ind.forEach(function (founded, i) {
+          if (Number(index) === Number(founded)) {
+            const foundedStreak = Number(el).toFixed(2);
+            arrOut.push(Number(foundedStreak));
+          }
+        });
+      });
+    }
+  }
+
+  function rankHistory2(name, obj) {
+    const arrNameRanks2 = [];
+    destructObjRanks2(obj, arrNameRanks2);
+    const indexesRanksName2 = getIndexesRanks2(arrNameRanks2, name);
+    const nameRanksOut2 = [];
+    ranksAllStrikes2(name, indexesRanksName2, arrNameRanks2, nameRanksOut2);
+    nameRanksOut2.unshift(1000);
+    return nameRanksOut2;
+  }
+
+  function sumOfFrags2(name, obj) {
+    const arrNameFrags2 = [];
+    destructObjRanks2(obj, arrNameFrags2);
+    const indexesFragsName2 = getIndexesFrags2(arrNameFrags2, name);
+    const nameFragsOut2 = [];
+    ranksAllStrikes2(name, indexesFragsName2, arrNameFrags2, nameFragsOut2);
+    let nameFragsOutExist2 = '';
+    if (Array.isArray(nameFragsOut2) && nameFragsOut2.length) {
+      nameFragsOutExist2 = nameFragsOut2.reduce((a, b) => a + b);
+    } else {
+      nameFragsOutExist2 = 0;
+    }
+    return nameFragsOutExist2;
+  }
+
+  function minMaxFrags2(name, obj) {
+    const arrNameFrags2 = [];
+    destructObjRanks2(obj, arrNameFrags2);
+    const indexesFragsName2 = getIndexesFrags2(arrNameFrags2, name);
+    const nameFragsOut2 = [];
+    ranksAllStrikes2(name, indexesFragsName2, arrNameFrags2, nameFragsOut2);
+    nameFragsOut2.unshift(0);
+    return nameFragsOut2;
+  }
+
+  function minFrags(name, obj) {
+    const arrNameFrags2 = [];
+    destructObjRanks2(obj, arrNameFrags2);
+    const indexesFragsName2 = getIndexesFrags2(arrNameFrags2, name);
+    const nameFragsOut2 = [];
+    ranksAllStrikes2(name, indexesFragsName2, arrNameFrags2, nameFragsOut2);
+    return nameFragsOut2;
+  }
+
+  function countWars(name, obj) {
+    const playerWarsObj = [];
+    const playerRankHistory2 = rankHistory2(name, obj);
+    playerRankHistory2.forEach((war, index) => {
+      playerWarsObj.push(index);
+    });
+    return playerWarsObj;
+  }
+
+  function getNumOfPlayers(obj) {
+    return obj.length;
+  }
+
+  function searchPlayerKeyName2(name, obj) {
+    const searchPlayerKeyNameArr = [];
+    for (let i = 0; i < obj.length; i++) {
+      if (obj[i].t1p1name === name) {
+        searchPlayerKeyNameArr.push(obj[i]);
+      } else if (obj[i].t1p2name === name) {
+        searchPlayerKeyNameArr.push(obj[i]);
+      } else if (obj[i].t1p3name === name) {
+        searchPlayerKeyNameArr.push(obj[i]);
+      } else if (obj[i].t1p4name === name) {
+        searchPlayerKeyNameArr.push(obj[i]);
+      } else if (obj[i].t1p5name === name) {
+        searchPlayerKeyNameArr.push(obj[i]);
+      } else if (obj[i].t1p6name === name) {
+        searchPlayerKeyNameArr.push(obj[i]);
+      } else if (obj[i].t1p7name === name) {
+        searchPlayerKeyNameArr.push(obj[i]);
+      } else if (obj[i].t2p1name === name) {
+        searchPlayerKeyNameArr.push(obj[i]);
+      } else if (obj[i].t2p2name === name) {
+        searchPlayerKeyNameArr.push(obj[i]);
+      } else if (obj[i].t2p3name === name) {
+        searchPlayerKeyNameArr.push(obj[i]);
+      } else if (obj[i].t2p4name === name) {
+        searchPlayerKeyNameArr.push(obj[i]);
+      } else if (obj[i].t2p5name === name) {
+        searchPlayerKeyNameArr.push(obj[i]);
+      } else if (obj[i].t2p6name === name) {
+        searchPlayerKeyNameArr.push(obj[i]);
+      } else if (obj[i].t2p7name === name) {
+        searchPlayerKeyNameArr.push(obj[i]);
+      }
+    }
+    return searchPlayerKeyNameArr;
+  }
+
+  function searchPlayerActivity2(name, obj) {
+    const resultObject = searchPlayerKeyName2(name, obj);
+    const warDates = [];
+    resultObject.forEach((elem) => {
+      const newTimestampElem = elem.timestamp;
+      warDates.push(newTimestampElem);
+    });
+
+    warDates.unshift(0);
+    return warDates;
+  }
+
+  function pastMonthActivity2(name, obj) {
+    const playerDates = searchPlayerActivity2(name, obj);
+
+    const todayUnix = Date.now();
+    const lastMonthEvent = new Date(new Date().setDate(new Date().getDate() - 30));
+    const resultLastMonth = Date.parse(lastMonthEvent);
+    const unixArr = [];
+
+    playerDates.forEach((el) => {
+      const elWar = Date.parse(el);
+      let lastMonthActivity = '';
+
+      if (elWar > resultLastMonth && elWar < todayUnix) {
+        lastMonthActivity += elWar;
+        unixArr.push(lastMonthActivity);
+      } else {
+        // console.log('nie ma takich dat');
+      }
+    });
+
+    let actSquare = '';
+    if (unixArr.length === 0) {
+      actSquare = `<div class="green0" title="${unixArr.length} wars in last month."></div>`;
+    } else if (unixArr.length > 0 && unixArr.length <= 5) {
+      actSquare = `<div class="green1_5" title="${unixArr.length} wars in last month."></div>`;
+    } else if (unixArr.length > 5 && unixArr.length <= 10) {
+      actSquare = `<div class="green6_10" title="${unixArr.length} wars in last month."></div>`;
+    } else if (unixArr.length > 10 && unixArr.length <= 20) {
+      actSquare = `<div class="green11_20" title="${unixArr.length} wars in last month."></div>`;
+    } else if (unixArr.length > 20 && unixArr.length <= 50) {
+      actSquare = `<div class="green21_50" title="${unixArr.length} wars in last month."></div>`;
+    } else if (unixArr.length > 50 && unixArr.length <= 79) {
+      actSquare = `<div class="green51_100" title="${unixArr.length} wars in last month."></div>`;
+    } else if (unixArr.length > 79) {
+      actSquare = `<div class="green101" title="${unixArr.length} wars in last month."></div>`;
+    } else {
+      // console.log('reszta ma inne niz 0');
+    }
+    return actSquare;
+  }
+
+  function searchPlayer2(name, obj) {
+    const resultObject = searchPlayerKeyName2(name, obj);
+    const warDates = [];
+    resultObject.forEach((elem) => {
+      const oldTimestampElem = elem.timestamp;
+      const newTimestampElem = new Date(oldTimestampElem).toLocaleDateString('pl-PL', { hour: '2-digit', minute: '2-digit' });
+
+      warDates.push(newTimestampElem);
+    });
+
+    warDates.unshift(0);
+    return warDates;
+  }
+
+  function searchPlayerWars2(name, obj) {
+    const resultObject = searchPlayerKeyName2(name, obj);
+    const warIDs = [];
+
+    resultObject.forEach((elem) => {
+      warIDs.push(elem);
+    });
+
+    const linkWars = [];
+    warIDs.forEach((el) => {
+      const oldTimestampEl = el.timestamp;
+      const newTimestampEl = new Date(oldTimestampEl).toLocaleDateString('pl-PL', { hour: '2-digit', minute: '2-digit' });
+
+      let linkWar = '';
+      linkWar = `<a href="#match-${el.idwar}" title="Show war #${el.idwar} - ${newTimestampEl}"><span>#</span>${el.idwar}</a>`;
+      linkWars.push(linkWar);
+    });
+
+    const showIDwars = linkWars.join(', ');
+
+    return showIDwars;
+  }
 }

@@ -1,6 +1,7 @@
 @import '../src/scripts/jquery.bracket.min.css';
 @import "./styles/mobile-menu.scss";
 @import "./styles/lightgallery.scss";
+@import "./styles/cup.scss";
 // @import "./styles/hamburgers.scss";
 
 $darkenRed: #400000;
@@ -3126,7 +3127,7 @@ canvas {
     bottom: 10px;
     right: 10px;
     content: "OBJ";    
-    font-size: 100px;
+    font-size: 52px;
     font-weight: 900;
     background-image: linear-gradient(0deg, #604040 25%, #603030 25%, #603030 50%, #604040 50%, #604040 75%, #603030 75%, #603030 100%);
     background-size: 12px 12px;
@@ -3630,6 +3631,10 @@ div.jQBracket .team div.label {
 
         .contrast-mode & {
           background-color: $darkenBlue;
+        }
+
+        img {
+          height: 35px;
         }
       }
 
@@ -4173,45 +4178,45 @@ div.jQBracket .team div.label {
  }
 }
 
-//CUP 1on1 First
-// [data-cup1on1first="winner"] {
-//   &:before {
-//     position: absolute;
-//     top: 5px;
-//     left: -20px;
-//     //margin-left: 5px;
-//     content: "";
-//     height: 13px;
-//     width: 16px; 
-//     background-image: url("/assets/smallcup.gif");
-//   }
-// }
+// CUP 1on1 First
+[data-cup1on1first="winner"] {
+  &:before {
+    position: absolute;
+    top: 5px;
+    left: -20px;
+    //margin-left: 5px;
+    content: "";
+    height: 13px;
+    width: 16px; 
+    background-image: url("/assets/smallcup.gif");
+  }
+}
 
-// [data-cup1on1first="second"] {
-//   &:before {
-//     position: absolute;
-//     top: 5px;
-//     left: -20px;
-//     //margin-left: 5px;
-//     content: "";
-//     height: 13px;
-//     width: 16px; 
-//     background-image: url("/assets/smallcup_silver.gif");
-//   }
-// }
+[data-cup1on1first="second"] {
+  &:before {
+    position: absolute;
+    top: 5px;
+    left: -20px;
+    //margin-left: 5px;
+    content: "";
+    height: 13px;
+    width: 16px; 
+    background-image: url("/assets/smallcup_silver.gif");
+  }
+}
 
-// [data-cup1on1first="third"] {
-//   &:before {
-//     position: absolute;
-//     top: 5px;
-//     left: -20px;
-//     //margin-left: 5px;
-//     content: "";
-//     height: 13px;
-//     width: 16px; 
-//     background-image: url("/assets/smallcup_bronze.gif");
-//   }
-// }
+[data-cup1on1first="third"] {
+  &:before {
+    position: absolute;
+    top: 5px;
+    left: -20px;
+    //margin-left: 5px;
+    content: "";
+    height: 13px;
+    width: 16px; 
+    background-image: url("/assets/smallcup_bronze.gif");
+  }
+}
 
 //ACTIVE SQUARES
 
@@ -4324,4 +4329,22 @@ div.jQBracket .team div.label {
 
 .accordion-container {
   padding: 15px 0;
+}
+
+.cup2on2ol {
+  :nth-child(n){
+    padding: 5px
+  }
+
+  :nth-child(even){
+    background-color: #333;
+  }
+
+  :nth-child(odd){
+    background-color: lighten(#333, 10%);
+  }
+}
+
+.blur {
+  filter: blur(15px);
 }

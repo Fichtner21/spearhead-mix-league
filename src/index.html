@@ -72,8 +72,8 @@
             <li><a href="#inactive" class="rank">OBJ <span>Inactive</span> <img src="assets/player_time.svg"></a></li>    
             <li><a href="#inactive-tdm" class="rank">TDM <span>Inactive</span> <img src="assets/player_time.svg"></a></li> 
             <li><a href="#log">Log</a></li> 
-            <li><a href="#cup">CUP <span>1on1</span> <img src="assets/smallcup.gif"></a></li>
-            <li><a href="#cup-rules">CUP Rules <span>1on1</span></a></li> 
+            <li><a href="#cup">CUP <span>1on1</span> <img src="assets/smallcup.gif"></a></li>            
+            <li><a href="#cup-two">CUP <span>2on2</span> <img src="assets/smallcup.gif"><img src="assets/smallcup.gif"></a></li>            
             <li><a href="#wanted">Wanted</a></li> 
             <li><a href="#description">Map descriptions</a></li>  
             </ul>            
@@ -106,9 +106,71 @@
         <div class="wrapper">
             <div class="mainSh">MoH: Spearhead Mix League</div>
             <div class="intro highlight1">
-              <div class="cup-info">
-                <div class="big-cup">CUP 1on1 OBJ in progress, follow it <a href="#cup">here</a></div>  
+              <!-- <div class="cup-info">
+                <div class="big-cup">The Winner of CUP 1on1 is <a href="#charts-boogie">booGie<img src="assets/smallcup.gif"></a></div>  
+              </div> -->
+              <div class="cup-result">
+                <div class="cup-result__info">Results of CUP 1on1</div>
+                <div class=""><a href="#charts-boogie" title="1st place in CUP 1on1 OBJ 1st Edition">booGie<img src="assets/smallcup.gif"></a></div>
+                <div class=""><a href="#charts-baton" title="2nd place in CUP 1on1 OBJ 1st Edition">bAtOn<img src="assets/smallcup_silver.gif"></a></div>
+                <div class=""><a href="#charts-zielony" title="3rd place in CUP 1on1 OBJ 1st Edition">Zielony<img src="assets/smallcup_bronze.gif"></a></div>
               </div>             
+            </div>
+            
+            <div id="selectionTeams">
+              <div class="matchSelection">          
+                <div class="date">
+                  <div class="matchId">ID 1</div>
+                  <div class="dateDetail">Upcoming War <img src="/src/assets/gid46_small.gif"></div>
+                  <div class="matchDate"></div>
+                </div>
+                <div class="team">        
+                  <div id="" class="players">
+                    <div id="team1ID1"><div class="lds-dual-ring3"></div></div>
+                    <div class="chance-cont">
+                      <div class="chance-desc">Chance of Winning</div>
+                      <div id="chanceT1ID1" class="chance"></div>
+                    </div> 
+                  </div>
+                  <div id="cumulativeTeam1ID1" class="cumulative"></div>
+                </div>
+                <div class="team">        
+                  <div id="" class="players">
+                      <div id="team2ID1"><div class="lds-dual-ring3"></div></div>
+                      <div class="chance-cont">
+                        <div class="chance-desc">Chance of Winning</div>
+                        <div id="chanceT2ID1" class="chance"></div>
+                      </div>                    
+                  </div>
+                  <div id="cumulativeTeam2ID1" class="cumulative"></div>
+                </div>
+              </div>
+              <div class="matchSelection">          
+                <div class="date">
+                  <div class="matchId">ID 2</div>
+                  <div class="dateDetail">Upcoming War <img src="/src/assets/gid46_small.gif"><img src="/src/assets/gid46_small.gif"></div>
+                </div>
+                <div class="team">        
+                  <div id="" class="players">
+                    <div id="team1ID2"><div class="lds-dual-ring3"></div></div>
+                    <div class="chance-cont">
+                      <div class="chance-desc">Chance of Winning</div>
+                      <div id="chanceT1ID2" class="chance"></div>
+                    </div>                    
+                  </div>
+                  <div id="cumulativeTeam1ID2" class="cumulative"></div>
+                </div>
+                <div class="team">        
+                  <div id="" class="players">
+                      <div id="team2ID2"><div class="lds-dual-ring3"></div></div>
+                      <div class="chance-cont">
+                        <div class="chance-desc">Chance of Winning</div>
+                        <div id="chanceT2ID2" class="chance"></div>
+                      </div>                    
+                   </div>
+                  <div id="cumulativeTeam2ID2" class="cumulative"></div>
+                </div>
+              </div>
             </div>
             <div class="important">
               <div class="important--home">           
@@ -192,62 +254,6 @@
                 </div>
               </div>   
             </div>
-            <div id="selectionTeams">
-              <div class="matchSelection">          
-                <div class="date">
-                  <div class="matchId">ID 1</div>
-                  <div class="dateDetail">Upcoming War <img src="/src/assets/gid46_small.gif"></div>
-                  <div class="matchDate"></div>
-                </div>
-                <div class="team">        
-                  <div id="" class="players">
-                    <div id="team1ID1"><div class="lds-dual-ring3"></div></div>
-                    <div class="chance-cont">
-                      <div class="chance-desc">Chance of Winning</div>
-                      <div id="chanceT1ID1" class="chance"></div>
-                    </div> 
-                  </div>
-                  <div id="cumulativeTeam1ID1" class="cumulative"></div>
-                </div>
-                <div class="team">        
-                  <div id="" class="players">
-                      <div id="team2ID1"><div class="lds-dual-ring3"></div></div>
-                      <div class="chance-cont">
-                        <div class="chance-desc">Chance of Winning</div>
-                        <div id="chanceT2ID1" class="chance"></div>
-                      </div>                    
-                  </div>
-                  <div id="cumulativeTeam2ID1" class="cumulative"></div>
-                </div>
-              </div>
-              <div class="matchSelection">          
-                <div class="date">
-                  <div class="matchId">ID 2</div>
-                  <div class="dateDetail">Upcoming War <img src="/src/assets/gid46_small.gif"><img src="/src/assets/gid46_small.gif"></div>
-                </div>
-                <div class="team">        
-                  <div id="" class="players">
-                    <div id="team1ID2"><div class="lds-dual-ring3"></div></div>
-                    <div class="chance-cont">
-                      <div class="chance-desc">Chance of Winning</div>
-                      <div id="chanceT1ID2" class="chance"></div>
-                    </div>                    
-                  </div>
-                  <div id="cumulativeTeam1ID2" class="cumulative"></div>
-                </div>
-                <div class="team">        
-                  <div id="" class="players">
-                      <div id="team2ID2"><div class="lds-dual-ring3"></div></div>
-                      <div class="chance-cont">
-                        <div class="chance-desc">Chance of Winning</div>
-                        <div id="chanceT2ID2" class="chance"></div>
-                      </div>                    
-                   </div>
-                  <div id="cumulativeTeam2ID2" class="cumulative"></div>
-                </div>
-              </div>
-            </div>
-            
             <div class="main">
               <div class="main__left">                
                 <a href="https://1drv.ms/u/s!ApJ-yZadNIlniDOUv6nMiygSW8P3?e=6wgWgv" class="file" title="Download MoH:AA Spearhead">
@@ -563,6 +569,11 @@
       <div class="container view hidden" id="cup">
         <div class="wrapper">
           <h2>Cup</h2>     
+          <ul>
+            <li>
+              <a href="#cup-rules">Cup rules</a>
+            </li>
+          </ul>          
           <h2>Seeded/Unseeded depends of ranking OBJ 05.02.2021</h2>     
           <div class="positions">
             
@@ -1146,7 +1157,7 @@
                   [[18,14]],
                   [[1,0]]
                 ], [         /* FINALS */
-                  [[null,null], [1,0]],
+                  [[17,10], [1,0]],
                   [[null,null]]
                 ]]
               }
@@ -1196,9 +1207,36 @@
           
         </div>
       </div>
+      <div class="container view hidden" id="cup-two">
+        <div class="wrapper">
+          <h2>First CUP 2on2 OBJ Real in MoH:SH Mix League</h2>
+          <a href="#cup-rules" class="cup-rules" title="Click to read CUP Rules">Cup rules</a>
+          <h3>Registered:</h3>
+          <div id="signed"></div>
+        </div>
+      </div>
       <div class="container view hidden" id="cup-rules">
         <div class="wrapper">
           <div class="cup-info">
+            <div class="popup__sub"><a href="#cup-two">First CUP 2on2 OBJ Real</a> in MoH:SH MIX League</div>
+            <div class="popup__sub">Rules:</div>  
+            <ol class="cup2on2ol">
+              <li>Register on <a href="https://discord.gg/u4MCqKSKZf">Discord <i class="fab fa-discord"></i> Channel #cup</a> until <strong>20:00, 14.03.2021 (Sunday)</strong></li>
+              <li>Example register in #cup channel on discord is: <strong style="border: 3px solid red;">R - Nickname1/Nickname2</strong></li>
+              <li>The draw of teams for the Cup live on twitch at 21:00 Sunday 14.03.2021</li>
+              <li>CUP based rules: DOUBLE ELIMINATION (Winner and Loser Brackets)</li>
+              <li>Time play: First to 5 rounds</li>
+              <li>Each round 4 minutes</li>
+              <li>Players have 7 days from selected to play their war</li>
+              <li>5 maps to choose from: The Hunt, V2, The Bridge, Stlo, VSUK Abbey</li>
+              <li>Teams before war will baning maps i.e: Team 1 - ban Stlo, Player 2 - ban VSUK Abbey, Team 1 - chose The Bridge, Team 2 - chose V2, <br>so they play The Bridge & V2 in case of draw next map will be The Hunt.</li></li>
+              <li>Two servers available: 173.199.83.169:12203 & 173.199.83.172:12203</li>
+              <li>Teams are required to send screenshots with the results from the war to the admin.</li>              
+              <li>Disputes are settled by the league committee (-Illu$ioN-, KaPsEL, bAtOn).</li>
+            </ol>          
+          </div>
+          
+          <div class="cup-info" style="filter:brightness(10%)">
             <div class="popup__sub">First CUP 1on1 </div>
             <div class="popup__sub">in MoH:SH MIX League</div>
             <div class="popup__sub">Rules:</div>
@@ -1209,6 +1247,7 @@
               <li>Players have 3 days(72hours) from selected to play their war</li>
               <li>Time play: First to 5 rounds</li>
               <li>Each round 4 minutes</li>
+              <li>Game settings: like in clanbase times, 1 nade, 1 smoke, no bazooka, no shotgun.</li>
               <li>Maps: The Hunt, V2, The Bridge, Stlo, VSUK Abbey - each player before war start baning maps i.e:<br> Player 1 - ban Stlo, Player 2 - ban VSUK Abbey, Player 1 - chose The Bridge, Player 2 - chose V2, <br>so they play The Bridge & V2 in case of draw next map will be The Hunt.</li>
               <li>Disputes are settled by the league committee (-Illu$ioN-, KaPsEL, bAtOn).</li>
             </ol>
@@ -1301,11 +1340,8 @@
                 Coming soon!
               </div>
             </a>
-            <a href="#" class="coming-soon">
-              <img src="assets/maps/stlo.jpg">
-              <div class="info-soon">
-                Coming soon!
-              </div>
+            <a href="#stlo">
+              <img src="assets/maps/stlo.jpg">              
             </a>
             <a href="#" class="coming-soon">
               <img src="assets/maps/dessau.jpg">
@@ -1490,7 +1526,60 @@
             </a>            
           </div>
         </div>
-      </div>     
+      </div>  
+      <div class="container view hidden" id="stlo">
+        <div class="wrapper">
+          <a href="#description" class="back-map-descriptions">Back to map descriptions</a>
+          <h2>Stlo</h2>
+          <div id="lightgallery-stlo" class="light-grid">
+            <a href="assets/maps/stlo/stlo1.jpg">
+              <img src="assets/maps/stlo/stlo1.jpg">
+            </a>   
+            <a href="assets/maps/stlo/stlo2.jpg">
+              <img src="assets/maps/stlo/stlo2.jpg">
+            </a>   
+            <a href="assets/maps/stlo/stlo3.jpg">
+              <img src="assets/maps/stlo/stlo3.jpg">
+            </a>   
+            <a href="assets/maps/stlo/stlo4.jpg">
+              <img src="assets/maps/stlo/stlo4.jpg">
+            </a>   
+            <a href="assets/maps/stlo/stlo5.jpg">
+              <img src="assets/maps/stlo/stlo5.jpg">
+            </a>   
+            <a href="assets/maps/stlo/stlo6.jpg">
+              <img src="assets/maps/stlo/stlo6.jpg">
+            </a>   
+            <a href="assets/maps/stlo/stlo7.jpg">
+              <img src="assets/maps/stlo/stlo7.jpg">
+            </a>   
+            <a href="assets/maps/stlo/stlo8.jpg">
+              <img src="assets/maps/stlo/stlo8.jpg">
+            </a>   
+            <a href="assets/maps/stlo/stlo9.jpg">
+              <img src="assets/maps/stlo/stlo9.jpg">
+            </a>   
+            <a href="assets/maps/stlo/stlo10.jpg">
+              <img src="assets/maps/stlo/stlo10.jpg">
+            </a>   
+            <a href="assets/maps/stlo/stlo11.jpg">
+              <img src="assets/maps/stlo/stlo11.jpg">
+            </a>   
+            <a href="assets/maps/stlo/stlo12.jpg">
+              <img src="assets/maps/stlo/stlo12.jpg">
+            </a>   
+            <a href="assets/maps/stlo/stlo13.jpg">
+              <img src="assets/maps/stlo/stlo13.jpg">
+            </a>   
+            <a href="assets/maps/stlo/stlo14.jpg">
+              <img src="assets/maps/stlo/stlo14.jpg">
+            </a>   
+            <a href="assets/maps/stlo/stlo15.jpg">
+              <img src="assets/maps/stlo/stlo15.jpg">
+            </a>   
+          </div>
+        </div>
+      </div>
     </div>  
     <!-- <div class="slow">
       <div class="slow__quit"><i class="far fa-window-close"></i></div>
@@ -1549,6 +1638,7 @@
     <script>
       lightGallery(document.getElementById('lightgallery-vsuk'));
       lightGallery(document.getElementById('lightgallery-v2'));
+      lightGallery(document.getElementById('lightgallery-stlo'));
    </script>
   </body>
 </html>

@@ -4,6 +4,34 @@ import firebase from 'firebase';
 import timeago from 'timeago';
 
 export function history() {
+  // function addPlayerLink2(player) {
+  //   let convertedPlayer = '';
+  //   playerFromTab.forEach((el) => {
+  //     if (player === el.username) {
+  //       convertedPlayer = `<a href="#charts-${el.username}">${el.playername}</a>`;
+  //     } else if (player === '') {
+  //       // console.log('N/A player');
+  //     } else {
+  //       // console.log('Something went wrong.');
+  //     }
+  //   });
+  //   return convertedPlayer;
+  // }
+
+  // function getFromInactive2(player) {
+  //   let mockInactive = '';
+  //   playerInactiveTag.forEach((el) => {
+  //     if (player === el.username) {
+  //       mockInactive = `<a href="#charts-${el.username}">${el.playername}</a>`;
+  //     } else if (player === '') {
+  //       // console.log('N/A player');
+  //     } else {
+  //       // console.log('Something went wrong.');
+  //     }
+  //   });
+  //   return mockInactive;
+  // }
+
   (async () => {
     // Load the data from the Drive Spreadsheet
     const historyMatches = await drive({
