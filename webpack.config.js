@@ -11,7 +11,7 @@ const config = {
   },
   output: {
     path: resolve(__dirname, './dist'),
-    filename: 'main.js',
+    filename: 'main.js',    
   },
   resolve: {
     extensions: ['.js', '.html', '.scss'],
@@ -62,6 +62,7 @@ const config = {
           {
             loader: 'file-loader',
             options: {
+              name: "[name].[contenthash].[ext]",
               outputPath: 'assets',
             },
           },
@@ -71,7 +72,7 @@ const config = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: resolve(__dirname, './src/index.html'),
+      template: resolve(__dirname, './src/index.html'),      
     }),
     new MiniCssExtractPlugin({
       filename: 'style.css',

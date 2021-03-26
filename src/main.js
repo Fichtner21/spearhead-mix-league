@@ -13,7 +13,28 @@ import { inactivePlayers } from './views/inactive';
 import { historyTdm } from './views/history_tdm';
 import { rankingTdm } from './views/ranking_tdm';
 import { cupTwo } from './views/cup_two';
+// import { smallStrike } from './functions/functions';
 // import Translator from './translator.js';
+
+window.self.addEventListener('fetch', function (event) {
+  event.respondWith(
+    caches.open('mysite-cache').then(function (cache) {
+      return cache.match(event.request).then(function (response2) {
+        return (
+          response2 ||
+          fetch(event.request).then(function (response22) {
+            cache.put(event.request, response22.clone());
+            return response22;
+          })
+        );
+      });
+    }),
+  );
+});
+
+window.self.addEventListener('fetch', function (event) {
+  event.respondWith(caches.match(event.request));
+});
 
 function enableRouting() {
   function setRoute() {
@@ -31,6 +52,18 @@ function enableRouting() {
   window.addEventListener('hashchange', setRoute);
 }
 
+// document.getElementById('rank-nav').addEventListener(
+//   'click',
+//   function (e) {
+//     rankingInfo();
+//   },
+//   false,
+// );
+
+// document.getElementById('obj-nav').addEventListener('click', function (e) {
+//   history();
+// });
+
 document.addEventListener('DOMContentLoaded', () => {
   rankingInfo();
   history();
@@ -38,6 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
   historyTdm();
   rankingTdm();
   cupTwo();
+
+  // smallStrike();
 
   // if (window.history.pushState) {
   //   window.history.pushState('', '/', window.location.pathname);
@@ -110,16 +145,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   new Accordion('.accordion-container');
 
-  setTimeout(function () {
-    $('.slowly').fadeOut(1500);
-  }, 12000);
+  // setTimeout(function () {
+  //   $('.slowly').fadeOut(1500);
+  // }, 12000);
 
-  let timeleft = 10;
-  const downloadTimer = setInterval(function () {
-    timeleft--;
-    document.getElementById('countdown').textContent = timeleft;
-    if (timeleft <= 0) clearInterval(downloadTimer);
-  }, 1000);
+  // let timeleft = 10;
+  // const downloadTimer = setInterval(function () {
+  //   timeleft--;
+  //   document.getElementById('countdown').textContent = timeleft;
+  //   if (timeleft <= 0) clearInterval(downloadTimer);
+  // }, 1000);
 
   (async () => {
     // Load the data from the Drive Spreadsheet

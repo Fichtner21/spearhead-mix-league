@@ -7,13 +7,13 @@ export function cupTwo() {
       tab: '8',
     });
 
-    const signedDiv = document.getElementById('signed');
-    const signedPlayers = signedCupTwo.map((entry) => entry);
-    signedPlayers.forEach((team) => {
-      const teamDiv = document.createElement('div');
-      teamDiv.classList.add('item');
-      teamDiv.innerHTML += team.signed;
-      signedDiv.appendChild(teamDiv);
-    });
+    // const signedDiv = document.getElementById('signed');
+    // const signedPlayers = signedCupTwo.map((entry) => entry);
+    // signedPlayers.forEach((team) => {
+    //   const teamDiv = document.createElement('div');
+    //   teamDiv.classList.add('item');
+    //   teamDiv.innerHTML += team.signed;
+    //   signedDiv.appendChild(teamDiv);
+    // });
   })();
 }

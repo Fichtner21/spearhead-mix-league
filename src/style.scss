@@ -2,6 +2,7 @@
 @import "./styles/mobile-menu.scss";
 @import "./styles/lightgallery.scss";
 @import "./styles/cup.scss";
+@import "./styles/ranking.scss";
 // @import "./styles/hamburgers.scss";
 
 $darkenRed: #400000;
@@ -3165,7 +3166,11 @@ canvas {
   }
 }
 
-.item0, .item1, .item2 {
+[data-title] {
+  font-weight: 400;
+}
+
+.item0, .item1, .item2, .item3 {
   .down-streak {
     position: absolute;
     right: -15px;
@@ -3209,6 +3214,7 @@ canvas {
       content: attr(data-title);
       /* position for title view box */
       position: absolute;
+      font-weight: 400 !important;
       bottom: -1.6em;  	
       left: 100%;
       z-index: 99999;
@@ -3278,6 +3284,7 @@ canvas {
     bottom: -1.6em;  	
     left: 120%;
     z-index: 99999;
+    font-weight: 400 !important;
     // visibility: hidden;
     visibility: visible;
     /* optional */
@@ -3312,6 +3319,7 @@ canvas {
     z-index: 99999;
     // visibility: hidden;
     visibility: visible;
+    font-weight: 400 !important;
     /* optional */
     white-space: nowrap;
     /* stilization */
@@ -3343,6 +3351,7 @@ canvas {
     left: 120%;
     z-index: 99999;
     // visibility: hidden;
+    font-weight: 400 !important;
     visibility: visible;
     /* optional */
     white-space: nowrap;
@@ -3556,6 +3565,7 @@ canvas {
   justify-content: center;
   align-content: center;
   margin-bottom: 20px;  
+  font-size: 20px;
 
   .playersToSelect {
     text-align: center;
@@ -3920,7 +3930,7 @@ div.jQBracket .team div.label {
   }
 }
 
-#cup {
+#cup, #cup-two {
   button {
     background-color: yellow;
     border:2px solid orange;
@@ -3929,6 +3939,7 @@ div.jQBracket .team div.label {
     color: $darkenBlue;
     font-weight: 700;
     font-size: 20px;
+    margin: 20px 0;
   }
 
   h3 {
@@ -4345,6 +4356,6 @@ div.jQBracket .team div.label {
   }
 }
 
-.blur {
-  filter: blur(15px);
+#team1map {
+  color: #000 !important;
 }

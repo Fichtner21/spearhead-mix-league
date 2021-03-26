@@ -25,110 +25,58 @@ export function rankingInfo() {
     const ourPlayers = document.getElementById('our-players2');
     ourPlayers.innerHTML = getNumOfPlayers(players);
 
-    function rankHistory(name) {
-      const arrNameRanks = [];
+    // const lastWar = document.getElementById('lastWar');
 
-      function destructObjRanks(obj, arr) {
-        for (const key in obj) {
-          if (obj.hasOwnProperty(key)) {
-            const objInArr = obj[key];
-            for (const key2 in objInArr) {
-              if (objInArr.hasOwnProperty(key2)) {
-                const elemOfObj = objInArr[key2];
-                arr.push(elemOfObj);
-              }
-            }
-          }
-        }
-      }
+    // const userNameTimeStamp = players.map((entry) => entry.username);
+    // userNameTimeStamp.forEach((user) => {
+    //   const userItemTimestamp = document.createElement('div');
+    //   userItemTimestamp.classList.add('item');
+    //   if (findPlayerLastWar(user, historyRanking)) {
+    //     userItemTimestamp.innerHTML += findPlayerLastWar(user, historyRanking);
+    //   } else {
+    //     // console.log('Can not find last timestamp war of: ' + user);
+    //     userItemTimestamp.innerHTML += 'No match';
+    //   }
+    //   lastWar.appendChild(userItemTimestamp);
+    // });
 
-      destructObjRanks(historyRanking, arrNameRanks);
-
-      function getIndexesRanks(arr, val) {
-        const indexes = [];
-        let i = -1;
-        while ((i = arr.indexOf(val, i + 1)) !== -1) {
-          indexes.push(i + 4); // postELO
-        }
-        return indexes;
-      }
-
-      const indexesRanksName = getIndexesRanks(arrNameRanks, name);
-      const nameRanksOut = [];
-
-      function ranksAllStrikes(username, ind, arrIn, arrOut) {
-        if (arrIn.includes(username)) {
-          arrIn.forEach(function (el, index) {
-            index += 1;
-            ind.forEach(function (founded, i) {
-              if (Number(index) === Number(founded)) {
-                const foundedStreak = Number(el).toFixed(2);
-                arrOut.push(Number(foundedStreak));
-              }
-            });
-          });
-        }
-      }
-
-      ranksAllStrikes(name, indexesRanksName, arrNameRanks, nameRanksOut);
-
-      // Every player start to play with 1000 ELO rank, so we need to put this before first value in array rank.
-      nameRanksOut.unshift(1000);
-
-      return nameRanksOut;
-    }
-
-    const lastWar = document.getElementById('lastWar');
-
-    const userNameTimeStamp = players.map((entry) => entry.username);
-    userNameTimeStamp.forEach((user) => {
-      const userItemTimestamp = document.createElement('div');
-      userItemTimestamp.classList.add('item');
-      if (findPlayerLastWar(user, historyRanking)) {
-        userItemTimestamp.innerHTML += findPlayerLastWar(user, historyRanking);
-      } else {
-        console.log('Can not find last timestamp war of: ' + user);
-      }
-      lastWar.appendChild(userItemTimestamp);
-    });
-
-    const playerName = document.getElementById('playerName');
-    const nationality = document.getElementById('nationality');
-    const place = document.getElementById('place');
-    const ranking = document.getElementById('overall');
-    const frags = document.getElementById('frags');
-    const warCount = document.getElementById('warCount');
+    // const playerName = document.getElementById('playerName');
+    // const nationality = document.getElementById('nationality');
+    // const place = document.getElementById('place');
+    // const ranking = document.getElementById('overall');
+    // const frags = document.getElementById('frags');
+    // const warCount = document.getElementById('warCount');
     const mainApp = document.getElementById('app');
-    const pastMonth = document.getElementById('pastmonth');
+    // const pastMonth = document.getElementById('pastmonth');
 
-    const player = players.map((entry) => entry);
-    player.forEach(function (name, index) {
-      const playerItem = document.createElement('div');
-      playerItem.classList.add('item' + index, 'item');
-      const playerItemLink = document.createElement('a');
-      playerItemLink.setAttribute('href', `#charts-${name.username}`);
-      playerItemLink.classList.add(`${name.username}`);
+    // const player = players.map((entry) => entry);
+    // player.forEach(function (name, index) {
+    //   const playerItem = document.createElement('div');
+    //   playerItem.classList.add('item' + index, 'item');
+    //   const playerItemLink = document.createElement('a');
+    //   playerItemLink.setAttribute('href', `#charts-${name.username}`);
+    //   playerItemLink.classList.add(`${name.username}`);
 
-      if (name.cup1on1edition1 === '1') {
-        playerItemLink.setAttribute('title', `Winner in 1on1 CUP 1st Edition.`);
-        playerItemLink.dataset.cup1on1first = 'winner';
-      } else if (name.cup1on1edition1 === '2') {
-        playerItemLink.setAttribute('title', `2nd place in 1on1 CUP 1st Edition.`);
-        playerItemLink.dataset.cup1on1first = 'second';
-      } else if (name.cup1on1edition1 === '3') {
-        playerItemLink.setAttribute('title', `3rd place in 1on1 CUP 1st Edition.`);
-        playerItemLink.dataset.cup1on1first = 'third';
-      } else {
-        //
-      }
-      // playerItemLink.setAttribute('title', `Watch ${name.playername} profile.`);
-      playerItemLink.innerHTML += name.playername;
+    //   if (name.cup1on1edition1 === '1') {
+    //     playerItemLink.setAttribute('title', `Winner in 1on1 CUP 1st Edition.`);
+    //     playerItemLink.dataset.cup1on1first = 'winner';
+    //   } else if (name.cup1on1edition1 === '2') {
+    //     playerItemLink.setAttribute('title', `2nd place in 1on1 CUP 1st Edition.`);
+    //     playerItemLink.dataset.cup1on1first = 'second';
+    //   } else if (name.cup1on1edition1 === '3') {
+    //     playerItemLink.setAttribute('title', `3rd place in 1on1 CUP 1st Edition.`);
+    //     playerItemLink.dataset.cup1on1first = 'third';
+    //   } else {
+    //     //
+    //   }
+    //   // playerItemLink.setAttribute('title', `Watch ${name.playername} profile.`);
+    //   playerItemLink.innerHTML += name.playername;
 
-      playerItem.dataset.place = ++index;
-      playerItem.appendChild(playerItemLink);
-      playerItemLink.appendChild(smallStrike(name.username, rankHistory));
-      playerName.appendChild(playerItem);
-    });
+    //   playerItem.dataset.place = ++index;
+    //   playerItem.appendChild(playerItemLink);
+    //   playerItemLink.appendChild(smallStrike(name.username, rankHistory));
+    //   playerName.appendChild(playerItem);
+    // });
 
     // const playersCompared = players.map((entry) => entry);
     // const playersCompArr = [];
@@ -293,75 +241,53 @@ export function rankingInfo() {
       // enableRoute();
     });
 
-    // ROZWIĄZANIE W JEDNYM RZĘDZIE
-
-    // const items = document.getElementById('items');
-    // const row = players.map((entry) => entry);
-    // row.forEach((el, index) => {
+    // const places2 = players.map((entry) => entry);
+    // places2.forEach(function (placeObj, index) {
     //   const item = document.createElement('div');
     //   item.classList.add('item');
-    //   item.innerHTML +=
-    //     ++index +
-    //     ' - ' +
-    //     el.playername +
-    //     ' - ' +
-    //     el.nationality +
-    //     ' - ' +
-    //     el.ranking +
-    //     ' - ' +
-    //     sumOfFrags2(el.username, historyRanking) +
-    //     ' - ' +
-    //     el.warcount;
-    //   items.appendChild(item);
+    //   item.innerHTML = ++index;
+    //   place.appendChild(item);
     // });
 
-    const places2 = players.map((entry) => entry);
-    places2.forEach(function (placeObj, index) {
-      const item = document.createElement('div');
-      item.classList.add('item');
-      item.innerHTML = ++index;
-      place.appendChild(item);
-    });
+    // const pastMonthDiv = players.map((entry) => entry);
+    // pastMonthDiv.forEach(function (playerActive) {
+    //   const playerActivity = document.createElement('div');
+    //   playerActivity.classList.add('item');
+    //   playerActivity.innerHTML = pastMonthActivity2(playerActive.username, historyRanking);
+    //   pastMonth.appendChild(playerActivity);
+    // });
 
-    const pastMonthDiv = players.map((entry) => entry);
-    pastMonthDiv.forEach(function (playerActive) {
-      const playerActivity = document.createElement('div');
-      playerActivity.classList.add('item');
-      playerActivity.innerHTML = pastMonthActivity2(playerActive.username, historyRanking);
-      pastMonth.appendChild(playerActivity);
-    });
+    // const national = players.map((entry) => entry);
+    // national.forEach(function (nat) {
+    //   const item = document.createElement('div');
+    //   item.classList.add('item');
+    //   item.innerHTML += getPlayerFlag(nat.nationality);
+    //   nationality.appendChild(item);
+    // });
 
-    const national = players.map((entry) => entry);
-    national.forEach(function (nat) {
-      const item = document.createElement('div');
-      item.classList.add('item');
-      item.innerHTML += getPlayerFlag(nat.nationality);
-      nationality.appendChild(item);
-    });
+    // const rankings = players.map((entry) => entry);
+    // rankings.forEach(function (elorank) {
+    //   const eloItem = document.createElement('div');
+    //   eloItem.classList.add('item');
+    //   eloItem.innerHTML += elorank.ranking;
+    //   ranking.appendChild(eloItem);
+    // });
 
-    const rankings = players.map((entry) => entry);
-    rankings.forEach(function (elorank) {
-      const eloItem = document.createElement('div');
-      eloItem.classList.add('item');
-      eloItem.innerHTML += elorank.ranking;
-      ranking.appendChild(eloItem);
-    });
+    // const showFrags = players.map((entry) => entry);
+    // showFrags.forEach(function (frag) {
+    //   const fragItem = document.createElement('div');
+    //   fragItem.classList.add('item');
+    //   fragItem.innerHTML += sumOfFrags2(frag.username, historyRanking);
+    //   frags.appendChild(fragItem);
+    // });
 
-    const showFrags = players.map((entry) => entry);
-    showFrags.forEach(function (frag) {
-      const fragItem = document.createElement('div');
-      fragItem.classList.add('item');
-      fragItem.innerHTML += sumOfFrags2(frag.username, historyRanking);
-      frags.appendChild(fragItem);
-    });
-
-    const wars = players.map((entry) => entry.warcount);
-    wars.forEach(function (matches) {
-      const warItem = document.createElement('div');
-      warItem.classList.add('item');
-      warItem.innerHTML += matches;
-      warCount.appendChild(warItem);
-    });
+    // const wars = players.map((entry) => entry.warcount);
+    // wars.forEach(function (matches) {
+    //   const warItem = document.createElement('div');
+    //   warItem.classList.add('item');
+    //   warItem.innerHTML += matches;
+    //   warCount.appendChild(warItem);
+    // });
 
     players.forEach((userNameInStreak) => {
       const increaseDiv = document.getElementById(`increase-${userNameInStreak.username}`);
@@ -605,32 +531,67 @@ export function rankingInfo() {
       //   },
       // });
     });
+
+    // ROZWIĄZANIE W JEDNYM RZĘDZIE
+
+    const items = document.getElementById('items');
+    const row = players.map((entry) => entry);
+    row.forEach((el, index) => {
+      const item = document.createElement('div');
+      item.classList.add('row');
+      item.innerHTML +=
+        `<div class="item">${++index}</div>` +
+        `<div class="item item-player item-${el.username}"><a href="#charts-${el.username}" class="item${index++} item-${
+          el.username
+        }-cup" title="${addTitleCup(el.cup1on1edition1)}">${el.playername} ${smallStrike2(el.username, historyRanking)}</a></div>` +
+        `<div class="item">${getPlayerFlag(el.nationality)}</div>` +
+        `<div class="item">${el.ranking}</div>` +
+        `<div class="item">${sumOfFrags2(el.username, historyRanking)}</div>` +
+        `<div class="item">${el.warcount}</div>` +
+        `<div class="item">${findPlayerLastWar(el.username, historyRanking)}</div>` +
+        `<div class="item">${pastMonthActivity2(el.username, historyRanking)}</div>`;
+
+      items.appendChild(item);
+    });
   })();
 
-  function smallStrike(name, arr) {
+  function addTitleCup(int) {
+    let cupInfoTitle = '';
+    switch (int) {
+      case '1': {
+        cupInfoTitle = `Winner in 1on1 CUP 1st Edition`;
+        break;
+      }
+      case '2': {
+        cupInfoTitle = `2nd place in 1on1 CUP 1st Edition`;
+        break;
+      }
+      case '3': {
+        cupInfoTitle = `3rd place in 1on1 CUP 1st Edition`;
+        break;
+      }
+      default:
+    }
+    return cupInfoTitle;
+  }
+
+  function smallStrike2(name, obj) {
     const littleStrike = document.createElement('div');
     const spanStrike = document.createElement('span');
-    const firstFromEnd = arr(name)[arr(name).length - 1];
-    const secondFromEnd = arr(name)[arr(name).length - 2];
+    const firstFromEnd = rankHistory2(name, obj).slice(-1)[0];
+    const secondFromEnd = rankHistory2(name, obj).slice(-2)[0];
     const countingPoints = firstFromEnd - secondFromEnd;
 
+    let littleStrike2 = '';
     if (firstFromEnd > secondFromEnd) {
-      littleStrike.classList.add('up-streak');
-      spanStrike.setAttribute('data-title', `${countingPoints > 0 ? `+${countingPoints.toFixed(2)}` : ''} pc in last war`);
-      littleStrike.appendChild(spanStrike);
+      littleStrike2 = `<div class="up-streak"><span data-title="+${countingPoints.toFixed(2)} pc in last war."></span></div>`;
     } else if (firstFromEnd < secondFromEnd) {
-      littleStrike.classList.add('down-streak');
-      spanStrike.setAttribute('data-title', `${countingPoints.toFixed(2)} pc in last war`);
-      littleStrike.appendChild(spanStrike);
-      // littleStrike.setAttribute('title', `${countingPoints.toFixed(2)} pc in last war`);
+      littleStrike2 = `<div class="down-streak"><span data-title="${countingPoints.toFixed(2)} pc in last war."></span></div>`;
     } else {
-      littleStrike.classList.add('draw-streak');
-      spanStrike.setAttribute('data-title', `${countingPoints.toFixed(2)} pc in last war`);
-      littleStrike.appendChild(spanStrike);
-      // littleStrike.setAttribute('title', `${countingPoints.toFixed(2)} pc in last war`);
+      littleStrike2 = `<div class="draw-streak"><span data-title="${countingPoints.toFixed(2)} pc in last war."></span></div>`;
     }
 
-    return littleStrike;
+    return littleStrike2;
   }
 
   function findPlayerLastWar(name, obj) {
@@ -670,21 +631,6 @@ export function rankingInfo() {
     }
     return max;
   }
-
-  // function cupAchivments(string) {
-  //   if ('1') {
-  //     playerItemLink.setAttribute('title', `Winner in 1on1 CUP 1st Edition.`);
-  //     playerItemLink.dataset.cup1on1first = 'winner';
-  //   } else if ('2') {
-  //     playerItemLink.setAttribute('title', `2nd place in 1on1 CUP 1st Edition.`);
-  //     playerItemLink.dataset.cup1on1first = 'second';
-  //   } else if ('3') {
-  //     playerItemLink.setAttribute('title', `3rd place in 1on1 CUP 1st Edition.`);
-  //     playerItemLink.dataset.cup1on1first = 'third';
-  //   } else {
-  //     //
-  //   }
-  // }
 
   function getPlayerFlag(playerFlag) {
     let flag = '';
@@ -747,6 +693,10 @@ export function rankingInfo() {
       }
       case 'AM': {
         flag = `<img src="/assets/flags/am.gif" title="Armenia">`;
+        break;
+      }
+      case 'SE': {
+        flag = `<img src="/assets/flags/se.gif" title="Sweden">`;
         break;
       }
       default:

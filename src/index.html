@@ -43,24 +43,7 @@
               </div>
               <span class="home">Home</span>
             </a> 
-          </div>
-          <!-- <div class="nav-left-grid">                     
-            <a href="#ranking" class="rank">OBJ <span>Ranking</span> <img src="assets/podium_w.svg"></a>    
-            <a href="#ranking-tdm" class="rank">TDM <span>Ranking</span> <img src="assets/podium_w.svg"></a> 
-            <a href="#server">Server</a>          
-            <a href="#history" data-i18n="history" class="rank">OBJ <span>Matches</span> <i class="fas fa-th-list"></i></a>
-            <a href="#history-tdm" data-i18n="history-tdm" class="rank">TDM <span>Matches</span> <i class="fas fa-th-list"></i></a>
-            <a href="#files" data-i18n="files">Files</a>
-            <a href="#inactive" class="rank">OBJ <span>Inactive</span> <img src="assets/player_time.svg"></a>    
-            <a href="#inactive-tdm" class="rank">TDM <span>Inactive</span> <img src="assets/player_time.svg"></a> 
-            <a href="#log">Log</a> 
-            <a href="#cup">CUP <span>1on1</span> <img src="assets/smallcup.gif"></a>
-            <a href="#cup-rules">CUP Rules <span>1on1</span></a> 
-            <a href="#wanted">Wanted</a>         
-            <button data-action="contrast-mode" class="contrast__button" title="Wersja kontrastowa">
-              <i class="fas fa-adjust"></i>         
-            </button>
-          </div>  -->
+          </div>         
           <div class="nav-left-grid" id="nav-left-grid">     
             <ul>
             <li><a href="#ranking" class="rank">OBJ <span>Ranking</span> <img src="assets/podium_w.svg"></a></li>    
@@ -118,6 +101,44 @@
             </div>
             
             <div id="selectionTeams">
+              <div class="matchSelection">          
+                <div class="date">
+                  <div class="matchId">ID 1</div>
+                  <div class="dateDetail">Maps <img src="/src/assets/gid46_small.gif"></div>
+                  <div class="matchDate"></div>
+                </div>
+                <div class="team">        
+                  <form action="" id="id1map">
+                     <label for="team1map">Map Team 1</label>
+                    <select name="maps" id="team1map">
+                      <option value="The Hunt">The Hunt</option>
+                      <option value="V2">V2</option>
+                      <option value="The Bridge">The Bridge</option> -->
+                      <!-- <option value=""></option>
+                      <option value=""></option>
+                      <option value=""></option>
+                      <option value=""></option>
+                      <option value=""></option> -->
+                    </select>
+                    
+                    <input type="submit" value="Confirm map" id="submitBtn">
+                  </form>    
+                  <!-- <button id="randomMap">Radom</button>
+                  <form action="" id="id1map">
+                    <input type="text" id="team1map" class="cumulative"></input>
+                    <input type="submit" value="Confirm map">
+                  </form> -->
+                  
+                  <div id="shotTeam1map" style="padding:15px; border:3px solid green;"></div>   
+                  <button id="delMap">Delete Map</button>           
+                </div>
+                <div class="team">
+                  <form action="" id="id2map">
+                    <input type="text" id="team2map" class="cumulative"></input>
+                    <input type="submit" value="Confirm map">
+                  </form>
+                </div>
+              </div>
               <div class="matchSelection">          
                 <div class="date">
                   <div class="matchId">ID 1</div>
@@ -759,15 +780,26 @@
                 let arr1 = [];
                 let arr2 = [];
                
+                // const students = [
+                //   'Zielony', 'bAtOn',
+                //   'Mr.Wiggles', '-Illu$ioN-' ,
+                //   'KaPsEL', 'booGie', 
+                //   'Zielakpr0', '-insaNe! >', 
+                //   'Wiktor', 'Match EL #1', 
+                //   'Match EL #2', 'Jim',
+                //   'L4mer', 'Markos ', 
+                //   'Match EL #3', 'k4ps', 
+                //   ];
+
                 const students = [
-                  'Zielony', 'bAtOn',
-                  'Mr.Wiggles', '-Illu$ioN-' ,
-                  'KaPsEL', 'booGie', 
-                  'Zielakpr0', '-insaNe! >', 
-                  'Wiktor', 'Match EL #1', 
-                  'Match EL #2', 'Jim',
-                  'L4mer', 'Markos ', 
-                  'Match EL #3', 'k4ps', 
+                  'Zielony/booGie', 'TailZ/Chris',
+                  'Zielakpr0/YP', 'k4ps/-Illu$ioN-' ,
+                  'bAtOn/Jim', 'Wariat/gRaBaRz', 
+                  'Antiher0/f1sh', 'josh/tommeh', 
+                  'MaDiNfO/Pelvis', 'BL@DY/Szycha', 
+                  'Sn@ke/Meg@Sh!ra', 'Wildcard #1',
+                  'Wildcard #2', 'Wildcard #3', 
+                  'Wildcard #4', 'Wildcard #5', 
                   ];
 
                   // 'Slash', 'Antiher0', 'Wiktor','Hwk', 'Tomas', '&elu$', 'f1sh', 'Mr.Wiggles', 'MoSeS', 'malysw', 'wiNt', 'Kurian', 'Wildcard#1', 'Wildcard#2','Wildcard#3','Wildcard#4'
@@ -1211,8 +1243,225 @@
         <div class="wrapper">
           <h2>First CUP 2on2 OBJ Real in MoH:SH Mix League</h2>
           <a href="#cup-rules" class="cup-rules" title="Click to read CUP Rules">Cup rules</a>
-          <h3>Registered:</h3>
-          <div id="signed"></div>
+          <!-- <h3>Registered:</h3>
+          <div id="signed"></div> -->
+          <!-- <button class="button-newPairs2">
+            GENERE PAIRS BEST OF 16
+          </button>    -->
+
+          <div id="play1" class="playersToSelect"></div>
+          <div id="play2" class="playersToSelect"></div>
+
+          <div class="container-pairs">
+            <div id="cup2on2One" class="playersToSelect">
+              <h2>Seeded Player</h2>
+              <div id="pos-0">Zielakpr0/YP</div>
+              <div id="pos-2">TailZ/Chris</div>
+              <div id="pos-4">Wariat/gRaBaRz</div>
+              <div id="pos-6">bAtOn/Jim</div>
+              <div id="pos-8">Antiher0/f1sh</div>
+              <div id="pos-10">k4ps/-Illu$ioN-</div>
+              <div id="pos-12">josh/tommeh</div>
+              <div id="pos-14">Zielony/booGie</div>            
+            </div>
+            <div class="playersToSelect">
+              <h2>?</h2>              
+              <div>vs.</div>
+              <div>vs.</div>
+              <div>vs.</div>
+              <div>vs.</div>
+              <div>vs.</div>
+              <div>vs.</div>
+              <div>vs.</div>
+              <div>vs.</div>            
+            </div>
+            <div id="cup2on2Two" class="playersToSelect">
+              <h2>Unseeded Player</h2>
+              <div id="pos-1">Wildcard #3</div>
+              <div id="pos-3">Foober/BrianDJ</div>
+              <div id="pos-5">BL@DY/Szycha</div>
+              <div id="pos-7">Wildcard #1</div>
+              <div id="pos-9">Sn@ke/Meg@Sh!ra</div>
+              <div id="pos-11">MaDiNfO/Pelvis</div>
+              <div id="pos-13">Wildcard #2</div>
+              <div id="pos-15">jay z/granu</div>            
+            </div>
+          </div>
+
+          <div id="cup2on2tournamet"></div>
+          <script>
+
+            function makePairs2() {
+               // We will clear our lists before each run of the function.
+                $('#cup2on2One').html('<h2>Unseeded</h2>');
+                $('#cup2on2Two').html('<h2>Seeded</h2>');
+                let arr1 = [];
+                let arr2 = [];               
+
+                const students = [
+                  'Zielony/booGie', 'TailZ/Chris',
+                  'Zielakpr0/YP', 'k4ps/-Illu$ioN-' ,
+                  'bAtOn/Jim', 'Wariat/gRaBaRz', 
+                  'Antiher0/f1sh', 'josh/tommeh', 
+                  'MaDiNfO/Pelvis', 'BL@DY/Szycha', 
+                  'Sn@ke/Meg@Sh!ra', 'Foober/BrianDJ',
+                  'jay z/granu', 'Wildcard #1', 
+                  'Wildcard #2', 'Wildcard #3', 
+                  ];
+                  
+                // By capturing these nodes in variables, we can reference them as our targets for insertion, below.
+                const studentOne = document.querySelector('#cup2on2One');
+                const studentTwo = document.querySelector('#cup2on2Two');
+
+                if (students.length % 2 !== 0) {
+                  alert('You must have an even number of students. You currently have ' + students.length + ' students.');
+                } else {
+                  arr1 = students.slice(0,8);
+                  // arr1 = students.slice(0,16); losowanie do 32
+                  arr2 = students.slice(8,16);
+                  // arr2 = students.slice(16,32); losowanie do 32                  
+
+                  arr1.sort(function () {
+                    return 0.5 - Math.random();
+                  });
+                  arr2.sort(function () {
+                    return 0.5 - Math.random();
+                  });
+
+                  // Here we make a function that will insert a DOM fragment inside a target node
+                  let index = '';
+                  const insertFragment = (output, target) => {
+                    let el = '';
+                    const fragment = document.createElement('div');
+                    fragment.classList.add('player-type');                    
+                    el = document.createElement('p');
+                    el.classList.add('pos-' + index++);
+                    el.innerText = output;
+                    fragment.appendChild(el);
+                    target.appendChild(fragment);
+                  };
+
+                  while (arr1.length) {
+                    const student1 = arr1.pop();
+                    const student2 = arr2[0] === student1 ? arr2.pop() : arr2.shift();
+
+                    // Here we use the function, sending student1 (the student) to studentOne (the target DOM node specified at the very top, #studentOne)
+                    insertFragment(student1, studentOne);
+                    insertFragment(student2, studentTwo);                    
+                  }
+                }
+              }
+
+              // Run the function on load
+              // makePairs();              
+
+              function addClicks2(){
+                for(let i = 0; i < 16; i++){
+                  if(i % 2 === 0){
+                    const players1 = document.querySelectorAll(`.pos-${i}`);
+                    console.log('gracze 1: ', players1);
+                    players1.forEach((player) => {
+                      console.log('NICK: ', player.innerHTML);
+                      const btnShow = document.createElement('div');
+                      btnShow.classList.add(`btn-${i}`, `btn-show`);
+                      btnShow.innerText = 'SHOW';
+                      console.log('rodzic: ', player.parentNode);
+                      player.parentNode.appendChild(btnShow); 
+                      const btnPos = $('.btn-show');
+                      btnPos.on('click', function(){
+                        $(this).siblings(`.pos-${i}`).addClass('scalePlayer');
+                        $(this).siblings(`.pos-${i}`).attr('style', 'filter: blur(0px)');
+                        $(this).parent('.player-type').addClass('earthquake');
+                        $(this).remove();
+                      });                     
+                    });
+                  }
+                }                
+              }              
+             
+              let teamsPlayers2 = '';
+              const btn2 = $('.button-newPairs2');
+              btn2.on('click', function () {                
+                makePairs2();
+                addClicks2();
+                // $.ajax({
+                //   url:makePairs(),
+                //   success: function(){
+                //     method2();
+                //   }
+                // })                
+              }); 
+
+              const bigData2 = {
+                teams : [
+                  // ['Zielony', 'Wariat'] /* first matchup */,
+                  // ['Mr.Wiggles', 'L4mer'] /* second matchup */,
+                  // ['KaPsEL', 'gRaBaRz'] /* second matchup */,
+                  // ['Zielakpr0', 'YOUR_PROBLEM'] /* second matchup */,
+                  // ['MoSeS', '-insaNe! >'] /* first matchup */,
+                  // ['Jim', 'Sn@ke'] /* second matchup */,
+                  // ['-Illu$ioN-', 'Markos'] /* second matchup */,
+                  // ['bAtOn', 'k4ps'] /* second matchup */,
+                  ['Zielakpr0/YP','Wildcard #3'],
+                  ['TailZ/Chris','Foober/BrianDJ'],
+                  ['Wariat/gRaBaRz','BL@DY/Szycha'],
+                  ['bAtOn/Jim','Wildcard #1'],
+                  ['Antiher0/f1sh','Sn@ke/Meg@Sh!ra'],
+                  ['k4ps/-Illu$ioN-','MaDiNfO/Pelvis'],
+                  ['josh/tommeh','Wildcard #2'],
+                  ['Zielony/booGie','jay z/granu']
+                ],
+                // results : [[ /* WINNER BRACKET */
+                //   [[3,5], [2,4], [6,3], [2,3], [1,5], [5,3], [7,2], [1,2]],
+                //   [[1,2], [3,4], [5,6], [7,8]],
+                //   [[9,1], [8,9]],
+                //   [[4,5]]
+                // ], [         /* LOSER BRACKET */
+                //   [[5,1], [1,2], [3,2], [6,9]],
+                //   [[8,2], [1,2], [6,2], [4,3]],
+                //   [[1,2], [3,5]],
+                //   [[3,0], [1,9]],
+                //   [[3,2]],
+                //   [[4,2]]
+                // ], [         /* FINALS */
+                //   [[3,8], [4,6]],
+                //   [[2,1]]
+                // ]]
+                results : [[ /* WINNER BRACKET */
+                  [[1,0], [null,null], [null,null], [1,0], [null,null], [null,null], [1,0], [null,null]],
+                  [[null,null], [null,null], [null,null], [null,null]],
+                  [[null,null], [null,null]],
+                  [[null,null]]
+                ], [         /* LOSER BRACKET */
+                  [[null,null], [null,null], [null,null], [null,null]],
+                  [[null,null], [null,null], [null,null], [null,null]],
+                  [[null,null], [null,null]],
+                  [[null,null], [null,null]],
+                  [[null,null]],
+                  [[null,null]]
+                ], [         /* FINALS */
+                  [[null,null], [null,null]],
+                  [[null,null]]
+                ]]
+              }
+
+              const resizeParametersCup2 = {
+                teamWidth: 120,
+                scoreWidth: 40,
+                matchMargin: 20,
+                roundMargin: 30,
+                init: bigData2,
+                skipSecondaryFinal: true,
+                // onMatchClick: getInfo
+              };
+          
+              function cupReady2(){
+                $('#cup2on2tournamet').bracket(resizeParametersCup2);
+              }
+          
+              $(cupReady2);
+
+          </script>
         </div>
       </div>
       <div class="container view hidden" id="cup-rules">
@@ -1221,17 +1470,17 @@
             <div class="popup__sub"><a href="#cup-two">First CUP 2on2 OBJ Real</a> in MoH:SH MIX League</div>
             <div class="popup__sub">Rules:</div>  
             <ol class="cup2on2ol">
-              <li>Register on <a href="https://discord.gg/u4MCqKSKZf">Discord <i class="fab fa-discord"></i> Channel #cup</a> until <strong>20:00, 14.03.2021 (Sunday)</strong></li>
+              <li>Register on <a href="https://discord.gg/u4MCqKSKZf">Discord <i class="fab fa-discord"></i> Channel #cup</a> until <strong>20:00, 19.03.2021 (Friday)</strong></li>
               <li>Example register in #cup channel on discord is: <strong style="border: 3px solid red;">R - Nickname1/Nickname2</strong></li>
-              <li>The draw of teams for the Cup live on twitch at 21:00 Sunday 14.03.2021</li>
+              <li>The draw of teams for the Cup live on twitch at 21:00 Friday 19.03.2021</li>
               <li>CUP based rules: DOUBLE ELIMINATION (Winner and Loser Brackets)</li>
-              <li>Time play: First to 5 rounds</li>
+              <li>Time play: 7 rounds</li>
               <li>Each round 4 minutes</li>
               <li>Players have 7 days from selected to play their war</li>
               <li>5 maps to choose from: The Hunt, V2, The Bridge, Stlo, VSUK Abbey</li>
               <li>Teams before war will baning maps i.e: Team 1 - ban Stlo, Player 2 - ban VSUK Abbey, Team 1 - chose The Bridge, Team 2 - chose V2, <br>so they play The Bridge & V2 in case of draw next map will be The Hunt.</li></li>
-              <li>Two servers available: 173.199.83.169:12203 & 173.199.83.172:12203</li>
-              <li>Teams are required to send screenshots with the results from the war to the admin.</li>              
+              <li>Servers available: 173.199.83.169:12203 & 173.199.83.172:12203 or Applepitje War servers (ask admin)</li>
+              <li>Teams are required to send screenshots with the results from the war to the admin. Admin can make a force screenshots druing the game, player must to send the screenshots to admin as soon as possible after war (10 mintus max!)</li>              
               <li>Disputes are settled by the league committee (-Illu$ioN-, KaPsEL, bAtOn).</li>
             </ol>          
           </div>
@@ -1587,10 +1836,10 @@
         Website shows bad datas? Please refresh its alpha version.
       </div>
     </div>  -->
-    <div class="slowly">
+    <!-- <div class="slowly">
       Please wait, sync data from database
       <p>This box will hide <span id="countdown">15 </span> Seconds</p>
-    </div>
+    </div> -->
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <!-- <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script> -->
 

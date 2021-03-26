@@ -4,34 +4,6 @@ import firebase from 'firebase';
 import timeago from 'timeago';
 
 export function history() {
-  // function addPlayerLink2(player) {
-  //   let convertedPlayer = '';
-  //   playerFromTab.forEach((el) => {
-  //     if (player === el.username) {
-  //       convertedPlayer = `<a href="#charts-${el.username}">${el.playername}</a>`;
-  //     } else if (player === '') {
-  //       // console.log('N/A player');
-  //     } else {
-  //       // console.log('Something went wrong.');
-  //     }
-  //   });
-  //   return convertedPlayer;
-  // }
-
-  // function getFromInactive2(player) {
-  //   let mockInactive = '';
-  //   playerInactiveTag.forEach((el) => {
-  //     if (player === el.username) {
-  //       mockInactive = `<a href="#charts-${el.username}">${el.playername}</a>`;
-  //     } else if (player === '') {
-  //       // console.log('N/A player');
-  //     } else {
-  //       // console.log('Something went wrong.');
-  //     }
-  //   });
-  //   return mockInactive;
-  // }
-
   (async () => {
     // Load the data from the Drive Spreadsheet
     const historyMatches = await drive({
@@ -799,6 +771,74 @@ export function history() {
 
     const rootRef = firebase.database().ref();
 
+    const mapsToPlay = ['The Hunt', 'V2', 'The Bridge', 'VSUK Abbey', 'Stlo', 'Navarone', 'Dessau', 'Stlo4', 'V2 Shelter', 'V2 Extended'];
+
+    $('#randomMap').on('click', function () {
+      const randomValue = Math.floor(Math.random() * mapsToPlay.length);
+      const randMap = mapsToPlay[randomValue];
+      $('#team1map').append(randMap);
+    });
+
+    const team1map = rootRef.child('team1map');
+    const linkTeam1map = window.location.pathname;
+    const pathkeyTeam1map = decodeURI(linkTeam1map.replace(new RegExp('\\/|\\.', 'g'), '_'));
+
+    const postRefMapTeam1 = team1map.child(pathkeyTeam1map);
+
+    $('#id1map').submit(function () {
+      JSON.parse(
+        JSON.stringify(
+          postRefMapTeam1.push().set({
+            duration: 30000,
+            team1map: $('#team1map').val(),
+            postedAt: firebase.database.ServerValue.TIMESTAMP,
+          }),
+        ),
+      );
+      $('input[type=text]').val('');
+      return false;
+    });
+
+    postRefMapTeam1.on('child_added', function (snapshot) {
+      const newMap1 = snapshot.val();
+      const html = "<div class='mapToShow'>" + newMap1.team1map + ' - ' + new Date(newMap1.postedAt) + '</div>';
+      $('#shotTeam1map').prepend(html);
+      if (newMap1) {
+        $('#submitBtn').prop('disabled', true);
+      }
+    });
+
+    postRefMapTeam1.limitToLast(1).on('value', (snapshot) => {
+      snapshot.forEach((snap) => {
+        const map1 = snap.child('team1map').val();
+        const shotTeam1map = $('#shotTeam1map');
+
+        $('<div></div>').append(map1);
+
+        $('#delMap').on('click', function () {
+          postRefMapTeam1.remove();
+          $('#shotTeam1map .mapToShow').remove();
+          $('#submitBtn').prop('disabled', false);
+        });
+      });
+    });
+
+    // const nowTime = Date.now();
+    // const cutoff = nowTime - 45000;
+    // const old = postRefMapTeam1.orderByChild('postedAt').endAt(cutoff).limitToLast(1);
+    // console.log('old => ', old);
+    // const listener = old.on('child_added', function (snapshot) {
+    //   console.log('snapshot => ', snapshot);
+    //   const newSnap = snapshot.val();
+    //   const newSnap2 = newSnap.team1map;
+    //   console.log('snapshot.postRefMapTeam1 => ', newSnap2);
+    //   snapshot.newSnap2.remove();
+    // });
+
+    // $('#delMap').on('click', function () {
+    //   postRefMapTeam1.remove();
+    // });
+
     newObj.forEach((warComment, ind) => {
       const warCardWrapper = document.querySelectorAll('.match-detail');
 
@@ -1050,4 +1090,18 @@ export function history() {
       showPage(parseInt($(this).text(), 10));
     });
   })();
+
+  function addPlayerLink2(player, obj) {
+    let convertedPlayer = '';
+    obj.forEach((el) => {
+      if (player === el.username) {
+        convertedPlayer = `<a href="#charts-${el.username}">${el.playername}</a>`;
+      } else if (player === '') {
+        // console.log('N/A player');
+      } else {
+        // console.log('Something went wrong.');
+      }
+    });
+    return convertedPlayer;
+  }
 }

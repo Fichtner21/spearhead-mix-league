@@ -1,0 +1,170 @@
+#ranking {
+  .wrapper {
+    #items {
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 0.2fr 1fr 0.8fr 1fr 1fr 0.25fr;
+        grid-template-rows: auto;
+        position: relative;
+        border-bottom: 1px solid $darkenRed;          
+
+        .contrast-mode & {
+          border-color: $darkenBlue;
+        }
+
+        &:last-of-type {
+          border: none;
+        }
+
+        &:nth-child(n){
+          background-color: $middleRed;
+
+          .contrast-mode & {
+            background-color: $middleBlue;
+          }
+        }
+
+        &:nth-child(2n){
+          background-color: $lightRed;
+
+          .contrast-mode & {
+            background-color: $lightBlue;
+          }
+        }
+    
+        .item {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-right: 1px solid $darkenRed;          
+
+          .contrast-mode & {
+            border-color: $darkenBlue;
+          }
+
+          &:last-of-type {
+            border: none;
+          }
+        }
+
+        .item-player {
+          position: relative;
+
+          a {
+            position: relative;
+            color: #ffffc0;
+            text-decoration: none;
+
+            &:hover {
+              color: red;
+            }
+          }
+        }  
+        
+        .winner {
+          &:before {
+            position: absolute;
+            top: 5px;
+            left: -20px;
+            //margin-left: 5px;
+            content: "";
+            height: 13px;
+            width: 16px; 
+            background-image: url("/assets/smallcup.gif");
+          }
+        }
+
+        .item1 {
+          position: relative;
+          font-weight: 700;
+          &:after {
+            position: absolute;
+            top: 5px;          
+            margin-left: 5px;
+            content: "";
+            height: 13px;
+            width: 10px;
+            background-image: url("/assets/ladder1.gif");
+  
+            @media screen and (max-width: 800px) {
+              top: 15px;
+            }
+          }
+        }
+  
+        .item2 {
+          position: relative;
+          &:after {
+            position: absolute;
+            top: 5px;         
+            margin-left: 5px;
+            content: "";
+            height: 13px;
+            width: 10px;
+            background-image: url("/assets/ladder2.gif");
+  
+            @media screen and (max-width: 800px) {
+              top: 15px;
+            }
+          }
+        }
+  
+        .item3 {
+          position: relative;
+          &:after {
+            position: absolute;
+            top: 5px;          
+            margin-left: 5px;
+            content: "";
+            height: 13px;
+            width: 10px;
+            background-image: url("/assets/ladder3.gif");
+  
+            @media screen and (max-width: 800px) {
+              top: 15px;
+            }
+          }
+        }
+
+        .item-boogie-cup {
+          &:before {
+            position: absolute;
+            top: 5px;
+            left: -20px;
+            //margin-left: 5px;
+            content: "";
+            height: 13px;
+            width: 16px; 
+            background-image: url("/assets/smallcup.gif");
+          }
+        }
+
+        .item-baton-cup {
+          &:before {
+            position: absolute;
+            top: 5px;
+            left: -20px;
+            //margin-left: 5px;
+            content: "";
+            height: 13px;
+            width: 16px; 
+            background-image: url("/assets/smallcup_silver.gif");
+          }
+        }
+
+        .item-zielony-cup {
+          &:before {
+            position: absolute;
+            top: 5px;
+            left: -20px;
+            //margin-left: 5px;
+            content: "";
+            height: 13px;
+            width: 16px; 
+            background-image: url("/assets/smallcup_bronze.gif");
+          }
+        }
+      }
+    }
+  }  
+}
