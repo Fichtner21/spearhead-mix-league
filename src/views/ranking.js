@@ -2,138 +2,126 @@ import drive from 'drive-db';
 import { Chart } from 'chart.js';
 import $ from 'jquery';
 import * as ChartAnnotation from 'chartjs-plugin-annotation';
+// import historyRanking from '../assets/json/history.json';
+// import players from '../assets/json/players.json';
+import historyMatchesTdm from '../assets/json/history_tdm.json';
 
-export function rankingInfo() {
-  (async () => {
-    // Load the data from the Drive Spreadsheet
+export async function rankingInfo() {
+  async function getPlayers(name) {
+    const sheets_url_players = `https://sheets.googleapis.com/v4/spreadsheets/1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo/values/${name}?key=AIzaSyD6eJ4T-ztIfyFn-h2oDAGTnNNYhNRziLU`;
+    const res = await fetch(sheets_url_players);
+    const json = await res.json();
+    return json;
+  }
 
-    const historyRanking = await drive({
-      sheet: '1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo',
-      tab: '4',
-    });
+  const newPlayersList = await getPlayers('Players');
+  const batchRowValues = newPlayersList.values;
+  const players = [];
+  for (let i = 1; i < batchRowValues.length; i++) {
+    const rowObject = {};
+    for (let j = 0; j < batchRowValues[i].length; j++) {
+      rowObject[batchRowValues[0][j]] = batchRowValues[i][j];
+    }
+    players.push(rowObject);
+  }
 
-    const players = await drive({
-      sheet: '1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo',
-      tab: '1',
-    });
+  const newMatchHistory = await getPlayers('Match+History');
+  const batchRowValuesHistory = newMatchHistory.values;
+  const historyRanking = [];
+  for (let i = 1; i < batchRowValuesHistory.length; i++) {
+    const rowObject = {};
+    for (let j = 0; j < batchRowValuesHistory[i].length; j++) {
+      rowObject[batchRowValuesHistory[0][j]] = batchRowValuesHistory[i][j];
+    }
+    historyRanking.push(rowObject);
+  }
+  // console.log('rows => ', players);
 
-    const historyMatchesTdm = await drive({
-      sheet: '1tcSgDUSxwrHQclfxdOKQDabZGQOAeb1E7GVTvitdfu4',
-      tab: '4',
-    });
+  // export function rankingInfo() {
+  // (async () => {
+  // Load the data from the Drive Spreadsheet
 
-    const ourPlayers = document.getElementById('our-players2');
-    ourPlayers.innerHTML = getNumOfPlayers(players);
+  // const historyRanking = await drive({
+  //   sheet: '1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo',
+  //   tab: '4',
+  // });
 
-    // const lastWar = document.getElementById('lastWar');
+  // const players = await drive({
+  //   sheet: '1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo',
+  //   tab: '1',
+  // });
 
-    // const userNameTimeStamp = players.map((entry) => entry.username);
-    // userNameTimeStamp.forEach((user) => {
-    //   const userItemTimestamp = document.createElement('div');
-    //   userItemTimestamp.classList.add('item');
-    //   if (findPlayerLastWar(user, historyRanking)) {
-    //     userItemTimestamp.innerHTML += findPlayerLastWar(user, historyRanking);
-    //   } else {
-    //     // console.log('Can not find last timestamp war of: ' + user);
-    //     userItemTimestamp.innerHTML += 'No match';
-    //   }
-    //   lastWar.appendChild(userItemTimestamp);
-    // });
+  // const historyMatchesTdm = await drive({
+  //   sheet: '1tcSgDUSxwrHQclfxdOKQDabZGQOAeb1E7GVTvitdfu4',
+  //   tab: '4',
+  // });
 
-    // const playerName = document.getElementById('playerName');
-    // const nationality = document.getElementById('nationality');
-    // const place = document.getElementById('place');
-    // const ranking = document.getElementById('overall');
-    // const frags = document.getElementById('frags');
-    // const warCount = document.getElementById('warCount');
-    const mainApp = document.getElementById('app');
-    // const pastMonth = document.getElementById('pastmonth');
+  const ourPlayers = document.getElementById('our-players2');
+  ourPlayers.innerHTML = getNumOfPlayers(players);
 
-    // const player = players.map((entry) => entry);
-    // player.forEach(function (name, index) {
-    //   const playerItem = document.createElement('div');
-    //   playerItem.classList.add('item' + index, 'item');
-    //   const playerItemLink = document.createElement('a');
-    //   playerItemLink.setAttribute('href', `#charts-${name.username}`);
-    //   playerItemLink.classList.add(`${name.username}`);
+  const mainApp = document.getElementById('app');
 
-    //   if (name.cup1on1edition1 === '1') {
-    //     playerItemLink.setAttribute('title', `Winner in 1on1 CUP 1st Edition.`);
-    //     playerItemLink.dataset.cup1on1first = 'winner';
-    //   } else if (name.cup1on1edition1 === '2') {
-    //     playerItemLink.setAttribute('title', `2nd place in 1on1 CUP 1st Edition.`);
-    //     playerItemLink.dataset.cup1on1first = 'second';
-    //   } else if (name.cup1on1edition1 === '3') {
-    //     playerItemLink.setAttribute('title', `3rd place in 1on1 CUP 1st Edition.`);
-    //     playerItemLink.dataset.cup1on1first = 'third';
-    //   } else {
-    //     //
-    //   }
-    //   // playerItemLink.setAttribute('title', `Watch ${name.playername} profile.`);
-    //   playerItemLink.innerHTML += name.playername;
+  // const playersCompared = players.map((entry) => entry);
+  // const playersCompArr = [];
+  // playersCompared.forEach((name) => {
+  //   // console.log('NAME: ', name);
+  //   const playerToCompare = { comparePlayerName: name.playername, compareUserName: name.username };
+  //   // console.log('playerToCompare', playerToCompare);
+  //   playersCompArr.push(playerToCompare);
+  // });
 
-    //   playerItem.dataset.place = ++index;
-    //   playerItem.appendChild(playerItemLink);
-    //   playerItemLink.appendChild(smallStrike(name.username, rankHistory));
-    //   playerName.appendChild(playerItem);
-    // });
-
-    // const playersCompared = players.map((entry) => entry);
-    // const playersCompArr = [];
-    // playersCompared.forEach((name) => {
-    //   // console.log('NAME: ', name);
-    //   const playerToCompare = { comparePlayerName: name.playername, compareUserName: name.username };
-    //   // console.log('playerToCompare', playerToCompare);
-    //   playersCompArr.push(playerToCompare);
-    // });
-
-    const playerCard = players.map((entry) => entry);
-    playerCard.forEach(function (name, index) {
-      const playerCardDiv = document.createElement('div');
-      playerCardDiv.classList.add('container', 'view', 'hidden', 'card');
-      playerCardDiv.setAttribute('id', `charts-${name.username}`);
-      const playerCardWrapper = document.createElement('div');
-      playerCardWrapper.classList.add('wrapper');
-      playerCardDiv.appendChild(playerCardWrapper);
-      playerCardWrapper.innerHTML += `<div class="frag-title"><span class="frag-name">${
-        name.playername
-      }</span><span class="frag-name">${getPlayerFlag(name.nationality)}</span> has played <span class="frag-name">${
-        name.warcount
-      }</span> OBJ wars.</div>
+  // const playerCard = players.forEach((entry) => entry);
+  const playerCard = players.map((entry) => entry);
+  playerCard.forEach(function (name, index) {
+    // Object.keys(players).forEach(function (name, index) {
+    const playerCardDiv = document.createElement('div');
+    playerCardDiv.classList.add('container', 'view', 'hidden', 'card');
+    playerCardDiv.setAttribute('id', `charts-${name.username}`);
+    const playerCardWrapper = document.createElement('div');
+    playerCardWrapper.classList.add('wrapper');
+    playerCardDiv.appendChild(playerCardWrapper);
+    playerCardWrapper.innerHTML += `<div class="frag-title"><span class="frag-name">${
+      name.playername
+    }</span><span class="frag-name">${getPlayerFlag(name.nationality)}</span> has played <span class="frag-name">${
+      name.warcount
+    }</span> OBJ wars.</div>
       ${
         countWars(name.username, historyMatchesTdm).length > 1
           ? `<div class="frag-title">
       Check <a href="#charts-tdm-${name.username}"><span class="frag-name">${name.playername}</span></a> statistics in TDM.</div>`
           : ''
       }`;
-      const inDeCont = document.createElement('div');
-      inDeCont.classList.add('increaseDecrease');
-      playerCardWrapper.appendChild(inDeCont);
-      const inCont = document.createElement('div');
-      inCont.classList.add('streak');
-      inCont.setAttribute('id', `increase-${name.username}`);
-      inDeCont.appendChild(inCont);
-      const deCont = document.createElement('div');
-      deCont.classList.add('streak');
-      deCont.setAttribute('id', `decrease-${name.username}`);
-      // deCont.innerHTML += `Clan History: ${name.clanhistory}`;
-      inDeCont.appendChild(deCont);
+    const inDeCont = document.createElement('div');
+    inDeCont.classList.add('increaseDecrease');
+    playerCardWrapper.appendChild(inDeCont);
+    const idWarsList = document.createElement('div');
+    idWarsList.classList.add('wars-list');
+    playerCardWrapper.appendChild(idWarsList);
+    const inCont = document.createElement('div');
+    inCont.classList.add('streak');
+    inCont.setAttribute('id', `increase-${name.username}`);
+    inDeCont.appendChild(inCont);
+    const deCont = document.createElement('div');
+    deCont.classList.add('streak');
+    deCont.setAttribute('id', `decrease-${name.username}`);
+    // deCont.innerHTML += `Clan History: ${name.clanhistory}`;
+    inDeCont.appendChild(deCont);
 
-      const clanHistoryCont = document.createElement('div');
-      clanHistoryCont.classList.add('frag-item');
-      clanHistoryCont.innerHTML += `Clan History: <span class="frag-value">${name.clanhistory}</span>`;
-      deCont.appendChild(clanHistoryCont);
+    const clanHistoryCont = document.createElement('div');
+    clanHistoryCont.classList.add('frag-item');
+    clanHistoryCont.innerHTML += `Clan History: <span class="frag-value">${name.clanhistory}</span>`;
+    deCont.appendChild(clanHistoryCont);
 
-      const fragCont = document.createElement('div');
-      fragCont.classList.add('streak', 'frag-cont', 'frag-cont-obj');
-      inDeCont.appendChild(fragCont);
+    const fragCont = document.createElement('div');
+    fragCont.classList.add('streak', 'frag-cont', 'frag-cont-obj');
+    inDeCont.appendChild(fragCont);
 
-      const fragContDiv = document.createElement('div');
-      fragContDiv.classList.add('frag-sum');
-      fragContDiv.innerHTML += `<div class="frag-item">Sum of Frags: <span class="frag-value">${sumOfFrags2(
-        name.username,
-        historyRanking,
-      )}</span></div>
+    const fragContDiv = document.createElement('div');
+    fragContDiv.classList.add('frag-sum');
+    fragContDiv.innerHTML += `<div class="frag-item">Sum of Frags: <span class="frag-value">${sumOfFrags2(
+      name.username,
+      historyRanking,
+    )}</span></div>
       <div class="frag-item">Highest ranking: <span class="frag-value">${Math.max(
         ...rankHistory2(name.username, historyRanking),
       )}</span></div>
@@ -144,416 +132,363 @@ export function rankingInfo() {
       <div class="frag-item">Achievements: <span class="frag-value">${
         name.cup1on1edition1 !== '' ? name.cup1on1edition1 + ' place in cup 1on1 OBJ 1st edition 05.02.2021 - 05.03.2021' : '-'
       }</span></div>`;
-      fragCont.appendChild(fragContDiv);
+    fragCont.appendChild(fragContDiv);
 
-      const fragAvarage = document.createElement('div');
-      fragAvarage.classList.add('streak', 'frag-avarage');
-      inDeCont.appendChild(fragAvarage);
+    const fragAvarage = document.createElement('div');
+    fragAvarage.classList.add('streak', 'frag-avarage');
+    inDeCont.appendChild(fragAvarage);
 
-      const fragAvarageDiv = document.createElement('div');
-      fragAvarageDiv.classList.add('frag-avarage');
-      fragAvarageDiv.innerHTML += `<div class="frag-item">Highest frags per war: <span class="frag-value frag-high">${Math.max(
-        ...minMaxFrags2(name.username, historyRanking),
-      )}</span><img src="./assets/high.png"></div><div class="frag-item">Avarage frags per war: <span class="frag-value frag-avarage">${(
-        sumOfFrags2(name.username, historyRanking) / name.warcount
-      ).toFixed(
-        2,
-      )}</span><img src="./assets/avarage.png"></div><div class="frag-item">Lowest frags per war: <span class="frag-value frag-low">${Math.min(
-        ...minFrags(name.username, historyRanking),
-      )}</span><img src="./assets/low.png"></div><div class="frag-item wars-cont">ID wars:
-     <span class="frag-value wars-id short">
-      ${searchPlayerWars2(name.username, historyRanking)}</span></div>`;
-      fragAvarage.appendChild(fragAvarageDiv);
+    const fragAvarageDiv = document.createElement('div');
+    fragAvarageDiv.classList.add('frag-avarage');
+    fragAvarageDiv.innerHTML += `<div class="frag-item">Highest frags per war: <span class="frag-value frag-high">${Math.max(
+      ...minMaxFrags2(name.username, historyRanking),
+    )}</span><img src="./assets/high.png"></div><div class="frag-item">Avarage frags per war: <span class="frag-value frag-avarage">${(
+      sumOfFrags2(name.username, historyRanking) / name.warcount
+    ).toFixed(
+      2,
+    )}</span><img src="./assets/avarage.png"></div><div class="frag-item">Lowest frags per war: <span class="frag-value frag-low">${Math.min(
+      ...minFrags(name.username, historyRanking),
+    )}</span><img src="./assets/low.png"></div>`;
+    fragAvarage.appendChild(fragAvarageDiv);
 
-      // const comparePlayer = document.createElement('div');
-      // comparePlayer.classList.add('frag-avarage');
-      // fragAvarage.appendChild(comparePlayer);
-      // const comparePlayerSelect = document.createElement('select');
-      // comparePlayerSelect.setAttribute('name', 'comparePlayers');
-      // comparePlayerSelect.setAttribute('id', 'comparePlayers');
-      // // comparePlayerSelect.setAttribute('onclick', 'valSelected()');
+    idWarsList.innerHTML += `<div class="frag-item wars-cont">ID wars:
+      <span class="frag-value wars-id short">
+       ${searchPlayerWars2(name.username, historyRanking)}</span></div>`;
 
-      // comparePlayer.appendChild(comparePlayerSelect);
-      // const compareInfo = document.createElement('option');
-      // compareInfo.setAttribute('value', '');
-      // compareInfo.innerHTML += '--Select to compare--';
-      // comparePlayerSelect.appendChild(compareInfo);
+    // const comparePlayer = document.createElement('div');
+    // comparePlayer.classList.add('frag-avarage');
+    // fragAvarage.appendChild(comparePlayer);
+    // const comparePlayerSelect = document.createElement('select');
+    // comparePlayerSelect.setAttribute('name', 'comparePlayers');
+    // comparePlayerSelect.setAttribute('id', 'comparePlayers');
+    // // comparePlayerSelect.setAttribute('onclick', 'valSelected()');
 
-      // playersCompArr.forEach((item) => {
-      //   const newOptCompare = document.createElement('option');
-      //   newOptCompare.setAttribute('value', `${item.compareUserName}`);
+    // comparePlayer.appendChild(comparePlayerSelect);
+    // const compareInfo = document.createElement('option');
+    // compareInfo.setAttribute('value', '');
+    // compareInfo.innerHTML += '--Select to compare--';
+    // comparePlayerSelect.appendChild(compareInfo);
 
-      //   newOptCompare.innerHTML += `${item.comparePlayerName}`;
-      //   comparePlayerSelect.appendChild(newOptCompare);
-      // });
+    // playersCompArr.forEach((item) => {
+    //   const newOptCompare = document.createElement('option');
+    //   newOptCompare.setAttribute('value', `${item.compareUserName}`);
 
-      // for (let i = 0; i < playersCompArr.length; i++) {
-      //   const optionCompare = document.createElement('option');
-      //   optionCompare.setAttribute('value', `${playersCompArr[i].compareUserName}`);
-      //   optionCompare.innerHTML += `${playersCompArr[i].comparePlayerName}`;
-      //   comparePlayerSelect.appendChild(optionCompare);
-      // }
-
-      // function valSelected() {
-      //   const selectedPlayer = document.getElementById('comparePlayers');
-      //   const selectedToDisplay = selectedPlayer.options[selectedPlayer.selectedIndex].text;
-      //   console.log('selected Players', selectedToDisplay);
-      //   return selectedToDisplay;
-      // }
-
-      const playerCardDivChart = document.createElement('canvas');
-      playerCardDivChart.setAttribute('id', `chart-${name.username}`);
-      playerCardWrapper.appendChild(playerCardDivChart);
-      // const chartWrapper = document.createElement('div');
-      // chartWrapper.classList.add('chartWrapper');
-      // playerCardWrapper.appendChild(chartWrapper);
-      // const chartAreaWrapper = document.createElement('div');
-      // chartAreaWrapper.classList.add('chartAreaWrapper');
-      // chartWrapper.appendChild(chartAreaWrapper);
-      // const myChartAxis = document.createElement('canvas');
-      // myChartAxis.classList.add('myChartAxis');
-      // myChartAxis.width = 0;
-      // myChartAxis.height = 580;
-      // chartWrapper.appendChild(myChartAxis);
-      // const myChart = document.createElement('canvas');
-      // myChart.width = 1160;
-      // myChart.height = 580;
-      // myChart.setAttribute('id', `chart-frags-${name.username}`);
-      // chartAreaWrapper.appendChild(myChart);
-
-      const playerCardFragsChart = document.createElement('canvas');
-      playerCardFragsChart.setAttribute('id', `chart-frags-${name.username}`);
-      playerCardWrapper.appendChild(playerCardFragsChart);
-
-      mainApp.appendChild(playerCardDiv);
-      // function enableRoute() {
-      //   function setRoute() {
-      //     $('.view').hide();
-      //     const { hash } = window.location;
-      //     if (hash === '') {
-      //       $('#home').show();
-      //     }
-      //     $(hash).show();
-      //   }
-      //   setRoute();
-      //   window.addEventListener('hashchange', setRoute);
-      // }
-      // enableRoute();
-    });
-
-    // const places2 = players.map((entry) => entry);
-    // places2.forEach(function (placeObj, index) {
-    //   const item = document.createElement('div');
-    //   item.classList.add('item');
-    //   item.innerHTML = ++index;
-    //   place.appendChild(item);
+    //   newOptCompare.innerHTML += `${item.comparePlayerName}`;
+    //   comparePlayerSelect.appendChild(newOptCompare);
     // });
 
-    // const pastMonthDiv = players.map((entry) => entry);
-    // pastMonthDiv.forEach(function (playerActive) {
-    //   const playerActivity = document.createElement('div');
-    //   playerActivity.classList.add('item');
-    //   playerActivity.innerHTML = pastMonthActivity2(playerActive.username, historyRanking);
-    //   pastMonth.appendChild(playerActivity);
-    // });
+    // for (let i = 0; i < playersCompArr.length; i++) {
+    //   const optionCompare = document.createElement('option');
+    //   optionCompare.setAttribute('value', `${playersCompArr[i].compareUserName}`);
+    //   optionCompare.innerHTML += `${playersCompArr[i].comparePlayerName}`;
+    //   comparePlayerSelect.appendChild(optionCompare);
+    // }
 
-    // const national = players.map((entry) => entry);
-    // national.forEach(function (nat) {
-    //   const item = document.createElement('div');
-    //   item.classList.add('item');
-    //   item.innerHTML += getPlayerFlag(nat.nationality);
-    //   nationality.appendChild(item);
-    // });
+    // function valSelected() {
+    //   const selectedPlayer = document.getElementById('comparePlayers');
+    //   const selectedToDisplay = selectedPlayer.options[selectedPlayer.selectedIndex].text;
+    //   console.log('selected Players', selectedToDisplay);
+    //   return selectedToDisplay;
+    // }
 
-    // const rankings = players.map((entry) => entry);
-    // rankings.forEach(function (elorank) {
-    //   const eloItem = document.createElement('div');
-    //   eloItem.classList.add('item');
-    //   eloItem.innerHTML += elorank.ranking;
-    //   ranking.appendChild(eloItem);
-    // });
+    const playerCardDivChart = document.createElement('canvas');
+    playerCardDivChart.setAttribute('id', `chart-wars-${name.username}`);
+    playerCardDiv.appendChild(playerCardDivChart);
+    // const chartWrapper = document.createElement('div');
+    // chartWrapper.classList.add('chartWrapper');
+    // playerCardWrapper.appendChild(chartWrapper);
+    // const chartAreaWrapper = document.createElement('div');
+    // chartAreaWrapper.classList.add('chartAreaWrapper');
+    // chartWrapper.appendChild(chartAreaWrapper);
+    // const myChartAxis = document.createElement('canvas');
+    // myChartAxis.classList.add('myChartAxis');
+    // myChartAxis.width = 0;
+    // myChartAxis.height = 580;
+    // chartWrapper.appendChild(myChartAxis);
+    // const myChart = document.createElement('canvas');
+    // myChart.width = 1160;
+    // myChart.height = 580;
+    // myChart.setAttribute('id', `chart-frags-${name.username}`);
+    // chartAreaWrapper.appendChild(myChart);
 
-    // const showFrags = players.map((entry) => entry);
-    // showFrags.forEach(function (frag) {
-    //   const fragItem = document.createElement('div');
-    //   fragItem.classList.add('item');
-    //   fragItem.innerHTML += sumOfFrags2(frag.username, historyRanking);
-    //   frags.appendChild(fragItem);
-    // });
+    const playerCardFragsChart = document.createElement('canvas');
+    playerCardFragsChart.setAttribute('id', `chart-frags-${name.username}`);
+    playerCardDiv.appendChild(playerCardFragsChart);
 
-    // const wars = players.map((entry) => entry.warcount);
-    // wars.forEach(function (matches) {
-    //   const warItem = document.createElement('div');
-    //   warItem.classList.add('item');
-    //   warItem.innerHTML += matches;
-    //   warCount.appendChild(warItem);
-    // });
+    mainApp.appendChild(playerCardDiv);
+  });
 
-    players.forEach((userNameInStreak) => {
-      const increaseDiv = document.getElementById(`increase-${userNameInStreak.username}`);
-      const playerInStreak = longestWinning(
-        rankHistory2(userNameInStreak.username, historyRanking),
-        rankHistory2(userNameInStreak.username, historyRanking).length,
-      );
-      // console.log('PLAYER STREAK: ', playerInStreak);
-      increaseDiv.innerHTML += `<div class="frag-item">Longest increase streak: <span class="frag-value">${playerInStreak}</span><i class="fas fa-arrow-up"></i></div>`;
-    });
+  // Object.keys(players).forEach((userNameInStreak) => {
+  players.forEach((userNameInStreak) => {
+    const increaseDiv = document.getElementById(`increase-${userNameInStreak.username}`);
+    const playerInStreak = longestWinning(
+      rankHistory2(userNameInStreak.username, historyRanking),
+      rankHistory2(userNameInStreak.username, historyRanking).length,
+    );
+    // console.log('PLAYER STREAK: ', playerInStreak);
+    increaseDiv.innerHTML += `<div class="frag-item">Longest increase streak: <span class="frag-value">${playerInStreak}</span><i class="fas fa-arrow-up"></i></div>`;
+  });
 
-    players.forEach((nameUser) => {
-      const ctx = document.getElementById(`chart-${nameUser.username}`).getContext('2d');
-      new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: countWars(nameUser.username, historyRanking),
-          datasets: [
+  // Object.keys(players).forEach((nameUser) => {
+  players.forEach((nameUser) => {
+    const ctx = document.getElementById(`chart-wars-${nameUser.username}`).getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: countWars(nameUser.username, historyRanking),
+        datasets: [
+          {
+            label: nameUser.playername,
+            borderColor: '#ffffc0',
+            data: rankHistory2(nameUser.username, historyRanking),
+            lineTension: 0,
+            order: 1,
+          },
+          // {
+          //   label: 'Frags',
+          //   id: 'frags',
+          //   borderColor: 'green',
+          //   backgroundColor: 'green',
+          //   data: fragsHistory(nameUser.username),
+          //   type: 'bar',
+          //   order: 2,
+          // },
+          // {
+          //   label: 'bAtOn',
+          //   borderColor: 'green',
+          //   data: rankHistory('kapsel'),
+          //   lineTension: 0,
+          // },
+        ],
+      },
+      options: {
+        elements: {
+          line: {
+            tension: 0,
+          },
+        },
+        scales: {
+          xAxes: [
             {
-              label: nameUser.playername,
-              borderColor: '#ffffc0',
-              data: rankHistory2(nameUser.username, historyRanking),
-              lineTension: 0,
-              order: 1,
+              scaleLabel: {
+                display: true,
+                labelString: 'No. of Match',
+              },
             },
-
-            // {
-            //   label: 'Frags',
-            //   id: 'frags',
-            //   borderColor: 'green',
-            //   backgroundColor: 'green',
-            //   data: fragsHistory(nameUser.username),
-            //   type: 'bar',
-            //   order: 2,
-            // },
-            // {
-            //   label: 'bAtOn',
-            //   borderColor: 'green',
-            //   data: rankHistory('kapsel'),
-            //   lineTension: 0,
-            // },
           ],
-        },
-        options: {
-          elements: {
-            line: {
-              tension: 0,
-            },
-          },
-          scales: {
-            xAxes: [
-              {
-                scaleLabel: {
-                  display: true,
-                  labelString: 'No. of Match',
-                },
-              },
-            ],
-            yAxes: [
-              {
-                scaleLabel: {
-                  display: true,
-                  labelString: 'RANKING',
-                },
-              },
-            ],
-          },
-          annotation: {
-            drawTime: 'afterDatasetsDraw',
-            annotations: [
-              {
-                id: 'hline1',
-                type: 'line',
-                mode: 'horizontal',
-                scaleID: 'y-axis-0',
-                value: 950,
-                borderColor: 'red',
-                borderDash: [10, 5],
-                label: {
-                  backgroundColor: 'red',
-                  content: '950',
-                  enabled: true,
-                },
-              },
-              {
-                id: 'hline3',
-                type: 'line',
-                mode: 'horizontal',
-                scaleID: 'y-axis-0',
-                value: 1000,
-                borderColor: 'red',
-                borderWidth: 3,
-                // borderDash: [10, 5],
-                label: {
-                  backgroundColor: 'red',
-                  content: '1000',
-                  enabled: true,
-                },
-              },
-              {
-                id: 'hline2',
-                type: 'line',
-                mode: 'horizontal',
-                scaleID: 'y-axis-0',
-                value: 1050,
-                borderColor: 'red',
-                borderDash: [10, 5],
-                label: {
-                  backgroundColor: 'red',
-                  content: '1050',
-                  enabled: true,
-                },
-              },
-              // {
-              //   id: 'hline4',
-              //   type: 'line',
-              //   mode: 'horizontal',
-              //   scaleID: 'y-axis-0',
-              //   value: 1100,
-              //   borderColor: 'orange',
-              //   borderDash: [10, 5],
-              //   label: {
-              //     backgroundColor: 'orange',
-              //     content: '1100',
-              //     enabled: true,
-              //   },
-              // },
-              // {
-              //   id: 'hline5',
-              //   type: 'line',
-              //   mode: 'horizontal',
-              //   scaleID: 'y-axis-0',
-              //   value: 1150,
-              //   borderColor: 'lightgreen',
-              //   borderDash: [10, 5],
-              //   label: {
-              //     backgroundColor: 'green',
-              //     content: '1150',
-              //     enabled: true,
-              //   },
-              // },
-            ],
-          },
-        },
-      });
-    });
-    players.forEach((nameUser) => {
-      const ctx = document.getElementById(`chart-frags-${nameUser.username}`).getContext('2d');
-
-      const chartF = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: searchPlayer2(nameUser.username, historyRanking),
-          datasets: [
+          yAxes: [
             {
-              label: 'Frags',
-              id: 'frags',
-              borderColor: 'green',
-              backgroundColor: 'lightgreen',
-              data: minMaxFrags2(nameUser.username, historyRanking),
-              type: 'bar',
-              xAxisID: 'date-x-axis',
+              scaleLabel: {
+                display: true,
+                labelString: 'RANKING',
+              },
             },
           ],
         },
-        options: {
-          elements: {
-            line: {
-              tension: 0,
+        annotation: {
+          drawTime: 'afterDatasetsDraw',
+          annotations: [
+            {
+              id: 'hline1',
+              type: 'line',
+              mode: 'horizontal',
+              scaleID: 'y-axis-0',
+              value: 950,
+              borderColor: 'red',
+              borderDash: [10, 5],
+              label: {
+                backgroundColor: 'red',
+                content: '950',
+                enabled: true,
+              },
             },
+            {
+              id: 'hline3',
+              type: 'line',
+              mode: 'horizontal',
+              scaleID: 'y-axis-0',
+              value: 1000,
+              borderColor: 'red',
+              borderWidth: 3,
+              // borderDash: [10, 5],
+              label: {
+                backgroundColor: 'red',
+                content: '1000',
+                enabled: true,
+              },
+            },
+            {
+              id: 'hline2',
+              type: 'line',
+              mode: 'horizontal',
+              scaleID: 'y-axis-0',
+              value: 1050,
+              borderColor: 'red',
+              borderDash: [10, 5],
+              label: {
+                backgroundColor: 'red',
+                content: '1050',
+                enabled: true,
+              },
+            },
+            // {
+            //   id: 'hline4',
+            //   type: 'line',
+            //   mode: 'horizontal',
+            //   scaleID: 'y-axis-0',
+            //   value: 1100,
+            //   borderColor: 'orange',
+            //   borderDash: [10, 5],
+            //   label: {
+            //     backgroundColor: 'orange',
+            //     content: '1100',
+            //     enabled: true,
+            //   },
+            // },
+            // {
+            //   id: 'hline5',
+            //   type: 'line',
+            //   mode: 'horizontal',
+            //   scaleID: 'y-axis-0',
+            //   value: 1150,
+            //   borderColor: 'lightgreen',
+            //   borderDash: [10, 5],
+            //   label: {
+            //     backgroundColor: 'green',
+            //     content: '1150',
+            //     enabled: true,
+            //   },
+            // },
+          ],
+        },
+      },
+    });
+  });
+  // Object.keys(players).forEach((nameUser) => {
+  players.forEach((nameUser) => {
+    const ctx = document.getElementById(`chart-frags-${nameUser.username}`).getContext('2d');
+
+    const chartF = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: searchPlayer2(nameUser.username, historyRanking),
+        datasets: [
+          {
+            label: 'Frags',
+            id: 'frags',
+            borderColor: 'green',
+            backgroundColor: 'lightgreen',
+            data: minMaxFrags2(nameUser.username, historyRanking),
+            type: 'bar',
+            xAxisID: 'date-x-axis',
           },
-          scales: {
-            xAxes: [
-              {
-                ticks: {
-                  beginAtZero: false,
-                  min: 1,
-                },
-                offset: true,
-                id: 'date-x-axis',
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Date of match',
-                },
-              },
-            ],
-            yAxes: [
-              {
-                scaleLabel: {
-                  display: true,
-                  labelString: 'Frags per war',
-                },
-              },
-            ],
-          },
-          annotation: {
-            drawTime: 'afterDatasetsDraw',
-            annotations: [
-              {
-                id: 'more-27',
-                type: 'line',
-                mode: 'horizontal',
-                scaleID: 'y-axis-0',
-                value: sumOfFrags2(nameUser.username, historyRanking) / nameUser.warcount,
-                borderColor: 'orange',
-                borderDash: [10, 5],
-                label: {
-                  fontColor: '#000',
-                  backgroundColor: 'rgba(250, 190, 88, 0.7)',
-                  content: (sumOfFrags2(nameUser.username, historyRanking) / nameUser.warcount).toFixed(2) + ' Avg.',
-                  enabled: true,
-                },
-              },
-              {
-                id: 'more-28',
-                type: 'line',
-                mode: 'horizontal',
-                scaleID: 'y-axis-0',
-                value: 28,
-                borderColor: 'red',
-                borderDash: [10, 5],
-                label: {
-                  backgroundColor: 'rgba(207, 0, 15, 0.5)',
-                  content: 'More then 1 kill per round (KDR > 1.0)',
-                  enabled: true,
-                },
-              },
-            ],
+        ],
+      },
+      options: {
+        elements: {
+          line: {
+            tension: 0,
           },
         },
-      });
-
-      // new Chart(ctx).Line(chartF, {
-      //   onAnimationComplete: function () {
-      //     const sourceCanvas = this.chartF.ctx.canvas;
-      //     const copyWidth = this.scale.xScalePaddingLeft - 5;
-      //     const copyHeight = this.scale.endPoint + 5;
-      //     const targetCtx = document.getElementById('myChartAxis').getContext('2d');
-      //     targetCtx.canvas.width = copyWidth;
-      //     targetCtx.drawImage(sourceCanvas, 0, 0, copyWidth, copyHeight, 0, 0, copyWidth, copyHeight);
-      //   },
-      // });
+        scales: {
+          xAxes: [
+            {
+              ticks: {
+                beginAtZero: false,
+                min: 1,
+              },
+              offset: true,
+              id: 'date-x-axis',
+              scaleLabel: {
+                display: true,
+                labelString: 'Date of match',
+              },
+            },
+          ],
+          yAxes: [
+            {
+              scaleLabel: {
+                display: true,
+                labelString: 'Frags per war',
+              },
+            },
+          ],
+        },
+        annotation: {
+          drawTime: 'afterDatasetsDraw',
+          annotations: [
+            {
+              id: 'more-27',
+              type: 'line',
+              mode: 'horizontal',
+              scaleID: 'y-axis-0',
+              value: sumOfFrags2(nameUser.username, historyRanking) / nameUser.warcount,
+              borderColor: 'orange',
+              borderDash: [10, 5],
+              label: {
+                fontColor: '#000',
+                backgroundColor: 'rgba(250, 190, 88, 0.7)',
+                content: (sumOfFrags2(nameUser.username, historyRanking) / nameUser.warcount).toFixed(2) + ' Avg.',
+                enabled: true,
+              },
+            },
+            {
+              id: 'more-28',
+              type: 'line',
+              mode: 'horizontal',
+              scaleID: 'y-axis-0',
+              value: 28,
+              borderColor: 'red',
+              borderDash: [10, 5],
+              label: {
+                backgroundColor: 'rgba(207, 0, 15, 0.5)',
+                content: 'More then 1 kill per round (KDR > 1.0)',
+                enabled: true,
+              },
+            },
+          ],
+        },
+      },
     });
 
-    // ROZWIĄZANIE W JEDNYM RZĘDZIE
+    // new Chart(ctx).Line(chartF, {
+    //   onAnimationComplete: function () {
+    //     const sourceCanvas = this.chartF.ctx.canvas;
+    //     const copyWidth = this.scale.xScalePaddingLeft - 5;
+    //     const copyHeight = this.scale.endPoint + 5;
+    //     const targetCtx = document.getElementById('myChartAxis').getContext('2d');
+    //     targetCtx.canvas.width = copyWidth;
+    //     targetCtx.drawImage(sourceCanvas, 0, 0, copyWidth, copyHeight, 0, 0, copyWidth, copyHeight);
+    //   },
+    // });
+  });
 
-    const items = document.getElementById('items');
-    const row = players.map((entry) => entry);
-    row.forEach((el, index) => {
-      const item = document.createElement('div');
-      item.classList.add('row');
-      item.innerHTML +=
-        `<div class="item">${++index}</div>` +
-        `<div class="item item-player item-${el.username}"><a href="#charts-${el.username}" class="item${index++} item-${
-          el.username
-        }-cup" title="${addTitleCup(el.cup1on1edition1)}">${el.playername} ${smallStrike2(el.username, historyRanking)}</a></div>` +
-        `<div class="item">${getPlayerFlag(el.nationality)}</div>` +
-        `<div class="item">${el.ranking}</div>` +
-        `<div class="item">${sumOfFrags2(el.username, historyRanking)}</div>` +
-        `<div class="item">${el.warcount}</div>` +
-        `<div class="item">${findPlayerLastWar(el.username, historyRanking)}</div>` +
-        `<div class="item">${pastMonthActivity2(el.username, historyRanking)}</div>`;
+  // ROZWIĄZANIE W JEDNYM RZĘDZIE
 
-      items.appendChild(item);
-    });
-  })();
+  const items = document.getElementById('items');
+  const row = Object.keys(players).map((entry) => entry);
+  // const row = players.map((entry) => entry);
+  const arrPlayers = Object.keys(players).map((k) => players[k]);
+
+  arrPlayers.forEach((el, index) => {
+    // row.forEach((el, index) => {
+    const item = document.createElement('div');
+    item.classList.add('row');
+    item.innerHTML +=
+      `<div class="item">${++index}</div>` +
+      `<div class="item item-player item-${el.username}"><a href="#charts-${el.username}" class="item${index++} item-${
+        el.username
+      }-cup" title="${addTitleCup(el.cup1on1edition1)}">${el.playername} ${smallStrike2(el.username, historyRanking)}</a></div>` +
+      `<div class="item">${getPlayerFlag(el.nationality)}</div>` +
+      `<div class="item">${el.ranking}</div>` +
+      `<div class="item">${sumOfFrags2(el.username, historyRanking)}</div>` +
+      `<div class="item">${el.warcount}</div>` +
+      `<div class="item">${findPlayerLastWar(el.username, historyRanking)}</div>` +
+      `<div class="item">${pastMonthActivity2(el.username, historyRanking)}</div>`;
+
+    items.appendChild(item);
+  });
+  // })();
 
   function addTitleCup(int) {
     let cupInfoTitle = '';
@@ -595,7 +530,14 @@ export function rankingInfo() {
   }
 
   function findPlayerLastWar(name, obj) {
-    const findeLastWar = obj.filter((item) => JSON.stringify(item).includes(name)).pop();
+    Date.prototype.removeHours = function (h) {
+      this.setHours(this.getHours() - h);
+      return this;
+    };
+    const findeLastWar = Object.values(obj)
+      .filter((item) => JSON.stringify(item).includes(name))
+      .pop();
+    // const findeLastWar = obj.filter((item) => JSON.stringify(item).includes(name)).pop();
     let findLastTimeStamp = '';
     let newTimestampElem = '';
     if (findeLastWar) {
@@ -805,7 +747,8 @@ export function rankingInfo() {
   }
 
   function getNumOfPlayers(obj) {
-    return obj.length;
+    // return obj.length;
+    return Object.keys(obj).length;
   }
 
   function searchPlayerKeyName2(name, obj) {
@@ -912,6 +855,10 @@ export function rankingInfo() {
   }
 
   function searchPlayerWars2(name, obj) {
+    Date.prototype.removeHours = function (h) {
+      this.setHours(this.getHours() - h);
+      return this;
+    };
     const resultObject = searchPlayerKeyName2(name, obj);
     const warIDs = [];
 
@@ -921,11 +868,14 @@ export function rankingInfo() {
 
     const linkWars = [];
     warIDs.forEach((el) => {
+      const squads = `<div><h2>Squads</h2><div>${el.t1p1name ? el.t1p1name : ''}<div><div>${
+        el.t2p1name ? el.t2p1name : ''
+      }</div></div></div>`;
       const oldTimestampEl = el.timestamp;
       const newTimestampEl = new Date(oldTimestampEl).toLocaleDateString('pl-PL', { hour: '2-digit', minute: '2-digit' });
 
       let linkWar = '';
-      linkWar = `<a href="#match-${el.idwar}" title="Show war #${el.idwar} - ${newTimestampEl}"><span>#</span>${el.idwar}</a>`;
+      linkWar = `<a href="#match-${el.idwar}" data-title="Show war #${el.idwar} - ${newTimestampEl}"><span>#</span>${el.idwar}</a>`;
       linkWars.push(linkWar);
     });
 

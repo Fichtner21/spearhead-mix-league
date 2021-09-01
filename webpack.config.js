@@ -55,7 +55,7 @@ const config = {
             loader: 'sass-loader',
           },
         ],
-      },
+      },      
       {
         test: /\.(svg|eot|woff|woff2|ttf)$/,
         loaders: [

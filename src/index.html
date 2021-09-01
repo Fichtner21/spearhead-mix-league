@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700,900" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     <link href="https://cdn.rawgit.com/sachinchoolur/lightgallery.js/master/dist/css/lightgallery.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/drive-db"></script>
     
     <!-- Global site tag (gtag.js) - Google Analytics -->    
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -46,7 +47,7 @@
           </div>         
           <div class="nav-left-grid" id="nav-left-grid">     
             <ul>
-            <li><a href="#ranking" class="rank">OBJ <span>Ranking</span> <img src="assets/podium_w.svg"></a></li>    
+            <li><a href="#ranking" id="ranking-link" class="rank">OBJ <span>Ranking</span> <img src="assets/podium_w.svg"></a></li>    
             <li><a href="#ranking-tdm" class="rank">TDM <span>Ranking</span> <img src="assets/podium_w.svg"></a></li> 
             <li><a href="#server">Server</a></li>          
             <li><a href="#history" data-i18n="history" class="rank">OBJ <span>Matches</span> <i class="fas fa-th-list"></i></a></li>
@@ -88,16 +89,25 @@
         </div>
         <div class="wrapper">
             <div class="mainSh">MoH: Spearhead Mix League</div>
+            <!-- <div class="intro" style="padding-left: 20px;">
+             We temporary display raw data below, want to see normal? just check <a href="#ranking">RANKING OBJ</a> or <a href="#history">Matches OBJ</a>.
+            </div>
+            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQiKIPzAj2O8mXB69MSreCM_y_cGPZYSGAhtRYBvrtWDQlt7Z-avxTI0b-1uQQj3aELqlMKK1wUjhrf/pubhtml" frameborder="0" width="100%" height="600px"></iframe> -->
             <div class="intro highlight1">
               <!-- <div class="cup-info">
                 <div class="big-cup">The Winner of CUP 1on1 is <a href="#charts-boogie">booGie<img src="assets/smallcup.gif"></a></div>  
               </div> -->
-              <div class="cup-result">
+              <!-- <div class="cup-result">
                 <div class="cup-result__info">Results of CUP 1on1</div>
                 <div class=""><a href="#charts-boogie" title="1st place in CUP 1on1 OBJ 1st Edition">booGie<img src="assets/smallcup.gif"></a></div>
                 <div class=""><a href="#charts-baton" title="2nd place in CUP 1on1 OBJ 1st Edition">bAtOn<img src="assets/smallcup_silver.gif"></a></div>
                 <div class=""><a href="#charts-zielony" title="3rd place in CUP 1on1 OBJ 1st Edition">Zielony<img src="assets/smallcup_bronze.gif"></a></div>
-              </div>             
+              </div>              -->
+              <div class="cup-result">
+                <div class="cup-result__info">Come play with us visit => </div><a href="mumble://nowy:heroes@m2.gametris.com:60139/" style="padding-left: 50px;"><img src="assets/1200px-Icons_mumble.svg.png" style="max-height: 50px;">MUMBLE</a>
+                <div></div>
+                <a href="https://discord.gg/u4MCqKSKZf" style="color:darkorange; font-size:50px;"><i class="fab fa-discord"></i>DISCORD</a>
+              </div>              
             </div>
             
             <div id="selectionTeams">
@@ -193,12 +203,13 @@
                 </div>
               </div>
             </div>
+            <!-- <div class="maps-pie">
+              <h2>MAPS STATISTICS</h2>
+              <canvas id="maps-pie" height="800" width="1000"><div class="lds-dual-ring3"></div></canvas>
+              
+            </div> -->
             <div class="important">
-              <div class="important--home">           
-                <!-- <h2>What to do to play a match?</h2>
-                <div class="important--home__info">
-                  <span>Join to our <a href="https://discord.gg/u4MCqKSKZf">Discord <i class="fab fa-discord"></i></a> </span><i class="fas fa-arrow-circle-right"></i> <span>request to play </span><i class="fas fa-arrow-circle-right"></i> <span>administrator will draw teams </span><i class="fas fa-arrow-circle-right"></i><span>The draw is done automatically by the ELO algorithm. <i class="fas fa-arrow-circle-right"></i> <span>That's all, go to server and start to play! GL & HF!</span>
-                </div> -->
+              <div class="important--home">
                 <div class="accordion-container">
                   <div class="ac">
                     <h2 class="ac-header">
@@ -452,11 +463,12 @@
       <div class="container view hidden" id="files">
         <div class="wrapper">
           <h2>Files to download:</h2>
+          <h3>HERE u can download MOHAA SPEARHEAD 3,0 Gb (CUSTOM MAPS INCLUDED)</h3>
           <div class="files">
-            <a href="https://drive.google.com/file/d/1xMUFqv9WpiQ-AWQcUClTEgqll89yFgPp/view?usp=drivesdk" class="file sh"><div>Spearhead</div></a>           
+            <a href="/MOHAA.rar" class="file sh"><div>Spearhead</div></a>           
             <a href="http://download.mumble.com/en/mumble-1.3.3.msi" class="file mumble"><div>Mumble</div></a>
             <a href="https://drive.google.com/u/0/uc?id=1IMftokjG3wD4PDM0okiLSFzsTKUru5-W&amp;export=download" class="file mappack"><div>Map Pack</div></a>            
-            <a href="http://chomikuj.pl/alias_pl/Dokumenty/The+All+Seeing+Eye/ASEv2.6,1355520649.zip(archive)" class="file tase"><div>The All Seeing Eye</div></a>
+            <a href="http://chomikuj.pl/alias_pl/Dokumenty/The+All+Seeing+Eye/ASEv2.6,1355520649.zip(archive)" class="file tase"><div>The All Seeing Eye</div></a>          
           </div>
           
           <!-- <h3>Leave a comment</h3>
@@ -577,6 +589,8 @@
         <div class="wrapper">
           <div class="log">
             <ul>
+              <li>05.05.2021 - <strong>RESET</strong> ranking points (back to 1000 for each players)</li>
+              <li>05.03.2021 - Finished first CUP 1on1</li>
               <li>05.02.2021 - Started first CUP 1on1 in MoH:SH MIX LEAGUE</li>
               <li>13.01.2021 - Change convertion rate of each player on the team, in case of win best player get more points and worst get less in winnig team. Before this change, the point distribution was almost equal (equal responsiblity per team).
                 <img src="assets/STARY_NOWY_ELO.jpg">
@@ -675,15 +689,7 @@
               <div id="pos-8">k4ps</div>
               <div id="pos-10">Jim</div>
               <div id="pos-12">Wiktor</div>
-              <div id="pos-14">Wariat/Meg@Sh!ra</div>
-              <!-- <div id="pos-16"></div>
-              <div id="pos-18"></div>
-              <div id="pos-20"></div>
-              <div id="pos-22"></div>
-              <div id="pos-24"></div>
-              <div id="pos-26"></div>
-              <div id="pos-28"></div>
-              <div id="pos-30"></div> -->
+              <div id="pos-14">Wariat/Meg@Sh!ra</div>              
             </div>
             <div class="playersToSelect">
               <h2>?</h2>              
@@ -694,15 +700,7 @@
               <div>vs.</div>
               <div>vs.</div>
               <div>vs.</div>
-              <div>vs.</div>
-              <!-- <div>vs.</div>
-              <div>vs.</div>
-              <div>vs.</div>
-              <div>vs.</div>
-              <div>vs.</div>
-              <div>vs.</div>
-              <div>vs.</div>
-              <div>vs.</div> -->
+              <div>vs.</div>             
             </div>
             <div id="studentTwo" class="playersToSelect">
               <h2>Seeded Player</h2>
@@ -713,15 +711,7 @@
               <div id="pos-9">Mr.Wiggles</div>
               <div id="pos-11">booGie</div>
               <div id="pos-13">bAtOn</div>
-              <div id="pos-15">Zielony</div>
-              <!-- <div id="pos-17"></div>
-              <div id="pos-19"></div>
-              <div id="pos-21"></div>
-              <div id="pos-23"></div>
-              <div id="pos-25"></div>
-              <div id="pos-27"></div>
-              <div id="pos-29"></div>
-              <div id="pos-31"></div> -->
+              <div id="pos-15">Zielony</div>             
             </div>
           </div>
           <div id="container-footer">
@@ -980,177 +970,10 @@
                 // });
                 $(this).prop('disabled', true);
                 $(this).html('GENERATED');                
-              });      
-                  
-              (async () => {
-                const cupStart = await drive({
-                  sheet: '1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo',
-                  tab: '8',
-                });
-                function getInfo(data){
-                  $('#match-cup').text("Match(data: '" + data +"')");
-                }
-                // console.log('CCCCCC => ',cupStart);
-                // document.getElementById(`pos-0`).innerHTML = cupStart[0].pos0;
-                // document.getElementById(`pos-1`).innerHTML = cupStart[0].pos1;
-                // document.getElementById(`pos-2`).innerHTML = cupStart[0].pos2;
-                // document.getElementById(`pos-3`).innerHTML = cupStart[0].pos3;
-                // document.getElementById(`pos-4`).innerHTML = cupStart[0].pos4;
-                // document.getElementById(`pos-5`).innerHTML = cupStart[0].pos5;
-                // document.getElementById(`pos-6`).innerHTML = cupStart[0].pos6;
-                // document.getElementById(`pos-7`).innerHTML = cupStart[0].pos7;
-                // document.getElementById(`pos-8`).innerHTML = cupStart[0].pos8;
-                // document.getElementById(`pos-9`).innerHTML = cupStart[0].pos9;
-                // document.getElementById(`pos-10`).innerHTML = cupStart[0].pos10;
-                // document.getElementById(`pos-11`).innerHTML = cupStart[0].pos11;
-                // document.getElementById(`pos-12`).innerHTML = cupStart[0].pos12;
-                // document.getElementById(`pos-13`).innerHTML = cupStart[0].pos13;
-                // document.getElementById(`pos-14`).innerHTML = cupStart[0].pos14;
-                // document.getElementById(`pos-15`).innerHTML = cupStart[0].pos15;
-                // const pos0 = document.getElementById('pos-0').innerText;
-                // const pos1 = document.getElementById('pos-1').innerText;
-                // const pos2 = document.getElementById('pos-2').innerText;
-                // const pos3 = document.getElementById('pos-3').innerText;
-                // const pos4 = document.getElementById('pos-4').innerText;
-                // const pos5 = document.getElementById('pos-5').innerText;
-                // const pos6 = document.getElementById('pos-6').innerText;
-                // const pos7 = document.getElementById('pos-7').innerText;
-                // const pos8 = document.getElementById('pos-8').innerText;
-                // const pos9 = document.getElementById('pos-9').innerText;
-                // const pos10 = document.getElementById('pos-10').innerText;
-                // const pos11 = document.getElementById('pos-11').innerText;
-                // const pos12 = document.getElementById('pos-12').innerText;
-                // const pos13 = document.getElementById('pos-13').innerText;
-                // const pos14 = document.getElementById('pos-14').innerText;
-                // const pos15 = document.getElementById('pos-15').innerText;
-                const pos0 = cupStart[0].pos0;
-                const pos1 = cupStart[0].pos1;
-                const pos2 = cupStart[0].pos2;
-                const pos3 = cupStart[0].pos3;
-                const pos4 = cupStart[0].pos4;
-                const pos5 = cupStart[0].pos5;
-                const pos6 = cupStart[0].pos6;
-                const pos7 = cupStart[0].pos7;
-                const pos8 = cupStart[0].pos8;
-                const pos9 = cupStart[0].pos9;
-                const pos10 = cupStart[0].pos10;
-                const pos11 = cupStart[0].pos11;
-                const pos12 = cupStart[0].pos12;
-                const pos13 = cupStart[0].pos13;
-                const pos14 = cupStart[0].pos14;
-                const pos15 = cupStart[0].pos15;
-
-                  const teamsPlayersCup = {
-                      teams: [
-                        [pos0,pos1],
-                        [pos2,pos3],
-                        [pos4,pos5],
-                        [pos6,pos7],
-                        [pos8,pos9],
-                        [pos10,pos11],
-                        [pos12,pos13],
-                        [pos14,pos15],
-                        ['Slash', 'Antiher0'],
-                        ['Wiktor','Hwk'],
-                        ['Tomas', 'Wildcard#1'],
-                        ['&elu$', 'f1sh'],
-                        ['Wildcard#4', 'MoSeS'],
-                        ['Kurian', 'malysw'],
-                        ['wiNt','Wildcard#2'],
-                        ['Mr.Wiggles', 'Wildcard#3'],             
-                 
-                      ],
-                      results : [[ /* WINNER BRACKET */
-                      [
-                        [17,11,'1 round winner bracket'], [15,13], [12,16], [18,10], [19,9], [11,17], [10,18], [12,16],
-                        [11,17], [15,13], [16,12], [18,10], [19,9], [11,17], [18,10], [12,16], // 17-32
-                      ],
-                      [
-                        [17,11], [15,13], [15,13], [18,10],
-                        [17,11], [15,13], [12,16], [18,10] // 17-32
-                      ],
-                      [
-                        [17,11], [15,13],
-                        [17,11], [15,13], // 17-32
-                      ],
-                      [                        
-                        [17,11], [15,13] // 17-32
-                      ],
-                      [
-                        [8,20],
-                      ]
-                    ], [         /* LOSER BRACKET */
-                      [
-                        [17,11], [15,13], [12,16], [18,10],
-                        [17,11], [13,15], [12,16], [10,18] // 17-32
-                      ],
-                      [
-                        [17,11], [15,13], [12,16], [18,10],
-                        [17,11], [13,15], [12,16], [10,18] // 17-32
-                      ],
-                      [
-                        [12,16], [18,10],
-                        [12,16], [18,10] // 17-32
-                      ],
-                      [
-                        [12,16], [18,10],
-                        [12,16], [18,10] // 17-32
-                      ],
-                      [
-                        [12,16],
-                        [12,16] // 17-32
-                      ],
-                      [
-                        [12,16],
-                        [12,16] // 17-32
-                      ],
-                      [
-                        [13, 15]
-                      ],
-                      [
-                        [21,7]
-                      ]
-                    ], [         /* FINALS */
-                      [
-                        [22,6], [11,17],
-                         // 17-32
-                      ],                      
-                      [
-                        [8,20]
-                      ],
-                      
-                    ]]
-                    };
-                  const resizeParameters = {
-                    teamWidth: 100,
-                    scoreWidth: 40,
-                    matchMargin: 50,
-                    roundMargin: 50,
-                    init: teamsPlayersCup,
-                    onMatchClick: getInfo
-                  };
-                  
-                  function updateResizeDemo() {
-                    $('#tournamentcup').bracket(resizeParameters);
-                  }
-              
-                  // $(updateResizeDemo) // odkomentuj jeśli chcesz pokazac CUP!!!!
-
-                  // $('#tournamentcup').bracket({
-                  //   init: teamsPlayersCup,         
-                  // });
-                })();                
-               
+              });  
+      
               const bigData = {
-                teams : [
-                  // ['Zielony', 'Wariat'] /* first matchup */,
-                  // ['Mr.Wiggles', 'L4mer'] /* second matchup */,
-                  // ['KaPsEL', 'gRaBaRz'] /* second matchup */,
-                  // ['Zielakpr0', 'YOUR_PROBLEM'] /* second matchup */,
-                  // ['MoSeS', '-insaNe! >'] /* first matchup */,
-                  // ['Jim', 'Sn@ke'] /* second matchup */,
-                  // ['-Illu$ioN-', 'Markos'] /* second matchup */,
-                  // ['bAtOn', 'k4ps'] /* second matchup */,
+                teams : [                  
                   ['KaPsEL','Markos'],
                   ['-Illu$ioN-','Sn@ke'],
                   ['Zielakpr0','L4mer'],
@@ -1159,23 +982,7 @@
                   ['booGie','Jim'],
                   ['bAtOn','Wiktor'],
                   ['Zielony','Meg@Sh!ra']
-                ],
-                // results : [[ /* WINNER BRACKET */
-                //   [[3,5], [2,4], [6,3], [2,3], [1,5], [5,3], [7,2], [1,2]],
-                //   [[1,2], [3,4], [5,6], [7,8]],
-                //   [[9,1], [8,9]],
-                //   [[4,5]]
-                // ], [         /* LOSER BRACKET */
-                //   [[5,1], [1,2], [3,2], [6,9]],
-                //   [[8,2], [1,2], [6,2], [4,3]],
-                //   [[1,2], [3,5]],
-                //   [[3,0], [1,9]],
-                //   [[3,2]],
-                //   [[4,2]]
-                // ], [         /* FINALS */
-                //   [[3,8], [4,6]],
-                //   [[2,1]]
-                // ]]
+                ],                
                 results : [[ /* WINNER BRACKET */
                   [[20,4], [14,17], [20,6], [14,12], [15,19], [20,5], [20,12], [19,13]],
                   [[16,10], [12,18], [8,20], [13,15]],
@@ -1208,34 +1015,9 @@
                 $('#tournament').bracket(resizeParametersCup);
               }
           
-              $(cupReady);
-
-              // const cup2on2 = {
-              //   teams : [
-              //     ['Kapsel/Markos', '-Illu$ioN-/Sn@ke'],
-              //     ['Zielakpr0/L4mer','-insaNe! >/YOUR_PROBLEM'],
-              //     ['Mr.Wiggles/k4ps','booGie/Jim'],
-              //     ['bAtOn/Wiktor','Zielony/Meg@Sh!ra']
-              //   ],
-              //   results : [[ /* WINNER BRACKET */
-              //     [[3,5], [2,4], [6,3], [2,3]],
-              //     [[5,6], [7,8]],                  
-              //     [[4,5]]
-              //   ], [         /* LOSER BRACKET */
-              //     [[5,1], [1,2]],
-              //     [[8,2], [5,4]], 
-              //     [[4,5]],                 
-              //     [[4,5]]                 
-              //   ], [         /* FINALS */
-              //     [[3,8], [4,6]],
-              //     [[2,1]]
-              //   ]] 
-              // }
-
-              // $('#cup2on2').bracket({init: cup2on2});
+              $(cupReady);              
               
-          </script>
-      
+          </script>    
           
         </div>
       </div>
@@ -1393,15 +1175,7 @@
               }); 
 
               const bigData2 = {
-                teams : [
-                  // ['Zielony', 'Wariat'] /* first matchup */,
-                  // ['Mr.Wiggles', 'L4mer'] /* second matchup */,
-                  // ['KaPsEL', 'gRaBaRz'] /* second matchup */,
-                  // ['Zielakpr0', 'YOUR_PROBLEM'] /* second matchup */,
-                  // ['MoSeS', '-insaNe! >'] /* first matchup */,
-                  // ['Jim', 'Sn@ke'] /* second matchup */,
-                  // ['-Illu$ioN-', 'Markos'] /* second matchup */,
-                  // ['bAtOn', 'k4ps'] /* second matchup */,
+                teams : [                  
                   ['Zielakpr0/YP','Wildcard #3'],
                   ['TailZ/Chris','Foober/BrianDJ'],
                   ['Wariat/gRaBaRz','BL@DY/Szycha'],
@@ -1410,31 +1184,15 @@
                   ['k4ps/-Illu$ioN-','MaDiNfO/Pelvis'],
                   ['josh/tommeh','Wildcard #2'],
                   ['Zielony/booGie','jay z/granu']
-                ],
-                // results : [[ /* WINNER BRACKET */
-                //   [[3,5], [2,4], [6,3], [2,3], [1,5], [5,3], [7,2], [1,2]],
-                //   [[1,2], [3,4], [5,6], [7,8]],
-                //   [[9,1], [8,9]],
-                //   [[4,5]]
-                // ], [         /* LOSER BRACKET */
-                //   [[5,1], [1,2], [3,2], [6,9]],
-                //   [[8,2], [1,2], [6,2], [4,3]],
-                //   [[1,2], [3,5]],
-                //   [[3,0], [1,9]],
-                //   [[3,2]],
-                //   [[4,2]]
-                // ], [         /* FINALS */
-                //   [[3,8], [4,6]],
-                //   [[2,1]]
-                // ]]
+                ],                
                 results : [[ /* WINNER BRACKET */
-                  [[1,0], [null,null], [null,null], [1,0], [null,null], [null,null], [1,0], [null,null]],
-                  [[null,null], [null,null], [null,null], [null,null]],
-                  [[null,null], [null,null]],
+                  [[1,0], [18,10], [16,12], [1,0], [6,20], [21,7], [1,0], [23,5]],
+                  [[17,11], [17,11], [26,16], [12,15]],
+                  [[null,null], [5,23]],
                   [[null,null]]
                 ], [         /* LOSER BRACKET */
-                  [[null,null], [null,null], [null,null], [null,null]],
-                  [[null,null], [null,null], [null,null], [null,null]],
+                  [[0,1], [1,0], [0,1], [0,1]],
+                  [[15,6], [null,null], [null,null], [null,null]],
                   [[null,null], [null,null]],
                   [[null,null], [null,null]],
                   [[null,null]],
@@ -1829,17 +1587,9 @@
           </div>
         </div>
       </div>
-    </div>  
-    <!-- <div class="slow">
-      <div class="slow__quit"><i class="far fa-window-close"></i></div>
-      <div class="slow__info">
-        Website shows bad datas? Please refresh its alpha version.
-      </div>
-    </div>  -->
-    <!-- <div class="slowly">
-      Please wait, sync data from database
-      <p>This box will hide <span id="countdown">15 </span> Seconds</p>
-    </div> -->
+    </div> 
+    
+   
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <!-- <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script> -->
 
