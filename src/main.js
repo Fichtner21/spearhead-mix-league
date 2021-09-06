@@ -56,7 +56,7 @@ function enableRouting() {
 document.addEventListener('DOMContentLoaded', () => {
   rankingInfo();
   history();
-  // newRanking();
+  newRanking();
   inactivePlayers();
   // historyTdm();
   // rankingTdm();
