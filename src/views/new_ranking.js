@@ -116,47 +116,51 @@ export async function newRanking() {
 
   const playersTab = await getPlayers2('Players');
 
-  console.log('playersTab', playersTab.values);
-
   const newPlayersList = await getPlayers('TeamSelectionOne');
-  console.log('TeamSelectionOne', newPlayersList);
 
   const batchRowValues = newPlayersList.values;
 
-  console.log('team 1: ', batchRowValues[1][0] + ' - ' + batchRowValues[1][1]);
-  console.log('team 1: ', batchRowValues[2][0] + ' - ' + batchRowValues[2][1]);
-  console.log('team 1: ', batchRowValues[3][0] + ' - ' + batchRowValues[3][1]);
-  console.log('team 1: ', batchRowValues[4][0] + ' - ' + batchRowValues[4][1]);
-  console.log('team 1: ', batchRowValues[5][0] + ' - ' + batchRowValues[5][1]);
-  console.log('team 1: ', batchRowValues[6][0] + ' - ' + batchRowValues[6][1]);
-
-  console.log('team 2: ', batchRowValues[1][2] + ' - ' + batchRowValues[1][3]);
-  console.log('team 2: ', batchRowValues[2][2] + ' - ' + batchRowValues[2][3]);
-  console.log('team 2: ', batchRowValues[3][2] + ' - ' + batchRowValues[3][3]);
-  console.log('team 2: ', batchRowValues[4][2] + ' - ' + batchRowValues[4][3]);
-  console.log('team 2: ', batchRowValues[5][2] + ' - ' + batchRowValues[5][3]);
-  console.log('team 2: ', batchRowValues[6][2] + ' - ' + batchRowValues[6][3]);
-
-  // for (let i = 0; i < 7; i++) {
-  //   for (let j = 0; j < 2; j++) {
-  //     console.log('bactchRowValues[j][j]', batchRowValues[j][i]);
-  //     // console.log('BATCH =>', batchRowValues[i][j]);
-  //     // console.log('LAST =>', batchRowValues[i][j].length - 1);
-  //   }
-  // }
   const team1ID1toShow = document.getElementById('team1ID1');
   const team1ID2toShow = document.getElementById('team1ID2');
   const team2ID1toShow = document.getElementById('team2ID1');
   const team2ID2toShow = document.getElementById('team2ID2');
 
-  for (let i = 1; i < 6; i++) {
-    console.log('team1' + batchRowValues[i][0] + ' rank: ' + batchRowValues[i][1]);
+  const cumulativeTeam1ID1 = Number(parseFloat(batchRowValues[6][1]).toFixed(2));
+  const cumulativeTeam2ID1 = Number(parseFloat(batchRowValues[6][3]).toFixed(2));
+
+  const cumulativeDivTeam1ID1 = document.getElementById('cumulativeTeam1ID1');
+  const cumulativeDivTeam2ID1 = document.getElementById('cumulativeTeam2ID1');
+
+  const chanceT1ID1 = document.getElementById('chanceT1ID1');
+  const chanceT2ID1 = document.getElementById('chanceT2ID1');
+
+  cumulativeDivTeam1ID1.innerHTML = 'Cumulative: ' + cumulativeTeam1ID1;
+  cumulativeDivTeam2ID1.innerHTML = 'Cumulative: ' + cumulativeTeam2ID1;
+
+  const chanceOfWinTeam2ID1 = 1 / (1 + 10 ** ((cumulativeTeam1ID1 - cumulativeTeam2ID1) / 400));
+  const chanceOfWinTeam1ID1 = 1 / (1 + 10 ** ((cumulativeTeam2ID1 - cumulativeTeam1ID1) / 400));
+
+  const chanceT1ID1a = Number(parseFloat(chanceOfWinTeam1ID1 * 100));
+  const chanceT2ID1a = Number(parseFloat(chanceOfWinTeam2ID1 * 100));
+
+  const chanceT1Id1toShow = floorPrecised(chanceT1ID1a, 2) + ' %';
+  const chanceT2Id1toShow = Math.round((chanceT2ID1a + Number.EPSILON) * 100) / 100 + ' %';
+
+  chanceT1ID1.innerHTML = chanceT1Id1toShow;
+  chanceT2ID1.innerHTML = chanceT2Id1toShow;
+
+  if (chanceT1Id1toShow > chanceT2Id1toShow) {
+    chanceT1ID1.classList.add('chance-win');
+    chanceT2ID1.classList.add('chance-lose');
+  } else if (chanceT1Id1toShow < chanceT2Id1toShow) {
+    chanceT2ID1.classList.add('chance-win');
+    chanceT1ID1.classList.add('chance-lose');
   }
 
-  const cumulativeTeam1ID1 = batchRowValues[6][1];
-  const cumulativeTeam2ID1 = batchRowValues[6][3];
-  console.log('cumulative t1id1:', cumulativeTeam1ID1);
-  console.log('cumulative t2id1:', cumulativeTeam2ID1);
+  function floorPrecised(number, precision) {
+    const power = Math.pow(10, precision);
+    return Math.floor(number * power) / power;
+  }
 
   const rows = [];
   for (let i = 1; i < batchRowValues.length; i++) {
@@ -166,7 +170,7 @@ export async function newRanking() {
     }
     rows.push(rowObject);
   }
-  console.log('rows => ', rows);
+  // console.log('rows => ', rows);
 
   const playerValues2 = playersTab.values;
   const rowsPlayers2 = [];
@@ -177,7 +181,7 @@ export async function newRanking() {
     }
     rowsPlayers2.push(rowObject2);
   }
-  console.log('rowsPlayers => ', rowsPlayers2);
+  // console.log('rowsPlayers => ', rowsPlayers2);
 
   let team1ID1 = '';
   for (let i = 1; i < 6; i++) {

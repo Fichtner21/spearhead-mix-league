@@ -25,8 +25,6 @@ export async function rankingInfo() {
     players.push(rowObject);
   }
 
-  console.log('players =>', players);
-
   const newMatchHistory = await getPlayers('Match+History');
   const batchRowValuesHistory = newMatchHistory.values;
   const historyRanking = [];
