@@ -2,8 +2,6 @@ import drive from 'drive-db';
 import { Chart } from 'chart.js';
 import $ from 'jquery';
 import * as ChartAnnotation from 'chartjs-plugin-annotation';
-// import historyRanking from '../assets/json/history.json';
-// import players from '../assets/json/players.json';
 import historyMatchesTdm from '../assets/json/history_tdm.json';
 
 export async function rankingInfo() {
@@ -35,26 +33,6 @@ export async function rankingInfo() {
     }
     historyRanking.push(rowObject);
   }
-  // console.log('rows => ', players);
-
-  // export function rankingInfo() {
-  // (async () => {
-  // Load the data from the Drive Spreadsheet
-
-  // const historyRanking = await drive({
-  //   sheet: '1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo',
-  //   tab: '4',
-  // });
-
-  // const players = await drive({
-  //   sheet: '1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo',
-  //   tab: '1',
-  // });
-
-  // const historyMatchesTdm = await drive({
-  //   sheet: '1tcSgDUSxwrHQclfxdOKQDabZGQOAeb1E7GVTvitdfu4',
-  //   tab: '4',
-  // });
 
   const ourPlayers = document.getElementById('our-players2');
   ourPlayers.innerHTML = getNumOfPlayers(players);
@@ -130,7 +108,7 @@ export async function rankingInfo() {
         ...rankHistory2(name.username, historyRanking),
       )}</span></div>
       <div class="frag-item">Achievements: <span class="frag-value">${
-        name.cup1on1edition1 !== '' ? name.cup1on1edition1 + ' place in cup 1on1 OBJ 1st edition 05.02.2021 - 05.03.2021' : '-'
+        name.cup1on1edition1 !== undefined ? name.cup1on1edition1 + ' place in cup 1on1 OBJ 1st edition 05.02.2021 - 05.03.2021' : '-'
       }</span></div>`;
     fragCont.appendChild(fragContDiv);
 
@@ -152,7 +130,7 @@ export async function rankingInfo() {
     fragAvarage.appendChild(fragAvarageDiv);
 
     idWarsList.innerHTML += `<div class="frag-item wars-cont">ID wars:
-      <span class="frag-value wars-id short">
+      <span class="wars-id short">
        ${searchPlayerWars2(name.username, historyRanking)}</span></div>`;
 
     // const comparePlayer = document.createElement('div');

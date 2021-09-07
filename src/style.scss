@@ -3556,9 +3556,18 @@ div.jQBracket .team div.label {
   position: relative;  
   display: block !important;
   display: none;
+  margin-top: 15px;
+  background-color: $lightRed;
+
+  .contrast-mode & {
+    background-color: $lightBlue;
+  }
 
   .wars-id {
     position: relative;
+    font-size: 20px;
+    margin-left: 0;
+    padding: 10px;    
 
     [data-title]:hover:before {
       opacity: 1;
@@ -3570,8 +3579,8 @@ div.jQBracket .team div.label {
       content: attr(data-title);
       /* position for title view box */
       position: absolute;
-      bottom: -1.6em;  	
-      left: 120%;
+      // bottom: -1.6em;  	
+      // left: 120%;
       z-index: 99999;
       font-weight: 400 !important;
       // visibility: hidden;

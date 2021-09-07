@@ -1,4 +1,3 @@
-import drive from 'drive-db';
 import { Chart } from 'chart.js';
 import $ from 'jquery';
 
@@ -33,24 +32,6 @@ export async function inactivePlayers() {
     }
     historyRanking4.push(rowObject);
   }
-  // }
-
-  // export function inactivePlayers() {
-  // (async () => {
-  // const players = await drive({
-  //   sheet: '1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo',
-  //   tab: '7',
-  // });
-
-  // const historyRanking4 = await drive({
-  //   sheet: '1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo',
-  //   tab: '4',
-  // });
-
-  // const historyRanking47 = await drive({
-  //   sheet: '1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo',
-  //   tab: '7',
-  // });
 
   const lastWar = document.getElementById('lastWar_inactive');
 

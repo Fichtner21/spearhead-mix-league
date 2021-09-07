@@ -4,9 +4,6 @@ import firebase from 'firebase';
 import timeago from 'timeago';
 import { Chart } from 'chart.js';
 import 'chartjs-plugin-labels';
-// import historyMatches from '../assets/json/history.json';
-// import playersTab from '../assets/json/players.json';
-// import inactivePlayers from '../assets/json/inactive.json';
 
 export async function history() {
   async function getMatches(name) {
@@ -48,26 +45,6 @@ export async function history() {
     }
     inactivePlayers.push(rowObjectInactive);
   }
-
-  // }
-
-  // export function history() {
-  // (async () => {
-  // Load the data from the Drive Spreadsheet
-  // const historyMatches = await drive({
-  //   sheet: '1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo',
-  //   tab: '4',
-  // });
-
-  // const playersTab = await drive({
-  //   sheet: '1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo',
-  //   tab: '1',
-  // });
-
-  // const inactivePlayers = await drive({
-  //   sheet: '1w_WHqCutkp_S6KveKyu4mNaG76C5dIlDwKw-A-dEOLo',
-  //   tab: '7',
-  // });
 
   // const maps = historyMatches.map((a) => a.info);
   // const stlo = maps.filter((item) => item.includes('Stlo')).length;
